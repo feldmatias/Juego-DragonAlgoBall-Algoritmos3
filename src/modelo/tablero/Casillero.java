@@ -4,6 +4,10 @@ import modelo.personajes.Personaje;
 
 public class Casillero {
 
+	public Casillero(Posicion pos1) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int distanciaA(Casillero otroCasillero) {
 		// TODO Auto-generated method stub
 		return 0;

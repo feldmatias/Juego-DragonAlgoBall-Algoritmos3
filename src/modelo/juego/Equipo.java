@@ -1,12 +1,19 @@
 package modelo.juego;
 
+import java.util.List;
+
 import modelo.personajes.Personaje;
 
 public class Equipo {
+	
+	private List<Personaje> personajes;
+	
+	public Equipo(List<Personaje> personajes){
+		this.personajes = personajes;
+	}
 
 	public boolean pertenece(Personaje personaje) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.personajes.contains(personaje);
 	}
 
 }

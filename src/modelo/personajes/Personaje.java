@@ -11,7 +11,7 @@ public abstract class Personaje {
 	
 	private String nombre;
 	private int vidaInicial;
-	private int vidaActual;
+	private float vidaActual;
 	private int ki;
 	private Equipo equipo;
 	private Modo modoActual;
@@ -53,8 +53,8 @@ public abstract class Personaje {
 		return this.modoActual.getVelocidad();
 	}
 	
-	public int getPorcentajeVida(){
-		return (this.vidaActual / this.vidaInicial) * 100;
+	public float getPorcentajeVida(){
+		return (100 * this.vidaActual / this.vidaInicial);
 	}
 	
 	public int getKi() {
@@ -86,7 +86,7 @@ public abstract class Personaje {
 
 	public void recibirAtaque(int poderPeleaEnemigo) {
 		if (this.getPoderPelea() >= poderPeleaEnemigo){
-			poderPeleaEnemigo *= 0.8;
+			poderPeleaEnemigo *= 0.8; //Disminuye 20%
 		}
 		this.vidaActual -= poderPeleaEnemigo;
 	}
