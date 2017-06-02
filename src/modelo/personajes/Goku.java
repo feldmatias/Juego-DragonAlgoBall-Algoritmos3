@@ -1,5 +1,7 @@
 package modelo.personajes;
 
+import modelo.juego.Equipo;
+
 public class Goku extends Personaje {
 	
 	public Goku(Equipo equipo){

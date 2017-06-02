@@ -1,6 +1,11 @@
 package modelo.personajes;
 
+import modelo.excepciones.AtaqueNoPosible;
+import modelo.excepciones.MovimientoNoPosible;
+import modelo.excepciones.TransformacionNoPosible;
+import modelo.juego.Equipo;
 import modelo.personajes.modos.Modo;
+import modelo.tablero.Casillero;
 
 public abstract class Personaje {
 	
@@ -10,7 +15,6 @@ public abstract class Personaje {
 	private int ki;
 	private Equipo equipo;
 	private Modo modoActual;
-	private Poder poderEspecial;
 	private Casillero casillero;
 	
 	public Personaje(String nombre,int vidaInicial, Equipo equipo, Modo modo){
@@ -45,7 +49,7 @@ public abstract class Personaje {
 		return this.modoActual.obtenerPoderPelea();
 	}
 
-	public Object obtenerDistanciaAtaque() {
+	public int obtenerDistanciaAtaque() {
 		return this.modoActual.obtenerDistanciaAtaque();
 	}
 
@@ -55,7 +59,7 @@ public abstract class Personaje {
 	
 	public void mover(Casillero nuevoCasillero) throws MovimientoNoPosible{
 		if (! this.puedeMoverse(nuevoCasillero)){
-			throw new MovimientoNoPOsible();
+			throw new MovimientoNoPosible();
 		}
 		this.casillero.desocupar();
 		this.casillero = nuevoCasillero;
