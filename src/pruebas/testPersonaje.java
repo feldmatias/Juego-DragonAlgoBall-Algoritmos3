@@ -197,7 +197,7 @@ public class testPersonaje {
 	}
 	
 	@Test 
-	public void testTransformacionDeKiRealizarTresVecesConKiLanzaExcepcion(){
+	public void testTransformacionDeKiRealizarTresVecesConKiLanzaExcepcionEnLaTercera(){
 		
 		for (int i = 0; i < 30; i++){
 			personaje.generarKi(); //ki=150
