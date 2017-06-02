@@ -17,27 +17,39 @@ public abstract class Personaje {
 	private Modo modoActual;
 	private Casillero casillero;
 	
-	public Personaje(String nombre,int vidaInicial, Equipo equipo, Modo modo){
+	public Personaje(String nombre,int vidaInicial, Modo modo){
 		this.nombre = nombre;
 		this.vidaInicial = vidaInicial;
 		this.vidaActual = vidaInicial;
 		this.ki = 0;
-		this.equipo = equipo;
 		this.modoActual = modo;
+	}
+	
+	public void setCasillero(Casillero casillero){
+		this.casillero = casillero;
+	}
+	
+	public void setEquipo(Equipo equipo){
+		this.equipo = equipo;
+	}
+	
+	public void generarKi(){
+		int kiGenerado = 5;
+		this.ki += kiGenerado;
 	}
 	
 	public void atacarAPersonaje(Personaje enemigo) throws AtaqueNoPosible{
 		if (this.equipo.pertenece(enemigo)){
 			throw new AtaqueNoPosible();
 		}
-		if (!enemigo.puedeSerAtacado(this.obtenerDistanciaAtaque(),this.obtenerCasillero())){
+		if (!enemigo.puedeSerAtacado(this.getDistanciaAtaque(),this.getCasillero())){
 			throw new AtaqueNoPosible();
 		}
-		enemigo.recibirAtaque(this.obtenerPoderPelea());
+		enemigo.recibirAtaque(this.getPoderPelea());
 	}
 
 	public boolean puedeSerAtacado(int distanciaAtaqueEnemigo, Casillero casilleroEnemigo) {
-		return (this.obtenerCasillero().distanciaA(casilleroEnemigo) <= distanciaAtaqueEnemigo);
+		return (this.getCasillero().distanciaA(casilleroEnemigo) <= distanciaAtaqueEnemigo);
 	}
 
 	public void recibirAtaque(int poderPeleaEnemigo) {
@@ -45,15 +57,15 @@ public abstract class Personaje {
 		this.vidaActual -= poderPeleaEnemigo;
 	}
 
-	public int obtenerPoderPelea() {
-		return this.modoActual.obtenerPoderPelea();
+	public int getPoderPelea() {
+		return this.modoActual.getPoderPelea();
 	}
 
-	public int obtenerDistanciaAtaque() {
-		return this.modoActual.obtenerDistanciaAtaque();
+	public int getDistanciaAtaque() {
+		return this.modoActual.getDistanciaAtaque();
 	}
 
-	public Casillero obtenerCasillero() {
+	public Casillero getCasillero() {
 		return this.casillero;
 	}
 	
@@ -68,18 +80,26 @@ public abstract class Personaje {
 	
 	public boolean puedeMoverse(Casillero nuevoCasillero){
 		return (nuevoCasillero.estaVacio() && 
-				nuevoCasillero.distanciaA(this.casillero) <= this.obtenerVelocidad());
+				nuevoCasillero.distanciaA(this.casillero) <= this.getVelocidad());
 	}
 
-	public int obtenerVelocidad() {
-		return this.modoActual.obtenerVelocidad();
+	public int getVelocidad() {
+		return this.modoActual.getVelocidad();
 	}
 	
 	public void transformar() throws TransformacionNoPosible{
-		if (!this.modoActual.puedeTransformar()){
+		if (!this.modoActual.puedeTransformarse(this)){
 			throw new TransformacionNoPosible();
 		}
-		this.modoActual = this.modoActual.obtenerTransformacion();
+		this.modoActual = this.modoActual.transformar();
+	}
+	
+	public int getKi() {
+		return this.ki;
+	}
+	
+	public int getPorcentajeVida(){
+		return (this.vidaActual / this.vidaInicial) * 100;
 	}
 	
 

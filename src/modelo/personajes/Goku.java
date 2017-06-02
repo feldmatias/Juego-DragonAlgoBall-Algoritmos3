@@ -1,12 +1,11 @@
 package modelo.personajes;
 
-import modelo.juego.Equipo;
+import modelo.personajes.modos.modosGoku.GokuNormal;
 
 public class Goku extends Personaje {
 	
-	public Goku(Equipo equipo){
-		int vidaInicial = 500;
-		super("Goku", vidaInicial, equipo, new ModoNormalGoku());
+	public Goku(){
+		super("Goku", 500,  new GokuNormal());
 	}
 
 }
