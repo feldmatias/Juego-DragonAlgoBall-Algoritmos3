@@ -53,7 +53,9 @@ public abstract class Personaje {
 	}
 
 	public void recibirAtaque(int poderPeleaEnemigo) {
-		// ver si resta 20% etc
+		if (this.getPoderPelea() >= poderPeleaEnemigo){
+			poderPeleaEnemigo *= 0.8;
+		}
 		this.vidaActual -= poderPeleaEnemigo;
 	}
 
