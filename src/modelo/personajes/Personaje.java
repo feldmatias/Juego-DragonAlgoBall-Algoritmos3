@@ -85,7 +85,7 @@ public abstract class Personaje {
 	}
 
 	public void recibirAtaque(int poderPeleaEnemigo) {
-		if (this.getPoderPelea() >= poderPeleaEnemigo){
+		if (this.getPoderPelea() > poderPeleaEnemigo){
 			poderPeleaEnemigo *= 0.8; //Disminuye 20%
 		}
 		this.vidaActual -= poderPeleaEnemigo;
@@ -102,7 +102,7 @@ public abstract class Personaje {
 	
 	public boolean puedeMoverse(Casillero nuevoCasillero){
 		return (nuevoCasillero.estaVacio() && 
-				nuevoCasillero.distanciaA(this.casillero) <= this.getVelocidad());
+				this.casillero.existeCaminoPosibleA(nuevoCasillero, this.getVelocidad()));
 	}
 	
 	public void transformar() throws TransformacionNoPosible{

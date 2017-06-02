@@ -15,7 +15,6 @@ public class Casillero {
 
 	public void desocupar() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void ocupar(Personaje personaje) {
@@ -24,6 +23,11 @@ public class Casillero {
 	}
 
 	public boolean estaVacio() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean existeCaminoPosibleA(Casillero nuevoCasillero, int velocidad) {
 		// TODO Auto-generated method stub
 		return false;
 	}
