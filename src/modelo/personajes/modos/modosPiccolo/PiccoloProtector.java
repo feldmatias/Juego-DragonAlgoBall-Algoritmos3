@@ -1,18 +1,12 @@
 package modelo.personajes.modos.modosPiccolo;
 
-import modelo.personajes.Personaje;
-import modelo.personajes.modos.Modo;
+import modelo.personajes.modos.ModoFinal;
 
-public class PiccoloProtector extends Modo {
+public class PiccoloProtector extends ModoFinal {
 
 	public PiccoloProtector() {
-		super(60, 6, 4, 0, null);
-		//poderPelea,distanciaAtaque,velocidad,kiNecesario,modoSiguiente
-	}
-
-	@Override
-	public boolean puedeTransformarse(Personaje personaje) {
-		return false;
+		super(60, 6, 4);
+		//poderPelea,distanciaAtaque,velocidad
 	}
 
 }

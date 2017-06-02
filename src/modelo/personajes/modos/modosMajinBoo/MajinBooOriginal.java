@@ -1,18 +1,12 @@
 package modelo.personajes.modos.modosMajinBoo;
 
-import modelo.personajes.Personaje;
-import modelo.personajes.modos.Modo;
+import modelo.personajes.modos.ModoFinal;
 
-public class MajinBooOriginal extends Modo {
+public class MajinBooOriginal extends ModoFinal {
 
 	public MajinBooOriginal() {
-		super(60, 3, 4, 0, null);
-		//poderPelea,distanciaAtaque,velocidad,kiNecesario,modoSiguiente
-	}
-
-	@Override
-	public boolean puedeTransformarse(Personaje personaje) {
-		return false;
+		super(60, 3, 4);
+		//poderPelea,distanciaAtaque,velocidad
 	}
 
 }

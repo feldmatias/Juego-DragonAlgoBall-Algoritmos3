@@ -1,18 +1,12 @@
 package modelo.personajes.modos.modosGoku;
 
-import modelo.personajes.Personaje;
-import modelo.personajes.modos.Modo;
+import modelo.personajes.modos.ModoFinal;
 
-public class GokuSuperSayajin extends Modo {
+public class GokuSuperSayajin extends ModoFinal {
 
 	public GokuSuperSayajin() {
-		super(60, 4, 5, 0, null);
-		//poderPelea,distanciaAtaque,velocidad,kiNecesario,modoSiguiente
-	}
-
-	@Override
-	public boolean puedeTransformarse(Personaje personaje) {
-		return false;
+		super(60, 4, 5);
+		//poderPelea,distanciaAtaque,velocidad
 	}
 
 }
