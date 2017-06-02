@@ -28,7 +28,7 @@ public abstract class Modo {
 		return this.velocidad;
 	}
 
-	public Modo transformar() {
+	public Modo transformar(Personaje personaje) {
 		return this.modoSiguiente;
 	}
 

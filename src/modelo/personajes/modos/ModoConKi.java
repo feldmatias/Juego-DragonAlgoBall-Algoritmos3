@@ -14,6 +14,11 @@ public abstract class ModoConKi extends Modo {
 	public boolean puedeTransformarse(Personaje personaje) {
 		return personaje.getKi() >= this.kiNecesario;
 	}
+	
+	public Modo transformar(Personaje personaje){
+		personaje.restarKi(this.kiNecesario);
+		return super.transformar(personaje);
+	}
 
 
 }

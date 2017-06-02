@@ -33,9 +33,41 @@ public abstract class Personaje {
 		this.equipo = equipo;
 	}
 	
+	public String getNombre(){
+		return this.nombre;
+	}
+	
+	public int getPoderPelea() {
+		return this.modoActual.getPoderPelea();
+	}
+
+	public int getDistanciaAtaque() {
+		return this.modoActual.getDistanciaAtaque();
+	}
+
+	public Casillero getCasillero() {
+		return this.casillero;
+	}
+	
+	public int getVelocidad() {
+		return this.modoActual.getVelocidad();
+	}
+	
+	public int getPorcentajeVida(){
+		return (this.vidaActual / this.vidaInicial) * 100;
+	}
+	
+	public int getKi() {
+		return this.ki;
+	}
+	
 	public void generarKi(){
 		int kiGenerado = 5;
 		this.ki += kiGenerado;
+	}
+	
+	public void restarKi(int kiPerdido) {
+		this.ki -= kiPerdido;
 	}
 	
 	public void atacarAPersonaje(Personaje enemigo) throws AtaqueNoPosible{
@@ -58,18 +90,6 @@ public abstract class Personaje {
 		}
 		this.vidaActual -= poderPeleaEnemigo;
 	}
-
-	public int getPoderPelea() {
-		return this.modoActual.getPoderPelea();
-	}
-
-	public int getDistanciaAtaque() {
-		return this.modoActual.getDistanciaAtaque();
-	}
-
-	public Casillero getCasillero() {
-		return this.casillero;
-	}
 	
 	public void mover(Casillero nuevoCasillero) throws MovimientoNoPosible{
 		if (! this.puedeMoverse(nuevoCasillero)){
@@ -84,24 +104,12 @@ public abstract class Personaje {
 		return (nuevoCasillero.estaVacio() && 
 				nuevoCasillero.distanciaA(this.casillero) <= this.getVelocidad());
 	}
-
-	public int getVelocidad() {
-		return this.modoActual.getVelocidad();
-	}
 	
 	public void transformar() throws TransformacionNoPosible{
 		if (!this.modoActual.puedeTransformarse(this)){
 			throw new TransformacionNoPosible();
 		}
-		this.modoActual = this.modoActual.transformar();
-	}
-	
-	public int getKi() {
-		return this.ki;
-	}
-	
-	public int getPorcentajeVida(){
-		return (this.vidaActual / this.vidaInicial) * 100;
+		this.modoActual = this.modoActual.transformar(this);
 	}
 	
 
