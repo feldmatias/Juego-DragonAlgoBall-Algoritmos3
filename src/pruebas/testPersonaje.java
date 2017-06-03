@@ -15,7 +15,6 @@ import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.tablero.Casillero;
-import modelo.tablero.Posicion;
 
 public class testPersonaje {
 	
@@ -220,11 +219,9 @@ public class testPersonaje {
 	
 	@Test
 	public void testMoverPersonajeAcordeALaVelocidadYComprobarNuevaPosicion(){
-		Posicion pos1 = new Posicion (0,0);
-		Posicion pos2 = new Posicion (0,1);
 		
-		Casillero cas1 = new Casillero (pos1);
-		Casillero cas2 = new Casillero (pos2);
+		Casillero cas1 = new Casillero (0,0);
+		Casillero cas2 = new Casillero (0,1);
 		personaje.setCasillero(cas1);
 		
 		try {
@@ -238,11 +235,9 @@ public class testPersonaje {
 	
 	@Test
 	public void testMoverPersonajeAPosicionLejanaLanzaExcepcion(){
-		Posicion pos1 = new Posicion (0,0);
-		Posicion pos2 = new Posicion (6,6);
-		
-		Casillero cas1 = new Casillero (pos1);
-		Casillero cas2 = new Casillero (pos2);
+
+		Casillero cas1 = new Casillero (0,0);
+		Casillero cas2 = new Casillero (6,6);
 		personaje.setCasillero(cas1);
 		
 		try {
@@ -255,11 +250,9 @@ public class testPersonaje {
 	
 	@Test
 	public void testMoverPersonajeAPosicionOcupadaLanzaExcepcion(){
-		Posicion pos1 = new Posicion (0,0);
-		Posicion pos2 = new Posicion (6,6);
-		
-		Casillero cas1 = new Casillero (pos1);
-		Casillero cas2 = new Casillero (pos2);
+
+		Casillero cas1 = new Casillero (0,0);
+		Casillero cas2 = new Casillero (6,6);
 		personaje.setCasillero(cas1);
 		cas2.ocupar(new Freezer());
 		
@@ -273,11 +266,9 @@ public class testPersonaje {
 
 	@Test
 	public void testMoverPersonajeAPosicionDespuesDeTransformacion(){
-		Posicion pos1 = new Posicion (0,0);
-		Posicion pos2 = new Posicion (0,3);
-		
-		Casillero cas1 = new Casillero (pos1);
-		Casillero cas2 = new Casillero (pos2);
+
+		Casillero cas1 = new Casillero (0,0);
+		Casillero cas2 = new Casillero (0,3);
 		personaje.setCasillero(cas1);
 		
 		for (int i = 0; i < 6; i++){
@@ -303,24 +294,18 @@ public class testPersonaje {
 	@Test
 	public void testMoverPersonajeConCaminoBloquadoLanzaExcepcion(){
 	
-		Posicion pos1 = new Posicion (0,0);
-		Posicion pos2 = new Posicion (0,1);
-		Posicion pos3 = new Posicion (1,0);
-		Posicion pos4 = new Posicion (1,1);
-		Posicion destino = new Posicion (2,0);
-		
-		Casillero cas1 = new Casillero (pos1);
-		Casillero cas2 = new Casillero (pos2);
-		Casillero cas3 = new Casillero (pos3);
-		Casillero cas4 = new Casillero (pos4);
-		Casillero casDestino = new Casillero (destino);
+		Casillero cas1 = new Casillero (0,0);
+		Casillero cas2 = new Casillero (0,1);
+		Casillero cas3 = new Casillero (1,0);
+		Casillero cas4 = new Casillero (1,1);
+		Casillero destino = new Casillero (2,0);
 		personaje.setCasillero(cas1);
 		cas2.ocupar(new Freezer());
 		cas3.ocupar(new Freezer());
 		cas4.ocupar(new Freezer());
 		
 		try {
-			personaje.mover(casDestino);
+			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido, el camino esta bloqueado");
 		} catch (MovimientoNoPosible e) {
 			Assert.assertEquals(cas1, personaje.getCasillero());
@@ -332,7 +317,7 @@ public class testPersonaje {
 	private Equipo crearEquipoUnPersonaje(Personaje personaje){
 		List<Personaje> lista = new ArrayList<Personaje>();
 		lista.add(personaje);
-		Equipo equipo = new Equipo (lista);
+		Equipo equipo = new Equipo ("nombre",lista);
 		personaje.setEquipo(equipo);
 		return equipo;
 	}
@@ -344,11 +329,8 @@ public class testPersonaje {
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
 		
-		Posicion pos1 = new Posicion (0,0);
-		Posicion pos2 = new Posicion (0,1);
-		
-		Casillero cas1 = new Casillero (pos1);
-		Casillero cas2 = new Casillero (pos2);
+		Casillero cas1 = new Casillero (0,0);
+		Casillero cas2 = new Casillero (0,1);
 		
 		personaje.setCasillero(cas1);
 		enemigo.setCasillero(cas2);
@@ -367,12 +349,9 @@ public class testPersonaje {
 		Personaje enemigo = new Freezer();
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
-		
-		Posicion pos1 = new Posicion (0,0);
-		Posicion pos2 = new Posicion (5,5);
-		
-		Casillero cas1 = new Casillero (pos1);
-		Casillero cas2 = new Casillero (pos2);
+
+		Casillero cas1 = new Casillero (0,0);
+		Casillero cas2 = new Casillero (5,5);
 		
 		personaje.setCasillero(cas1);
 		enemigo.setCasillero(cas2);
@@ -392,7 +371,7 @@ public class testPersonaje {
 		List<Personaje> lista = new ArrayList<Personaje>();
 		lista.add(personaje);
 		lista.add(enemigo);
-		personaje.setEquipo(new Equipo(lista));
+		personaje.setEquipo(new Equipo("equipo",lista));
 		
 		try {
 			personaje.atacarAPersonaje(enemigo);
@@ -408,12 +387,9 @@ public class testPersonaje {
 		Personaje enemigo = new Freezer();
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
-		
-		Posicion pos1 = new Posicion (0,0);
-		Posicion pos2 = new Posicion (0,4);
-		
-		Casillero cas1 = new Casillero (pos1);
-		Casillero cas2 = new Casillero (pos2);
+
+		Casillero cas1 = new Casillero (0,0);
+		Casillero cas2 = new Casillero (0,4);
 		
 		personaje.setCasillero(cas1);
 		enemigo.setCasillero(cas2);
