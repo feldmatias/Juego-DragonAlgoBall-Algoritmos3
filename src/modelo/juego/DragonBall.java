@@ -10,7 +10,9 @@ import modelo.personajes.Piccolo;
 import modelo.tablero.Tablero;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.juego.Equipo;
 
@@ -19,16 +21,15 @@ public class DragonBall {
 	private Tablero tablero;
 	private Jugador jugador1;
 	private Jugador jugador2;
-	private Equipo equipoGuerreros;
-	private Equipo equipoEnemigos;
+	private Map<String,Equipo> equipos;
 	
 	
 	public void nuevoJuego () {
 		
 		this.tablero = new Tablero(SIZE_TABLERO);
-		
-		equipoGuerreros = crearEquipoGuerreros();
-		equipoEnemigos = crearEquipoEnemigos();
+		this.equipos = new HashMap<String, Equipo>();
+		equipos.put("Guerreros Z", this.crearEquipoGuerreros());
+		equipos.put("Enemigos de la tierra", this.crearEquipoEnemigos());
 		
 		jugador1 = new Jugador();
 		jugador2 = new Jugador();
@@ -66,20 +67,14 @@ public class DragonBall {
 	}
 
 	public void elegirEquipos(String primerEquipo, String segundoEquipo) {
-		/*falta excepciones nombres invalidos*/
-		if(primerEquipo=="Guerreros Z"){
-			asignarEquipoAJugador(equipoGuerreros, jugador1);
-			asignarEquipoAJugador(equipoEnemigos, jugador2);
-		}else{
-			asignarEquipoAJugador(equipoGuerreros, jugador2);
-			asignarEquipoAJugador(equipoEnemigos, jugador1);
-		}
-		
+		//Excepciones
+		this.asignarEquipoAJugador(this.equipos.get(primerEquipo), this.jugador1);
+		this.asignarEquipoAJugador(this.equipos.get(segundoEquipo), this.jugador2);
 	}
 
 	public boolean existeEquipo(String unNombre) {
 		
-		return ((equipoGuerreros.tuNombreEs(unNombre)) || (equipoEnemigos.tuNombreEs(unNombre)));
+		return this.equipos.containsKey(unNombre);
 		
 	}
 
@@ -91,13 +86,8 @@ public class DragonBall {
 	}
 
 	private Equipo getEquipo(String unNombre) {
-		if(unNombre=="Guerreros Z"){
-			return this.equipoGuerreros;
-		}
-		if(unNombre=="Enemigos de la Tierra"){
-			return this.equipoEnemigos;
-		}
-		return null;//aca iria un return excepcion
+		return equipos.get(unNombre);
+		//return null;//aca iria un return excepcion
 	}
 
 	public String getNombreEquipoDelJugador(String unJugador) {
