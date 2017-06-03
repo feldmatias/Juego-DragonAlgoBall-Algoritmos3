@@ -24,6 +24,4 @@ public class TestCasillero {
 		Assert.assertTrue( casillero1.estaVacio() );
 	}
 	
-	public void
-
 }
