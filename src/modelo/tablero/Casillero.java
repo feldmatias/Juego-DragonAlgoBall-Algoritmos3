@@ -13,14 +13,7 @@ public class Casillero {
 	}
 
 	public double distanciaA(Casillero otroCasillero) {
-		Posicion posSegundoCasillero = otroCasillero.getPosicion();
-		Posicion restaPosiciones = (this.posicion).restar(posSegundoCasillero);
-		
-		int X= restaPosiciones.getX();
-		int Y= restaPosiciones.getY();
-		double distancia = Math.sqrt( (Math.pow(X, 2)) + Math.pow(Y, 2) ) ;
-		
-		return distancia;
+		return this.posicion.distanciaA(otroCasillero.getPosicion());
 	}
 	
 	public Posicion getPosicion(){

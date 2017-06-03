@@ -14,21 +14,21 @@ public class Tablero {
 	public Tablero(int size){
 		this.size = size;
 		this.tablero = new Casillero[size][size];
-		this.cargarCasilleros(this.tablero, size);
+		this.cargarCasilleros();
 	}
 
-	private void cargarCasilleros(Casillero[][] tablero,int size){
+	private void cargarCasilleros(){
 		Casillero casillero;
-		for(int x=0 ; x < size ; x++){
-			for(int y=0 ; y < size ; y++){
+		for(int x=0 ; x < this.size ; x++){
+			for(int y=0 ; y < this.size ; y++){
 				casillero= new Casillero(x,y);
-				tablero[x][y]=casillero;
+				this.tablero[x][y] = casillero;
 			}
 		}
 	}
 	
-	public Casillero getCasillero(int x, int y){
-		return this.tablero[x][y];
+	public Casillero getCasillero(Posicion pos){
+		return this.tablero[pos.getX()][pos.getY()];
 	}
 	
 	public void posicionarPersonaje(Personaje personaje, Casillero casillero){
@@ -37,21 +37,21 @@ public class Tablero {
 	}
 	
 	public void reposicionarPersonaje(Personaje personaje, Casillero casilleroDestino) {
-		Casillero casilleroADesocupar = casillerosOcupados.get(personaje);
+		this.casillerosOcupados.get(personaje).desocupar();
 		this.posicionarPersonaje(personaje, casilleroDestino);
-		casilleroADesocupar.desocupar();
 		
 	}
 	
 
 	public boolean existeCamino(Casillero actual,Casillero destino, int velocidad) {
-		List<Casillero> adyacentes= this.adyacentesA(actual);
+		
 		if (actual == destino){
 			return true;
 		}
 		if ( velocidad == 0 || (!actual.estaVacio()) ){
 			return false;
 		}
+		List<Casillero> adyacentes= this.adyacentesA(actual);
 		for	(Casillero casillero: adyacentes){
 			if (this.existeCamino(casillero , destino , velocidad-1)){
 				return true;
@@ -60,22 +60,22 @@ public class Tablero {
 		return false;
 	}
 	
-	private boolean posicionEnRango(int x, int y){
-		return ((x > 0) && (x < this.size) && (y < 0) && (y < this.size));
+	private boolean posicionEnRango(Posicion posicion){
+		return posicion.esValida(this.size);
 	}
 	
 	public List<Casillero> adyacentesA(Casillero origen){
-		List<Casillero> listaCasilleros = new ArrayList();
+		List<Casillero> listaCasilleros = new ArrayList<Casillero>();
 		Posicion posOrigen = origen.getPosicion();
+		Posicion posActual;
 		
 		for(int x = -1; x < 2 ; x++ ){
 			for(int y = -1 ; y< 2 ; y++){
-				int xActual =  (posOrigen.getX() + x);
-				int yActual = (posOrigen.getY() + y);
+				posActual = posOrigen.sumarPosicion(new Posicion (x, y));
 				
-				if ( !this.posicionEnRango(xActual,yActual) ) continue;
+				if ( !this.posicionEnRango(posActual) ) continue;
 				
-				Casillero casillero =  this.getCasillero(xActual, yActual);
+				Casillero casillero =  this.getCasillero(posActual);
 				
 				if (casillero == origen) continue;
 			
@@ -83,6 +83,17 @@ public class Tablero {
 			}
 		}
 		return listaCasilleros;
+	}
+
+
+	public int distanciaEntre(Personaje personaje, Personaje enemigo) {
+		Posicion pos1 = this.casillerosOcupados.get(personaje).getPosicion();
+		Posicion pos2 = this.casillerosOcupados.get(enemigo).getPosicion();
+		return pos1.distanciaA(pos2);
+	}
+
+	public boolean personajePuedeMoverse(Personaje personaje, Casillero nuevoCasillero) {
+		return this.existeCamino(this.casillerosOcupados.get(personaje), nuevoCasillero, personaje.getVelocidad());
 	}
 	
 	

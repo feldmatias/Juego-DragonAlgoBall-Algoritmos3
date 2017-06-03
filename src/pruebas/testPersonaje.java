@@ -15,14 +15,17 @@ import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.tablero.Casillero;
+import modelo.tablero.Tablero;
 
 public class testPersonaje {
 	
 	private Personaje personaje;
+	private Tablero tablero;
 	
 	@Before
 	public void setUp(){
-		personaje = new Goku();
+		tablero = new Tablero(8);
+		personaje = new Goku(tablero);
 	}
 	
 	@Test
@@ -222,11 +225,11 @@ public class testPersonaje {
 		
 		Casillero cas1 = new Casillero (0,0);
 		Casillero cas2 = new Casillero (0,1);
-		personaje.setCasillero(cas1);
+		tablero.posicionarPersonaje(personaje, cas1);
 		
 		try {
 			personaje.mover(cas2);
-			Assert.assertEquals(cas2, personaje.getCasillero());
+			Assert.assertEquals(cas2);
 		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia poder moverse");
 		}

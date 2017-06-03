@@ -51,17 +51,17 @@ public class DragonBall {
 	}
 	
 	private Equipo crearEquipoGuerreros() {
-		Personaje goku = new Goku();
-		Personaje gohan = new Gohan();
-		Personaje piccolo = new Piccolo();		
+		Personaje goku = new Goku(this.tablero);
+		Personaje gohan = new Gohan(this.tablero);
+		Personaje piccolo = new Piccolo(this.tablero);		
 	
 		return this.crearEquipo("Guerreros Z", goku, gohan, piccolo);
 	}
 	
 	private Equipo crearEquipoEnemigos() {
-		Personaje cell = new Cell();
-		Personaje freezer = new Freezer();
-		Personaje majinBoo = new MajinBoo();		
+		Personaje cell = new Cell(this.tablero);
+		Personaje freezer = new Freezer(this.tablero);
+		Personaje majinBoo = new MajinBoo(this.tablero);		
 		
 		return this.crearEquipo("Enemigos de la tierra", cell, freezer, majinBoo);
 	}
