@@ -7,6 +7,7 @@ import modelo.personajes.Goku;
 import modelo.personajes.MajinBoo;
 import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
+import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
 
 import java.util.ArrayList;
@@ -20,14 +21,15 @@ import modelo.excepciones.NombresDeEquipoIguales;
 import modelo.juego.Equipo;
 
 public class DragonBall {
-	private static final int SIZE_TABLERO = 6; //Defini la constante con cualquier numero
+	
+	private static final int SIZE_TABLERO = 8;
 	private Tablero tablero;
 	private Jugador jugador1;
 	private Jugador jugador2;
 	private Map<String,Equipo> equipos;
 	
 	
-	public void nuevoJuego () {
+	public DragonBall () {
 		
 		this.tablero = new Tablero(SIZE_TABLERO);
 		this.equipos = new HashMap<String, Equipo>();
@@ -45,11 +47,14 @@ public class DragonBall {
 		
 	}
 	
-	private Equipo crearEquipo(String nombreEquipo, Personaje pers1, Personaje pers2, Personaje pers3){
+	private Equipo crearEquipoYPosicionarPersonajes(String nombreEquipo, Personaje pers1, Personaje pers2, Personaje pers3, Posicion posInicial){
 		List<Personaje> lista = new ArrayList<Personaje>();
 		lista.add(pers1);
 		lista.add(pers2);
 		lista.add(pers3);
+		tablero.posicionarPersonaje(pers1, posInicial);
+		tablero.posicionarPersonaje(pers2, posInicial.sumarPosicion(new Posicion(0,1)));
+		tablero.posicionarPersonaje(pers3, posInicial.sumarPosicion(new Posicion(0,2)));
 		return new Equipo (nombreEquipo, lista);
 	}
 	
@@ -58,7 +63,7 @@ public class DragonBall {
 		Personaje gohan = new Gohan(this.tablero);
 		Personaje piccolo = new Piccolo(this.tablero);		
 	
-		return this.crearEquipo("Guerreros Z", goku, gohan, piccolo);
+		return this.crearEquipoYPosicionarPersonajes("Guerreros Z", goku, gohan, piccolo, new Posicion (0,0));
 	}
 	
 	private Equipo crearEquipoEnemigos() {
@@ -66,7 +71,7 @@ public class DragonBall {
 		Personaje freezer = new Freezer(this.tablero);
 		Personaje majinBoo = new MajinBoo(this.tablero);		
 		
-		return this.crearEquipo("Enemigos de la Tierra", cell, freezer, majinBoo);
+		return this.crearEquipoYPosicionarPersonajes("Enemigos de la Tierra", cell, freezer, majinBoo, new Posicion (SIZE_TABLERO - 1, 0));
 	}
 
 	public void elegirEquipos(String primerEquipo, String segundoEquipo) throws NombresDeEquipoIguales, EquipoInexistente {

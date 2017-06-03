@@ -15,7 +15,6 @@ public class TestDragonBall {
 	@Before
 	public void setUp(){
 		dragonBall = new DragonBall();
-		dragonBall.nuevoJuego();
 	}
 
 	@Test
