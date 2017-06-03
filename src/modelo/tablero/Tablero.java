@@ -37,7 +37,7 @@ public class Tablero {
 	}
 	
 	public void reposicionarPersonaje(Personaje personaje, Casillero casilleroDestino) {
-		this.casillerosOcupados.get(personaje).desocupar();
+		this.getCasilleroPersonaje(personaje).desocupar();
 		this.posicionarPersonaje(personaje, casilleroDestino);
 		
 	}
@@ -87,13 +87,17 @@ public class Tablero {
 
 
 	public int distanciaEntre(Personaje personaje, Personaje enemigo) {
-		Posicion pos1 = this.casillerosOcupados.get(personaje).getPosicion();
-		Posicion pos2 = this.casillerosOcupados.get(enemigo).getPosicion();
+		Posicion pos1 = this.getCasilleroPersonaje(personaje).getPosicion();
+		Posicion pos2 = this.getCasilleroPersonaje(enemigo).getPosicion();
 		return pos1.distanciaA(pos2);
 	}
 
 	public boolean personajePuedeMoverse(Personaje personaje, Casillero nuevoCasillero) {
 		return this.existeCamino(this.casillerosOcupados.get(personaje), nuevoCasillero, personaje.getVelocidad());
+	}
+	
+	public Casillero getCasilleroPersonaje(Personaje personaje){
+		return this.casillerosOcupados.get(personaje);
 	}
 	
 	

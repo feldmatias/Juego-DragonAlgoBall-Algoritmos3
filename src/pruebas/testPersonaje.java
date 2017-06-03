@@ -24,8 +24,8 @@ public class testPersonaje {
 	
 	@Before
 	public void setUp(){
-		tablero = new Tablero(8);
-		personaje = new Goku(tablero);
+		this.tablero = new Tablero(8);
+		this.personaje = new Goku(tablero);
 	}
 	
 	@Test
@@ -229,7 +229,7 @@ public class testPersonaje {
 		
 		try {
 			personaje.mover(cas2);
-			Assert.assertEquals(cas2);
+			Assert.assertEquals(cas2,tablero.getCasilleroPersonaje(personaje));
 		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia poder moverse");
 		}
@@ -241,13 +241,13 @@ public class testPersonaje {
 
 		Casillero cas1 = new Casillero (0,0);
 		Casillero cas2 = new Casillero (6,6);
-		personaje.setCasillero(cas1);
+		tablero.posicionarPersonaje(personaje, cas1);
 		
 		try {
 			personaje.mover(cas2);
 			Assert.fail("No deberia haberse movido");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertEquals(cas1, personaje.getCasillero());
+			Assert.assertEquals(cas1, tablero.getCasilleroPersonaje(personaje));
 		}
 	}
 	
@@ -256,14 +256,14 @@ public class testPersonaje {
 
 		Casillero cas1 = new Casillero (0,0);
 		Casillero cas2 = new Casillero (6,6);
-		personaje.setCasillero(cas1);
-		cas2.ocupar(new Freezer());
+		tablero.posicionarPersonaje(personaje, cas1);
+		tablero.posicionarPersonaje(new Freezer(tablero), cas2);
 		
 		try {
 			personaje.mover(cas2);
 			Assert.fail("No deberia haberse movido");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertEquals(cas1, personaje.getCasillero());
+			Assert.assertEquals(cas1,  tablero.getCasilleroPersonaje(personaje));
 		}
 	}
 
@@ -272,7 +272,7 @@ public class testPersonaje {
 
 		Casillero cas1 = new Casillero (0,0);
 		Casillero cas2 = new Casillero (0,3);
-		personaje.setCasillero(cas1);
+		tablero.posicionarPersonaje(personaje, cas1);
 		
 		for (int i = 0; i < 6; i++){
 			personaje.generarKi(); 
@@ -285,7 +285,7 @@ public class testPersonaje {
 			try {
 				personaje.transformar();
 				personaje.mover(cas2);
-				Assert.assertEquals(cas2, personaje.getCasillero());
+				Assert.assertEquals(cas2, tablero.getCasilleroPersonaje(personaje));
 			} catch (TransformacionNoPosible f){
 				Assert.fail("Deberia haberse transformado");
 			} catch (MovimientoNoPosible g){
@@ -302,16 +302,16 @@ public class testPersonaje {
 		Casillero cas3 = new Casillero (1,0);
 		Casillero cas4 = new Casillero (1,1);
 		Casillero destino = new Casillero (2,0);
-		personaje.setCasillero(cas1);
-		cas2.ocupar(new Freezer());
-		cas3.ocupar(new Freezer());
-		cas4.ocupar(new Freezer());
+		tablero.posicionarPersonaje(personaje, cas1);
+		tablero.posicionarPersonaje(new Freezer(tablero), cas2);
+		tablero.posicionarPersonaje(new Freezer(tablero), cas3);
+		tablero.posicionarPersonaje(new Freezer(tablero), cas4);
 		
 		try {
 			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido, el camino esta bloqueado");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertEquals(cas1, personaje.getCasillero());
+			Assert.assertEquals(cas1, tablero.getCasilleroPersonaje(personaje));
 		}
 	}
 	
@@ -328,15 +328,15 @@ public class testPersonaje {
 	@Test
 	public void testAtacarPersonajeDistintoEquipoPosicionCorrecta(){
 		
-		Personaje enemigo = new Freezer();
+		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
 		
 		Casillero cas1 = new Casillero (0,0);
 		Casillero cas2 = new Casillero (0,1);
 		
-		personaje.setCasillero(cas1);
-		enemigo.setCasillero(cas2);
+		tablero.posicionarPersonaje(personaje, cas1);
+		tablero.posicionarPersonaje(enemigo, cas2);
 		
 		try {
 			personaje.atacarAPersonaje(enemigo);
@@ -349,15 +349,15 @@ public class testPersonaje {
 	@Test 
 	public void testAtacarPersonajeDistintoEquipoPosicionLejanaLanzaExcepcion(){
 		
-		Personaje enemigo = new Freezer();
+		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
 
 		Casillero cas1 = new Casillero (0,0);
 		Casillero cas2 = new Casillero (5,5);
 		
-		personaje.setCasillero(cas1);
-		enemigo.setCasillero(cas2);
+		tablero.posicionarPersonaje(personaje, cas1);
+		tablero.posicionarPersonaje(enemigo, cas2);
 		
 		try {
 			personaje.atacarAPersonaje(enemigo);
@@ -370,7 +370,7 @@ public class testPersonaje {
 	@Test 
 	public void testAtacarPersonajeMismoEquipoLanzaExcepcion(){
 		
-		Personaje enemigo = new Freezer();
+		Personaje enemigo = new Freezer(tablero);
 		List<Personaje> lista = new ArrayList<Personaje>();
 		lista.add(personaje);
 		lista.add(enemigo);
@@ -387,15 +387,15 @@ public class testPersonaje {
 	@Test
 	public void testAtacarPersonajeDistintoEquipoPosicionCorrectaDespuesDeTransformar(){
 		
-		Personaje enemigo = new Freezer();
+		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
 
 		Casillero cas1 = new Casillero (0,0);
 		Casillero cas2 = new Casillero (0,4);
 		
-		personaje.setCasillero(cas1);
-		enemigo.setCasillero(cas2);
+		tablero.posicionarPersonaje(personaje, cas1);
+		tablero.posicionarPersonaje(enemigo, cas2);
 		
 		for (int i = 0; i < 6; i++){
 			personaje.generarKi();

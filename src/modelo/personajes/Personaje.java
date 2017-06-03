@@ -68,7 +68,7 @@ public abstract class Personaje {
 		if (this.equipo.pertenece(enemigo)){
 			throw new AtaqueNoPosible();
 		}
-		if (!alcanzaDistanciaAtaque(enemigo)){
+		if (!this.alcanzaDistanciaAtaque(enemigo)){
 			throw new AtaqueNoPosible();
 		}
 		enemigo.recibirAtaque(this.getPoderPelea());
