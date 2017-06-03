@@ -5,7 +5,7 @@ import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.modos.Modo;
-import modelo.tablero.Casillero;
+import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
 
 public abstract class Personaje {
@@ -85,16 +85,15 @@ public abstract class Personaje {
 		this.vidaActual -= poderPeleaEnemigo;
 	}
 	
-	public void mover(Casillero nuevoCasillero) throws MovimientoNoPosible{
-		if (! this.puedeMoverse(nuevoCasillero)){
+	public void mover(Posicion nuevaPosicion) throws MovimientoNoPosible{
+		if (! this.puedeMoverse(nuevaPosicion)){
 			throw new MovimientoNoPosible();
 		}
-		this.tablero.reposicionarPersonaje(this , nuevoCasillero);
+		this.tablero.reposicionarPersonaje(this , nuevaPosicion);
 	}
 	
-	public boolean puedeMoverse(Casillero nuevoCasillero){
-		return (nuevoCasillero.estaVacio() && 
-				this.tablero.personajePuedeMoverse(this, nuevoCasillero));
+	public boolean puedeMoverse(Posicion nuevaPosicion){
+			return this.tablero.personajePuedeMoverse(this, nuevaPosicion);
 	}
 	
 	public void transformar() throws TransformacionNoPosible{

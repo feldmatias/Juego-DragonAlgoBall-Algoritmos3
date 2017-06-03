@@ -14,7 +14,7 @@ import modelo.juego.Equipo;
 import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
-import modelo.tablero.Casillero;
+import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
 
 public class testPersonaje {
@@ -223,13 +223,12 @@ public class testPersonaje {
 	@Test
 	public void testMoverPersonajeAcordeALaVelocidadYComprobarNuevaPosicion(){
 		
-		Casillero cas1 = new Casillero (0,0);
-		Casillero cas2 = new Casillero (0,1);
-		tablero.posicionarPersonaje(personaje, cas1);
+		Posicion destino = new Posicion(0,1);
+		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		
 		try {
-			personaje.mover(cas2);
-			Assert.assertEquals(cas2,tablero.getCasilleroPersonaje(personaje));
+			personaje.mover(destino);
+			Assert.assertEquals(destino,tablero.getPosicionPersonaje(personaje));
 		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia poder moverse");
 		}
@@ -239,53 +238,52 @@ public class testPersonaje {
 	@Test
 	public void testMoverPersonajeAPosicionLejanaLanzaExcepcion(){
 
-		Casillero cas1 = new Casillero (0,0);
-		Casillero cas2 = new Casillero (6,6);
-		tablero.posicionarPersonaje(personaje, cas1);
+		Posicion posActual = new Posicion(0,0);
+		Posicion destino = new Posicion(6,6);
+		tablero.posicionarPersonaje(personaje, posActual);
 		
 		try {
-			personaje.mover(cas2);
+			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertEquals(cas1, tablero.getCasilleroPersonaje(personaje));
+			Assert.assertEquals(posActual, tablero.getPosicionPersonaje(personaje));
 		}
 	}
 	
 	@Test
 	public void testMoverPersonajeAPosicionOcupadaLanzaExcepcion(){
 
-		Casillero cas1 = new Casillero (0,0);
-		Casillero cas2 = new Casillero (6,6);
-		tablero.posicionarPersonaje(personaje, cas1);
-		tablero.posicionarPersonaje(new Freezer(tablero), cas2);
+		Posicion actual = new Posicion(0,0);
+		Posicion destino = new Posicion(6,6);
+		tablero.posicionarPersonaje(personaje, actual);
+		tablero.posicionarPersonaje(new Freezer(tablero), destino);
 		
 		try {
-			personaje.mover(cas2);
+			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertEquals(cas1,  tablero.getCasilleroPersonaje(personaje));
+			Assert.assertEquals(actual,  tablero.getPosicionPersonaje(personaje));
 		}
 	}
 
 	@Test
 	public void testMoverPersonajeAPosicionDespuesDeTransformacion(){
 
-		Casillero cas1 = new Casillero (0,0);
-		Casillero cas2 = new Casillero (0,3);
-		tablero.posicionarPersonaje(personaje, cas1);
+		Posicion destino = new Posicion(0,3);
+		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		
 		for (int i = 0; i < 6; i++){
 			personaje.generarKi(); 
 		}
 		
 		try {
-			personaje.mover(cas2);
+			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido");
 		} catch (MovimientoNoPosible e) {
 			try {
 				personaje.transformar();
-				personaje.mover(cas2);
-				Assert.assertEquals(cas2, tablero.getCasilleroPersonaje(personaje));
+				personaje.mover(destino);
+				Assert.assertEquals(destino, tablero.getPosicionPersonaje(personaje));
 			} catch (TransformacionNoPosible f){
 				Assert.fail("Deberia haberse transformado");
 			} catch (MovimientoNoPosible g){
@@ -297,21 +295,18 @@ public class testPersonaje {
 	@Test
 	public void testMoverPersonajeConCaminoBloquadoLanzaExcepcion(){
 	
-		Casillero cas1 = new Casillero (0,0);
-		Casillero cas2 = new Casillero (0,1);
-		Casillero cas3 = new Casillero (1,0);
-		Casillero cas4 = new Casillero (1,1);
-		Casillero destino = new Casillero (2,0);
-		tablero.posicionarPersonaje(personaje, cas1);
-		tablero.posicionarPersonaje(new Freezer(tablero), cas2);
-		tablero.posicionarPersonaje(new Freezer(tablero), cas3);
-		tablero.posicionarPersonaje(new Freezer(tablero), cas4);
+		Posicion posActual = new Posicion(0,0);
+		Posicion destino = new Posicion(2,0);
+		tablero.posicionarPersonaje(personaje, posActual);
+		tablero.posicionarPersonaje(new Freezer(tablero), new Posicion(0,1));
+		tablero.posicionarPersonaje(new Freezer(tablero), new Posicion(1,0));
+		tablero.posicionarPersonaje(new Freezer(tablero), new Posicion(1,1));
 		
 		try {
 			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido, el camino esta bloqueado");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertEquals(cas1, tablero.getCasilleroPersonaje(personaje));
+			Assert.assertEquals(posActual, tablero.getPosicionPersonaje(personaje));
 		}
 	}
 	
@@ -331,12 +326,9 @@ public class testPersonaje {
 		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
-		
-		Casillero cas1 = new Casillero (0,0);
-		Casillero cas2 = new Casillero (0,1);
-		
-		tablero.posicionarPersonaje(personaje, cas1);
-		tablero.posicionarPersonaje(enemigo, cas2);
+
+		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
+		tablero.posicionarPersonaje(enemigo, new Posicion(0,1));
 		
 		try {
 			personaje.atacarAPersonaje(enemigo);
@@ -352,12 +344,9 @@ public class testPersonaje {
 		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
-
-		Casillero cas1 = new Casillero (0,0);
-		Casillero cas2 = new Casillero (5,5);
 		
-		tablero.posicionarPersonaje(personaje, cas1);
-		tablero.posicionarPersonaje(enemigo, cas2);
+		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
+		tablero.posicionarPersonaje(enemigo, new Posicion(5,5));
 		
 		try {
 			personaje.atacarAPersonaje(enemigo);
@@ -391,11 +380,8 @@ public class testPersonaje {
 		this.crearEquipoUnPersonaje(personaje);
 		this.crearEquipoUnPersonaje(enemigo);
 
-		Casillero cas1 = new Casillero (0,0);
-		Casillero cas2 = new Casillero (0,4);
-		
-		tablero.posicionarPersonaje(personaje, cas1);
-		tablero.posicionarPersonaje(enemigo, cas2);
+		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
+		tablero.posicionarPersonaje(enemigo, new Posicion(0,4));
 		
 		for (int i = 0; i < 6; i++){
 			personaje.generarKi();

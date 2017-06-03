@@ -1,20 +1,22 @@
 package modelo.tablero;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import modelo.personajes.Personaje;
 
 public class Tablero {
 	private Casillero [][] tablero;
 	private int size;
-	private Hashtable<Personaje,Casillero> casillerosOcupados;
+	private Map<Personaje,Casillero> casillerosOcupados;
 	
 	public Tablero(int size){
 		this.size = size;
 		this.tablero = new Casillero[size][size];
 		this.cargarCasilleros();
+		this.casillerosOcupados = new HashMap<Personaje,Casillero>();
 	}
 
 	private void cargarCasilleros(){
@@ -31,14 +33,16 @@ public class Tablero {
 		return this.tablero[pos.getX()][pos.getY()];
 	}
 	
-	public void posicionarPersonaje(Personaje personaje, Casillero casillero){
+	public void posicionarPersonaje(Personaje personaje, Posicion posicion){
+		Casillero casillero = this.getCasillero(posicion);
 		casillero.ocupar(personaje);
 		this.casillerosOcupados.put(personaje, casillero);
 	}
 	
-	public void reposicionarPersonaje(Personaje personaje, Casillero casilleroDestino) {
-		this.getCasilleroPersonaje(personaje).desocupar();
-		this.posicionarPersonaje(personaje, casilleroDestino);
+	public void reposicionarPersonaje(Personaje personaje, Posicion nuevaPosicion) {
+		Casillero casilleroActual = this.getCasillero(this.getPosicionPersonaje(personaje));
+		casilleroActual.desocupar();
+		this.posicionarPersonaje(personaje, nuevaPosicion);
 		
 	}
 	
@@ -87,17 +91,17 @@ public class Tablero {
 
 
 	public int distanciaEntre(Personaje personaje, Personaje enemigo) {
-		Posicion pos1 = this.getCasilleroPersonaje(personaje).getPosicion();
-		Posicion pos2 = this.getCasilleroPersonaje(enemigo).getPosicion();
+		Posicion pos1 = this.getPosicionPersonaje(personaje);
+		Posicion pos2 = this.getPosicionPersonaje(enemigo);
 		return pos1.distanciaA(pos2);
 	}
 
-	public boolean personajePuedeMoverse(Personaje personaje, Casillero nuevoCasillero) {
-		return this.existeCamino(this.casillerosOcupados.get(personaje), nuevoCasillero, personaje.getVelocidad());
+	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion) {
+		return this.existeCamino(this.casillerosOcupados.get(personaje), this.getCasillero(nuevaPosicion), personaje.getVelocidad());
 	}
 	
-	public Casillero getCasilleroPersonaje(Personaje personaje){
-		return this.casillerosOcupados.get(personaje);
+	public Posicion getPosicionPersonaje(Personaje personaje){
+		return this.casillerosOcupados.get(personaje).getPosicion();
 	}
 	
 	
