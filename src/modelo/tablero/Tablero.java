@@ -29,17 +29,21 @@ public class Tablero {
 		}
 	}
 	
-	public Casillero getCasillero(Posicion pos){
+	public Casillero getCasillero(Posicion pos) throws PosicionFueraDeRango{
+		if ( !this.posicionEnRango(pos)){
+			throw new PosicionFueraDeRango();
+		}
 		return this.tablero[pos.getX()][pos.getY()];
 	}
 	
-	public void posicionarPersonaje(Personaje personaje, Posicion posicion){
-		Casillero casillero = this.getCasillero(posicion);
-		casillero.ocupar(personaje);
-		this.casillerosOcupados.put(personaje, casillero);
+	public void posicionarPersonaje(Personaje personaje, Posicion posicion) throws PosicionFueraDeRango{
+			Casillero casillero = this.getCasillero(posicion);
+			casillero.ocupar(personaje);
+			this.casillerosOcupados.put(personaje, casillero);
 	}
 	
-	public void reposicionarPersonaje(Personaje personaje, Posicion nuevaPosicion) {
+	public void reposicionarPersonaje(Personaje personaje, Posicion nuevaPosicion) throws PosicionFueraDeRango{
+	
 		Casillero casilleroActual = this.getCasillero(this.getPosicionPersonaje(personaje));
 		casilleroActual.desocupar();
 		this.posicionarPersonaje(personaje, nuevaPosicion);
@@ -47,7 +51,7 @@ public class Tablero {
 	}
 	
 
-	public boolean existeCamino(Casillero actual,Casillero destino, int velocidad) {
+	public boolean existeCamino(Casillero actual,Casillero destino, int velocidad) throws PosicionFueraDeRango {
 		
 		if (actual == destino){
 			return true;
@@ -64,11 +68,12 @@ public class Tablero {
 		return false;
 	}
 	
+	
 	private boolean posicionEnRango(Posicion posicion){
 		return posicion.esValida(this.size);
 	}
 	
-	public List<Casillero> adyacentesA(Casillero origen){
+	public List<Casillero> adyacentesA(Casillero origen) throws PosicionFueraDeRango{
 		List<Casillero> listaCasilleros = new ArrayList<Casillero>();
 		Posicion posOrigen = origen.getPosicion();
 		Posicion posActual;
@@ -80,9 +85,9 @@ public class Tablero {
 				if ( !this.posicionEnRango(posActual) ) continue;
 				
 				Casillero casillero =  this.getCasillero(posActual);
-				
+					
 				if (casillero == origen) continue;
-			
+				
 				listaCasilleros.add(casillero);
 			}
 		}
@@ -96,7 +101,7 @@ public class Tablero {
 		return pos1.distanciaA(pos2);
 	}
 
-	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion) {
+	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion) throws PosicionFueraDeRango {
 		return this.existeCamino(this.casillerosOcupados.get(personaje), this.getCasillero(nuevaPosicion), personaje.getVelocidad());
 	}
 	

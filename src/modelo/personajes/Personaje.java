@@ -6,6 +6,7 @@ import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.modos.Modo;
 import modelo.tablero.Posicion;
+import modelo.tablero.PosicionFueraDeRango;
 import modelo.tablero.Tablero;
 
 public abstract class Personaje {
@@ -89,11 +90,21 @@ public abstract class Personaje {
 		if (! this.puedeMoverse(nuevaPosicion)){
 			throw new MovimientoNoPosible();
 		}
-		this.tablero.reposicionarPersonaje(this , nuevaPosicion);
+		try {
+			this.tablero.reposicionarPersonaje(this , nuevaPosicion);
+		}
+		catch(PosicionFueraDeRango e){
+			throw new MovimientoNoPosible();
+		}
 	}
 	
 	public boolean puedeMoverse(Posicion nuevaPosicion){
+		try{
 			return this.tablero.personajePuedeMoverse(this, nuevaPosicion);
+		}
+		catch (PosicionFueraDeRango e){
+			return false;
+		}
 	}
 	
 	public void transformar() throws TransformacionNoPosible{

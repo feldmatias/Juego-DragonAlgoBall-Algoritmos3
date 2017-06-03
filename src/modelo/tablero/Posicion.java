@@ -33,4 +33,8 @@ public class Posicion {
 		int distanciaVertical = Math.abs (this.pos_y - pos2.pos_y );
 		return Math.max(distanciaHorizontal, distanciaVertical);
 	}
+	
+	public boolean equals(Posicion posAComparar){
+		return ( (this.pos_x == posAComparar.getX()) && (this.pos_y == posAComparar.getY()) ) ;
+	}
 }

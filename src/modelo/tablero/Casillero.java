@@ -12,7 +12,7 @@ public class Casillero {
 		this.ficha = null;
 	}
 
-	public double distanciaA(Casillero otroCasillero) {
+	public int distanciaA(Casillero otroCasillero) {
 		return this.posicion.distanciaA(otroCasillero.getPosicion());
 	}
 	
