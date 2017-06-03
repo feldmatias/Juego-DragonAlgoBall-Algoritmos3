@@ -7,7 +7,6 @@ import org.junit.Test;
 import modelo.juego.DragonBall;
 
 
-
 public class TestDragonBall {
 	private DragonBall dragonBall;
 	

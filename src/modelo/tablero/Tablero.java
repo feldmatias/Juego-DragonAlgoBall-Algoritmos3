@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
-import modelo.excepciones.MovimientoNoPosible;
 import modelo.personajes.Personaje;
 
 public class Tablero {
