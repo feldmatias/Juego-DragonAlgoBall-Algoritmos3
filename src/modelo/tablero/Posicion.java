@@ -19,13 +19,13 @@ public class Posicion {
 	
 	public Posicion sumarPosicion(Posicion unaPosicion){
 		int nueva_x = (this.pos_x ) + (unaPosicion.getX());
-		int nueva_y = (this.pos_x) + (unaPosicion.getY());
+		int nueva_y = (this.pos_y) + (unaPosicion.getY());
 		Posicion nueva_pos = new Posicion(nueva_x,nueva_y);
 		return (nueva_pos);
 	}
 
 	public boolean esValida(int size) {
-		return pos_x >= 0 && pos_y >= 0 && pos_x < size && pos_y < size;
+		return (pos_x >= 0 && pos_y >= 0 && pos_x < size && pos_y < size);
 	}
 
 	public int distanciaA(Posicion pos2) {
@@ -33,4 +33,5 @@ public class Posicion {
 		int distanciaVertical = Math.abs (this.pos_y - pos2.pos_y );
 		return Math.max(distanciaHorizontal, distanciaVertical);
 	}
+	
 }

@@ -47,17 +47,17 @@ public class Tablero {
 	}
 	
 
-	public boolean existeCamino(Casillero actual,Casillero destino, int velocidad) {
+	public boolean existeCamino(Casillero actual,Casillero origen, Casillero destino, int velocidad) {
 		
 		if (actual == destino){
 			return true;
 		}
-		if ( velocidad == 0 || (!actual.estaVacio()) ){
+		if ( velocidad == 0 || (actual != origen && !actual.estaVacio()) ){
 			return false;
 		}
-		List<Casillero> adyacentes= this.adyacentesA(actual);
+		List<Casillero> adyacentes = this.adyacentesA(actual);
 		for	(Casillero casillero: adyacentes){
-			if (this.existeCamino(casillero , destino , velocidad-1)){
+			if (this.existeCamino(casillero , origen, destino , velocidad-1)){
 				return true;
 			}
 		}
@@ -76,7 +76,6 @@ public class Tablero {
 		for(int x = -1; x < 2 ; x++ ){
 			for(int y = -1 ; y< 2 ; y++){
 				posActual = posOrigen.sumarPosicion(new Posicion (x, y));
-				
 				if ( !this.posicionEnRango(posActual) ) continue;
 				
 				Casillero casillero =  this.getCasillero(posActual);
@@ -97,7 +96,9 @@ public class Tablero {
 	}
 
 	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion) {
-		return this.existeCamino(this.casillerosOcupados.get(personaje), this.getCasillero(nuevaPosicion), personaje.getVelocidad());
+		Casillero destino = this.getCasillero(nuevaPosicion);
+		Casillero origen = this.casillerosOcupados.get(personaje);
+		return destino.estaVacio() && this.existeCamino(origen, origen, destino, personaje.getVelocidad());
 	}
 	
 	public Posicion getPosicionPersonaje(Personaje personaje){
