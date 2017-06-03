@@ -30,6 +30,9 @@ public class DragonBall {
 		equipoGuerreros = crearEquipoGuerreros();
 		equipoEnemigos = crearEquipoEnemigos();
 		
+		jugador1 = new Jugador();
+		jugador2 = new Jugador();
+		
 		
 	}
 
@@ -72,7 +75,7 @@ public class DragonBall {
 
 	public void elegirEquipos(String primerEquipo, String segundoEquipo) {
 		/*falta excepciones nombres invalidos*/
-		if(primerEquipo=="Guerreros"){
+		if(primerEquipo=="Guerreros Z"){
 			asignarEquipoAJugador(equipoGuerreros, jugador1);
 			asignarEquipoAJugador(equipoEnemigos, jugador2);
 		}else{
@@ -103,5 +106,18 @@ public class DragonBall {
 			return this.equipoEnemigos;
 		}
 		return null;//aca iria un return excepcion
+	}
+
+	public String getNombreEquipoDelJugador(String unJugador) {
+		Jugador elJugador = this.jugador1; //probando para que no quede null
+		if(unJugador == "Jugador 1"){
+			elJugador = this.jugador1;
+		}
+		if(unJugador == "Jugador 2"){
+			elJugador = this.jugador2;
+		}
+		Equipo elEquipo = elJugador.getEquipo();
+		return (elEquipo.getNombre());
+	
 	}
 }
