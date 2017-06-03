@@ -75,7 +75,7 @@ public abstract class Personaje {
 		enemigo.recibirAtaque(this.getPoderPelea());
 	}
 
-	public boolean alcanzaDistanciaAtaque(Personaje enemigo) {
+	private boolean alcanzaDistanciaAtaque(Personaje enemigo) {
 		return (this.tablero.distanciaEntre(this,enemigo) <= this.getDistanciaAtaque());
 	}
 
@@ -98,13 +98,10 @@ public abstract class Personaje {
 		}
 	}
 	
-	public boolean puedeMoverse(Posicion nuevaPosicion){
-		try{
-			return this.tablero.personajePuedeMoverse(this, nuevaPosicion);
-		}
-		catch (PosicionFueraDeRango e){
-			return false;
-		}
+	private boolean puedeMoverse(Posicion nuevaPosicion){
+		
+		return this.tablero.personajePuedeMoverse(this, nuevaPosicion);
+		
 	}
 	
 	public void transformar() throws TransformacionNoPosible{

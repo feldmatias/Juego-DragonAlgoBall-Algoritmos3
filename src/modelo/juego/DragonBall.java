@@ -55,7 +55,11 @@ public class DragonBall {
 		tablero.posicionarPersonaje(pers1, posInicial);
 		tablero.posicionarPersonaje(pers2, posInicial.sumarPosicion(new Posicion(0,1)));
 		tablero.posicionarPersonaje(pers3, posInicial.sumarPosicion(new Posicion(0,2)));
-		return new Equipo (nombreEquipo, lista);
+		Equipo equipo =  new Equipo (nombreEquipo, lista);
+		pers1.setEquipo(equipo);
+		pers2.setEquipo(equipo);
+		pers3.setEquipo(equipo);
+		return equipo;
 	}
 	
 	private Equipo crearEquipoGuerreros() throws PosicionFueraDeRango {
