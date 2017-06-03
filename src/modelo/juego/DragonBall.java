@@ -29,7 +29,7 @@ public class DragonBall {
 		this.tablero = new Tablero(SIZE_TABLERO);
 		this.equipos = new HashMap<String, Equipo>();
 		equipos.put("Guerreros Z", this.crearEquipoGuerreros());
-		equipos.put("Enemigos de la tierra", this.crearEquipoEnemigos());
+		equipos.put("Enemigos de la Tierra", this.crearEquipoEnemigos());
 		
 		jugador1 = new Jugador();
 		jugador2 = new Jugador();
@@ -63,7 +63,7 @@ public class DragonBall {
 		Personaje freezer = new Freezer(this.tablero);
 		Personaje majinBoo = new MajinBoo(this.tablero);		
 		
-		return this.crearEquipo("Enemigos de la tierra", cell, freezer, majinBoo);
+		return this.crearEquipo("Enemigos de la Tierra", cell, freezer, majinBoo);
 	}
 
 	public void elegirEquipos(String primerEquipo, String segundoEquipo) {
