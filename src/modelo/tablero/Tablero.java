@@ -53,7 +53,7 @@ public class Tablero {
 	}
 	
 
-public boolean existeCamino(Casillero actual,Casillero origen, Casillero destino, int velocidad) throws PosicionFueraDeRango {
+private boolean existeCamino(Casillero actual,Casillero origen, Casillero destino, int velocidad) throws PosicionFueraDeRango {
 		
 		if (actual == destino){
 			return true;
@@ -75,7 +75,7 @@ public boolean existeCamino(Casillero actual,Casillero origen, Casillero destino
 		return posicion.esValida(this.size);
 	}
 	
-	public List<Casillero> adyacentesA(Casillero origen) throws PosicionFueraDeRango{
+	private List<Casillero> adyacentesA(Casillero origen) throws PosicionFueraDeRango{
 		List<Casillero> listaCasilleros = new ArrayList<Casillero>();
 		Posicion posOrigen = origen.getPosicion();
 		Posicion posActual;
