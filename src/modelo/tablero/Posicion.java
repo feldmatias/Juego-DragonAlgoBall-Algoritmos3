@@ -2,7 +2,7 @@ package modelo.tablero;
 
 public class Posicion {
 
-	public Posicion(int i, int j) {
+	public Posicion(int x, int y) {
 		// TODO Auto-generated constructor stub
 	}
 

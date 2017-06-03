@@ -3,8 +3,10 @@ package modelo.tablero;
 import modelo.personajes.Personaje;
 
 public class Casillero {
+	
 
-	public Casillero(Posicion pos1) {
+	public Casillero(int x, int y) {
+		
 		// TODO Auto-generated constructor stub
 	}
 

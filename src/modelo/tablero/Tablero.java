@@ -1,24 +1,23 @@
 package modelo.tablero;
 
 public class Tablero {
-	private static final int TAM_TABLERO = 8;
 	private Casillero [][] tablero;
 	private Casillero casillero;
+	private int size;
 
 	
-	public Tablero(){
-		this.tablero= new Casillero[TAM_TABLERO][TAM_TABLERO];
-		this.cargarCasilleros(this.tablero);
+	public Tablero(int size){
+		this.size = size;
+		this.tablero = new Casillero[size][size];
+		this.cargarCasilleros(this.tablero, size);
 	}
 
-	private void cargarCasilleros(Casillero[][] tablero){
-		for(int x=0 ; x < TAM_TABLERO ; x++){
-			for(int y=0 ; y < TAM_TABLERO ; y++){
+	private void cargarCasilleros(Casillero[][] tablero,int size){
+		for(int x=0 ; x < size ; x++){
+			for(int y=0 ; y < size ; y++){
 				casillero= new Casillero(x,y);
 				tablero[x][y]=casillero;
 			}
 		}
 	}
-	
-
 }
