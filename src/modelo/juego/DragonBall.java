@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.EquipoInexistente;
 import modelo.excepciones.NombresDeEquipoIguales;
 import modelo.juego.Equipo;
@@ -80,11 +79,8 @@ public class DragonBall {
 		if(primerEquipo == segundoEquipo){
 			throw new NombresDeEquipoIguales();
 		}
-		//Chequeo que primerEquipo y segundoEquipo sean o "Enemigos de la Tierra" o "Guerreros Z"
-		Boolean casoPosible1 = (primerEquipo == "Guerreros Z") && (segundoEquipo == "Enemigos de la Tierra");
-		Boolean casoPosible2 = (primerEquipo == "Enemigos de la Tierra") && (segundoEquipo == "Guerreros Z");
 		
-		if (!(casoPosible1 || casoPosible2)){
+		if (! this.existeEquipo(primerEquipo) || ! this.existeEquipo(segundoEquipo)){
 			throw new EquipoInexistente();
 		}
 		
@@ -92,34 +88,19 @@ public class DragonBall {
 		this.asignarEquipoAJugador(this.equipos.get(segundoEquipo), this.jugador2);
 	}
 
-	public boolean existeEquipo(String unNombre) {
+	private boolean existeEquipo(String unNombre) {
 		
 		return this.equipos.containsKey(unNombre);
 		
 	}
 
-	public boolean personajePerteneceAEquipo(String unNombrePersonaje, String unNombreEquipo) {
-		
-		Equipo unEquipo = this.getEquipo(unNombreEquipo);
-		return(unEquipo.contienePersonajeConNombre(unNombrePersonaje));
-		
+	public Jugador getJugador1(){
+		return this.jugador1;
 	}
-
-	private Equipo getEquipo(String unNombre) {
-		return equipos.get(unNombre);
-		//return null;//aca iria un return excepcion
-	}
-
-	public String getNombreEquipoDelJugador(String unJugador) {
-		Jugador elJugador = this.jugador1; //probando para que no quede null
-		if(unJugador == "Jugador 1"){
-			elJugador = this.jugador1;
-		}
-		if(unJugador == "Jugador 2"){
-			elJugador = this.jugador2;
-		}
-		Equipo elEquipo = elJugador.getEquipo();
-		return (elEquipo.getNombre());
 	
+	public Jugador getJugador2(){
+		return this.jugador2;
 	}
+
+
 }
