@@ -31,4 +31,5 @@ public class TestTablero {
 		Assert.assertTrue( posBuscada.equals(posCasillero) );	
 	}
 	
+	
 }

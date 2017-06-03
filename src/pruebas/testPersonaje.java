@@ -221,10 +221,6 @@ public class testPersonaje {
 	
 	//Test mover personaje
 	
-	private boolean posicionesIguales(Posicion pos1, Posicion pos2){
-		return (pos1.getX() == pos2.getX() && pos1.getY() == pos2.getY());
-	}
-	
 	@Test
 	public void testMoverPersonajeAcordeALaVelocidadYComprobarNuevaPosicion() throws PosicionFueraDeRango{
 		
@@ -233,7 +229,7 @@ public class testPersonaje {
 		
 		try {
 			personaje.mover(destino);
-			Assert.assertTrue(this.posicionesIguales(destino, tablero.getPosicionPersonaje(personaje)));
+			Assert.assertTrue(destino.equals(tablero.getPosicionPersonaje(personaje)));
 		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia poder moverse");
 		}
@@ -251,7 +247,7 @@ public class testPersonaje {
 			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertTrue(this.posicionesIguales(posActual, tablero.getPosicionPersonaje(personaje)));
+			Assert.assertTrue(posActual.equals(tablero.getPosicionPersonaje(personaje)));
 		}
 	}
 	
@@ -267,7 +263,7 @@ public class testPersonaje {
 			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertTrue(this.posicionesIguales(actual, tablero.getPosicionPersonaje(personaje)));
+			Assert.assertTrue(actual.equals(tablero.getPosicionPersonaje(personaje)));
 		}
 	}
 
@@ -288,7 +284,7 @@ public class testPersonaje {
 			try {
 				personaje.transformar();
 				personaje.mover(destino);
-				Assert.assertTrue(this.posicionesIguales(destino, tablero.getPosicionPersonaje(personaje)));
+				Assert.assertTrue(destino.equals(tablero.getPosicionPersonaje(personaje)));
 			} catch (TransformacionNoPosible f){
 				Assert.fail("Deberia haberse transformado");
 			} catch (MovimientoNoPosible g){
@@ -311,7 +307,7 @@ public class testPersonaje {
 			personaje.mover(destino);
 			Assert.fail("No deberia haberse movido, el camino esta bloqueado");
 		} catch (MovimientoNoPosible e) {
-			Assert.assertTrue(this.posicionesIguales(posActual, tablero.getPosicionPersonaje(personaje)));
+			Assert.assertTrue(posActual.equals(tablero.getPosicionPersonaje(personaje)));
 		}
 	}
 	
