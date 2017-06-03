@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import modelo.excepciones.AtaqueNoPosible;
+import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.NombresDeEquipoIguales;
 import modelo.juego.Equipo;
 
 public class DragonBall {
@@ -66,8 +69,20 @@ public class DragonBall {
 		return this.crearEquipo("Enemigos de la Tierra", cell, freezer, majinBoo);
 	}
 
-	public void elegirEquipos(String primerEquipo, String segundoEquipo) {
+	public void elegirEquipos(String primerEquipo, String segundoEquipo) throws NombresDeEquipoIguales, EquipoInexistente {
 		//Excepciones
+		//Chequeo que ambos equipos no sean iguales
+		if(primerEquipo == segundoEquipo){
+			throw new NombresDeEquipoIguales();
+		}
+		//Chequeo que primerEquipo y segundoEquipo sean o "Enemigos de la Tierra" o "Guerreros Z"
+		Boolean casoPosible1 = (primerEquipo == "Guerreros Z") && (segundoEquipo == "Enemigos de la Tierra");
+		Boolean casoPosible2 = (primerEquipo == "Enemigos de la Tierra") && (segundoEquipo == "Guerreros Z");
+		
+		if (!(casoPosible1 || casoPosible2)){
+			throw new EquipoInexistente();
+		}
+		
 		this.asignarEquipoAJugador(this.equipos.get(primerEquipo), this.jugador1);
 		this.asignarEquipoAJugador(this.equipos.get(segundoEquipo), this.jugador2);
 	}
