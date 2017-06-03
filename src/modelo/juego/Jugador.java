@@ -1,11 +1,9 @@
 package modelo.juego;
 
 public class Jugador {
-	private String nombre;
 	private Equipo equipo;
 	
-	public void setNombreYEquipo (String nombre, Equipo equipo) {
-		this.nombre = nombre;
+	public void setEquipo (Equipo equipo) {
 		this.equipo = equipo;
 	}
 }

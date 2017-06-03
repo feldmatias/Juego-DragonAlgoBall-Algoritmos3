@@ -21,4 +21,17 @@ public class Equipo {
 		return this.personajes.contains(personaje);
 	}
 
+	boolean tuNombreEs(String unNombre) {
+		return(this.nombre == unNombre);
+	}
+
+	public boolean contienePersonajeConNombre(String unNombrePersonaje) {
+		for (Personaje unPersonaje : personajes) {
+			if (unPersonaje.getNombre()==unNombrePersonaje){
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

@@ -19,16 +19,22 @@ public class DragonBall {
 	private Tablero tablero;
 	private Jugador jugador1;
 	private Jugador jugador2;
+	private Equipo equipoGuerreros;
+	private Equipo equipoEnemigos;
 	
 	
 	public void nuevoJuego () {
 		
 		this.tablero = new Tablero(SIZE_TABLERO);
 		
-		Equipo equipoGuerreros = crearEquipoGuerreros();
-		Equipo equipoEnemigos = crearEquipoEnemigos();
+		equipoGuerreros = crearEquipoGuerreros();
+		equipoEnemigos = crearEquipoEnemigos();
 		
-				
+		
+	}
+
+	private void asignarEquipoAJugador(Equipo equipo, Jugador jugador) {
+		jugador.setEquipo(equipo);
 		
 	}
 
@@ -62,5 +68,40 @@ public class DragonBall {
 		equipo.setNombre("Enemigos de la Tierra");
 		
 		return equipo;
+	}
+
+	public void elegirEquipos(String primerEquipo, String segundoEquipo) {
+		/*falta excepciones nombres invalidos*/
+		if(primerEquipo=="Guerreros"){
+			asignarEquipoAJugador(equipoGuerreros, jugador1);
+			asignarEquipoAJugador(equipoEnemigos, jugador2);
+		}else{
+			asignarEquipoAJugador(equipoGuerreros, jugador2);
+			asignarEquipoAJugador(equipoEnemigos, jugador1);
+		}
+		
+	}
+
+	public Object existeEquipo(String unNombre) {
+		
+		return ((equipoGuerreros.tuNombreEs(unNombre)) || (equipoEnemigos.tuNombreEs(unNombre)));
+		
+	}
+
+	public boolean personajePerteneceAEquipo(String unNombrePersonaje, String unNombreEquipo) {
+		
+		Equipo unEquipo = this.getEquipo(unNombreEquipo);
+		return(unEquipo.contienePersonajeConNombre(unNombrePersonaje));
+		
+	}
+
+	private Equipo getEquipo(String unNombre) {
+		if(unNombre=="Guerreros Z"){
+			return this.equipoGuerreros;
+		}
+		if(unNombre=="Enemigos de la Tierra"){
+			return this.equipoEnemigos;
+		}
+		return null;//aca iria un return excepcion
 	}
 }
