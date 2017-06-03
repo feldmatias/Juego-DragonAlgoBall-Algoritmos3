@@ -3,35 +3,40 @@ package modelo.tablero;
 import modelo.personajes.Personaje;
 
 public class Casillero {
+	private Posicion posicion;
+	private Personaje ficha;
 	
 
 	public Casillero(int x, int y) {
-		
-		// TODO Auto-generated constructor stub
+		this.posicion = new Posicion(x,y);
+		this.ficha = null;
 	}
 
-	public int distanciaA(Casillero otroCasillero) {
-		// TODO Auto-generated method stub
-		return 0;
+	public double distanciaA(Casillero otroCasillero) {
+		Posicion posSegundoCasillero = otroCasillero.getPosicion();
+		Posicion restaPosiciones = (this.posicion).restar(posSegundoCasillero);
+		
+		int X= restaPosiciones.getX();
+		int Y= restaPosiciones.getY();
+		double distancia = Math.sqrt( (Math.pow(X, 2)) + Math.pow(Y, 2) ) ;
+		
+		return distancia;
+	}
+	
+	public Posicion getPosicion(){
+		return this.posicion;
 	}
 
 	public void desocupar() {
-		// TODO Auto-generated method stub
+		this.ficha = null;
 	}
 
 	public void ocupar(Personaje personaje) {
-		// TODO Auto-generated method stub
-		
+		this.ficha = personaje;
 	}
 
 	public boolean estaVacio() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean existeCaminoPosibleA(Casillero nuevoCasillero, int velocidad) {
-		// TODO Auto-generated method stub
-		return false;
+		return (this.ficha == null );
 	}
 
 }

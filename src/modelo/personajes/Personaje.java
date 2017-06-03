@@ -6,6 +6,7 @@ import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.modos.Modo;
 import modelo.tablero.Casillero;
+import modelo.tablero.Tablero;
 
 public abstract class Personaje {
 	
@@ -16,16 +17,21 @@ public abstract class Personaje {
 	private Equipo equipo;
 	private Modo modoActual;
 	private Casillero casillero;
+	private Tablero tablero;
 	
-	public Personaje(String nombre,int vidaInicial, Modo modo){
+	public Personaje(String nombre,int vidaInicial, Modo modo, Tablero tablero){
 		this.nombre = nombre;
 		this.vidaInicial = vidaInicial;
 		this.vidaActual = vidaInicial;
 		this.ki = 0;
 		this.modoActual = modo;
+		this.tablero = tablero;
 	}
 	
-	public void setCasillero(Casillero casillero){
+	public void setCasillero(Casillero casillero){ 
+		//ACA PODES PONERLE SET POSICION INICIAL Y LLAMAS AL METODO DE TABLERO:
+		//public void posicionarPersonaje(Personaje personaje, int pos_x, int pos_y){
+		// O SINO CAMBIA LA FIRMA DE POSICIONAR Y QUE RECIBA (PERSONAJE,CASILLERO)
 		this.casillero = casillero;
 	}
 	
@@ -95,15 +101,14 @@ public abstract class Personaje {
 		if (! this.puedeMoverse(nuevoCasillero)){
 			throw new MovimientoNoPosible();
 		}
-		this.casillero.desocupar();
-		this.casillero = nuevoCasillero;
-		this.casillero.ocupar(this);
+		this.tablero.reposicionarPersonaje(this , nuevoCasillero);
 	}
 	
 	public boolean puedeMoverse(Casillero nuevoCasillero){
 		return (nuevoCasillero.estaVacio() && 
-				this.casillero.existeCaminoPosibleA(nuevoCasillero, this.getVelocidad()));
+				this.tablero.existeCamino(nuevoCasillero, this.getVelocidad()));
 	}
+	//ACA NO SE COMO LO QUERES CAMBIAR PARA QUE QUEDE CON LA FIRMA DE EXISTE CAMINO
 	
 	public void transformar() throws TransformacionNoPosible{
 		if (!this.modoActual.puedeTransformarse(this)){
