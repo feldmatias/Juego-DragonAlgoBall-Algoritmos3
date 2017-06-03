@@ -9,12 +9,9 @@ public class Equipo {
 	private List<Personaje> personajes;
 	private String nombre;
 	
-	public Equipo(List<Personaje> personajes){
-		this.personajes = personajes;
-	}
-	
-	public void setNombre(String nombre){
+	public Equipo(String nombre, List<Personaje> personajes){
 		this.nombre = nombre;
+		this.personajes = personajes;
 	}
 
 	public boolean pertenece(Personaje personaje) {

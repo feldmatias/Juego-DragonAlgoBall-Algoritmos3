@@ -37,37 +37,29 @@ public class DragonBall {
 		jugador.setEquipo(equipo);
 		
 	}
-
+	
+	private Equipo crearEquipo(String nombreEquipo, Personaje pers1, Personaje pers2, Personaje pers3){
+		List<Personaje> lista = new ArrayList<Personaje>();
+		lista.add(pers1);
+		lista.add(pers2);
+		lista.add(pers3);
+		return new Equipo (nombreEquipo, lista);
+	}
+	
 	private Equipo crearEquipoGuerreros() {
-		Equipo equipo;
 		Personaje goku = new Goku();
 		Personaje gohan = new Gohan();
 		Personaje piccolo = new Piccolo();		
-		
-		List<Personaje> lista = new ArrayList<Personaje>();
-		lista.add(goku);
-		lista.add(gohan);
-		lista.add(piccolo);
-		equipo = new Equipo (lista);
-		equipo.setNombre("Guerreros Z");
-		
-		return equipo;
+	
+		return this.crearEquipo("Guerreros Z", goku, gohan, piccolo);
 	}
 	
 	private Equipo crearEquipoEnemigos() {
-		Equipo equipo;
 		Personaje cell = new Cell();
 		Personaje freezer = new Freezer();
 		Personaje majinBoo = new MajinBoo();		
 		
-		List<Personaje> lista = new ArrayList<Personaje>();
-		lista.add(cell);
-		lista.add(freezer);
-		lista.add(majinBoo);
-		equipo = new Equipo (lista);
-		equipo.setNombre("Enemigos de la Tierra");
-		
-		return equipo;
+		return this.crearEquipo("Enemigos de la tierra", cell, freezer, majinBoo);
 	}
 
 	public void elegirEquipos(String primerEquipo, String segundoEquipo) {
@@ -82,7 +74,7 @@ public class DragonBall {
 		
 	}
 
-	public Object existeEquipo(String unNombre) {
+	public boolean existeEquipo(String unNombre) {
 		
 		return ((equipoGuerreros.tuNombreEs(unNombre)) || (equipoEnemigos.tuNombreEs(unNombre)));
 		
