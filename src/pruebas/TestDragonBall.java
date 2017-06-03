@@ -4,6 +4,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.NombresDeEquipoIguales;
 import modelo.juego.DragonBall;
 
 
@@ -13,7 +15,6 @@ public class TestDragonBall {
 	@Before
 	public void setUp(){
 		dragonBall = new DragonBall();
-		dragonBall.nuevoJuego();
 	}
 
 	@Test
@@ -46,22 +47,67 @@ public class TestDragonBall {
 	
 	@Test
 	public void elegirEquiposJugador1GuerrerosJugador2Enemigos() {
-		dragonBall.elegirEquipos("Guerreros Z", "Enemigos de la Tierra");
-		String unNombre = dragonBall.getNombreEquipoDelJugador("Jugador 1");
-		String otroNombre = dragonBall.getNombreEquipoDelJugador("Jugador 2");
-		
-		Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Guerreros Z", true, (unNombre == "Guerreros Z"));
-		Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Enemigos de la Tierra", true, (otroNombre == "Enemigos de la Tierra"));
+		try{
+			dragonBall.elegirEquipos("Guerreros Z", "Enemigos de la Tierra");
+			String unNombre = dragonBall.getNombreEquipoDelJugador("Jugador 1");
+			String otroNombre = dragonBall.getNombreEquipoDelJugador("Jugador 2");
+			
+			Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Guerreros Z", true, (unNombre == "Guerreros Z"));
+			Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Enemigos de la Tierra", true, (otroNombre == "Enemigos de la Tierra"));
+			
+		} catch (NombresDeEquipoIguales e){
+			Assert.fail("No se han elegido dos equipos iguales.");
+		} catch (EquipoInexistente e) {
+			Assert.fail("No se ha elegido ningun equipo inexistente.");
+		}
 	}
 	@Test
 	public void elegirEquiposJugador1EnemigosJugador2Guerreros() {
-		dragonBall.elegirEquipos("Enemigos de la Tierra", "Guerreros Z");
-		String unNombre = dragonBall.getNombreEquipoDelJugador("Jugador 1");
-		String otroNombre = dragonBall.getNombreEquipoDelJugador("Jugador 2");
+		try{
+			
+			dragonBall.elegirEquipos("Enemigos de la Tierra", "Guerreros Z");
+			
+			String unNombre = dragonBall.getNombreEquipoDelJugador("Jugador 1");
+			String otroNombre = dragonBall.getNombreEquipoDelJugador("Jugador 2");
+			
+			Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Enemigos de la Tierra", true, (unNombre == "Enemigos de la Tierra"));
+			Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Guerreros Z", true, (otroNombre == "Guerreros Z"));
+		} catch (NombresDeEquipoIguales e){
+			Assert.fail("No se han elegido dos equipos iguales.");
+		} catch (EquipoInexistente e) {
+			Assert.fail("No se ha elegido ningun equipo inexistente.");
+		}
 		
-		Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Enemigos de la Tierra", true, (unNombre == "Enemigos de la Tierra"));
-		Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Guerreros Z", true, (otroNombre == "Guerreros Z"));
 	}
+	
+	@Test
+	public void elegirUnEquipoInexistenteLanzaExcepcion() {
+		try {
+			dragonBall.elegirEquipos("Equipo Verde", "Enemigos de la Tierra");
+		} catch (NombresDeEquipoIguales e) {
+			Assert.fail("No se han elegido dos equipos iguales.");
+		} catch (EquipoInexistente e) {}
+	}
+	
+	@Test
+	public void elegirDosEquiposInexistentesLanzaExcepcion() {
+		try {
+			dragonBall.elegirEquipos("Equipo Verde", "Equipo Rojo");
+		} catch (NombresDeEquipoIguales e) {
+			Assert.fail("No se han elegido dos equipos iguales.");
+		} catch (EquipoInexistente e) {}
+	}
+	
+	@Test
+	public void elegirDosEquiposIgualesLanzaExcepcion() {
+		try {
+			dragonBall.elegirEquipos("Guerreros Z", "Guerreros Z");
+		} catch (NombresDeEquipoIguales e) {
+		} catch (EquipoInexistente e) {
+			Assert.fail("No se ha elegido ningun equipo inexistente.");
+		}
+	}
+	
 
 	
 }
