@@ -54,12 +54,8 @@ public class DragonBall {
 		lista.add(pers3);
 		tablero.posicionarPersonaje(pers1, posInicial);
 		tablero.posicionarPersonaje(pers2, posInicial.sumarPosicion(new Posicion(0,1)));
-		tablero.posicionarPersonaje(pers3, posInicial.sumarPosicion(new Posicion(0,2)));
-		Equipo equipo =  new Equipo (nombreEquipo, lista);
-		pers1.setEquipo(equipo);
-		pers2.setEquipo(equipo);
-		pers3.setEquipo(equipo);
-		return equipo;
+		tablero.posicionarPersonaje(pers3, posInicial.sumarPosicion(new Posicion(0,-1)));
+		return new Equipo (nombreEquipo, lista);
 	}
 	
 	private Equipo crearEquipoGuerreros() throws PosicionFueraDeRango {
@@ -67,7 +63,7 @@ public class DragonBall {
 		Personaje gohan = new Gohan(this.tablero);
 		Personaje piccolo = new Piccolo(this.tablero);		
 	
-		return this.crearEquipoYPosicionarPersonajes("Guerreros Z", goku, gohan, piccolo, new Posicion (0,0));
+		return this.crearEquipoYPosicionarPersonajes("Guerreros Z", goku, gohan, piccolo, new Posicion (0,SIZE_TABLERO/2));
 	}
 	
 	private Equipo crearEquipoEnemigos() throws PosicionFueraDeRango {
@@ -75,12 +71,11 @@ public class DragonBall {
 		Personaje freezer = new Freezer(this.tablero);
 		Personaje majinBoo = new MajinBoo(this.tablero);		
 		
-		return this.crearEquipoYPosicionarPersonajes("Enemigos de la Tierra", cell, freezer, majinBoo, new Posicion (SIZE_TABLERO - 1, 0));
+		return this.crearEquipoYPosicionarPersonajes("Enemigos de la Tierra", cell, freezer, majinBoo, new Posicion (SIZE_TABLERO - 1, SIZE_TABLERO/2));
 	}
 
 	public void elegirEquipos(String primerEquipo, String segundoEquipo) throws NombresDeEquipoIguales, EquipoInexistente {
 		//Excepciones
-		//Chequeo que ambos equipos no sean iguales
 		if(primerEquipo == segundoEquipo){
 			throw new NombresDeEquipoIguales();
 		}
