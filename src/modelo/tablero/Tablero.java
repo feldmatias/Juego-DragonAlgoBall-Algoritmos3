@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import modelo.excepciones.PosicionFueraDeRango;
 import modelo.personajes.Personaje;
 
 public class Tablero {

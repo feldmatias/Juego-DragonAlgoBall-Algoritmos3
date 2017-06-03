@@ -8,7 +8,6 @@ import modelo.personajes.MajinBoo;
 import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
 import modelo.tablero.Posicion;
-import modelo.tablero.PosicionFueraDeRango;
 import modelo.tablero.Tablero;
 
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ import java.util.Map;
 
 import modelo.excepciones.EquipoInexistente;
 import modelo.excepciones.NombresDeEquipoIguales;
+import modelo.excepciones.PosicionFueraDeRango;
 import modelo.juego.Equipo;
 
 public class DragonBall {
@@ -29,7 +29,7 @@ public class DragonBall {
 	private Map<String,Equipo> equipos;
 	
 	
-	public DragonBall () throws PosicionFueraDeRango {
+	public DragonBall () {
 		
 		this.tablero = new Tablero(SIZE_TABLERO);
 		this.equipos = new HashMap<String, Equipo>();

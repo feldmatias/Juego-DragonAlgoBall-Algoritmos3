@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import modelo.excepciones.EquipoInexistente;
 import modelo.excepciones.NombresDeEquipoIguales;
+import modelo.excepciones.PosicionFueraDeRango;
 import modelo.juego.DragonBall;
 import modelo.personajes.Cell;
 import modelo.personajes.Freezer;
@@ -22,7 +23,7 @@ public class TestDragonBall {
 	private DragonBall dragonBall;
 	
 	@Before
-	public void setUp(){
+	public void setUp() {
 		dragonBall = new DragonBall();
 	}
 

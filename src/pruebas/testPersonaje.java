@@ -9,13 +9,13 @@ import org.junit.Test;
 
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
+import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.tablero.Posicion;
-import modelo.tablero.PosicionFueraDeRango;
 import modelo.tablero.Tablero;
 
 public class testPersonaje {

@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import modelo.excepciones.PosicionFueraDeRango;
 import modelo.tablero.Casillero;
 import modelo.tablero.Posicion;
-import modelo.tablero.PosicionFueraDeRango;
 import modelo.tablero.Tablero;
 
 public class TestTablero {

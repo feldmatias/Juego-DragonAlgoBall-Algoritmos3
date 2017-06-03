@@ -2,11 +2,11 @@ package modelo.personajes;
 
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
+import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.modos.Modo;
 import modelo.tablero.Posicion;
-import modelo.tablero.PosicionFueraDeRango;
 import modelo.tablero.Tablero;
 
 public abstract class Personaje {
