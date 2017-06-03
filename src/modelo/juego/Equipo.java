@@ -31,4 +31,8 @@ public class Equipo {
 		return false;
 	}
 
+	public String getNombre() {
+		return this.nombre;
+	}
+
 }
