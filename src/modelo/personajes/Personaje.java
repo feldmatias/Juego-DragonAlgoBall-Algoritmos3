@@ -16,7 +16,6 @@ public abstract class Personaje {
 	private int ki;
 	private Equipo equipo;
 	private Modo modoActual;
-	private Casillero casillero;
 	private Tablero tablero;
 	
 	public Personaje(String nombre,int vidaInicial, Modo modo, Tablero tablero){
@@ -26,13 +25,6 @@ public abstract class Personaje {
 		this.ki = 0;
 		this.modoActual = modo;
 		this.tablero = tablero;
-	}
-	
-	public void setCasillero(Casillero casillero){ 
-		//ACA PODES PONERLE SET POSICION INICIAL Y LLAMAS AL METODO DE TABLERO:
-		//public void posicionarPersonaje(Personaje personaje, int pos_x, int pos_y){
-		// O SINO CAMBIA LA FIRMA DE POSICIONAR Y QUE RECIBA (PERSONAJE,CASILLERO)
-		this.casillero = casillero;
 	}
 	
 	public void setEquipo(Equipo equipo){
@@ -49,10 +41,6 @@ public abstract class Personaje {
 
 	public int getDistanciaAtaque() {
 		return this.modoActual.getDistanciaAtaque();
-	}
-
-	public Casillero getCasillero() {
-		return this.casillero;
 	}
 	
 	public int getVelocidad() {
@@ -80,14 +68,14 @@ public abstract class Personaje {
 		if (this.equipo.pertenece(enemigo)){
 			throw new AtaqueNoPosible();
 		}
-		if (!enemigo.puedeSerAtacado(this.getDistanciaAtaque(),this.getCasillero())){
+		if (!alcanzaDistanciaAtaque(enemigo)){
 			throw new AtaqueNoPosible();
 		}
 		enemigo.recibirAtaque(this.getPoderPelea());
 	}
 
-	public boolean puedeSerAtacado(int distanciaAtaqueEnemigo, Casillero casilleroEnemigo) {
-		return (this.getCasillero().distanciaA(casilleroEnemigo) <= distanciaAtaqueEnemigo);
+	public boolean alcanzaDistanciaAtaque(Personaje enemigo) {
+		return (this.tablero.distanciaEntre(this,enemigo) <= this.getDistanciaAtaque());
 	}
 
 	public void recibirAtaque(int poderPeleaEnemigo) {
@@ -106,9 +94,8 @@ public abstract class Personaje {
 	
 	public boolean puedeMoverse(Casillero nuevoCasillero){
 		return (nuevoCasillero.estaVacio() && 
-				this.tablero.existeCamino(nuevoCasillero, this.getVelocidad()));
+				this.tablero.personajePuedeMoverse(this, nuevoCasillero));
 	}
-	//ACA NO SE COMO LO QUERES CAMBIAR PARA QUE QUEDE CON LA FIRMA DE EXISTE CAMINO
 	
 	public void transformar() throws TransformacionNoPosible{
 		if (!this.modoActual.puedeTransformarse(this)){

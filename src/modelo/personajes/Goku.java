@@ -1,11 +1,12 @@
 package modelo.personajes;
 
 import modelo.personajes.modos.modosGoku.GokuNormal;
+import modelo.tablero.Tablero;
 
 public class Goku extends Personaje {
 	
-	public Goku(){
-		super("Goku", 500,  new GokuNormal());
+	public Goku(Tablero tablero){
+		super("Goku", 500,  new GokuNormal(), tablero);
 	}
 	
 	public int getPoderPelea(){

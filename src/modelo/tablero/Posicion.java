@@ -17,10 +17,20 @@ public class Posicion {
 		return pos_y; 
 	}
 	
-	public Posicion restar(Posicion unaPosicion){
-		int nueva_x = (this.pos_x )- (unaPosicion.getX());
-		int nueva_y = (this.pos_x) - (unaPosicion.getY());
+	public Posicion sumarPosicion(Posicion unaPosicion){
+		int nueva_x = (this.pos_x ) + (unaPosicion.getX());
+		int nueva_y = (this.pos_x) + (unaPosicion.getY());
 		Posicion nueva_pos = new Posicion(nueva_x,nueva_y);
 		return (nueva_pos);
+	}
+
+	public boolean esValida(int size) {
+		return pos_x >= 0 && pos_y >= 0 && pos_x < size && pos_y < size;
+	}
+
+	public int distanciaA(Posicion pos2) {
+		int distanciaHorizontal = Math.abs(this.pos_x - pos2.pos_x );
+		int distanciaVertical = Math.abs (this.pos_y - pos2.pos_y );
+		return Math.max(distanciaHorizontal, distanciaVertical);
 	}
 }
