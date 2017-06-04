@@ -104,11 +104,17 @@ public class Tablero {
 		return pos1.distanciaA(pos2);
 	}
 
-	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion) throws PosicionFueraDeRango {
-		Casillero destino = this.getCasillero(nuevaPosicion);
+	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion){
+		Casillero destino;
 		Casillero origen = this.casillerosOcupados.get(personaje);
-		return destino.estaVacio() && this.existeCamino(origen, origen, destino, personaje.getVelocidad()) && Turno.getInstance().esMiTurno(personaje.getEquipo());
+		try{
+			destino = this.getCasillero(nuevaPosicion);
+			return destino.estaVacio() && this.existeCamino(origen, origen, destino, personaje.getVelocidad()) && Turno.getInstance().esMiTurno(personaje.getEquipo());
+		}catch(PosicionFueraDeRango e){
+			return false;
+		}
 	}
+		
 	public Posicion getPosicionPersonaje(Personaje personaje){
 		return this.casillerosOcupados.get(personaje).getPosicion();
 	}
