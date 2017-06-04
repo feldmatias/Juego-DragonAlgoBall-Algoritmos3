@@ -16,6 +16,7 @@ import modelo.personajes.MajinBoo;
 import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
 import modelo.tablero.Posicion;
+import modelo.utilidades.Constantes;
 
 public class TestIntegracion {
 	
@@ -24,12 +25,12 @@ public class TestIntegracion {
 		
 		try{
 			DragonBall dragonBall = new DragonBall();
-			dragonBall.elegirEquipos("Guerreros Z", "Enemigos de la Tierra");
+			dragonBall.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
 			
 			String unNombre = dragonBall.getJugador1().getEquipo().getNombre();
 			String otroNombre = dragonBall.getJugador2().getEquipo().getNombre();
-			Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Guerreros", "Guerreros Z", unNombre);
-			Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Enemigos", "Enemigos de la Tierra", otroNombre);
+			Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Guerreros", Constantes.GUERREROS, unNombre);
+			Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Enemigos", Constantes.ENEMIGOS, otroNombre);
 			
 			List<Personaje> miembrosGuerreros = dragonBall.getJugador1().getEquipo().getMiembros();
 			for (Personaje personaje : miembrosGuerreros){

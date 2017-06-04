@@ -1,5 +1,14 @@
 package modelo.juego;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.NombresDeEquipoIguales;
+import modelo.excepciones.PosicionFueraDeRango;
 import modelo.personajes.Cell;
 import modelo.personajes.Freezer;
 import modelo.personajes.Gohan;
@@ -9,37 +18,32 @@ import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
 import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import modelo.excepciones.EquipoInexistente;
-import modelo.excepciones.NombresDeEquipoIguales;
-import modelo.excepciones.PosicionFueraDeRango;
-import modelo.juego.Equipo;
+import modelo.utilidades.Constantes;
 
 public class DragonBall {
 	
-	private static final int SIZE_TABLERO = 8;
 	public Tablero tablero;
 	private Jugador jugador1;
 	private Jugador jugador2;
 	private Map<String,Equipo> equipos;
-	
-	
+
 	public DragonBall () {
 		
-		this.tablero = new Tablero(SIZE_TABLERO);
+		this.tablero = new Tablero(Constantes.SIZE_TABLERO);
 		this.equipos = new HashMap<String, Equipo>();
-		equipos.put("Guerreros Z", this.crearEquipoGuerreros());
-		equipos.put("Enemigos de la Tierra", this.crearEquipoEnemigos());
+		equipos.put(Constantes.GUERREROS, this.crearEquipoGuerreros());
+		equipos.put(Constantes.ENEMIGOS, this.crearEquipoEnemigos());
 		
 		jugador1 = new Jugador();
 		jugador2 = new Jugador();
 		
-		
+		int random = new Random().nextInt(9)+1;
+         
+		if (random > 5) {		
+			Turno.getInstance().setEquipo(equipos.get(Constantes.GUERREROS));
+		} else {
+			Turno.getInstance().setEquipo(equipos.get(Constantes.ENEMIGOS));
+		}
 	}
 
 	private void asignarEquipoAJugador(Equipo equipo, Jugador jugador) {
@@ -63,7 +67,7 @@ public class DragonBall {
 		Personaje gohan = new Gohan(this.tablero);
 		Personaje piccolo = new Piccolo(this.tablero);		
 	
-		return this.crearEquipoYPosicionarPersonajes("Guerreros Z", goku, gohan, piccolo, new Posicion (0,SIZE_TABLERO/2));
+		return this.crearEquipoYPosicionarPersonajes(Constantes.GUERREROS, goku, gohan, piccolo, new Posicion (0,Constantes.SIZE_TABLERO/2));
 	}
 	
 	private Equipo crearEquipoEnemigos() throws PosicionFueraDeRango {
@@ -71,7 +75,7 @@ public class DragonBall {
 		Personaje freezer = new Freezer(this.tablero);
 		Personaje majinBoo = new MajinBoo(this.tablero);		
 		
-		return this.crearEquipoYPosicionarPersonajes("Enemigos de la Tierra", cell, freezer, majinBoo, new Posicion (SIZE_TABLERO - 1, SIZE_TABLERO/2));
+		return this.crearEquipoYPosicionarPersonajes(Constantes.ENEMIGOS, cell, freezer, majinBoo, new Posicion (Constantes.SIZE_TABLERO - 1, Constantes.SIZE_TABLERO/2));
 	}
 
 	public void elegirEquipos(String primerEquipo, String segundoEquipo) throws NombresDeEquipoIguales, EquipoInexistente {
@@ -102,7 +106,7 @@ public class DragonBall {
 		return this.jugador2;
 	}
 	public int getSizeTablero(){
-		return SIZE_TABLERO;
+		return Constantes.SIZE_TABLERO;
 	}
 
 

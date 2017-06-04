@@ -11,11 +11,13 @@ import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
+import modelo.juego.Turno;
 import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
+import modelo.utilidades.Constantes;
 
 public class TestPersonaje {
 	
@@ -223,6 +225,7 @@ public class TestPersonaje {
 	@Test
 	public void testMoverPersonajeAcordeALaVelocidadYComprobarNuevaPosicion(){
 		
+		Turno.getInstance().setEquipo(crearEquipoUnPersonaje(personaje, Constantes.ENEMIGOS));
 		Posicion destino = new Posicion(0,1);
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		
@@ -269,6 +272,7 @@ public class TestPersonaje {
 	@Test
 	public void testMoverPersonajeAPosicionDespuesDeTransformacion(){
 
+		Turno.getInstance().setEquipo(crearEquipoUnPersonaje(personaje, Constantes.ENEMIGOS));
 		Posicion destino = new Posicion(0,3);
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		
@@ -312,10 +316,10 @@ public class TestPersonaje {
 	
 	//Test atacar a personaje
 	
-	private Equipo crearEquipoUnPersonaje(Personaje personaje){
+	private Equipo crearEquipoUnPersonaje(Personaje personaje, String nombreEquipo){
 		List<Personaje> lista = new ArrayList<Personaje>();
 		lista.add(personaje);
-		Equipo equipo = new Equipo ("nombre",lista);
+		Equipo equipo = new Equipo (nombreEquipo, lista);
 		personaje.setEquipo(equipo);
 		return equipo;
 	}
@@ -324,13 +328,14 @@ public class TestPersonaje {
 	public void testAtacarPersonajeDistintoEquipoPosicionCorrecta(){
 		
 		Personaje enemigo = new Freezer(tablero);
-		this.crearEquipoUnPersonaje(personaje);
-		this.crearEquipoUnPersonaje(enemigo);
+		this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS);
+		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
 
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		tablero.posicionarPersonaje(enemigo, new Posicion(0,1));
 		
 		try {
+			Turno.getInstance().setEquipo(this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS));
 			personaje.atacarAPersonaje(enemigo);
 			Assert.assertEquals(95, enemigo.getPorcentajeVida(), 0.01);
 		} catch (AtaqueNoPosible e) {
@@ -342,8 +347,8 @@ public class TestPersonaje {
 	public void testAtacarPersonajeDistintoEquipoPosicionLejanaLanzaExcepcion(){
 		
 		Personaje enemigo = new Freezer(tablero);
-		this.crearEquipoUnPersonaje(personaje);
-		this.crearEquipoUnPersonaje(enemigo);
+		this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS);
+		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
 		
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		tablero.posicionarPersonaje(enemigo, new Posicion(5,5));
@@ -377,8 +382,11 @@ public class TestPersonaje {
 	public void testAtacarPersonajeDistintoEquipoPosicionCorrectaDespuesDeTransformar(){
 		
 		Personaje enemigo = new Freezer(tablero);
-		this.crearEquipoUnPersonaje(personaje);
-		this.crearEquipoUnPersonaje(enemigo);
+		this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS);
+		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
+		
+		Turno.getInstance().setEquipo(crearEquipoUnPersonaje(personaje, Constantes.GUERREROS));
+
 
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		tablero.posicionarPersonaje(enemigo, new Posicion(0,4));

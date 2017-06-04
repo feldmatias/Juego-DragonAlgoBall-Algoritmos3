@@ -5,6 +5,7 @@ import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
+import modelo.juego.Turno;
 import modelo.personajes.modos.Modo;
 import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
@@ -56,6 +57,11 @@ public abstract class Personaje {
 		return this.ki;
 	}
 	
+	public Equipo getEquipo() {
+		return this.equipo;
+	}
+	
+	
 	public void generarKi(){
 		int kiGenerado = 5;
 		this.ki += kiGenerado;
@@ -70,6 +76,9 @@ public abstract class Personaje {
 			throw new AtaqueNoPosible();
 		}
 		if (!this.alcanzaDistanciaAtaque(enemigo)){
+			throw new AtaqueNoPosible();
+		}
+		if (Turno.getInstance().esMiTurno(enemigo.getEquipo())){
 			throw new AtaqueNoPosible();
 		}
 		enemigo.recibirAtaque(this.getPoderPelea());
