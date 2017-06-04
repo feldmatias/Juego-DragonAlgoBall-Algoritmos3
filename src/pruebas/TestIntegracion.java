@@ -5,8 +5,14 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import modelo.excepciones.AtaqueNoPosible;
+import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.MovimientoNoPosible;
+import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.NombresDeEquipoIguales;
+import modelo.excepciones.PersonajeNoSeleccionable;
+import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.personajes.Cell;
 import modelo.personajes.Freezer;
@@ -77,8 +83,69 @@ public class TestIntegracion {
 		}
 		
 		
-		
-		
-		
 	}
+	
+	public void testIntegracionJugarJuego() throws NombresDeEquipoIguales, EquipoInexistente, MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible{
+		DragonBall juego = new DragonBall();
+		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
+		
+		if (juego.getJugadorActual() == juego.getJugador2()){
+			juego.jugadorActualTerminarTurno();
+		}
+		
+		Personaje goku = juego.getJugador1().getEquipo().getMiembros().get(0);
+		Personaje freezer = juego.getJugador2().getEquipo().getMiembros().get(1);
+		
+		//Turno guerreros
+		juego.jugadorActualSeleccionarPersonaje(goku);
+		juego.jugadorActualMoverAPosicion(new Posicion (2,3));
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno enemigos
+		juego.jugadorActualSeleccionarPersonaje(freezer);
+		juego.jugadorActualMoverAPosicion(new Posicion (4,6));
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno guerreros
+		juego.jugadorActualMoverAPosicion(new Posicion(3,1));
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno enemigos
+		juego.jugadorActualMoverAPosicion(new Posicion (5,3));
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno guerreros
+		juego.jugadorActualAtacarAEnemigo(freezer);
+		Assert.assertEquals(95, freezer.getPorcentajeVida(), 0.01);
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno enemigos
+		juego.jugadorActualAtacarAEnemigo(goku);
+		Assert.assertEquals(96, goku.getPorcentajeVida(), 0.01);
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno guerreros
+		juego.jugadorActualMoverAPosicion(new Posicion (5,1));
+		juego.jugadorActualAtacarAEnemigo(freezer);
+		Assert.assertEquals(90, freezer.getPorcentajeVida(), 0.01);
+		
+		//Turno enemigos
+		Assert.assertEquals(juego.getJugador2(), juego.getJugadorActual());
+		juego.jugadorActualAtacarAEnemigo(goku);
+		Assert.assertEquals(92, goku.getPorcentajeVida(), 0.01);
+		juego.jugadorActualMoverAPosicion(new Posicion (5,2));
+		
+		//Turno guerreros
+		juego.jugadorActualTransformar();
+		juego.jugadorActualAtacarAEnemigo(freezer);
+		Assert.assertEquals(80, freezer.getPorcentajeVida(), 0.01);
+		juego.jugadorActualMoverAPosicion(new Posicion (2,4));
+		
+		//Turno enemigos
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno guerreros
+		Assert.assertEquals(juego.getJugador1(), juego.getJugadorActual());
+	}
+	
 }

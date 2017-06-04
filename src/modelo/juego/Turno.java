@@ -9,6 +9,7 @@ import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoPerteneceAEquipo;
 import modelo.excepciones.PersonajeNoSeleccionable;
+import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Personaje;
 import modelo.tablero.Posicion;
 
@@ -73,5 +74,10 @@ public class Turno {
 		} catch (PersonajeNoPerteneceAEquipo e){
 			throw new PersonajeNoSeleccionable();
 		}
+	}
+
+
+	public void transformar() throws TransformacionNoPosible {
+		this.jugadorActual().transformarPersonaje();
 	}
 }

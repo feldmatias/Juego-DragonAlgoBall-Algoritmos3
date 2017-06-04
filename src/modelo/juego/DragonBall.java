@@ -6,9 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import modelo.excepciones.AtaqueNoPosible;
+import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.MovimientoNoPosible;
+import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.NombresDeEquipoIguales;
+import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.PosicionFueraDeRango;
+import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Cell;
 import modelo.personajes.Freezer;
 import modelo.personajes.Gohan;
@@ -120,6 +126,26 @@ public class DragonBall {
 	
 	public Jugador getJugadorActual(){
 		return this.turno.jugadorActual();
+	}
+	
+	public void jugadorActualAtacarAEnemigo(Personaje enemigo) throws AtaqueYaRealizado, AtaqueNoPosible{
+		this.turno.atacarEnemigo(enemigo);
+	}
+	
+	public void jugadorActualMoverAPosicion(Posicion destino) throws MovimientoYaRealizado, MovimientoNoPosible{
+		this.turno.moverPersonaje(destino);
+	}
+	
+	public void jugadorActualTransformar() throws TransformacionNoPosible{
+		this.turno.transformar();
+	}
+	
+	public void jugadorActualSeleccionarPersonaje(Personaje personaje) throws PersonajeNoSeleccionable{
+		this.turno.seleccionarPersonaje(personaje);
+	}
+	
+	public void jugadorActualTerminarTurno(){
+		this.turno.terminarTurno();
 	}
 
 }
