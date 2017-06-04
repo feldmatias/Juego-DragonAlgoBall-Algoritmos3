@@ -55,9 +55,9 @@ public class TestIntegracion {
 			}
 			int size = Constantes.SIZE_TABLERO;
 			
-			Posicion posicionEsperadaGuerreros1 = new Posicion(0,size/2);
-			Posicion posicionEsperadaGuerreros2 = new Posicion(0,(size/2)+1);
-			Posicion posicionEsperadaGuerreros3 = new Posicion(0,(size/2)-1);
+			Posicion posicionEsperadaGuerreros1 = new Posicion(0,Constantes.POS_CENTRAL);
+			Posicion posicionEsperadaGuerreros2 = new Posicion(0,(Constantes.POS_CENTRAL)+1);
+			Posicion posicionEsperadaGuerreros3 = new Posicion(0,(Constantes.POS_CENTRAL)-1);
 			for (Personaje personaje : miembrosGuerreros){
 				Posicion posicionReal = dragonBall.getTablero().getPosicionPersonaje(personaje);
 				boolean flag = posicionReal.equals(posicionEsperadaGuerreros1);
@@ -65,9 +65,9 @@ public class TestIntegracion {
 				flag = flag || posicionReal.equals(posicionEsperadaGuerreros3);
 				Assert.assertTrue(flag);
 			}
-			Posicion posicionEsperadaEnemigos1 = new Posicion(size-1,size/2);
-			Posicion posicionEsperadaEnemigos2 = new Posicion(size-1,(size/2)+1);
-			Posicion posicionEsperadaEnemigos3 = new Posicion(size-1,(size/2)-1);
+			Posicion posicionEsperadaEnemigos1 = new Posicion(size-1,Constantes.POS_CENTRAL);
+			Posicion posicionEsperadaEnemigos2 = new Posicion(size-1,(Constantes.POS_CENTRAL)+1);
+			Posicion posicionEsperadaEnemigos3 = new Posicion(size-1,(Constantes.POS_CENTRAL)-1);
 			for (Personaje personaje : miembrosEnemigos){
 				Posicion posicionReal = dragonBall.getTablero().getPosicionPersonaje(personaje);
 				boolean flag = posicionReal.equals(posicionEsperadaEnemigos1);
@@ -85,6 +85,7 @@ public class TestIntegracion {
 		
 	}
 	
+	@Test
 	public void testIntegracionJugarJuego() throws NombresDeEquipoIguales, EquipoInexistente, MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible{
 		DragonBall juego = new DragonBall();
 		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
