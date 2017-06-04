@@ -40,24 +40,27 @@ public class Turno {
 		}
 		this.jugadorActual().atacar(enemigo);
 		this.ataqueRealizado = true;
-		this.terminarTurno();
+		this.comprobarTurnoTerminado();
 	}
-	
+
 	public void moverPersonaje(Posicion destino) throws MovimientoYaRealizado, MovimientoNoPosible{
 		if (movimientoRealizado){
 			throw new MovimientoYaRealizado();
 		}
 		this.jugadorActual().mover(destino);
 		this.movimientoRealizado = true;
-		this.terminarTurno();
+		this.comprobarTurnoTerminado();
 	}
 	
-	private void terminarTurno() {
-		if (! (this.movimientoRealizado && this.ataqueRealizado)){
-			return;
-		}
+	public void terminarTurno() {
 		jugadores.add(jugadores.remove()); // Cambia el jugador actual
 		this.empezarTurno();
+	}
+	
+	private void comprobarTurnoTerminado() {
+		if (this.movimientoRealizado && this.ataqueRealizado){
+			this.terminarTurno();
+		}
 	}
 	
 	public Jugador jugadorActual(){

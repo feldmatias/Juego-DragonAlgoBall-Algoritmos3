@@ -117,5 +117,9 @@ public class DragonBall {
 		Collections.shuffle(lista);
 		this.turno = new Turno (lista.get(0), lista.get(1));
 	}
+	
+	public Jugador getJugadorActual(){
+		return this.turno.jugadorActual();
+	}
 
 }
