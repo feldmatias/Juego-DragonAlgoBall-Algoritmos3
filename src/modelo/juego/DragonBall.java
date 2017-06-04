@@ -1,6 +1,7 @@
 package modelo.juego;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +89,7 @@ public class DragonBall {
 		this.asignarEquipoAJugador(this.equipos.get(primerEquipo), this.jugador1);
 		this.asignarEquipoAJugador(this.equipos.get(segundoEquipo), this.jugador2);
 		
-		this.turno = new Turno (jugador1, jugador2); // si quieren despues lo hacemos al azar
+		this.iniciarTurno();
 	}
 
 	private boolean existeEquipo(String unNombre) {
@@ -107,6 +108,14 @@ public class DragonBall {
 	
 	public Tablero getTablero(){
 		return this.tablero;
+	}
+	
+	private void iniciarTurno(){
+		List<Jugador> lista = new ArrayList<Jugador>();
+		lista.add(this.jugador1);
+		lista.add(this.jugador2);
+		Collections.shuffle(lista);
+		this.turno = new Turno (lista.get(0), lista.get(1));
 	}
 
 }

@@ -47,16 +47,18 @@ public class TestTurno {
 		
 	@Test
 	public void testGenerarKiAlComienzoDelTurno(){
-		for (Personaje personaje: jugador1.getEquipo().getMiembros()){
-			Assert.assertEquals(10, personaje.getKi());
-		}
+		Personaje personaje = jugador1.getEquipo().getMiembros().get(0);
+		int kiActual = personaje.getKi();
+		new Turno (jugador1, jugador2);
+		Assert.assertEquals(kiActual + 5, personaje.getKi());
 	}
 	
 	@Test
 	public void testNoGenerarKiAlComienzoDelTurnoDelOtroJugador(){
-		for (Personaje personaje: jugador2.getEquipo().getMiembros()){
-			Assert.assertEquals(0, personaje.getKi());
-		}
+		Personaje personaje = jugador2.getEquipo().getMiembros().get(0);
+		int kiActual = personaje.getKi();
+		new Turno (jugador1, jugador2);
+		Assert.assertEquals(kiActual, personaje.getKi());
 	}
 	
 	@Test
@@ -192,14 +194,14 @@ public class TestTurno {
 	@Test
 	public void testAlCambiarDeTurnoGeneraKiNuevoJugador() throws AtaqueYaRealizado, AtaqueNoPosible, MovimientoYaRealizado, MovimientoNoPosible{
 		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
+		int kiActual = enemigo.getKi();
 		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
 		Posicion destino = new Posicion (2, Constantes.SIZE_TABLERO / 2);
 
 		turno.atacarEnemigo(enemigo);
 		turno.moverPersonaje(destino);
-		for (Personaje personaje: jugador2.getEquipo().getMiembros()){
-			Assert.assertEquals(5, personaje.getKi());
-		}
+		
+		Assert.assertEquals(kiActual + 5, enemigo.getKi());
 
 	}
 	
