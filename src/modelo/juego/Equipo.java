@@ -26,4 +26,11 @@ public class Equipo {
 		return this.personajes;
 	}
 
+	public void empezarTurno() {
+		for (Personaje personaje: this.personajes){
+			personaje.generarKi();
+		}
+		
+	}
+
 }

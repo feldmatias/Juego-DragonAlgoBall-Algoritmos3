@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.excepciones.PosicionFueraDeRango;
-import modelo.juego.Turno;
 import modelo.personajes.Personaje;
 
 public class Tablero {
@@ -107,8 +106,9 @@ public class Tablero {
 	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion) throws PosicionFueraDeRango {
 		Casillero destino = this.getCasillero(nuevaPosicion);
 		Casillero origen = this.casillerosOcupados.get(personaje);
-		return destino.estaVacio() && this.existeCamino(origen, origen, destino, personaje.getVelocidad()) && Turno.getInstance().esMiTurno(personaje.getEquipo());
+		return destino.estaVacio() && this.existeCamino(origen, origen, destino, personaje.getVelocidad());
 	}
+	
 	public Posicion getPosicionPersonaje(Personaje personaje){
 		return this.casillerosOcupados.get(personaje).getPosicion();
 	}

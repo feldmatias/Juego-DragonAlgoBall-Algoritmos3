@@ -1,74 +1,70 @@
 package pruebas;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import modelo.juego.Equipo;
+import modelo.excepciones.AtaqueNoPosible;
+import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.NombresDeEquipoIguales;
+import modelo.juego.DragonBall;
+import modelo.juego.Jugador;
 import modelo.juego.Turno;
-import modelo.personajes.Cell;
-import modelo.personajes.Freezer;
-import modelo.personajes.Gohan;
-import modelo.personajes.Goku;
-import modelo.personajes.MajinBoo;
 import modelo.personajes.Personaje;
-import modelo.personajes.Piccolo;
-import modelo.personajes.modos.modosGoku.GokuNormal;
-import modelo.tablero.Tablero;
+import modelo.tablero.Posicion;
 import modelo.utilidades.Constantes;
 
 public class TestTurno {
-	private Equipo equipo1;
-	private Equipo equipo2;
+	
+	private DragonBall juego;
+	private Jugador jugador1;
+	private Jugador jugador2;
+	private Turno turno;
 	
 	@Before
-	public void setUp(){
-		List<Personaje> personajes = new ArrayList<Personaje>();
-		Tablero tablero = new Tablero(8);
-		personajes.add(new Goku(tablero));
-		personajes.add(new Gohan(tablero));
-		personajes.add(new Piccolo(tablero));
-		this.equipo1 = new Equipo(Constantes.GUERREROS, personajes);
-		
-		List<Personaje> personajesMalos = new ArrayList<Personaje>();
-		personajesMalos.add(new Cell(tablero));
-		personajesMalos.add(new Freezer(tablero));
-		personajesMalos.add(new MajinBoo(tablero));
-		this.equipo2 = new Equipo(Constantes.ENEMIGOS, personajesMalos);
-	}
-	
-	
-	
-
-	@Test
-	public void testTurnoNoEstaCreado() {
-		Turno turno = new Turno();
-		Assert.assertTrue(Turno.getInstance() != null);
+	public void setUp() throws NombresDeEquipoIguales, EquipoInexistente{
+		juego = new DragonBall();
+		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS); //Crea un turno interno que no uso
+		this.jugador1 = juego.getJugador1();
+		this.jugador2 = juego.getJugador2();
+		this.turno = new Turno (jugador1, jugador2);
 	}
 	
 	@Test
-	public void testNoEsElTurnodelEquipo2 (){
-		Turno.getInstance().setEquipo(equipo1);
-		Turno.getInstance().esMiTurno(equipo2);
-		Assert.assertTrue(Turno.getInstance().esMiTurno(equipo2)== false);
+	public void testNoEsElTurnodelEquipo2AlIniciar (){
+		Assert.assertNotEquals(jugador2, turno.jugadorActual());
 	}
 	
 	@Test
-	public void testEsElTurnoDelEquipo1 (){
-		Turno.getInstance().setEquipo(equipo1);
-		Turno.getInstance().esMiTurno(equipo1);
-		Assert.assertTrue(Turno.getInstance().esMiTurno(equipo1)== true);
+	public void testEsElTurnoDelEquipo1AlIniciar (){
+		Assert.assertEquals(jugador1, turno.jugadorActual());
 	}	
 		
 	@Test
 	public void testGenerarKiAlComienzoDelTurno(){
-		Turno.getInstance().setEquipo(equipo1);
-		Turno.getInstance().empezarTurno();
-		for (Personaje personaje: equipo1.getMiembros()){
-			Assert.assertEquals(5, personaje.getKi());
+		for (Personaje personaje: jugador1.getEquipo().getMiembros()){
+			Assert.assertEquals(10, personaje.getKi());
+		}
+	}
+	
+	@Test
+	public void testNoGenerarKiAlComienzoDelTurnoDelOtroJugador(){
+		for (Personaje personaje: jugador2.getEquipo().getMiembros()){
+			Assert.assertEquals(0, personaje.getKi());
+		}
+	}
+	
+	@Test
+	public void testJugadorActualPuedeAtacarEnemigo(){
+		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
+		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
+		System.out.println(enemigo.toString());
+		try {
+			turno.atacarEnemigo(enemigo);
+			Assert.assertTrue(enemigo.getPorcentajeVida() < 100); 
+		} catch (AtaqueNoPosible e) {
+			Assert.fail("Deberia haber atacado");
 		}
 	}
 }
