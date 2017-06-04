@@ -11,7 +11,6 @@ import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
-import modelo.juego.Turno;
 import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
@@ -225,7 +224,6 @@ public class TestPersonaje {
 	@Test
 	public void testMoverPersonajeAcordeALaVelocidadYComprobarNuevaPosicion(){
 		
-		Turno.getInstance().setEquipo(crearEquipoUnPersonaje(personaje, Constantes.ENEMIGOS));
 		Posicion destino = new Posicion(0,1);
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		
@@ -272,7 +270,6 @@ public class TestPersonaje {
 	@Test
 	public void testMoverPersonajeAPosicionDespuesDeTransformacion(){
 
-		Turno.getInstance().setEquipo(crearEquipoUnPersonaje(personaje, Constantes.ENEMIGOS));
 		Posicion destino = new Posicion(0,3);
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		
@@ -335,7 +332,6 @@ public class TestPersonaje {
 		tablero.posicionarPersonaje(enemigo, new Posicion(0,1));
 		
 		try {
-			Turno.getInstance().setEquipo(this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS));
 			personaje.atacarAPersonaje(enemigo);
 			Assert.assertEquals(95, enemigo.getPorcentajeVida(), 0.01);
 		} catch (AtaqueNoPosible e) {
@@ -385,9 +381,6 @@ public class TestPersonaje {
 		this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS);
 		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
 		
-		Turno.getInstance().setEquipo(crearEquipoUnPersonaje(personaje, Constantes.GUERREROS));
-
-
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
 		tablero.posicionarPersonaje(enemigo, new Posicion(0,4));
 		

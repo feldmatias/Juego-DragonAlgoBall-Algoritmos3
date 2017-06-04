@@ -47,13 +47,13 @@ public class TestIntegracion {
 				flag = flag || personaje.getClass() == MajinBoo.class;
 				Assert.assertTrue(flag);
 			}
-			int size = dragonBall.getSizeTablero();
+			int size = Constantes.SIZE_TABLERO;
 			
 			Posicion posicionEsperadaGuerreros1 = new Posicion(0,size/2);
 			Posicion posicionEsperadaGuerreros2 = new Posicion(0,(size/2)+1);
 			Posicion posicionEsperadaGuerreros3 = new Posicion(0,(size/2)-1);
 			for (Personaje personaje : miembrosGuerreros){
-				Posicion posicionReal = dragonBall.tablero.getPosicionPersonaje(personaje);
+				Posicion posicionReal = dragonBall.getTablero().getPosicionPersonaje(personaje);
 				boolean flag = posicionReal.equals(posicionEsperadaGuerreros1);
 				flag = flag || posicionReal.equals(posicionEsperadaGuerreros2);
 				flag = flag || posicionReal.equals(posicionEsperadaGuerreros3);
@@ -63,7 +63,7 @@ public class TestIntegracion {
 			Posicion posicionEsperadaEnemigos2 = new Posicion(size-1,(size/2)+1);
 			Posicion posicionEsperadaEnemigos3 = new Posicion(size-1,(size/2)-1);
 			for (Personaje personaje : miembrosEnemigos){
-				Posicion posicionReal = dragonBall.tablero.getPosicionPersonaje(personaje);
+				Posicion posicionReal = dragonBall.getTablero().getPosicionPersonaje(personaje);
 				boolean flag = posicionReal.equals(posicionEsperadaEnemigos1);
 				flag = flag || posicionReal.equals(posicionEsperadaEnemigos2);
 				flag = flag || posicionReal.equals(posicionEsperadaEnemigos3);
