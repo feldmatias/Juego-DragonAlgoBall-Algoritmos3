@@ -1,6 +1,5 @@
 package pruebas;
 
-import static org.junit.Assert.*;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -71,11 +70,11 @@ public class TestTablero {
 		Casillero casillero = this.tablero.getCasillero(pos);
 		this.tablero.posicionarPersonaje(personaje, pos);
 		
-		Assert.assertTrue( !casillero.estaVacio() );	
+		Assert.assertFalse( casillero.estaVacio() );	
 	}
 	
 	@Test
-	public void alReposicionarPersonajeLosElNuevoCasilleroNoEstaVacio(){
+	public void alReposicionarPersonajeElNuevoCasilleroNoEstaVacio(){
 		Personaje personaje = new Goku(this.tablero);
 		Posicion posInicial = new Posicion(0,0);
 		Posicion posFinal = new Posicion (5,5);
@@ -83,7 +82,7 @@ public class TestTablero {
 		
 		this.tablero.reposicionarPersonaje(personaje, posFinal);
 		Assert.assertTrue( (this.tablero.getCasillero(posInicial)).estaVacio() );
-		Assert.assertTrue( !(this.tablero.getCasillero(posFinal)).estaVacio() );
+		Assert.assertFalse( this.tablero.getCasillero(posFinal).estaVacio() );
 		
 	
 	}

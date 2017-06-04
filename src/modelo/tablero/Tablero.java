@@ -53,7 +53,7 @@ public class Tablero {
 	}
 	
 
-private boolean existeCamino(Casillero actual,Casillero origen, Casillero destino, int velocidad) throws PosicionFueraDeRango {
+	private boolean existeCamino(Casillero actual,Casillero origen, Casillero destino, int velocidad) throws PosicionFueraDeRango {
 		
 		if (actual == destino){
 			return true;

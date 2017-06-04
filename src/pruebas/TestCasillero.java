@@ -29,7 +29,7 @@ public class TestCasillero {
 	@Test
 	public void testLuegoDePosicionarPersonajeElCasilleroNoEstaVacio(){
 		casillero1.ocupar(personaje);
-		Assert.assertTrue( !casillero1.estaVacio() );
+		Assert.assertFalse( casillero1.estaVacio() );
 	}
 	
 	@Test

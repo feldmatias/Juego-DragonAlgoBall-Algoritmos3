@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
-import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.Freezer;
@@ -18,7 +17,7 @@ import modelo.personajes.Personaje;
 import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
 
-public class testPersonaje {
+public class TestPersonaje {
 	
 	private Personaje personaje;
 	private Tablero tablero;
@@ -222,7 +221,7 @@ public class testPersonaje {
 	//Test mover personaje
 	
 	@Test
-	public void testMoverPersonajeAcordeALaVelocidadYComprobarNuevaPosicion() throws PosicionFueraDeRango{
+	public void testMoverPersonajeAcordeALaVelocidadYComprobarNuevaPosicion(){
 		
 		Posicion destino = new Posicion(0,1);
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
@@ -237,7 +236,7 @@ public class testPersonaje {
 	}
 	
 	@Test
-	public void testMoverPersonajeAPosicionLejanaLanzaExcepcion() throws PosicionFueraDeRango{
+	public void testMoverPersonajeAPosicionLejanaLanzaExcepcion(){
 
 		Posicion posActual = new Posicion(0,0);
 		Posicion destino = new Posicion(6,6);
@@ -252,7 +251,7 @@ public class testPersonaje {
 	}
 	
 	@Test
-	public void testMoverPersonajeAPosicionOcupadaLanzaExcepcion() throws PosicionFueraDeRango{
+	public void testMoverPersonajeAPosicionOcupadaLanzaExcepcion(){
 
 		Posicion actual = new Posicion(0,0);
 		Posicion destino = new Posicion(6,6);
@@ -268,7 +267,7 @@ public class testPersonaje {
 	}
 
 	@Test
-	public void testMoverPersonajeAPosicionDespuesDeTransformacion() throws PosicionFueraDeRango{
+	public void testMoverPersonajeAPosicionDespuesDeTransformacion(){
 
 		Posicion destino = new Posicion(0,3);
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
@@ -294,7 +293,7 @@ public class testPersonaje {
 	}
 	
 	@Test
-	public void testMoverPersonajeConCaminoBloquadoLanzaExcepcion() throws PosicionFueraDeRango{
+	public void testMoverPersonajeConCaminoBloquadoLanzaExcepcion(){
 	
 		Posicion posActual = new Posicion(0,0);
 		Posicion destino = new Posicion(2,0);
@@ -322,7 +321,7 @@ public class testPersonaje {
 	}
 	
 	@Test
-	public void testAtacarPersonajeDistintoEquipoPosicionCorrecta() throws PosicionFueraDeRango{
+	public void testAtacarPersonajeDistintoEquipoPosicionCorrecta(){
 		
 		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje);
@@ -340,7 +339,7 @@ public class testPersonaje {
 	}
 	
 	@Test 
-	public void testAtacarPersonajeDistintoEquipoPosicionLejanaLanzaExcepcion() throws PosicionFueraDeRango{
+	public void testAtacarPersonajeDistintoEquipoPosicionLejanaLanzaExcepcion(){
 		
 		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje);
@@ -375,7 +374,7 @@ public class testPersonaje {
 	}
 	
 	@Test
-	public void testAtacarPersonajeDistintoEquipoPosicionCorrectaDespuesDeTransformar() throws PosicionFueraDeRango{
+	public void testAtacarPersonajeDistintoEquipoPosicionCorrectaDespuesDeTransformar(){
 		
 		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje);

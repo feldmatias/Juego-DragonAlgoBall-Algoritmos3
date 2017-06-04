@@ -17,7 +17,7 @@ import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
 import modelo.tablero.Posicion;
 
-public class testIntegracion {
+public class TestIntegracion {
 	
 	@Test
 	public void integracionNuevoJuegoConDosJugadoresYPersonajesDistribuidos() throws NombresDeEquipoIguales, EquipoInexistente {
