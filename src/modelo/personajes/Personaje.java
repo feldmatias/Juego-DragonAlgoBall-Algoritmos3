@@ -89,6 +89,7 @@ public abstract class Personaje {
 			poderPeleaEnemigo *= 0.8; //Disminuye 20%
 		}
 		this.vidaActual -= poderPeleaEnemigo;
+		this.comprobarSiEstaMuerto();
 	}
 	
 	public void mover(Posicion nuevaPosicion) throws MovimientoNoPosible{
@@ -116,5 +117,10 @@ public abstract class Personaje {
 		this.modoActual = this.modoActual.transformar(this);
 	}
 	
+	private void comprobarSiEstaMuerto(){
+		if (this.vidaActual == 0){
+			this.equipo.personajeMuerto(this);
+		}
+	}
 
 }

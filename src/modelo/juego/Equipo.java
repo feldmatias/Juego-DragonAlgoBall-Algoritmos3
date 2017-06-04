@@ -30,7 +30,14 @@ public class Equipo {
 		for (Personaje personaje: this.personajes){
 			personaje.generarKi();
 		}
-		
+	}
+
+	public void personajeMuerto(Personaje personaje) {
+		this.personajes.remove(personaje);
+	}
+	
+	public boolean equipoMuerto(){
+		return this.personajes.isEmpty();
 	}
 
 }

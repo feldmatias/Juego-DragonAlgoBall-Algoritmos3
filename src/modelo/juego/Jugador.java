@@ -12,7 +12,7 @@ public class Jugador {
 	
 	public void setEquipo (Equipo equipo) {
 		this.equipo = equipo;
-		this.personajeSeleccionado = equipo.getMiembros().get(0);
+		this.seleccionarCualquierPersonaje();
 	}
 
 	public Equipo getEquipo() {
@@ -32,5 +32,15 @@ public class Jugador {
 			throw new PersonajeNoPerteneceAEquipo();
 		}
 		this.personajeSeleccionado = personaje;
+	}
+	
+	private void seleccionarCualquierPersonaje(){
+		this.seleccionarPersonaje(this.equipo.getMiembros().get(0));
+	}
+	
+	public void comprobarPersonajeSeleccionado(){
+		if (! this.equipo.pertenece(this.personajeSeleccionado)){
+			this.seleccionarCualquierPersonaje();
+		}
 	}
 }
