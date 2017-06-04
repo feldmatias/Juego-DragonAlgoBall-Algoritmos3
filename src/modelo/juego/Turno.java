@@ -29,7 +29,7 @@ public class Turno {
 
 	private void empezarTurno(){
 		this.jugadorActual().comprobarPersonajeSeleccionado();
-		this.jugadorActual().getEquipo().empezarTurno();	
+		this.jugadorActual().empezarTurno();	
 		this.movimientoRealizado = false;
 		this.ataqueRealizado = false;	
 	}

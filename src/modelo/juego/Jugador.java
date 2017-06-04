@@ -43,4 +43,8 @@ public class Jugador {
 			this.seleccionarCualquierPersonaje();
 		}
 	}
+
+	public void empezarTurno() {
+		this.equipo.empezarTurno();
+	}
 }
