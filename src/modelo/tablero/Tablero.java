@@ -118,5 +118,4 @@ public class Tablero {
 		return this.casillerosOcupados.get(personaje).getPosicion();
 	}
 	
-	
 }

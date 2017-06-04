@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.personajes.Cell;
+import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.tablero.Casillero;
@@ -172,7 +173,95 @@ public class TestTablero {
 		Posicion posDestino = new Posicion(0,3); //distancia 3
 		this.tablero.posicionarPersonaje(personaje, posInicial);
 		
+		Assert.assertFalse( this.tablero.personajePuedeMoverse(personaje, posDestino) );
+	}
+	
+	@Test 
+	public void personajePuedeMoverseEnDireccionDiagonalDevuelveTrueSiLeAlcanzaLaVelocidad(){
+		Personaje personaje = new Goku(this.tablero); //velocidad 2
+		Posicion posInicial = new Posicion(0,0);
+		Posicion posDestino =  new Posicion(2,2); //distancia 2
+		this.tablero.posicionarPersonaje(personaje, posInicial);
+		
 		Assert.assertTrue( this.tablero.personajePuedeMoverse(personaje, posDestino) );
 	}
+	
+	@Test
+	public void personajePuedeMoverseEnDireccionRectaConCaminoBloqueadoDebeDarTrueSiAlcanzaLaVelocidad(){
+		Personaje personaje = new Goku(this.tablero); //velocidad 2
+		Personaje personaje2 = new Cell(this.tablero);
+		Posicion posInicial = new Posicion(0,0); 
+		Posicion PosBloqueada = new Posicion (0,1);
+		Posicion posDestino = new Posicion(0,2); //distancia 2
+		this.tablero.posicionarPersonaje(personaje, posInicial);
+		this.tablero.posicionarPersonaje(personaje2, PosBloqueada);
+		
+		Assert.assertTrue( this.tablero.personajePuedeMoverse(personaje, posDestino) );
+	}
+	
+	@Test
+	public void personajePuedeMoverseEnDireccionDiagonalConCaminoBloqueadoDebeDarTrueSiAlcanzaLaVelocidad(){
+		Personaje personaje = new Freezer(this.tablero); //velocidad 4
+		Personaje personaje2 = new Goku(this.tablero);
+		Posicion posInicial = new Posicion(0,0); 
+		Posicion PosBloqueada = new Posicion (1,1);
+		Posicion posDestino = new Posicion(2,2); //se puede llegar en 3 casilleros
+		this.tablero.posicionarPersonaje(personaje, posInicial);
+		this.tablero.posicionarPersonaje(personaje2, PosBloqueada);
+		
+		Assert.assertTrue( this.tablero.personajePuedeMoverse(personaje, posDestino) );
+	}
+	
+	@Test
+	public void personajePuedeMoverseEnDireccionDiagonalConCaminoBloqueadoDebeDarFalseSiNoAlcanzaLaVelocidad(){
+		Personaje personaje = new Goku(this.tablero); //velocidad 2
+		Personaje personaje2 = new Freezer(this.tablero); 
+		Posicion posInicial = new Posicion(0,0); 
+		Posicion PosBloqueada = new Posicion (1,1);
+		Posicion posDestino = new Posicion(2,2); //se puede llegar en 3 casilleros
+		this.tablero.posicionarPersonaje(personaje, posInicial);
+		this.tablero.posicionarPersonaje(personaje2, PosBloqueada);
+		
+		Assert.assertFalse( this.tablero.personajePuedeMoverse(personaje, posDestino) );
+	}
+	
+	@Test
+	public void personajePuedeMoverseConCaminoBloqueadoDevuelveTrueCombinandoDireccionesSiLeAlcanzaLaVelocidad(){
+		Personaje personaje = new Freezer(this.tablero); //velocidad 4
+		Personaje personaje2 = new Goku (this.tablero); 
+		Personaje personaje3 = new Cell (this.tablero); 
+		Posicion PosInicial = new Posicion(0,0);
+		Posicion PosBloqueada1 = new Posicion(1,1);//bloquea camino recto
+		Posicion Posbloqueada2 = new Posicion (1,0);//bloquea camino diagonal
+		Posicion PosicionDestino = new Posicion(3,3); // se llega con 3 casilleros combinando direcciones
+		
+		this.tablero.posicionarPersonaje(personaje, PosInicial);
+		this.tablero.posicionarPersonaje(personaje2, PosBloqueada1);
+		this.tablero.posicionarPersonaje(personaje3, Posbloqueada2);
+		
+		Assert.assertTrue( this.tablero.personajePuedeMoverse(personaje, PosicionDestino) );
+		
+	}
+	
+	@Test
+	public void personajePuedeMoverseConCaminoBloqueadoDevuelveFalseCombinandoDireccionesSiNoAlcanzaLaVelocidad(){
+		Personaje personaje = new Goku(this.tablero); //velocidad 2
+		Personaje personaje2 = new Freezer (this.tablero); 
+		Personaje personaje3 = new Cell (this.tablero); 
+		Posicion PosInicial = new Posicion(0,0);
+		Posicion PosBloqueada1 = new Posicion(1,1);//bloquea camino recto
+		Posicion Posbloqueada2 = new Posicion (1,0);//bloquea camino diagonal
+		Posicion PosicionDestino = new Posicion(3,3); // se llega con 3 casilleros combinando direcciones
+		
+		this.tablero.posicionarPersonaje(personaje, PosInicial);
+		this.tablero.posicionarPersonaje(personaje2, PosBloqueada1);
+		this.tablero.posicionarPersonaje(personaje3, Posbloqueada2);
+		
+		Assert.assertFalse( this.tablero.personajePuedeMoverse(personaje, PosicionDestino) );
+		
+	}
+	
+	
+	
 	
 }
