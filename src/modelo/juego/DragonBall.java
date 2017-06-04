@@ -23,7 +23,7 @@ import modelo.juego.Equipo;
 public class DragonBall {
 	
 	private static final int SIZE_TABLERO = 8;
-	private Tablero tablero;
+	public Tablero tablero;
 	private Jugador jugador1;
 	private Jugador jugador2;
 	private Map<String,Equipo> equipos;
@@ -100,6 +100,9 @@ public class DragonBall {
 	
 	public Jugador getJugador2(){
 		return this.jugador2;
+	}
+	public int getSizeTablero(){
+		return SIZE_TABLERO;
 	}
 
 
