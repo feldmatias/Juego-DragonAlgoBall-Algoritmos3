@@ -8,6 +8,7 @@ import org.junit.Test;
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.personajes.Cell;
 import modelo.personajes.Freezer;
+import modelo.personajes.Gohan;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.tablero.Casillero;
@@ -259,6 +260,28 @@ public class TestTablero {
 		
 		Assert.assertFalse( this.tablero.personajePuedeMoverse(personaje, PosicionDestino) );
 		
+	}
+	
+	@Test
+	public void personajePuedeMoverseConCaminoTotalmenteBloqueadoDevuelveFalse(){
+		Personaje personaje1 = new Freezer(this.tablero);
+		Personaje personaje2 = new Goku(this.tablero);
+		Personaje personaje3 = new Cell(this.tablero);
+		Personaje personaje4 = new Gohan(this.tablero);
+		
+		Posicion PosInicial = new Posicion(0,0);
+		Posicion PosDestino = new Posicion(0,2);
+		Posicion PosBloqueada1 = new Posicion(0,1);
+		Posicion PosBloqueada2 = new Posicion (1,0);
+		Posicion PosBloqueada3 = new Posicion(1,1);
+		
+		//se encierra al personaje1
+		this.tablero.posicionarPersonaje(personaje1, PosInicial);
+		this.tablero.posicionarPersonaje(personaje2, PosBloqueada1);
+		this.tablero.posicionarPersonaje(personaje3, PosBloqueada2);
+		this.tablero.posicionarPersonaje(personaje4, PosBloqueada3);
+		
+		Assert.assertFalse( this.tablero.personajePuedeMoverse(personaje1, PosDestino) );
 	}
 	
 	
