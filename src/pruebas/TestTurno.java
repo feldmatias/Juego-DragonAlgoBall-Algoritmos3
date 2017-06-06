@@ -8,9 +8,9 @@ import org.junit.Test;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.EquipoYaElegido;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.MovimientoYaRealizado;
-import modelo.excepciones.NombresDeEquipoIguales;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.juego.DragonBall;
 import modelo.juego.Jugador;
@@ -27,9 +27,11 @@ public class TestTurno {
 	private Turno turno;
 	
 	@Before
-	public void setUp() throws NombresDeEquipoIguales, EquipoInexistente{
+	public void setUp() throws EquipoInexistente, EquipoYaElegido{
 		juego = new DragonBall();
-		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS); //Crea un turno interno que no uso
+//		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS); //Crea un turno interno que no uso
+		juego.establecerEquipoJugador1(Constantes.GUERREROS);
+		juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
 		this.jugador1 = juego.getJugador1();
 		this.jugador2 = juego.getJugador2();
 		this.turno = new Turno (jugador1, jugador2);

@@ -9,9 +9,9 @@ import java.util.Map;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.EquipoYaElegido;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.MovimientoYaRealizado;
-import modelo.excepciones.NombresDeEquipoIguales;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
@@ -38,31 +38,42 @@ public class DragonBall {
 		
 		this.tablero = new Tablero(Constantes.SIZE_TABLERO);
 		this.equipos = new HashMap<String, Equipo>();
-		equipos.put(Constantes.GUERREROS, this.crearEquipoGuerreros());
-		equipos.put(Constantes.ENEMIGOS, this.crearEquipoEnemigos());
-		
-		jugador1 = new Jugador();
-		jugador2 = new Jugador();
+		//equipos.put(Constantes.GUERREROS, this.crearEquipoGuerreros());
+		//equipos.put(Constantes.ENEMIGOS, this.crearEquipoEnemigos());
+		this.crearEquipoGuerreros();
+		this.crearEquipoEnemigos();
+		this.jugador1 = new Jugador();
+		this.jugador2 = new Jugador();
 		
 	}
 
-	private void asignarEquipoAJugador(Equipo equipo, Jugador jugador) {
-		jugador.setEquipo(equipo);
-		
-	}
+//	private void asignarEquipoAJugador(Equipo equipo, Jugador jugador) {
+//		jugador.setEquipo(equipo);
+//		
+//	}
 	
-	private Equipo crearEquipoYPosicionarPersonajes(String nombreEquipo, Personaje pers1, Personaje pers2, Personaje pers3, Posicion posInicial) throws PosicionFueraDeRango{
-		List<Personaje> lista = new ArrayList<Personaje>();
-		lista.add(pers1);
-		lista.add(pers2);
-		lista.add(pers3);
-		tablero.posicionarPersonaje(pers1, posInicial);
-		tablero.posicionarPersonaje(pers2, posInicial.sumarPosicion(new Posicion(0,1)));
-		tablero.posicionarPersonaje(pers3, posInicial.sumarPosicion(new Posicion(0,-1)));
-		Equipo equipo = new Equipo (nombreEquipo, lista);
-		pers1.setEquipo(equipo);
-		pers2.setEquipo(equipo);
-		pers3.setEquipo(equipo);
+//	private Equipo crearEquipoYPosicionarPersonajes(String nombreEquipo, Personaje pers1, Personaje pers2, Personaje pers3, Posicion posInicial) throws PosicionFueraDeRango{
+//		List<Personaje> lista = new ArrayList<Personaje>();
+//		lista.add(pers1);
+//		lista.add(pers2);
+//		lista.add(pers3);
+//		tablero.posicionarPersonaje(pers1, posInicial);
+//		tablero.posicionarPersonaje(pers2, posInicial.sumarPosicion(new Posicion(0,1)));
+//		tablero.posicionarPersonaje(pers3, posInicial.sumarPosicion(new Posicion(0,-1)));
+//		Equipo equipo = new Equipo (nombreEquipo, lista);
+//		pers1.setEquipo(equipo);
+//		pers2.setEquipo(equipo);
+//		pers3.setEquipo(equipo);
+//		return equipo;
+//	}
+	
+	private Equipo crearEquipo(String nombreEquipo, Personaje pers1, Personaje pers2, Personaje pers3){
+		List<Personaje> listaPersonajes = new ArrayList<Personaje>();
+		listaPersonajes.add(pers1);
+		listaPersonajes.add(pers2);
+		listaPersonajes.add(pers3);
+		Equipo equipo = new Equipo( nombreEquipo, listaPersonajes);
+		this.equipos.put(nombreEquipo, equipo);
 		return equipo;
 	}
 	
@@ -70,35 +81,65 @@ public class DragonBall {
 		Personaje goku = new Goku(this.tablero);
 		Personaje gohan = new Gohan(this.tablero);
 		Personaje piccolo = new Piccolo(this.tablero);		
-	
-		return this.crearEquipoYPosicionarPersonajes(Constantes.GUERREROS, goku, gohan, piccolo, new Posicion (0,Constantes.POS_CENTRAL));
+		return this.crearEquipo(Constantes.GUERREROS, goku, gohan, piccolo);
+		//return this.crearEquipoYPosicionarPersonajes(Constantes.GUERREROS, goku, gohan, piccolo, new Posicion (0,Constantes.POS_CENTRAL));
 	}
 	
 	private Equipo crearEquipoEnemigos() throws PosicionFueraDeRango {
 		Personaje cell = new Cell(this.tablero);
 		Personaje freezer = new Freezer(this.tablero);
 		Personaje majinBoo = new MajinBoo(this.tablero);		
-		
-		return this.crearEquipoYPosicionarPersonajes(Constantes.ENEMIGOS, cell, freezer, majinBoo, new Posicion (Constantes.SIZE_TABLERO - 1, Constantes.POS_CENTRAL));
+		return this.crearEquipo(Constantes.ENEMIGOS, cell, freezer, majinBoo);
+		//return this.crearEquipoYPosicionarPersonajes(Constantes.ENEMIGOS, cell, freezer, majinBoo, new Posicion (Constantes.SIZE_TABLERO - 1, Constantes.POS_CENTRAL));
 	}
 
-	public void elegirEquipos(String primerEquipo, String segundoEquipo) throws NombresDeEquipoIguales, EquipoInexistente {
-		//Excepciones
-		if(primerEquipo == segundoEquipo){
-			throw new NombresDeEquipoIguales();
-		}
-		
-		if (! this.existeEquipo(primerEquipo) || ! this.existeEquipo(segundoEquipo)){
-			throw new EquipoInexistente();
-		}
-		
-		this.asignarEquipoAJugador(this.equipos.get(primerEquipo), this.jugador1);
-		this.asignarEquipoAJugador(this.equipos.get(segundoEquipo), this.jugador2);
-		
+//	public void elegirEquipos(String primerEquipo, String segundoEquipo) throws NombresDeEquipoIguales, EquipoInexistente {
+//		//Excepciones
+//		if(primerEquipo == segundoEquipo){
+//			throw new NombresDeEquipoIguales();
+//		}
+//		
+//		if (! this.existeEquipo(primerEquipo) || ! this.existeEquipo(segundoEquipo)){
+//			throw new EquipoInexistente();
+//		}
+//		
+//		this.asignarEquipoAJugador(this.equipos.get(primerEquipo), this.jugador1);
+//		this.asignarEquipoAJugador(this.equipos.get(segundoEquipo), this.jugador2);
+//		
+//		this.iniciarTurno();
+//	}
+
+	
+	//aca puse el iniciar turno porque no sabia donde ponerlo
+	public void iniciar(){
 		this.iniciarTurno();
 	}
 
-	private boolean existeEquipo(String unNombre) {
+	private void establecerEquipo(Jugador jugador,String nombreEquipo,Posicion posInicial) throws EquipoInexistente, EquipoYaElegido{
+		if(! this.existeEquipo(nombreEquipo) ){
+			throw new EquipoInexistente();
+		}
+		Equipo equipoElegido = this.equipos.get(nombreEquipo);
+		if ( equipoElegido.estaSeleccionado() ){
+			throw new EquipoYaElegido();
+		}
+		jugador.setEquipo(equipoElegido);
+		List<Personaje> personajesEquipo = equipoElegido.getMiembros();
+		this.tablero.posicionarPersonajes(personajesEquipo, posInicial);
+	}
+	
+	public void establecerEquipoJugador1(String nombreEquipo) throws EquipoInexistente, EquipoYaElegido{
+		Jugador jugador = this.jugador1;
+		this.establecerEquipo(jugador, nombreEquipo, Constantes.POS_INICIAL1);
+	}
+	
+	public void establecerEquipoJugador2(String nombreEquipo) throws EquipoInexistente, EquipoYaElegido{
+		Jugador jugador = this.jugador2;
+		this.establecerEquipo(jugador, nombreEquipo,Constantes.POS_INICIAL2);
+	}
+	
+	
+	public boolean existeEquipo(String unNombre) {
 		
 		return this.equipos.containsKey(unNombre);
 		

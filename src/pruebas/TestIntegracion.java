@@ -8,6 +8,7 @@ import org.junit.Test;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.EquipoInexistente;
+import modelo.excepciones.EquipoYaElegido;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.NombresDeEquipoIguales;
@@ -31,7 +32,10 @@ public class TestIntegracion {
 		
 		try{
 			DragonBall dragonBall = new DragonBall();
-			dragonBall.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
+			//dragonBall.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
+			dragonBall.establecerEquipoJugador1(Constantes.GUERREROS);
+			dragonBall.establecerEquipoJugador2(Constantes.ENEMIGOS);
+			dragonBall.iniciar();
 			
 			String unNombre = dragonBall.getJugador1().getEquipo().getNombre();
 			String otroNombre = dragonBall.getJugador2().getEquipo().getNombre();
@@ -76,8 +80,11 @@ public class TestIntegracion {
 				Assert.assertTrue(flag);
 			}
 			
-		}catch (NombresDeEquipoIguales e){
-			Assert.fail("No se han elegido dos equipos iguales.");
+//		}catch (NombresDeEquipoIguales e){
+//			Assert.fail("No se han elegido dos equipos iguales.");
+			
+		}catch(EquipoYaElegido e){
+			Assert.fail("No se han elegido los mismos equipos");
 		} catch (EquipoInexistente e) {
 			Assert.fail("No se ha elegido ningun equipo inexistente.");
 		}
@@ -86,9 +93,13 @@ public class TestIntegracion {
 	}
 	
 	@Test
-	public void testIntegracionJugarJuego() throws NombresDeEquipoIguales, EquipoInexistente, MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible{
+	public void testIntegracionJugarJuego() throws NombresDeEquipoIguales, EquipoInexistente, MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible, EquipoYaElegido{
 		DragonBall juego = new DragonBall();
-		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
+//		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
+		
+		juego.establecerEquipoJugador1(Constantes.GUERREROS);
+		juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
+		juego.iniciar();
 		
 		if (juego.getJugadorActual() == juego.getJugador2()){
 			juego.jugadorActualTerminarTurno();

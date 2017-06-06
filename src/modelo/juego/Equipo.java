@@ -8,16 +8,25 @@ public class Equipo {
 	
 	private List<Personaje> personajes;
 	private String nombre;
+	private boolean seleccionado;
 	
 	public Equipo(String nombre, List<Personaje> personajes){
 		this.nombre = nombre;
 		this.personajes = personajes;
+		this.inicializarMiembros();
+		this.seleccionado = false;
 	}
 
 	public boolean pertenece(Personaje personaje) {
 		return this.personajes.contains(personaje);
 	}
 
+	private void inicializarMiembros(){
+		for(Personaje personaje: this.personajes ){
+			personaje.setEquipo(this);
+		}
+	} 
+	
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -40,4 +49,12 @@ public class Equipo {
 		return this.personajes.isEmpty();
 	}
 
+	public void seleccionar(){
+		this.seleccionado = true;
+	}
+	
+	public boolean estaSeleccionado(){
+		return (this.seleccionado == true);
+	}
+	
 }

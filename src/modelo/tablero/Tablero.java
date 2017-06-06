@@ -117,5 +117,26 @@ public class Tablero {
 	public Posicion getPosicionPersonaje(Personaje personaje){
 		return this.casillerosOcupados.get(personaje).getPosicion();
 	}
+
+	public void posicionarPersonajes(List<Personaje> personajes, Posicion posCentral) {
+		
+		List<Posicion> listadoPosiciones = new ArrayList<Posicion>();
+		listadoPosiciones.add(posCentral);
+		int cantPorLado = personajes.size()/2;
+		
+		for(int i=1; i <= cantPorLado; i++){
+			Posicion posDerecha = posCentral.sumarPosicion( new Posicion (0, i) );
+			Posicion posIzquierda = posCentral.sumarPosicion( new Posicion (0,-i) );
+			listadoPosiciones.add(posDerecha);
+			listadoPosiciones.add(posIzquierda);
+		}
+		
+		for(int j=0; j < personajes.size() ; j++ ){
+			Personaje personaje = personajes.get(j);
+			Posicion posicion = listadoPosiciones.get(j);
+			this.posicionarPersonaje(personaje, posicion);
+		}
+		
+	}
 	
 }
