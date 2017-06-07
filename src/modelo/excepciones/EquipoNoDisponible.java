@@ -1,7 +1,6 @@
 package modelo.excepciones;
 
-public class EquipoYaElegido extends Exception{
-
+public class EquipoNoDisponible extends Exception {
 
 	/**
 	 * 

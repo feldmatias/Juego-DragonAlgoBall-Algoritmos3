@@ -7,8 +7,7 @@ import org.junit.Test;
 
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.AtaqueYaRealizado;
-import modelo.excepciones.EquipoInexistente;
-import modelo.excepciones.EquipoYaElegido;
+import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoSeleccionable;
@@ -27,7 +26,7 @@ public class TestTurno {
 	private Turno turno;
 	
 	@Before
-	public void setUp() throws EquipoInexistente, EquipoYaElegido{
+	public void setUp() throws EquipoNoDisponible{
 		juego = new DragonBall();
 //		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS); //Crea un turno interno que no uso
 		juego.establecerEquipoJugador1(Constantes.GUERREROS);

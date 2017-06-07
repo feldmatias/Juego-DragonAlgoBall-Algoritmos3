@@ -122,7 +122,7 @@ public class Tablero {
 		
 		List<Posicion> listadoPosiciones = new ArrayList<Posicion>();
 		listadoPosiciones.add(posCentral);
-		int cantPorLado = personajes.size()/2;
+		int cantPorLado = (personajes.size()) /2;
 		
 		for(int i=1; i <= cantPorLado; i++){
 			Posicion posDerecha = posCentral.sumarPosicion( new Posicion (0, i) );

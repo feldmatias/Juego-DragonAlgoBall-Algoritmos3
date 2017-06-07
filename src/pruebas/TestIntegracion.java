@@ -7,11 +7,9 @@ import org.junit.Test;
 
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.AtaqueYaRealizado;
-import modelo.excepciones.EquipoInexistente;
-import modelo.excepciones.EquipoYaElegido;
+import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.MovimientoYaRealizado;
-import modelo.excepciones.NombresDeEquipoIguales;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
@@ -28,7 +26,7 @@ import modelo.utilidades.Constantes;
 public class TestIntegracion {
 	
 	@Test
-	public void integracionNuevoJuegoConDosJugadoresYPersonajesDistribuidos() throws NombresDeEquipoIguales, EquipoInexistente {
+	public void integracionNuevoJuegoConDosJugadoresYPersonajesDistribuidos() {
 		
 		try{
 			DragonBall dragonBall = new DragonBall();
@@ -83,17 +81,13 @@ public class TestIntegracion {
 //		}catch (NombresDeEquipoIguales e){
 //			Assert.fail("No se han elegido dos equipos iguales.");
 			
-		}catch(EquipoYaElegido e){
-			Assert.fail("No se han elegido los mismos equipos");
-		} catch (EquipoInexistente e) {
-			Assert.fail("No se ha elegido ningun equipo inexistente.");
+		}catch(EquipoNoDisponible e){
+			Assert.fail("La prueba fallo, los equipos deberian estar disponibles");
 		}
-		
-		
 	}
 	
 	@Test
-	public void testIntegracionJugarJuego() throws NombresDeEquipoIguales, EquipoInexistente, MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible, EquipoYaElegido{
+	public void testIntegracionJugarJuego() throws EquipoNoDisponible, MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible{
 		DragonBall juego = new DragonBall();
 //		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
 		

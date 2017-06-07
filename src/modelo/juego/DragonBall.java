@@ -8,8 +8,7 @@ import java.util.Map;
 
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.AtaqueYaRealizado;
-import modelo.excepciones.EquipoInexistente;
-import modelo.excepciones.EquipoYaElegido;
+import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoSeleccionable;
@@ -115,32 +114,29 @@ public class DragonBall {
 		this.iniciarTurno();
 	}
 
-	private void establecerEquipo(Jugador jugador,String nombreEquipo,Posicion posInicial) throws EquipoInexistente, EquipoYaElegido{
-		if(! this.existeEquipo(nombreEquipo) ){
-			throw new EquipoInexistente();
+	private void establecerEquipo(Jugador jugador,String nombreEquipo,Posicion posInicial) throws EquipoNoDisponible{
+		if(! this.equipoEstaDisponible(nombreEquipo) ){
+			throw new EquipoNoDisponible();
 		}
 		Equipo equipoElegido = this.equipos.get(nombreEquipo);
-		if ( equipoElegido.estaSeleccionado() ){
-			throw new EquipoYaElegido();
-		}
 		jugador.setEquipo(equipoElegido);
 		List<Personaje> personajesEquipo = equipoElegido.getMiembros();
+		this.equipos.remove(nombreEquipo);
 		this.tablero.posicionarPersonajes(personajesEquipo, posInicial);
 	}
 	
-	public void establecerEquipoJugador1(String nombreEquipo) throws EquipoInexistente, EquipoYaElegido{
+	public void establecerEquipoJugador1(String nombreEquipo) throws EquipoNoDisponible{
 		Jugador jugador = this.jugador1;
 		this.establecerEquipo(jugador, nombreEquipo, Constantes.POS_INICIAL1);
 	}
 	
-	public void establecerEquipoJugador2(String nombreEquipo) throws EquipoInexistente, EquipoYaElegido{
+	public void establecerEquipoJugador2(String nombreEquipo) throws EquipoNoDisponible{
 		Jugador jugador = this.jugador2;
 		this.establecerEquipo(jugador, nombreEquipo,Constantes.POS_INICIAL2);
 	}
 	
 	
-	public boolean existeEquipo(String unNombre) {
-		
+	public boolean equipoEstaDisponible(String unNombre) {
 		return this.equipos.containsKey(unNombre);
 		
 	}

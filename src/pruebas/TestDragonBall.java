@@ -6,9 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import modelo.excepciones.EquipoInexistente;
-import modelo.excepciones.EquipoYaElegido;
-import modelo.excepciones.NombresDeEquipoIguales;
+import modelo.excepciones.EquipoNoDisponible;
 import modelo.juego.DragonBall;
 import modelo.juego.Equipo;
 import modelo.personajes.Cell;
@@ -30,25 +28,25 @@ public class TestDragonBall {
 	}
 
 	@Test
-	public void alIniciarExisteEquipoConNombreGuerrerosZ() throws NombresDeEquipoIguales, EquipoInexistente {
+	public void alIniciarEstaDisponibleEquipoConNombreGuerrerosZ(){
 		//dragonBall.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
 		//Assert.assertEquals("La prueba pasó: existe un equipo con nombre Guerreros Z", 
 				//Constantes.GUERREROS, dragonBall.getJugador1().getEquipo().getNombre());
 		
-		Assert.assertTrue( dragonBall.existeEquipo(Constantes.GUERREROS) );
+		Assert.assertTrue( dragonBall.equipoEstaDisponible(Constantes.GUERREROS) );
 		
 	}
 	@Test
-	public void alIniciarExisteEquipoConNombreEnemigos() throws NombresDeEquipoIguales, EquipoInexistente {
+	public void alIniciarEstaDisponibleEquipoConNombreEnemigos() {
 //		dragonBall.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
 //		Assert.assertEquals("La prueba pasó: existe un equipo con nombre Enemigos de la Tierra", 
 //				"Enemigos de la Tierra",  dragonBall.getJugador2().getEquipo().getNombre());
 		
-		Assert.assertTrue( dragonBall.existeEquipo( Constantes.GUERREROS ) );
+		Assert.assertTrue( dragonBall.equipoEstaDisponible( Constantes.GUERREROS ) );
 		}
 	
 	@Test
-	public void seleccionarEquipoJugador1ComoGuerrerosEstableceEquipoCorrecto() throws EquipoInexistente, EquipoYaElegido{
+	public void seleccionarEquipoJugador1ComoGuerrerosEstableceEquipoCorrecto() throws EquipoNoDisponible{
 		dragonBall.establecerEquipoJugador1( Constantes.GUERREROS );
 		String nombreEquipoEsperado = Constantes.GUERREROS;
 		Equipo equipo = dragonBall.getJugador1().getEquipo();
@@ -58,38 +56,40 @@ public class TestDragonBall {
 	}
 	
 	@Test
-	public void seleccionarEquipoJugador1ComoEnemigosEstableceEquipoCorrecto() throws EquipoInexistente, EquipoYaElegido{
+	public void seleccionarEquipoJugador1ComoEnemigosEstableceEquipoCorrecto(){
 		try{
 			dragonBall.establecerEquipoJugador1(Constantes.ENEMIGOS);
 			String nombreEquipoEsperado = Constantes.ENEMIGOS;
 			Equipo equipo = dragonBall.getJugador1().getEquipo();
 			String nombreEquipoObtenido = equipo.getNombre();
 			Assert.assertEquals(nombreEquipoEsperado, nombreEquipoObtenido);
-		}catch(EquipoInexistente e){
-			Assert.fail("La prueba fallo, deberia existir el equipo");
-		}catch(EquipoYaElegido e){
-			Assert.fail("La prueba fallo no se eligieron equipos iguales");
+		}catch(EquipoNoDisponible e){
+			Assert.fail("La prueba fallo, deberia estar disponible el equipo");
 		}
 	}
 	
 //AGREGAR PRUEBAS PARA JUGADOR2 ??	
 	
 	@Test
-	public void equipoGuerrerosTieneLosTresPersonajesAlIniciar() throws EquipoInexistente, EquipoYaElegido {
+	public void equipoGuerrerosTieneLosTresPersonajesAlIniciar() throws EquipoNoDisponible {
 		//dragonBall.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);<>
 		
-		dragonBall.establecerEquipoJugador1( Constantes.GUERREROS );
-		List<Personaje> miembros = dragonBall.getJugador1().getEquipo().getMiembros();
-		for (Personaje personaje : miembros){
-			boolean flag = personaje.getClass() == Goku.class;
-			flag = flag || personaje.getClass() == Gohan.class;
-			flag = flag || personaje.getClass() == Piccolo.class;
-			Assert.assertTrue(flag);
+		try{
+			dragonBall.establecerEquipoJugador1( Constantes.GUERREROS );
+			List<Personaje> miembros = dragonBall.getJugador1().getEquipo().getMiembros();
+			for (Personaje personaje : miembros){
+				boolean flag = personaje.getClass() == Goku.class;
+				flag = flag || personaje.getClass() == Gohan.class;
+				flag = flag || personaje.getClass() == Piccolo.class;
+				Assert.assertTrue(flag);
+			}
+		}catch(EquipoNoDisponible e){
+			Assert.fail("La prueba fallo, el equipo deberia estar disponible");
 		}
 	}
 	
 	@Test
-	public void equipoEnemigosTieneLosTresPersonajesAlIniciar() throws EquipoInexistente, EquipoYaElegido {
+	public void equipoEnemigosTieneLosTresPersonajesAlIniciar(){
 		
 		//dragonBall.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
 		try{
@@ -101,10 +101,8 @@ public class TestDragonBall {
 				flag = flag || personaje.getClass() == MajinBoo.class;
 				Assert.assertTrue(flag);
 			}
-		}catch(EquipoInexistente e){
+		}catch(EquipoNoDisponible e){
 			Assert.fail("La prueba fallo, el equipo deberia existir");
-		}catch(EquipoYaElegido e){
-			Assert.fail("La prueba fallo, no se eligio un equipo ya elegido");
 		}
 	}
 	
@@ -123,10 +121,8 @@ public class TestDragonBall {
 			
 		//} catch (NombresDeEquipoIguales e){
 			//Assert.fail("No se han elegido dos equipos iguales.");
-		}catch( EquipoYaElegido e ){
-				Assert.fail("No han elegido los mismos equipos");
-		} catch (EquipoInexistente e ) {
-			Assert.fail("No se ha elegido ningun equipo inexistente.");
+		}catch( EquipoNoDisponible e ){
+				Assert.fail("La prueba fallo, los equipos deberian estar disponibles");
 		}
 	}
 	
@@ -145,10 +141,8 @@ public class TestDragonBall {
 			Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Guerreros Z", Constantes.GUERREROS, nombreEquipo2);
 		//} catch (NombresDeEquipoIguales e){
 			//Assert.fail("No se han elegido dos equipos iguales.");
-		}catch (EquipoYaElegido e){
-			Assert.fail("No se han elegido los mismos equipos");
-		} catch (EquipoInexistente e) {
-			Assert.fail("No se ha elegido ningun equipo inexistente.");
+		}catch (EquipoNoDisponible e){
+			Assert.fail("La prueba fallo, los equipos deberian estar disponibles");
 		}
 		
 	}
@@ -161,9 +155,8 @@ public class TestDragonBall {
 			dragonBall.establecerEquipoJugador1( equipoInexistente );
 //		} catch (NombresDeEquipoIguales e) {
 //			Assert.fail("No se han elegido dos equipos iguales.");
-		} catch( EquipoYaElegido e ){
-			Assert.fail( "No se ha ingresado un equipo ya elegido" );
-		} catch (EquipoInexistente e) {}
+		} catch( EquipoNoDisponible e ){}
+		
 	}
 	
 	@Test
@@ -177,9 +170,7 @@ public class TestDragonBall {
 //		} catch (NombresDeEquipoIguales e) {
 //			Assert.fail("No se han elegido dos equipos iguales.");
 			
-		}catch (EquipoYaElegido e){
-			Assert.fail("No se han ingresado equipos ya elegidos");
-		} catch (EquipoInexistente e) {}
+		} catch (EquipoNoDisponible e) {}
 	}
 	
 	@Test
@@ -190,10 +181,7 @@ public class TestDragonBall {
 			dragonBall.establecerEquipoJugador2(Constantes.GUERREROS);
 			Assert.fail("El jugador 2 no deberia haber elegido el mismo equipo");
 //		} catch (NombresDeEquipoIguales e) {
-		}catch (EquipoYaElegido e){
-		} catch (EquipoInexistente e) {
-			Assert.fail("No se ha elegido ningun equipo inexistente.");
-		}
+		}catch (EquipoNoDisponible e){}
 	}
 	
 

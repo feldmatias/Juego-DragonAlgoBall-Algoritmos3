@@ -13,7 +13,6 @@ public class Jugador {
 	
 	public void setEquipo (Equipo equipo) {
 		this.equipo = equipo;
-		equipo.seleccionar();
 		this.seleccionarCualquierPersonaje();
 	}
 
