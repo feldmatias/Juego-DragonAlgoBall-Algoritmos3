@@ -41,10 +41,15 @@ public class Gohan extends PersonajeTransformableConKi {
 
 	@Override
 	public boolean puedeTransformarseAModoFinal() {
-		// TODO Auto-generated method stub
-		return false;
+		boolean puedeTransformarse = super.puedeTransformarseAModoFinal();
 		
-		//HACER HACER HACER
+		for (Personaje personaje: this.getEquipo().getMiembros()){
+			if (personaje == this){
+				continue;
+			}
+			puedeTransformarse = puedeTransformarse && (personaje.getPorcentajeVida() < 30);
+		}
+		return puedeTransformarse;
 	}
 
 	@Override

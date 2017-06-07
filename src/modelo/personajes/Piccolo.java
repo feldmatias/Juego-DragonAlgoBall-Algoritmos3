@@ -55,9 +55,13 @@ public class Piccolo extends PersonajeTransformableConKi {
 	
 	@Override
 	public boolean puedeTransformarseAModoFinal() {
-		return false;
-		
-		//HACER   HACER  HACER
+
+		for (Personaje personaje: this.getEquipo().getMiembros()){
+			if (personaje.getNombre() == "Gohan"){
+				return personaje.getPorcentajeVida() < 20;
+			}
+		}
+		return true; //Gohan esta muerto
 	}
 
 }
