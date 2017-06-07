@@ -35,7 +35,7 @@ public class Equipo {
 
 	public void empezarTurno() {
 		for (Personaje personaje: this.personajes){
-			personaje.generarKi();
+			personaje.empezarTurno();
 		}
 	}
 

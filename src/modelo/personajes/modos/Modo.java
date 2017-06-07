@@ -2,16 +2,19 @@ package modelo.personajes.modos;
 
 import modelo.personajes.Personaje;
 
-public interface Modo {
+public abstract class Modo {
 
-	public int getPoderPelea(Personaje personaje);
+	public abstract int getPoderPelea(Personaje personaje);
 
-	public int getDistanciaAtaque(Personaje personaje);
+	public abstract int getDistanciaAtaque(Personaje personaje);
 	
-	public int getVelocidad(Personaje personaje);
+	public abstract int getVelocidad(Personaje personaje);
 
-	public Modo transformar(Personaje personaje);
+	public abstract Modo transformar(Personaje personaje);
 
-	public boolean puedeTransformarse(Personaje personaje);
+	public abstract boolean puedeTransformarse(Personaje personaje);
 	
+	public void empezarTurno(Personaje personaje){
+		personaje.generarKi();
+	}
 }

@@ -6,6 +6,7 @@ import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.modos.Modo;
+import modelo.personajes.modos.ModoInmovilizado;
 import modelo.personajes.modos.ModoNormal;
 import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
@@ -121,11 +122,20 @@ public abstract class Personaje {
 	private void comprobarSiEstaMuerto(){
 		if (this.vidaActual == 0){
 			this.equipo.personajeMuerto(this);
+			this.tablero.personajeMuerto(this);
 		}
 	}
 	
 	protected boolean comprobarKiNecesario(int kiNecesario){
 		return this.ki >= kiNecesario;
+	}
+	
+	public void empezarTurno(){
+		this.modoActual.empezarTurno(this);
+	}
+	
+	public void inmovilizar(){
+		this.modoActual = new ModoInmovilizado(this.modoActual);
 	}
 
 	public abstract int getPoderPeleaModoNormal();

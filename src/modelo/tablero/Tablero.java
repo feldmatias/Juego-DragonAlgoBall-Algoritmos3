@@ -138,5 +138,12 @@ public class Tablero {
 		}
 		
 	}
+
+	public void personajeMuerto(Personaje personaje) {
+		Posicion pos = this.getPosicionPersonaje(personaje);
+		Casillero casillero = this.getCasillero(pos);
+		casillero.desocupar();
+		this.casillerosOcupados.remove(personaje);
+	}
 	
 }

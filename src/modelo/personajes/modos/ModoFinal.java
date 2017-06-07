@@ -2,7 +2,7 @@ package modelo.personajes.modos;
 
 import modelo.personajes.Personaje;
 
-public class ModoFinal implements Modo {
+public class ModoFinal extends Modo {
 
 	@Override
 	public int getPoderPelea(Personaje personaje) {
