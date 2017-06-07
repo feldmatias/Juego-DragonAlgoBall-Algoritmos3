@@ -2,36 +2,16 @@ package modelo.personajes.modos;
 
 import modelo.personajes.Personaje;
 
-public abstract class Modo {
+public interface Modo {
+
+	public int getPoderPelea(Personaje personaje);
+
+	public int getDistanciaAtaque(Personaje personaje);
 	
-	private int poderPelea;
-	private int distanciaAtaque;
-	private int velocidad;
-	private Modo modoSiguiente;
-	
-	public Modo (int poderPelea, int distanciaAtaque, int velocidad, Modo modoSiguiente){
-		this. poderPelea = poderPelea;
-		this.distanciaAtaque = distanciaAtaque;
-		this.velocidad = velocidad;
-		this.modoSiguiente = modoSiguiente;
-	}
+	public int getVelocidad(Personaje personaje);
 
-	public int getPoderPelea() {
-		return this.poderPelea;
-	}
+	public Modo transformar(Personaje personaje);
 
-	public int getDistanciaAtaque() {
-		return this.distanciaAtaque;
-	}
-	
-	public int getVelocidad() {
-		return this.velocidad;
-	}
-
-	public Modo transformar(Personaje personaje) {
-		return this.modoSiguiente;
-	}
-
-	public abstract boolean puedeTransformarse(Personaje personaje);
+	public boolean puedeTransformarse(Personaje personaje);
 	
 }

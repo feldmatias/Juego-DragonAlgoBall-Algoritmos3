@@ -6,6 +6,7 @@ import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.modos.Modo;
+import modelo.personajes.modos.ModoNormal;
 import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
 
@@ -19,12 +20,12 @@ public abstract class Personaje {
 	private Modo modoActual;
 	private Tablero tablero;
 	
-	public Personaje(String nombre,int vidaInicial, Modo modo, Tablero tablero){
+	public Personaje(String nombre,int vidaInicial, Tablero tablero){
 		this.nombre = nombre;
 		this.vidaInicial = vidaInicial;
 		this.vidaActual = vidaInicial;
 		this.ki = 0;
-		this.modoActual = modo;
+		this.modoActual = new ModoNormal();
 		this.tablero = tablero;
 	}
 	
@@ -37,15 +38,15 @@ public abstract class Personaje {
 	}
 	
 	public int getPoderPelea() {
-		return this.modoActual.getPoderPelea();
+		return this.modoActual.getPoderPelea(this);
 	}
 
 	public int getDistanciaAtaque() {
-		return this.modoActual.getDistanciaAtaque();
+		return this.modoActual.getDistanciaAtaque(this);
 	}
 	
 	public int getVelocidad() {
-		return this.modoActual.getVelocidad();
+		return this.modoActual.getVelocidad(this);
 	}
 	
 	public float getPorcentajeVida(){
@@ -122,5 +123,35 @@ public abstract class Personaje {
 			this.equipo.personajeMuerto(this);
 		}
 	}
+	
+	protected boolean comprobarKiNecesario(int kiNecesario){
+		return this.ki >= kiNecesario;
+	}
+
+	public abstract int getPoderPeleaModoNormal();
+
+	public abstract int getDistanciaAtaqueModoNormal();
+
+	public abstract int getVelocidadModoNormal();
+
+	public abstract void transformarAModoTransformado();
+
+	public abstract boolean puedeTransformarseAModoTransformado();
+
+	public abstract int getPoderPeleaModoTransformado();
+
+	public abstract int getDistanciaAtaqueModoTransformado();
+
+	public abstract int getVelocidadModoTransformado();
+
+	public abstract void transformarAModoFinal();
+
+	public abstract boolean puedeTransformarseAModoFinal();
+
+	public abstract int getPoderPeleaModoFinal();
+
+	public abstract int getDistanciaAtaqueModoFinal();
+
+	public abstract int getVelocidadModoFinal();
 
 }

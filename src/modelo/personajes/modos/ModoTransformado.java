@@ -2,31 +2,32 @@ package modelo.personajes.modos;
 
 import modelo.personajes.Personaje;
 
-public class ModoFinal implements Modo {
+public class ModoTransformado implements Modo {
 
 	@Override
 	public int getPoderPelea(Personaje personaje) {
-		return personaje.getPoderPeleaModoFinal();
+		return personaje.getPoderPeleaModoTransformado();
 	}
 
 	@Override
 	public int getDistanciaAtaque(Personaje personaje) {
-		return personaje.getDistanciaAtaqueModoFinal();
+		return personaje.getDistanciaAtaqueModoTransformado();
 	}
 
 	@Override
 	public int getVelocidad(Personaje personaje) {
-		return personaje.getVelocidadModoFinal();
+		return personaje.getVelocidadModoTransformado();
 	}
 
 	@Override
 	public Modo transformar(Personaje personaje) {
-		return null;
+		personaje.transformarAModoFinal();
+		return new ModoFinal();
 	}
 
 	@Override
 	public boolean puedeTransformarse(Personaje personaje) {
-		return false;
+		return personaje.puedeTransformarseAModoFinal();
 	}
 
 }
