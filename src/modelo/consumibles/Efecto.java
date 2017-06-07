@@ -19,7 +19,7 @@ public abstract class Efecto {
 	public void modificarPoderPelea(Personaje personaje){
 		return;
 	}
-	public boolean permiteTransformacion(){ //para inutilizar
+	public boolean permiteAcciones(){ //para inutilizar
 		return true;
 	}
 
