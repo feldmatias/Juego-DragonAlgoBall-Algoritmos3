@@ -1,5 +1,9 @@
 package modelo.personajes;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import modelo.consumibles.Efecto;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PosicionFueraDeRango;
@@ -20,6 +24,7 @@ public abstract class Personaje {
 	private Equipo equipo;
 	private Modo modoActual;
 	private Tablero tablero;
+	private List<Efecto> listadoEfectos;
 	
 	public Personaje(String nombre,int vidaInicial, Tablero tablero){
 		this.nombre = nombre;
@@ -28,6 +33,7 @@ public abstract class Personaje {
 		this.ki = 0;
 		this.modoActual = new ModoNormal();
 		this.tablero = tablero;
+		this.listadoEfectos = new ArrayList<Efecto>();
 	}
 	
 	public void setEquipo(Equipo equipo){
@@ -131,7 +137,13 @@ public abstract class Personaje {
 	}
 	
 	public void empezarTurno(){
+		
 		this.modoActual.empezarTurno(this);
+	}
+	
+	public void sumarEfecto(Efecto efecto){
+		this.vidaActual= efecto.regenerarVida();
+		this.listadoEfectos.add(efecto);
 	}
 	
 	public void inmovilizar(){

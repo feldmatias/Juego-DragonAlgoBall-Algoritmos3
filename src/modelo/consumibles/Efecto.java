@@ -4,20 +4,18 @@ import modelo.personajes.Personaje;
 
 public abstract class Efecto {
 	private int duracion;
-	private int costoKi;
 	
-	public Efecto (int duracion, int costoKi){
+	public Efecto (int duracion){
 		this.duracion = duracion;
-		this.costoKi = costoKi;
 	}
-	public void regenerarVida(Personaje personaje){
-		return;
+	public int regenerarVida(){
+		return 0;
 	}
-	public void modificarVelocidad(Personaje personaje){
-		return;
+	public int modificarVelocidad(int velocidad){
+		return velocidad;
 	}
-	public void modificarPoderPelea(Personaje personaje){
-		return;
+	public int modificarPoderPelea(int poderPelea){
+		return poderPelea;
 	}
 	public boolean permiteAcciones(){ //para inutilizar
 		return true;
