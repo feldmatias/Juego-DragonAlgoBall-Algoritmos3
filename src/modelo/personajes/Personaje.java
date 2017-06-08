@@ -11,7 +11,6 @@ import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoInmovilizado;
-import modelo.personajes.modos.ModoNormal;
 import modelo.tablero.Posicion;
 import modelo.tablero.Tablero;
 
@@ -26,12 +25,12 @@ public abstract class Personaje {
 	private Tablero tablero;
 	private List<Efecto> listadoEfectos;
 	
-	public Personaje(String nombre,int vidaInicial, Tablero tablero){
+	public Personaje(String nombre,int vidaInicial, Modo modoInicial, Tablero tablero){
 		this.nombre = nombre;
 		this.vidaInicial = vidaInicial;
 		this.vidaActual = vidaInicial;
 		this.ki = 0;
-		this.modoActual = new ModoNormal();
+		this.modoActual = modoInicial;
 		this.tablero = tablero;
 		this.listadoEfectos = new ArrayList<Efecto>();
 	}
@@ -45,15 +44,15 @@ public abstract class Personaje {
 	}
 	
 	public int getPoderPelea() {
-		return this.modoActual.getPoderPelea(this);
+		return this.modoActual.getPoderPelea();
 	}
 
 	public int getDistanciaAtaque() {
-		return this.modoActual.getDistanciaAtaque(this);
+		return this.modoActual.getDistanciaAtaque();
 	}
 	
 	public int getVelocidad() {
-		return this.modoActual.getVelocidad(this);
+		return this.modoActual.getVelocidad();
 	}
 	
 	public float getPorcentajeVida(){
@@ -150,30 +149,13 @@ public abstract class Personaje {
 		this.modoActual = new ModoInmovilizado(this.modoActual);
 	}
 
-	public abstract int getPoderPeleaModoNormal();
-
-	public abstract int getDistanciaAtaqueModoNormal();
-
-	public abstract int getVelocidadModoNormal();
-
-	public abstract void transformarAModoTransformado();
+	public abstract Modo transformarAModoTransformado();
 
 	public abstract boolean puedeTransformarseAModoTransformado();
 
-	public abstract int getPoderPeleaModoTransformado();
-
-	public abstract int getDistanciaAtaqueModoTransformado();
-
-	public abstract int getVelocidadModoTransformado();
-
-	public abstract void transformarAModoFinal();
+	public abstract Modo transformarAModoFinal();
 
 	public abstract boolean puedeTransformarseAModoFinal();
 
-	public abstract int getPoderPeleaModoFinal();
-
-	public abstract int getDistanciaAtaqueModoFinal();
-
-	public abstract int getVelocidadModoFinal();
 
 }

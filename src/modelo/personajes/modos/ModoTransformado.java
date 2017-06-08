@@ -4,25 +4,14 @@ import modelo.personajes.Personaje;
 
 public class ModoTransformado extends Modo {
 
-	@Override
-	public int getPoderPelea(Personaje personaje) {
-		return personaje.getPoderPeleaModoTransformado();
-	}
-
-	@Override
-	public int getDistanciaAtaque(Personaje personaje) {
-		return personaje.getDistanciaAtaqueModoTransformado();
-	}
-
-	@Override
-	public int getVelocidad(Personaje personaje) {
-		return personaje.getVelocidadModoTransformado();
+	
+	public ModoTransformado(int poderPelea, int distanciaAtaque, int velocidad) {
+		super(poderPelea, distanciaAtaque, velocidad);
 	}
 
 	@Override
 	public Modo transformar(Personaje personaje) {
-		personaje.transformarAModoFinal();
-		return new ModoFinal();
+		return personaje.transformarAModoFinal();
 	}
 
 	@Override

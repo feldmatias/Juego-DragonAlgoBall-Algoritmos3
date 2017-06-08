@@ -1,56 +1,26 @@
 package modelo.personajes;
 
+import modelo.personajes.modos.Modo;
+import modelo.personajes.modos.ModoFinal;
+import modelo.personajes.modos.ModoNormal;
+import modelo.personajes.modos.ModoTransformado;
 import modelo.tablero.Tablero;
 
 public class Piccolo extends PersonajeTransformableConKi {
 
 	public Piccolo(Tablero tablero) {
-		super("Piccolo", 500, tablero, 20 ,0);
+		super("Piccolo", 500, new ModoNormal(20,2,2),  tablero, 20 ,0);
+	}
+	
+	public Modo transformarAModoTransformado(){
+		super.transformarAModoTransformadoConKi();
+		return new ModoTransformado(40,4,3);
 	}
 
 	@Override
-	public int getPoderPeleaModoNormal() {
-		return 20;
-	}
-
-	@Override
-	public int getDistanciaAtaqueModoNormal() {
-		return 2;
-	}
-
-	@Override
-	public int getVelocidadModoNormal() {
-		return 2;
-	}
-
-	@Override
-	public int getPoderPeleaModoTransformado() {
-		return 40;
-	}
-
-	@Override
-	public int getDistanciaAtaqueModoTransformado() {
-		return 4;
-	}
-
-	@Override
-	public int getVelocidadModoTransformado() {
-		return 3;
-	}
-
-	@Override
-	public int getPoderPeleaModoFinal() {
-		return 60;
-	}
-
-	@Override
-	public int getDistanciaAtaqueModoFinal() {
-		return 6;
-	}
-
-	@Override
-	public int getVelocidadModoFinal() {
-		return 4;
+	public Modo transformarAModoFinal() {
+		super.transformarAModoFinalConKi();
+		return new ModoFinal(60,6,4);
 	}
 	
 	@Override

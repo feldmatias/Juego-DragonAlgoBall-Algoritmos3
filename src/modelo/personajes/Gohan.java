@@ -1,44 +1,23 @@
 package modelo.personajes;
 
+import modelo.personajes.modos.Modo;
+import modelo.personajes.modos.ModoFinal;
+import modelo.personajes.modos.ModoNormal;
+import modelo.personajes.modos.ModoTransformado;
 import modelo.tablero.Tablero;
 
 public class Gohan extends PersonajeTransformableConKi {
 	
 	public Gohan(Tablero tablero) {
-		super("Gohan", 300, tablero, 10, 30);
+		super("Gohan", 300, new ModoNormal(15,2,2), tablero, 10, 30);
 	}
 
 	@Override
-	public int getPoderPeleaModoNormal() {
-		return 15;
+	public Modo transformarAModoTransformado(){
+		super.transformarAModoTransformadoConKi();
+		return new ModoTransformado(30,2,2);
 	}
-
-	@Override
-	public int getDistanciaAtaqueModoNormal() {
-		return 2;
-	}
-
-	@Override
-	public int getVelocidadModoNormal() {
-		return 2;
-	}
-
-	@Override
-	public int getPoderPeleaModoTransformado() {
-		return 30;
-	}
-
-	@Override
-	public int getDistanciaAtaqueModoTransformado() {
-		return 2;
-	}
-
-	@Override
-	public int getVelocidadModoTransformado() {
-		return 2;
-	}
-
-
+	
 	@Override
 	public boolean puedeTransformarseAModoFinal() {
 		boolean puedeTransformarse = super.puedeTransformarseAModoFinal();
@@ -53,18 +32,10 @@ public class Gohan extends PersonajeTransformableConKi {
 	}
 
 	@Override
-	public int getPoderPeleaModoFinal() {
-		return 100;
+	public Modo transformarAModoFinal() {
+		super.transformarAModoFinalConKi();
+		return new ModoFinal(100,4,3);
 	}
-
-	@Override
-	public int getDistanciaAtaqueModoFinal() {
-		return 4;
-	}
-
-	@Override
-	public int getVelocidadModoFinal() {
-		return 3;
-	}
+	
 
 }

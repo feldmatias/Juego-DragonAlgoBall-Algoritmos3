@@ -1,13 +1,17 @@
 package modelo.personajes;
 
 
+import modelo.personajes.modos.Modo;
+import modelo.personajes.modos.ModoFinal;
+import modelo.personajes.modos.ModoNormal;
+import modelo.personajes.modos.ModoTransformado;
 import modelo.tablero.Tablero;
 
 public class Goku extends PersonajeTransformableConKi {
 	
 	
 	public Goku(Tablero tablero){
-		super("Goku", 500, tablero, 20, 50);
+		super("Goku", 500, new ModoNormal(20,2,2), tablero, 20, 50);
 	}
 	
 	public int getPoderPelea(){
@@ -17,50 +21,17 @@ public class Goku extends PersonajeTransformableConKi {
 		}
 		return poderPelea;
 	}
-
+	
 	@Override
-	public int getPoderPeleaModoNormal() {
-		return 20;
+	public Modo transformarAModoTransformado(){
+		super.transformarAModoTransformadoConKi();
+		return new ModoTransformado(40,4,3);
 	}
-
+	
 	@Override
-	public int getDistanciaAtaqueModoNormal() {
-		return 2;
-	}
-
-	@Override
-	public int getVelocidadModoNormal() {
-		return 2;
-	}
-
-	@Override
-	public int getPoderPeleaModoTransformado() {
-		return 40;
-	}
-
-	@Override
-	public int getDistanciaAtaqueModoTransformado() {
-		return 4;
-	}
-
-	@Override
-	public int getVelocidadModoTransformado() {
-		return 3;
-	}
-
-	@Override
-	public int getPoderPeleaModoFinal() {
-		return 60;
-	}
-
-	@Override
-	public int getDistanciaAtaqueModoFinal() {
-		return 4;
-	}
-
-	@Override
-	public int getVelocidadModoFinal() {
-		return 5;
+	public Modo transformarAModoFinal() {
+		super.transformarAModoFinalConKi();
+		return new ModoFinal(60,4,5);
 	}
 
 }

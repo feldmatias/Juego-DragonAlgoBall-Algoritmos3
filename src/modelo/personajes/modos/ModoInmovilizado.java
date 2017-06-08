@@ -9,24 +9,11 @@ public class ModoInmovilizado extends Modo {
 	private Modo modoAnterior;
 	
 	public ModoInmovilizado(Modo modoAnterior){
+		super(0,0,0);
 		this.turnosRestantes = 3;
 		this.modoAnterior = modoAnterior;
 	}
 	
-	@Override
-	public int getPoderPelea(Personaje personaje) {
-		return 0;
-	}
-
-	@Override
-	public int getDistanciaAtaque(Personaje personaje) {
-		return 0;
-	}
-
-	@Override
-	public int getVelocidad(Personaje personaje) {
-		return 0;
-	}
 
 	@Override
 	public Modo transformar(Personaje personaje) {
