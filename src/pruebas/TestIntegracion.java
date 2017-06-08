@@ -100,7 +100,10 @@ public class TestIntegracion {
 		}
 		
 		Personaje goku = juego.getJugador1().getEquipo().getMiembros().get(0);
+		Personaje gohan = juego.getJugador1().getEquipo().getMiembros().get(1);
+		Personaje cell = juego.getJugador2().getEquipo().getMiembros().get(0);
 		Personaje freezer = juego.getJugador2().getEquipo().getMiembros().get(1);
+		Personaje majinBoo = juego.getJugador2().getEquipo().getMiembros().get(2);
 		
 		//Turno guerreros
 		juego.jugadorActualSeleccionarPersonaje(goku);
@@ -151,7 +154,42 @@ public class TestIntegracion {
 		juego.jugadorActualTerminarTurno();
 		
 		//Turno guerreros
-		Assert.assertEquals(juego.getJugador1(), juego.getJugadorActual());
+		juego.jugadorActualAtacarAEnemigo(freezer);
+		juego.jugadorActualSeleccionarPersonaje(gohan);
+		juego.jugadorActualMoverAPosicion(new Posicion(2,5));
+		
+		//Turno Enemigos
+		juego.jugadorActualSeleccionarPersonaje(cell);
+		juego.jugadorActualMoverAPosicion(new Posicion(6,4));
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno Guerreros
+		juego.jugadorActualTransformar();
+		juego.jugadorActualMoverAPosicion(new Posicion (4,5));
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno Enemigos
+		juego.jugadorActualRealizarAtaqueEspecial(gohan);
+		Assert.assertTrue(cell.getPorcentajeVida() > 100);
+		juego.jugadorActualSeleccionarPersonaje(majinBoo);
+		juego.jugadorActualMoverAPosicion(new Posicion(6,3));
+		
+		//Turno guerreros
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno Enemigos
+		juego.jugadorActualRealizarAtaqueEspecial(gohan);
+		juego.jugadorActualTerminarTurno();
+		
+		//Turno Guerreros
+		try{
+			juego.jugadorActualAtacarAEnemigo(majinBoo);
+			Assert.fail("No deberia atacar, esta inmovilizado");
+		} catch (AtaqueNoPosible e){
+		}
+		juego.jugadorActualSeleccionarPersonaje(goku);
+		juego.jugadorActualRealizarAtaqueEspecial(majinBoo);
+		
 	}
 	
 }

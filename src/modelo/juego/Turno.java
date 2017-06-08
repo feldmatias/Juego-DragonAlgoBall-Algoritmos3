@@ -80,4 +80,14 @@ public class Turno {
 	public void transformar() throws TransformacionNoPosible {
 		this.jugadorActual().transformarPersonaje();
 	}
+
+
+	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueYaRealizado, AtaqueNoPosible {
+		if (ataqueRealizado){
+			throw new AtaqueYaRealizado();
+		}
+		this.jugadorActual().realizarAtaqueEspecial(enemigo);
+		this.ataqueRealizado = true;
+		this.comprobarTurnoTerminado();
+	}
 }

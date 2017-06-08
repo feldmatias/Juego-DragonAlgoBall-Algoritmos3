@@ -169,6 +169,10 @@ public class DragonBall {
 		this.turno.atacarEnemigo(enemigo);
 	}
 	
+	public void jugadorActualRealizarAtaqueEspecial(Personaje enemigo) throws AtaqueYaRealizado, AtaqueNoPosible{
+		this.turno.realizarAtaqueEspecial(enemigo);
+	}
+	
 	public void jugadorActualMoverAPosicion(Posicion destino) throws MovimientoYaRealizado, MovimientoNoPosible{
 		this.turno.moverPersonaje(destino);
 	}

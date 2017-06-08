@@ -1,5 +1,7 @@
 package modelo.juego;
 
+import java.util.function.Function;
+
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PersonajeNoPerteneceAEquipo;
@@ -51,5 +53,9 @@ public class Jugador {
 
 	public void transformarPersonaje() throws TransformacionNoPosible {
 		this.personajeSeleccionado.transformar();
+	}
+
+	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible {
+		this.personajeSeleccionado.realizarAtaqueEspecial(enemigo);
 	}
 }
