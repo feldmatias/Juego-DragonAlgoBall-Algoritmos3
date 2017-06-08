@@ -9,7 +9,7 @@ import modelo.tablero.Tablero;
 public class Cell extends Personaje {
 
 	public Cell( Tablero tablero) {
-		super("Cell", 500, new ModoNormal(20,3,2), tablero);
+		super("Cell", 500, new ModoNormal(20,3,2), new AtaqueAbsorver(5), tablero);
 	}
 
 

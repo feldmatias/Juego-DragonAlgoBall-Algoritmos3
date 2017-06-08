@@ -24,8 +24,9 @@ public abstract class Personaje {
 	private Modo modoActual;
 	private Tablero tablero;
 	private List<Efecto> listadoEfectos;
+	private AtaqueEspecial ataqueEspecial;
 	
-	public Personaje(String nombre,int vidaInicial, Modo modoInicial, Tablero tablero){
+	public Personaje(String nombre,int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, Tablero tablero){
 		this.nombre = nombre;
 		this.vidaInicial = vidaInicial;
 		this.vidaActual = vidaInicial;
@@ -33,6 +34,7 @@ public abstract class Personaje {
 		this.modoActual = modoInicial;
 		this.tablero = tablero;
 		this.listadoEfectos = new ArrayList<Efecto>();
+		this.ataqueEspecial = ataqueEspecial;
 	}
 	
 	public void setEquipo(Equipo equipo){
@@ -77,21 +79,26 @@ public abstract class Personaje {
 		this.ki -= kiPerdido;
 	}
 	
+	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible{
+		this.ataqueEspecial.ataqueEspecial(this, enemigo);
+	}
+	
 	public void atacarAPersonaje(Personaje enemigo) throws AtaqueNoPosible{
-		if (this.equipo.pertenece(enemigo)){
-			throw new AtaqueNoPosible();
-		}
-		if (!this.alcanzaDistanciaAtaque(enemigo)){
+		if (!this.puedeAtacarA(enemigo)){
 			throw new AtaqueNoPosible();
 		}
 		enemigo.recibirAtaque(this.getPoderPelea());
+	}
+	
+	public boolean puedeAtacarA(Personaje enemigo){
+		return (!this.equipo.pertenece(enemigo)) && this.alcanzaDistanciaAtaque(enemigo);
 	}
 
 	private boolean alcanzaDistanciaAtaque(Personaje enemigo) {
 		return (this.tablero.distanciaEntre(this,enemigo) <= this.getDistanciaAtaque());
 	}
 
-	public void recibirAtaque(int poderPeleaEnemigo) {
+	public void recibirAtaque(double poderPeleaEnemigo) {
 		if (this.getPoderPelea() > poderPeleaEnemigo){
 			poderPeleaEnemigo *= 0.8; //Disminuye 20%
 		}
@@ -131,7 +138,7 @@ public abstract class Personaje {
 		}
 	}
 	
-	protected boolean comprobarKiNecesario(int kiNecesario){
+	public boolean comprobarKiNecesario(int kiNecesario){
 		return this.ki >= kiNecesario;
 	}
 	
@@ -143,6 +150,10 @@ public abstract class Personaje {
 	public void sumarEfecto(Efecto efecto){
 		this.vidaActual= efecto.regenerarVida();
 		this.listadoEfectos.add(efecto);
+	}
+	
+	public void regenerarVida(double vidaRegenerada){
+		this.vidaActual += vidaRegenerada;
 	}
 	
 	public void inmovilizar(){

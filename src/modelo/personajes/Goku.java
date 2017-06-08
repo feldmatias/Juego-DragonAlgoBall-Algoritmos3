@@ -11,7 +11,7 @@ public class Goku extends PersonajeTransformableConKi {
 	
 	
 	public Goku(Tablero tablero){
-		super("Goku", 500, new ModoNormal(20,2,2), tablero, 20, 50);
+		super("Goku", 500, new ModoNormal(20,2,2), new AtaquePotenciador(20,1.5), tablero, 20, 50);
 	}
 	
 	public int getPoderPelea(){

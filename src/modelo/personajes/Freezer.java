@@ -9,7 +9,7 @@ import modelo.tablero.Tablero;
 public class Freezer extends PersonajeTransformableConKi{
 
 	public Freezer(Tablero tablero) {
-		super("Freezer", 400, new ModoNormal(20,2,4),  tablero, 20, 50);
+		super("Freezer", 400, new ModoNormal(20,2,4), new AtaquePotenciador(20,1.5), tablero, 20, 50);
 	}
 	
 	@Override

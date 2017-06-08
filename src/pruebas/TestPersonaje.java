@@ -403,6 +403,65 @@ public class TestPersonaje {
 			}
 		}
 	}
+	
+	//Test Ataque especial potenciador
 
+	@Test 
+	public void testAtaqueEspecialSinKiNecesarioLanzaExcepcion(){
+		
+		Personaje enemigo = new Freezer(tablero);
+		this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS);
+		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
+		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
+		tablero.posicionarPersonaje(enemigo, new Posicion(0,1));
+		
+		try {
+			personaje.realizarAtaqueEspecial(enemigo);
+			Assert.fail("El ataque no deberia realizarse");
+		} catch (AtaqueNoPosible e) {
+			Assert.assertEquals(100,enemigo.getPorcentajeVida(),0.01);
+		}
+	}
+	
+	@Test 
+	public void testRealizarAtaqueEspecialYComprobarVida(){
+		for (int i = 0; i < 10; i++ ){
+			personaje.generarKi();
+		}
+		
+		Personaje enemigo = new Freezer(tablero);
+		this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS);
+		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
+		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
+		tablero.posicionarPersonaje(enemigo, new Posicion(0,1));
+		
+		try {
+			personaje.realizarAtaqueEspecial(enemigo);
+			Assert.assertEquals(92.5, enemigo.getPorcentajeVida(), 0.01);
+		} catch (AtaqueNoPosible e) {
+			Assert.fail("El ataque deberia realizarse");
+		}
+	}
+	
+	@Test 
+	public void testRealizarAtaqueEspecialYComprobarKi(){
+		for (int i = 0; i < 10; i++ ){
+			personaje.generarKi();
+		}
+		int kiActual = personaje.getKi();
+		
+		Personaje enemigo = new Freezer(tablero);
+		this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS);
+		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
+		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
+		tablero.posicionarPersonaje(enemigo, new Posicion(0,1));
+		
+		try {
+			personaje.realizarAtaqueEspecial(enemigo);
+			Assert.assertEquals(kiActual - 20, personaje.getKi());
+		} catch (AtaqueNoPosible e) {
+			Assert.fail("El ataque deberia realizarse");
+		}
+	}
 	
 }

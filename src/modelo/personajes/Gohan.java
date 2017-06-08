@@ -9,7 +9,7 @@ import modelo.tablero.Tablero;
 public class Gohan extends PersonajeTransformableConKi {
 	
 	public Gohan(Tablero tablero) {
-		super("Gohan", 300, new ModoNormal(15,2,2), tablero, 10, 30);
+		super("Gohan", 300, new ModoNormal(15,2,2), new AtaquePotenciador(10,1.25), tablero, 10, 30);
 	}
 
 	@Override

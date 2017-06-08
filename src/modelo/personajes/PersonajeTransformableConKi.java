@@ -8,8 +8,9 @@ public abstract class PersonajeTransformableConKi extends Personaje{
 	private int kiNecesarioModoTransformado;
 	private int kiNecesarioModoFinal;
 	
-	public PersonajeTransformableConKi(String nombre, int vidaInicial, Modo modoInicial, Tablero tablero, int kiModoTransformado, int kiModoFinal){
-		super(nombre, vidaInicial, modoInicial, tablero);
+	public PersonajeTransformableConKi(String nombre, int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, 
+			Tablero tablero, int kiModoTransformado, int kiModoFinal){
+		super(nombre, vidaInicial, modoInicial, ataqueEspecial, tablero);
 		this.kiNecesarioModoTransformado = kiModoTransformado;
 		this.kiNecesarioModoFinal = kiModoFinal;
 	}
