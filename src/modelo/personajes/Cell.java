@@ -20,10 +20,8 @@ public class Cell extends Personaje {
 
 	@Override
 	public boolean puedeTransformarseAModoTransformado() {
-		// TODO Auto-generated method stub
-		return false;
-		
-		//HACER HACER    HACER
+		AtaqueAbsorver ataque = (AtaqueAbsorver) this.ataqueEspecial;
+		return ataque.getCantidadUsos() >= 4;
 	}
 
 
@@ -34,10 +32,8 @@ public class Cell extends Personaje {
 
 	@Override
 	public boolean puedeTransformarseAModoFinal() {
-		// TODO Auto-generated method stub
-		return false;
-		
-		//HACER   AHCER    HACER
+		AtaqueAbsorver ataque = (AtaqueAbsorver) this.ataqueEspecial;
+		return ataque.getCantidadUsos() >= 8;
 	}
 	
 }

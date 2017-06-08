@@ -24,7 +24,7 @@ public abstract class Personaje {
 	private Modo modoActual;
 	private Tablero tablero;
 	private List<Efecto> listadoEfectos;
-	private AtaqueEspecial ataqueEspecial;
+	protected AtaqueEspecial ataqueEspecial;
 	
 	public Personaje(String nombre,int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, Tablero tablero){
 		this.nombre = nombre;
