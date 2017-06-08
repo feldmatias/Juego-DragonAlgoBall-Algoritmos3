@@ -10,7 +10,7 @@ public class ModoInmovilizado extends Modo {
 	
 	public ModoInmovilizado(Modo modoAnterior){
 		super(0,0,0);
-		this.turnosRestantes = 3;
+		this.turnosRestantes = 4;
 		this.modoAnterior = modoAnterior;
 	}
 	
@@ -25,6 +25,7 @@ public class ModoInmovilizado extends Modo {
 		return this.turnosRestantes == 0;
 	}
 	
+	@Override
 	public void empezarTurno(Personaje personaje){
 		this.turnosRestantes -= 1;
 		if (this.turnosRestantes == 0){
@@ -32,8 +33,8 @@ public class ModoInmovilizado extends Modo {
 				personaje.transformar();
 			} catch (TransformacionNoPosible e) {
 			}
+			personaje.empezarTurno();
 		}
-		personaje.empezarTurno();
 	}
 
 }
