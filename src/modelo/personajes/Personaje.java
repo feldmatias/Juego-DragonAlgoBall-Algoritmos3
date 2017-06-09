@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.consumibles.Efecto;
+import modelo.consumibles.EsferaDeDragon;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PosicionFueraDeRango;
@@ -46,6 +47,10 @@ public abstract class Personaje {
 	}
 	
 	public int getPoderPelea() {
+		int poderPelea = this.modoActual.getPoderPelea();
+		for (Efecto efecto: listadoEfectos){
+			poderPelea += efecto.modificarPoderPelea( poderPelea );
+		}
 		return this.modoActual.getPoderPelea();
 	}
 
@@ -54,7 +59,11 @@ public abstract class Personaje {
 	}
 	
 	public int getVelocidad() {
-		return this.modoActual.getVelocidad();
+		int velocidad = this.modoActual.getVelocidad();
+		for (Efecto efecto: listadoEfectos){
+			velocidad += efecto.modificarVelocidad(velocidad);
+		}
+		return velocidad;
 	}
 	
 	public float getPorcentajeVida(){
@@ -143,17 +152,22 @@ public abstract class Personaje {
 	}
 	
 	public void empezarTurno(){
-		
+		for(Efecto efecto: listadoEfectos){
+			efecto.empezarTurno();
+			if(efecto.terminoTiempo()){
+				listadoEfectos.remove(efecto);
+			}
+		}
 		this.modoActual.empezarTurno(this);
 	}
 	
 	public void sumarEfecto(Efecto efecto){
-		this.vidaActual= efecto.regenerarVida();
+		efecto.aplicarEfectoInstantaneo(this);
 		this.listadoEfectos.add(efecto);
 	}
 	
-	public void regenerarVida(double vidaRegenerada){
-		this.vidaActual += vidaRegenerada;
+	public void regenerarVida(double d){
+		this.vidaActual += d;
 	}
 	
 	public void inmovilizar(){
@@ -167,6 +181,11 @@ public abstract class Personaje {
 	public abstract Modo transformarAModoFinal();
 
 	public abstract boolean puedeTransformarseAModoFinal();
+
+	public void agregarEsferaAColeccion(EsferaDeDragon esferaDeDragon) {
+		this.equipo.agregarEsferaAColeccion(esferaDeDragon);
+		
+	}
 
 
 }

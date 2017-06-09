@@ -8,18 +8,26 @@ public abstract class Efecto {
 	public Efecto (int duracion){
 		this.duracion = duracion;
 	}
-	public int regenerarVida(){
-		return 0;
+	public void regenerarVida(Personaje personaje){
+		return;
 	}
 	public int modificarVelocidad(int velocidad){
 		return velocidad;
 	}
-	public int modificarPoderPelea(int poderPelea){
+	public double modificarPoderPelea(int poderPelea){
 		return poderPelea;
 	}
-	public boolean permiteAcciones(){ //para inutilizar
-		return true;
+	public void aplicarEfectoInstantaneo(Personaje personaje){
+		return;
 	}
-
+	public void restarDuracion(){
+		this.duracion -= 1;
+	}
+	public void empezarTurno(){
+		return;
+	}
+	public boolean terminoTiempo(){
+		return this.duracion == 0 ;
+	}
 
 }

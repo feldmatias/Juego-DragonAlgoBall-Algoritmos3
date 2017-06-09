@@ -1,14 +1,20 @@
 package modelo.consumibles;
 
 public class NubeVoladora extends Efecto{
-
+	
+	private int cantidadAAumentar;
+	
 	public NubeVoladora() {
-		super(2); //Duracion Nube Voladora en constante?
-		// TODO Auto-generated constructor stub
+		super(3); 
+		this.cantidadAAumentar = 2;
+		//Duracion Nube Voladora en constante?
 	}
 	@Override
-	public modificarVelocidad(){
-		
+	public int modificarVelocidad(int velocidad){
+		return velocidad * this.cantidadAAumentar;
 	}
-
+	@Override
+	public void empezarTurno(){
+		this.restarDuracion();
+	}
 }
