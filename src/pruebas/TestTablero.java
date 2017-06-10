@@ -23,8 +23,6 @@ public class TestTablero {
 	public void setUp() throws Exception {
 		sizeTablero = 6;
 		tablero = new Tablero(6);
-		
-		
 	}
 	
 	@Test

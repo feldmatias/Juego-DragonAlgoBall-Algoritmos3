@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.consumibles.Efecto;
-import modelo.consumibles.EsferaDeDragon;
-import modelo.consumibles.NubeVoladora;
-import modelo.consumibles.SemillaDelErmitanio;
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.personajes.Personaje;
 
@@ -17,12 +14,17 @@ public class Tablero {
 	private Casillero [][] tablero;
 	private int size;
 	private Map<Personaje,Casillero> casillerosOcupados;
+	private List<Efecto> consumibles;
 	
 	public Tablero(int size){
 		this.size = size;
 		this.tablero = new Casillero[size][size];
 		this.cargarCasilleros();
 		this.casillerosOcupados = new HashMap<Personaje,Casillero>();
+	}
+	
+	public void setListadoConsumibles(List<Efecto> listadoConsumibles){
+		this.consumibles = listadoConsumibles;
 	}
 
 	private void cargarCasilleros(){
@@ -153,19 +155,14 @@ public class Tablero {
 
 	public void generarConsumibles() {
 		//Genera un solo consumible en una posicion al azar con una probabilidad de 50%
-		
-		List <Efecto> consumiblesPosibles = new ArrayList<Efecto>();
-		consumiblesPosibles.add(new EsferaDeDragon());
-		consumiblesPosibles.add(new NubeVoladora());
-		consumiblesPosibles.add(new SemillaDelErmitanio());
-		Collections.shuffle(consumiblesPosibles);
+		Collections.shuffle(consumibles);
 		
 		double probabilidad = Math.random() * 10;
 		if (probabilidad >= 5){	
 			int x = (int) (Math.random() * (this.size - 1));
 			int y = (int) (Math.random() * (this.size - 1));
 			Posicion pos = new Posicion (x,y); //Posicion al azar
-			this.getCasillero(pos).agregarConsumible(consumiblesPosibles.get(0));
+			this.getCasillero(pos).agregarConsumible(consumibles.get(0));
 		}
 	}
 	
