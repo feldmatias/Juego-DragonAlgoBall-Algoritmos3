@@ -163,9 +163,10 @@ public class TestCell {
 	
 	@Test
 	public void testAbsorverRegeneraVida(){
+		double porcentajeVidaEsperado = 104; //se espera aumento 4% aumento luego del ataque
 		try {
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(104, cell.getPorcentajeVida(), 0.01);
+			Assert.assertEquals(porcentajeVidaEsperado, cell.getPorcentajeVida(), 0.01);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
@@ -174,10 +175,11 @@ public class TestCell {
 	
 	@Test
 	public void testAbsorverDosVecesRegeneraVida(){
+		double porcentajeVidaEsperado = 108; // se espera aumento 8% luego de dos ataques
 		try {
 			cell.realizarAtaqueEspecial(goku);
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(108, cell.getPorcentajeVida(), 0.01);
+			Assert.assertEquals(porcentajeVidaEsperado,cell.getPorcentajeVida() , 0.01);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
@@ -186,9 +188,10 @@ public class TestCell {
 	
 	@Test
 	public void testRealizarAtaqueEspecialYComprobarVidaEnemigo(){
+		double porcentajeVidaEsperado = 96; //se espera que tenga 4% menos de vida
 		try {
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(96, goku.getPorcentajeVida(), 0.01);
+			Assert.assertEquals(porcentajeVidaEsperado, goku.getPorcentajeVida(), 0.01);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
