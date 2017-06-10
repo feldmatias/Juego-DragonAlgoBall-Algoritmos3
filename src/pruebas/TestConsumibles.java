@@ -48,6 +48,7 @@ public class TestConsumibles {
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		//Personaje1 Agarro el consumible
 		Assert.assertTrue(personaje1.getPorcentajeVida() > 100);
+		
 		tablero.reposicionarPersonaje(personaje1, new Posicion (0,0));
 		
 		tablero.reposicionarPersonaje(personaje2, posConsumible);
@@ -56,25 +57,55 @@ public class TestConsumibles {
 	}
 	
 	@Test
-	public void testComprobarEfectoSemillaDelErmitanio(){
+	public void testSemillaDelErmitanioRegeneraVida(){
+		float porcentajeVidaInicial = personaje1.getPorcentajeVida();
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		Assert.assertEquals(120, personaje1.getPorcentajeVida(), 0.01);
+		float porcentajeVidaFinal = personaje1.getPorcentajeVida(); //se espera aumento del 20%
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial + 20, 0.01);
 	}
 	
 	@Test
-	public void testComprobarEfectoEsferaDelDragon(){
+	public void testEsferaDelDragonAumentaElPoderDePelea(){
+		double poderPeleaInicial = personaje1.getPoderPelea();
 		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		Assert.assertEquals(25, personaje1.getPoderPelea(), 0.01);
+		double poderPeleaFinal = personaje1.getPoderPelea();
+		Assert.assertEquals(poderPeleaInicial + 5, poderPeleaFinal, 0.01);
 	}
 	
 	@Test
-	public void testComprobarEfectoNubeVoladora(){
+	public void testNubeVoladoraAumentaVelocidadAlDoble(){
+		int velocidadInicial = personaje1.getVelocidad();
 		tablero.getCasillero(posConsumible).agregarConsumible(new NubeVoladora());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		Assert.assertEquals(4, personaje1.getVelocidad());
+		int velocidadFinal = personaje1.getVelocidad();
+		Assert.assertEquals(velocidadFinal , velocidadInicial * 2 );
 	}
+	
+	@Test
+	public void testNubeVoladoraAumentaVelocidadAlDobleDuranteSegundoTurno(){
+		int velocidadInicial = personaje1.getVelocidad();
+		tablero.getCasillero(posConsumible).agregarConsumible(new NubeVoladora());
+		tablero.reposicionarPersonaje(personaje1, posConsumible);
+		personaje1.empezarTurno();
+		personaje1.empezarTurno(); //segundo turno
+		int velocidadFinal = personaje1.getVelocidad();
+		Assert.assertEquals(velocidadFinal , velocidadInicial * 2 );
+		
+	}
+	
+	@Test
+	public void testNubeVoladoraPierdeEfectoEnElTercerTurno(){
+		int velocidadInicial = personaje1.getVelocidad();
+		tablero.getCasillero(posConsumible).agregarConsumible(new NubeVoladora());
+		tablero.reposicionarPersonaje(personaje1, posConsumible);
+		personaje1.empezarTurno();
+		personaje1.empezarTurno();
+		personaje1.empezarTurno(); //En el tercer turno ya no tiene efecto
+		Assert.assertEquals(velocidadInicial, personaje1.getVelocidad());
+	}
+	
 	
 	@Test
 	public void testSemillaDelErmitanioNoGeneraVidaDosVeces(){
@@ -85,8 +116,45 @@ public class TestConsumibles {
 		Assert.assertEquals(120, personaje1.getPorcentajeVida(), 0.01);
 	}
 	
+	
 	@Test
-	public void testEsferaDelDragonDuraSoloDosAtaques(){
+	public void testEsferaDelDragonAumentaElDanioARecibirPorElEnemigo() {
+		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
+		tablero.reposicionarPersonaje(personaje1, posConsumible);
+		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
+		try {
+			personaje1.atacarAPersonaje(personaje2); //se espera danio de 25
+		} catch (AtaqueNoPosible e) {
+			Assert.fail("El ataque deberia haberse realizado");
+		}
+		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, 0.01);
+		
+	}
+	
+	@Test
+	public void testEsferaDelDragonAumentaElDanioARecibirPorEnemigoPorDosAtaques(){
+		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
+		tablero.reposicionarPersonaje(personaje1, posConsumible);
+		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
+		try {
+			personaje1.atacarAPersonaje(personaje2); //se espera danio de 25
+		} catch (AtaqueNoPosible e) {
+			Assert.fail("El ataque deberia haberse realizado");
+		}
+		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, 0.01);
+		try {
+			personaje1.atacarAPersonaje(personaje2);
+		}catch (AtaqueNoPosible e){
+			Assert.fail("El ataque deberia haberse realizado");
+		}
+		porcentajeVidaFinal = personaje2.getPorcentajeVida();
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial -12.5 , 0.01);
+	}
+	
+	@Test
+	public void testEsferaDelDragonEnElTercerAtaqueAplicaDanioNormal(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		try {
@@ -95,19 +163,17 @@ public class TestConsumibles {
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
-		Assert.assertEquals(20, personaje1.getPoderPelea(), 0.01);
+		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
+		try{
+			personaje1.atacarAPersonaje(personaje2);
+		}catch(AtaqueNoPosible e){
+			Assert.fail("Deberia haber realizado el tercer ataque");
+		}
+		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); //se espera danio del 5%
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 5, 0.01);
 	}
 	
-	@Test
-	public void testNubeVoladoraDuraSoloDosTurnos(){
-		tablero.getCasillero(posConsumible).agregarConsumible(new NubeVoladora());
-		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		personaje1.empezarTurno();
-		personaje1.empezarTurno();
-		personaje1.empezarTurno(); //En el tercer turno ya no tiene efecto
-		Assert.assertEquals(2, personaje1.getVelocidad());
-	}
-	
+
 	@Test
 	public void testEsferaDelDragonSumaEsferaAEquipo(){
 		personaje1.sumarEfecto(new EsferaDeDragon());
