@@ -41,7 +41,7 @@ public class TestCell {
 			cell.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(20, cell.getPoderPelea());
+			Assert.assertEquals(20, cell.getPoderPelea(), 0.01);
 		}
 	}
 	
@@ -58,7 +58,7 @@ public class TestCell {
 			cell.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(20, cell.getPoderPelea());
+			Assert.assertEquals(20, cell.getPoderPelea(), 0.01);
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class TestCell {
 		}
 		try {
 			cell.transformar();
-			Assert.assertEquals(40, cell.getPoderPelea());
+			Assert.assertEquals(40, cell.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -90,7 +90,7 @@ public class TestCell {
 		}
 		try {
 			cell.transformar();
-			Assert.assertEquals(40, cell.getPoderPelea());
+			Assert.assertEquals(40, cell.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -109,7 +109,7 @@ public class TestCell {
 		}
 		try {
 			cell.transformar();
-			Assert.assertEquals(40, cell.getPoderPelea());
+			Assert.assertEquals(40, cell.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado: primera transformacion");
 		}
@@ -117,7 +117,7 @@ public class TestCell {
 			cell.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(40, cell.getPoderPelea());
+			Assert.assertEquals(40, cell.getPoderPelea(), 0.01);
 		}
 	}
 	
@@ -133,7 +133,7 @@ public class TestCell {
 		try {
 			cell.transformar();
 			cell.transformar();
-			Assert.assertEquals(80, cell.getPoderPelea());
+			Assert.assertEquals(80, cell.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -152,7 +152,7 @@ public class TestCell {
 		try {
 			cell.transformar();
 			cell.transformar();
-			Assert.assertEquals(80, cell.getPoderPelea());
+			Assert.assertEquals(80, cell.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}

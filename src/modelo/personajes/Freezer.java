@@ -6,7 +6,7 @@ import modelo.personajes.modos.ModoNormal;
 import modelo.personajes.modos.ModoTransformado;
 import modelo.tablero.Tablero;
 
-public class Freezer extends PersonajeTransformableConKi{
+public class Freezer extends Personaje{
 
 	public Freezer(Tablero tablero) {
 		super("Freezer", 400, new ModoNormal(20,2,4), new AtaquePotenciador(20,1.5), tablero, 20, 50);

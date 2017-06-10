@@ -42,7 +42,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(30, gohan.getPoderPelea());
+			Assert.assertEquals(30, gohan.getPoderPelea(), 0.01);
 		}
 	}
 	
@@ -53,7 +53,7 @@ public class TestGohan {
 		piccolo.recibirAtaque(420);
 		try {
 			gohan.transformar();
-			Assert.assertEquals(100, gohan.getPoderPelea());
+			Assert.assertEquals(100, gohan.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -66,7 +66,7 @@ public class TestGohan {
 		piccolo.recibirAtaque(1000);
 		try {
 			gohan.transformar();
-			Assert.assertEquals(100, gohan.getPoderPelea());
+			Assert.assertEquals(100, gohan.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -80,7 +80,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(30, gohan.getPoderPelea());
+			Assert.assertEquals(30, gohan.getPoderPelea(), 0.01);
 		}
 	}
 	
@@ -92,7 +92,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(30, gohan.getPoderPelea());
+			Assert.assertEquals(30, gohan.getPoderPelea(), 0.01);
 		}
 	}
 	

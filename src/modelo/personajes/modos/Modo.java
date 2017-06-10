@@ -4,17 +4,17 @@ import modelo.personajes.Personaje;
 
 public abstract class Modo {
 
-	private int poderPelea;
+	private double poderPelea;
 	private int distanciaAtaque;
 	private int velocidad;
 	
-	public Modo(int poderPelea, int distanciaAtaque, int velocidad){
+	public Modo(double poderPelea, int distanciaAtaque, int velocidad){
 		this.poderPelea = poderPelea;
 		this.distanciaAtaque = distanciaAtaque;
 		this.velocidad = velocidad;
 	}
 	
-	public int getPoderPelea(){
+	public double getPoderPelea(){
 		return this.poderPelea;
 	}
 

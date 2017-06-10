@@ -1,10 +1,15 @@
 package modelo.tablero;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import modelo.consumibles.Efecto;
+import modelo.consumibles.EsferaDeDragon;
+import modelo.consumibles.NubeVoladora;
+import modelo.consumibles.SemillaDelErmitanio;
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.personajes.Personaje;
 
@@ -144,6 +149,24 @@ public class Tablero {
 		Casillero casillero = this.getCasillero(pos);
 		casillero.desocupar();
 		this.casillerosOcupados.remove(personaje);
+	}
+
+	public void generarConsumibles() {
+		//Genera un solo consumible en una posicion al azar con una probabilidad de 50%
+		
+		List <Efecto> consumiblesPosibles = new ArrayList<Efecto>();
+		consumiblesPosibles.add(new EsferaDeDragon());
+		consumiblesPosibles.add(new NubeVoladora());
+		consumiblesPosibles.add(new SemillaDelErmitanio());
+		Collections.shuffle(consumiblesPosibles);
+		
+		double probabilidad = Math.random() * 10;
+		if (probabilidad >= 5){	
+			int x = (int) (Math.random() * (this.size - 1));
+			int y = (int) (Math.random() * (this.size - 1));
+			Posicion pos = new Posicion (x,y); //Posicion al azar
+			this.getCasillero(pos).agregarConsumible(consumiblesPosibles.get(0));
+		}
 	}
 	
 }

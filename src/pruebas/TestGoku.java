@@ -20,13 +20,13 @@ public class TestGoku {
 		
 	@Test
 	public void testGokuVidaCompletaTienePoderPeleaNormal(){
-		Assert.assertEquals(20, goku.getPoderPelea());
+		Assert.assertEquals(20, goku.getPoderPelea(), 0.01);
 	}
 	
 	@Test
 	public void testGokuPocaVidaTienePoderPeleaMayor(){
 		goku.recibirAtaque(480);
-		Assert.assertEquals(24, goku.getPoderPelea());
+		Assert.assertEquals(24, goku.getPoderPelea(), 0.01);
 	}
 	
 	@Test
@@ -40,7 +40,7 @@ public class TestGoku {
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
-		Assert.assertEquals(48, goku.getPoderPelea());
+		Assert.assertEquals(48, goku.getPoderPelea(), 0.01);
 	}
 	
 	@Test
@@ -55,7 +55,7 @@ public class TestGoku {
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
-		Assert.assertEquals(72, goku.getPoderPelea());
+		Assert.assertEquals(72, goku.getPoderPelea(), 0.01);
 	}
 
 }

@@ -33,7 +33,7 @@ public class TestTurno {
 		juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
 		this.jugador1 = juego.getJugador1();
 		this.jugador2 = juego.getJugador2();
-		this.turno = new Turno (jugador1, jugador2);
+		this.turno = new Turno (jugador1, jugador2, juego.getTablero());
 	}
 	
 	@Test
@@ -50,7 +50,7 @@ public class TestTurno {
 	public void testGenerarKiAlComienzoDelTurno(){
 		Personaje personaje = jugador1.getEquipo().getMiembros().get(0);
 		int kiActual = personaje.getKi();
-		new Turno (jugador1, jugador2);
+		new Turno (jugador1, jugador2, juego.getTablero());
 		Assert.assertEquals(kiActual + 5, personaje.getKi());
 	}
 	
@@ -58,7 +58,7 @@ public class TestTurno {
 	public void testNoGenerarKiAlComienzoDelTurnoDelOtroJugador(){
 		Personaje personaje = jugador2.getEquipo().getMiembros().get(0);
 		int kiActual = personaje.getKi();
-		new Turno (jugador1, jugador2);
+		new Turno (jugador1, jugador2, juego.getTablero());
 		Assert.assertEquals(kiActual, personaje.getKi());
 	}
 	

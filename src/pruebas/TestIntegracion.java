@@ -30,7 +30,6 @@ public class TestIntegracion {
 		
 		try{
 			DragonBall dragonBall = new DragonBall();
-			//dragonBall.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
 			dragonBall.establecerEquipoJugador1(Constantes.GUERREROS);
 			dragonBall.establecerEquipoJugador2(Constantes.ENEMIGOS);
 			dragonBall.iniciar();
@@ -78,8 +77,6 @@ public class TestIntegracion {
 				Assert.assertTrue(flag);
 			}
 			
-//		}catch (NombresDeEquipoIguales e){
-//			Assert.fail("No se han elegido dos equipos iguales.");
 			
 		}catch(EquipoNoDisponible e){
 			Assert.fail("La prueba fallo, los equipos deberian estar disponibles");
@@ -88,8 +85,10 @@ public class TestIntegracion {
 	
 	@Test
 	public void testIntegracionJugarJuego() throws EquipoNoDisponible, MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible{
+		
+		//La prueba falla si lanza una excepcion
+		
 		DragonBall juego = new DragonBall();
-//		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS);
 		
 		juego.establecerEquipoJugador1(Constantes.GUERREROS);
 		juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
@@ -125,29 +124,24 @@ public class TestIntegracion {
 		
 		//Turno guerreros
 		juego.jugadorActualAtacarAEnemigo(freezer);
-		Assert.assertEquals(95, freezer.getPorcentajeVida(), 0.01);
 		juego.jugadorActualTerminarTurno();
 		
 		//Turno enemigos
 		juego.jugadorActualAtacarAEnemigo(goku);
-		Assert.assertEquals(96, goku.getPorcentajeVida(), 0.01);
 		juego.jugadorActualTerminarTurno();
 		
 		//Turno guerreros
 		juego.jugadorActualMoverAPosicion(new Posicion (5,1));
 		juego.jugadorActualAtacarAEnemigo(freezer);
-		Assert.assertEquals(90, freezer.getPorcentajeVida(), 0.01);
 		
 		//Turno enemigos
 		Assert.assertEquals(juego.getJugador2(), juego.getJugadorActual());
 		juego.jugadorActualAtacarAEnemigo(goku);
-		Assert.assertEquals(92, goku.getPorcentajeVida(), 0.01);
 		juego.jugadorActualMoverAPosicion(new Posicion (5,2));
 		
 		//Turno guerreros
 		juego.jugadorActualTransformar();
 		juego.jugadorActualAtacarAEnemigo(freezer);
-		Assert.assertEquals(80, freezer.getPorcentajeVida(), 0.01);
 		juego.jugadorActualMoverAPosicion(new Posicion (2,4));
 		
 		//Turno enemigos
@@ -170,7 +164,6 @@ public class TestIntegracion {
 		
 		//Turno Enemigos
 		juego.jugadorActualRealizarAtaqueEspecial(gohan);
-		Assert.assertTrue(cell.getPorcentajeVida() > 100);
 		juego.jugadorActualSeleccionarPersonaje(majinBoo);
 		juego.jugadorActualMoverAPosicion(new Posicion(6,3));
 		

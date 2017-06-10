@@ -6,7 +6,7 @@ import modelo.personajes.modos.ModoNormal;
 import modelo.personajes.modos.ModoTransformado;
 import modelo.tablero.Tablero;
 
-public class MajinBoo extends PersonajeTransformableConKi {
+public class MajinBoo extends Personaje {
 
 	public MajinBoo(Tablero tablero) {
 		super("Majin Boo", 300, new ModoNormal(30,2,2), new AtaqueInmovilizador(30), tablero, 20, 50);

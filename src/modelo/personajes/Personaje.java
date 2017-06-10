@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.consumibles.Efecto;
-import modelo.consumibles.EsferaDeDragon;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PosicionFueraDeRango;
@@ -26,8 +25,10 @@ public abstract class Personaje {
 	private Tablero tablero;
 	private List<Efecto> listadoEfectos;
 	protected AtaqueEspecial ataqueEspecial;
+	private int kiNecesarioModoTransformado;
+	private int kiNecesarioModoFinal;
 	
-	public Personaje(String nombre,int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, Tablero tablero){
+	public Personaje(String nombre,int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, Tablero tablero, int kiNecesarioModoTransformado, int kiNecesarioModoFinal){
 		this.nombre = nombre;
 		this.vidaInicial = vidaInicial;
 		this.vidaActual = vidaInicial;
@@ -36,6 +37,8 @@ public abstract class Personaje {
 		this.tablero = tablero;
 		this.listadoEfectos = new ArrayList<Efecto>();
 		this.ataqueEspecial = ataqueEspecial;
+		this.kiNecesarioModoTransformado = kiNecesarioModoTransformado;
+		this.kiNecesarioModoFinal = kiNecesarioModoFinal;
 	}
 	
 	public void setEquipo(Equipo equipo){
@@ -46,12 +49,12 @@ public abstract class Personaje {
 		return this.nombre;
 	}
 	
-	public int getPoderPelea() {
-		int poderPelea = this.modoActual.getPoderPelea();
+	public double getPoderPelea() {
+		double poderPelea = this.modoActual.getPoderPelea();
 		for (Efecto efecto: listadoEfectos){
-			poderPelea += efecto.modificarPoderPelea( poderPelea );
+			poderPelea = efecto.modificarPoderPelea( poderPelea );
 		}
-		return this.modoActual.getPoderPelea();
+		return poderPelea;
 	}
 
 	public int getDistanciaAtaque() {
@@ -61,7 +64,7 @@ public abstract class Personaje {
 	public int getVelocidad() {
 		int velocidad = this.modoActual.getVelocidad();
 		for (Efecto efecto: listadoEfectos){
-			velocidad += efecto.modificarVelocidad(velocidad);
+			velocidad = efecto.modificarVelocidad(velocidad);
 		}
 		return velocidad;
 	}
@@ -154,9 +157,6 @@ public abstract class Personaje {
 	public void empezarTurno(){
 		for(Efecto efecto: listadoEfectos){
 			efecto.empezarTurno();
-			if(efecto.terminoTiempo()){
-				listadoEfectos.remove(efecto);
-			}
 		}
 		this.modoActual.empezarTurno(this);
 	}
@@ -166,8 +166,8 @@ public abstract class Personaje {
 		this.listadoEfectos.add(efecto);
 	}
 	
-	public void regenerarVida(double d){
-		this.vidaActual += d;
+	public void regenerarVida(double vidaRegenerada){
+		this.vidaActual += vidaRegenerada;
 	}
 	
 	public void inmovilizar(){
@@ -176,15 +176,27 @@ public abstract class Personaje {
 
 	public abstract Modo transformarAModoTransformado();
 
-	public abstract boolean puedeTransformarseAModoTransformado();
+	public boolean puedeTransformarseAModoTransformado(){
+		return this.comprobarKiNecesario(kiNecesarioModoTransformado);
+	}
 
 	public abstract Modo transformarAModoFinal();
 
-	public abstract boolean puedeTransformarseAModoFinal();
+	public boolean puedeTransformarseAModoFinal(){
+		return this.comprobarKiNecesario(kiNecesarioModoFinal);
+	}
 
-	public void agregarEsferaAColeccion(EsferaDeDragon esferaDeDragon) {
-		this.equipo.agregarEsferaAColeccion(esferaDeDragon);
+	public void agregarEsferaAColeccion() {
+		this.equipo.agregarEsferaAColeccion();
 		
+	}
+	
+	public void transformarAModoTransformadoConKi(){
+		this.restarKi(kiNecesarioModoTransformado);
+	}
+	
+	public void transformarAModoFinalConKi(){
+		this.restarKi(kiNecesarioModoFinal);
 	}
 
 

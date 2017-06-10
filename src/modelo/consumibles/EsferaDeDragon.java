@@ -12,14 +12,17 @@ public class EsferaDeDragon extends Efecto{
 	}
 
 	@Override
-	public double modificarPoderPelea(int poderPelea){
+	public double modificarPoderPelea(double poderPelea){
+		if (this.terminoTiempo()){
+			return poderPelea;
+		}
 		this.restarDuracion();
-		return poderPelea + (poderPelea*aumentoDeDanio);
+		return poderPelea + (poderPelea * aumentoDeDanio);
 	}
 	
 	@Override
 	public void aplicarEfectoInstantaneo(Personaje personaje){
-		personaje.agregarEsferaAColeccion(this);
+		personaje.agregarEsferaAColeccion();
 	}
 	
 }

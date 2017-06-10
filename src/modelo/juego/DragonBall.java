@@ -158,7 +158,7 @@ public class DragonBall {
 		lista.add(this.jugador1);
 		lista.add(this.jugador2);
 		Collections.shuffle(lista);
-		this.turno = new Turno (lista.get(0), lista.get(1));
+		this.turno = new Turno (lista.get(0), lista.get(1), this.tablero);
 	}
 	
 	public Jugador getJugadorActual(){

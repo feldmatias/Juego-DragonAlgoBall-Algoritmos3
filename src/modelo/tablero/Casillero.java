@@ -1,15 +1,18 @@
 package modelo.tablero;
 
+import modelo.consumibles.Efecto;
 import modelo.personajes.Personaje;
 
 public class Casillero {
 	private Posicion posicion;
-	private Personaje ficha;
+	private Personaje personaje;
+	private Efecto consumible;
 	
 
 	public Casillero(int x, int y) {
 		this.posicion = new Posicion(x,y);
-		this.ficha = null;
+		this.personaje = null;
+		this.consumible = null;
 	}
 
 	public int distanciaA(Casillero otroCasillero) {
@@ -21,15 +24,25 @@ public class Casillero {
 	}
 
 	public void desocupar() {
-		this.ficha = null;
+		this.personaje = null;
 	}
 
 	public void ocupar(Personaje personaje) {
-		this.ficha = personaje;
+		if (this.consumible != null){
+			personaje.sumarEfecto(this.consumible);
+			this.consumible = null;
+		}
+		this.personaje = personaje;
 	}
 
 	public boolean estaVacio() {
-		return (this.ficha == null );
+		return (this.personaje == null );
+	}
+	
+	public void agregarConsumible(Efecto consumible){
+		if (this.estaVacio()){
+			this.consumible = consumible;
+		}
 	}
 
 }
