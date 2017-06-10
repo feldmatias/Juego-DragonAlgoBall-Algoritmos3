@@ -76,7 +76,7 @@ public class DragonBall {
 		return equipo;
 	}
 	
-	private Equipo crearEquipoGuerreros() throws PosicionFueraDeRango {
+	private Equipo crearEquipoGuerreros() /*throws PosicionFueraDeRango*/ {
 		Personaje goku = new Goku(this.tablero);
 		Personaje gohan = new Gohan(this.tablero);
 		Personaje piccolo = new Piccolo(this.tablero);		
@@ -84,7 +84,7 @@ public class DragonBall {
 		//return this.crearEquipoYPosicionarPersonajes(Constantes.GUERREROS, goku, gohan, piccolo, new Posicion (0,Constantes.POS_CENTRAL));
 	}
 	
-	private Equipo crearEquipoEnemigos() throws PosicionFueraDeRango {
+	private Equipo crearEquipoEnemigos() /*throws PosicionFueraDeRango*/ {
 		Personaje cell = new Cell(this.tablero);
 		Personaje freezer = new Freezer(this.tablero);
 		Personaje majinBoo = new MajinBoo(this.tablero);		
