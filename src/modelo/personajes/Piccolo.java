@@ -6,7 +6,7 @@ import modelo.personajes.modos.ModoNormal;
 import modelo.personajes.modos.ModoTransformado;
 import modelo.tablero.Tablero;
 
-public class Piccolo extends PersonajeTransformableConKi {
+public class Piccolo extends Personaje {
 
 	public Piccolo(Tablero tablero) {
 		super("Piccolo", 500, new ModoNormal(20,2,2), new AtaquePotenciador(10,1.25), tablero, 20 ,0);

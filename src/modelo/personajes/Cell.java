@@ -9,7 +9,7 @@ import modelo.tablero.Tablero;
 public class Cell extends Personaje {
 
 	public Cell( Tablero tablero) {
-		super("Cell", 500, new ModoNormal(20,3,2), new AtaqueAbsorver(5), tablero);
+		super("Cell", 500, new ModoNormal(20,3,2), new AtaqueAbsorver(5), tablero, 0, 0);
 	}
 
 
@@ -20,8 +20,7 @@ public class Cell extends Personaje {
 
 	@Override
 	public boolean puedeTransformarseAModoTransformado() {
-		AtaqueAbsorver ataque = (AtaqueAbsorver) this.ataqueEspecial;
-		return ataque.getCantidadUsos() >= 4;
+		return this.getCantidadAbsorciones() >= 4;
 	}
 
 
@@ -32,8 +31,11 @@ public class Cell extends Personaje {
 
 	@Override
 	public boolean puedeTransformarseAModoFinal() {
-		AtaqueAbsorver ataque = (AtaqueAbsorver) this.ataqueEspecial;
-		return ataque.getCantidadUsos() >= 8;
+		return this.getCantidadAbsorciones() >= 8;
 	}
 	
+	private int getCantidadAbsorciones(){
+		AtaqueAbsorver ataque = (AtaqueAbsorver) this.ataqueEspecial;
+		return ataque.getCantidadUsos();
+	}
 }

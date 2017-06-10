@@ -55,7 +55,7 @@ public class TestPersonaje {
 	
 	@Test
 	public void testObtenerPoderPeleaModoNormal(){
-		Assert.assertEquals(20, personaje.getPoderPelea());
+		Assert.assertEquals(20, personaje.getPoderPelea(), 0.01);
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class TestPersonaje {
 			personaje.transformar();
 			Assert.fail("La transformacion no deberia realizarse");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(20, personaje.getPoderPelea());
+			Assert.assertEquals(20, personaje.getPoderPelea(), 0.01);
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class TestPersonaje {
 		}
 		try {
 			personaje.transformar();
-			Assert.assertEquals(40,personaje.getPoderPelea());
+			Assert.assertEquals(40,personaje.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("La transformacion deberia realizarse");
 		}
@@ -165,7 +165,7 @@ public class TestPersonaje {
 			personaje.transformar();
 			Assert.fail("La transformacion no deberia realizarse");
 		} catch (TransformacionNoPosible f) {
-			Assert.assertEquals(40, personaje.getPoderPelea());
+			Assert.assertEquals(40, personaje.getPoderPelea(), 0.01);
 		}
 	}
 
@@ -193,7 +193,7 @@ public class TestPersonaje {
 		try {
 			personaje.transformar();
 			personaje.transformar();
-			Assert.assertEquals(60,personaje.getPoderPelea());
+			Assert.assertEquals(60,personaje.getPoderPelea(), 0.01);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Las transformaciones deberian realizarse");
 		}
@@ -215,7 +215,7 @@ public class TestPersonaje {
 			personaje.transformar();
 			Assert.fail("La tercera transformacion no deberia realizarse");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(60, personaje.getPoderPelea());
+			Assert.assertEquals(60, personaje.getPoderPelea(), 0.01);
 		}
 	}
 	

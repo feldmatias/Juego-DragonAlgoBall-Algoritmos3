@@ -1,23 +1,20 @@
 package modelo.juego;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import modelo.consumibles.Efecto;
-import modelo.consumibles.EsferaDeDragon;
 import modelo.personajes.Personaje;
 
 public class Equipo {
 	
 	private List<Personaje> personajes;
 	private String nombre;
-	private List<EsferaDeDragon> coleccionDeEsferas;
+	private int cantidadEsferas;
 	
 	public Equipo(String nombre, List<Personaje> personajes){
 		this.nombre = nombre;
 		this.personajes = personajes;
 		this.inicializarMiembros();
-		this.coleccionDeEsferas = new ArrayList<EsferaDeDragon>();
+		this.cantidadEsferas = 0;
 	}
 
 	public boolean pertenece(Personaje personaje) {
@@ -52,9 +49,8 @@ public class Equipo {
 		return this.personajes.isEmpty();
 	}
 
-	public void agregarEsferaAColeccion(EsferaDeDragon esferaDeDragon) {
-		this.coleccionDeEsferas.add(esferaDeDragon);
-		
+	public void agregarEsferaAColeccion() {
+		this.cantidadEsferas += 1;
 	}
 
 }
