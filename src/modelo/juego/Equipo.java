@@ -52,5 +52,9 @@ public class Equipo {
 	public void agregarEsferaAColeccion() {
 		this.cantidadEsferas += 1;
 	}
+	
+	public int getCantidadEsferas(){
+		return this.cantidadEsferas;
+	}
 
 }
