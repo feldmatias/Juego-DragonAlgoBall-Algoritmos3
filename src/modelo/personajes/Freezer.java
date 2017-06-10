@@ -1,9 +1,9 @@
 package modelo.personajes;
 
 import modelo.personajes.modos.Modo;
-import modelo.personajes.modos.ModoFinal;
 import modelo.personajes.modos.ModoNormal;
-import modelo.personajes.modos.ModoTransformado;
+import modelo.personajes.modos.PrimeraTransformacion;
+import modelo.personajes.modos.SegundaTransformacion;
 import modelo.tablero.Tablero;
 
 public class Freezer extends Personaje{
@@ -13,15 +13,15 @@ public class Freezer extends Personaje{
 	}
 	
 	@Override
-	public Modo transformarAModoTransformado(){
-		super.transformarAModoTransformadoConKi();
-		return new ModoTransformado(40,3,4);
+	public Modo realizarPrimeraTransformacion(){
+		super.restarKiPrimeraTransformacion();
+		return new PrimeraTransformacion(40,3,4);
 	}
 	
 	@Override
-	public Modo transformarAModoFinal() {
-		super.transformarAModoFinalConKi();
-		return new ModoFinal(50,3,6);
+	public Modo realizarSegundaTransformacion() {
+		super.restarKiSegundaTransformacion();
+		return new SegundaTransformacion(50,3,6);
 	}
 
 }

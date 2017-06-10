@@ -2,21 +2,20 @@ package modelo.personajes.modos;
 
 import modelo.personajes.Personaje;
 
-public class ModoTransformado extends Modo {
+public class SegundaTransformacion extends Modo {
 
-	
-	public ModoTransformado(int poderPelea, int distanciaAtaque, int velocidad) {
+	public SegundaTransformacion(int poderPelea, int distanciaAtaque, int velocidad) {
 		super(poderPelea, distanciaAtaque, velocidad);
 	}
 
 	@Override
 	public Modo transformar(Personaje personaje) {
-		return personaje.transformarAModoFinal();
+		return this;
 	}
 
 	@Override
 	public boolean puedeTransformarse(Personaje personaje) {
-		return personaje.puedeTransformarseAModoFinal();
+		return false;
 	}
 
 }

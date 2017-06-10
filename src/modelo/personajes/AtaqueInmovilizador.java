@@ -13,6 +13,7 @@ public class AtaqueInmovilizador extends AtaqueEspecial {
 		return 0;
 	}
 	
+	@Override
 	public void ataqueEspecial(Personaje atacante, Personaje enemigo) throws AtaqueNoPosible{
 		if (!this.ataquePosible(atacante, enemigo)){
 			throw new AtaqueNoPosible();

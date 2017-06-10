@@ -10,12 +10,12 @@ public class ModoNormal extends Modo{
 
 	@Override
 	public Modo transformar(Personaje personaje) {
-		return personaje.transformarAModoTransformado();
+		return personaje.realizarPrimeraTransformacion();
 	}
 
 	@Override
 	public boolean puedeTransformarse(Personaje personaje) {
-		return personaje.puedeTransformarseAModoTransformado();
+		return personaje.puedeRealizarPrimeraTransformacion();
 	}
 
 

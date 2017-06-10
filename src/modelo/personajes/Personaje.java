@@ -174,15 +174,15 @@ public abstract class Personaje {
 		this.modoActual = new ModoInmovilizado(this.modoActual);
 	}
 
-	public abstract Modo transformarAModoTransformado();
+	public abstract Modo realizarPrimeraTransformacion();
 
-	public boolean puedeTransformarseAModoTransformado(){
+	public boolean puedeRealizarPrimeraTransformacion(){
 		return this.comprobarKiNecesario(kiNecesarioModoTransformado);
 	}
 
-	public abstract Modo transformarAModoFinal();
+	public abstract Modo realizarSegundaTransformacion();
 
-	public boolean puedeTransformarseAModoFinal(){
+	public boolean puedeRealizarSegundaTransformacion(){
 		return this.comprobarKiNecesario(kiNecesarioModoFinal);
 	}
 
@@ -191,11 +191,11 @@ public abstract class Personaje {
 		
 	}
 	
-	public void transformarAModoTransformadoConKi(){
+	public void restarKiPrimeraTransformacion(){
 		this.restarKi(kiNecesarioModoTransformado);
 	}
 	
-	public void transformarAModoFinalConKi(){
+	public void restarKiSegundaTransformacion(){
 		this.restarKi(kiNecesarioModoFinal);
 	}
 

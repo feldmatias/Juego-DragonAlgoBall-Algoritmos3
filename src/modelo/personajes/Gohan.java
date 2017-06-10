@@ -1,9 +1,9 @@
 package modelo.personajes;
 
 import modelo.personajes.modos.Modo;
-import modelo.personajes.modos.ModoFinal;
 import modelo.personajes.modos.ModoNormal;
-import modelo.personajes.modos.ModoTransformado;
+import modelo.personajes.modos.PrimeraTransformacion;
+import modelo.personajes.modos.SegundaTransformacion;
 import modelo.tablero.Tablero;
 
 public class Gohan extends Personaje{
@@ -13,14 +13,14 @@ public class Gohan extends Personaje{
 	}
 
 	@Override
-	public Modo transformarAModoTransformado(){
-		super.transformarAModoTransformadoConKi();
-		return new ModoTransformado(30,2,2);
+	public Modo realizarPrimeraTransformacion(){
+		super.restarKiPrimeraTransformacion();
+		return new PrimeraTransformacion(30,2,2);
 	}
 	
 	@Override
-	public boolean puedeTransformarseAModoFinal() {
-		boolean puedeTransformarse = super.puedeTransformarseAModoFinal();
+	public boolean puedeRealizarSegundaTransformacion() {
+		boolean puedeTransformarse = super.puedeRealizarSegundaTransformacion();
 		
 		for (Personaje personaje: this.getEquipo().getMiembros()){
 			if (personaje == this){
@@ -32,9 +32,9 @@ public class Gohan extends Personaje{
 	}
 
 	@Override
-	public Modo transformarAModoFinal() {
-		super.transformarAModoFinalConKi();
-		return new ModoFinal(100,4,3);
+	public Modo realizarSegundaTransformacion() {
+		super.restarKiSegundaTransformacion();
+		return new SegundaTransformacion(100,4,3);
 	}
 	
 

@@ -1,9 +1,9 @@
 package modelo.personajes;
 
 import modelo.personajes.modos.Modo;
-import modelo.personajes.modos.ModoFinal;
 import modelo.personajes.modos.ModoNormal;
-import modelo.personajes.modos.ModoTransformado;
+import modelo.personajes.modos.PrimeraTransformacion;
+import modelo.personajes.modos.SegundaTransformacion;
 import modelo.tablero.Tablero;
 
 public class Cell extends Personaje {
@@ -14,23 +14,23 @@ public class Cell extends Personaje {
 
 
 	@Override
-	public Modo transformarAModoTransformado() {
-		return new ModoTransformado(40,4,3);
+	public Modo realizarPrimeraTransformacion() {
+		return new PrimeraTransformacion(40,4,3);
 	}
 
 	@Override
-	public boolean puedeTransformarseAModoTransformado() {
+	public boolean puedeRealizarPrimeraTransformacion() {
 		return this.getCantidadAbsorciones() >= 4;
 	}
 
 
 	@Override
-	public Modo transformarAModoFinal() {
-		return new ModoFinal(80,4,4);
+	public Modo realizarSegundaTransformacion() {
+		return new SegundaTransformacion(80,4,4);
 	}
 
 	@Override
-	public boolean puedeTransformarseAModoFinal() {
+	public boolean puedeRealizarSegundaTransformacion() {
 		return this.getCantidadAbsorciones() >= 8;
 	}
 	
