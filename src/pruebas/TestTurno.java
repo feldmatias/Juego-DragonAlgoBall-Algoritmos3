@@ -13,9 +13,9 @@ import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.juego.DragonBall;
 import modelo.juego.Jugador;
+import modelo.juego.Posicion;
 import modelo.juego.Turno;
 import modelo.personajes.Personaje;
-import modelo.tablero.Posicion;
 import modelo.utilidades.Constantes;
 
 public class TestTurno {

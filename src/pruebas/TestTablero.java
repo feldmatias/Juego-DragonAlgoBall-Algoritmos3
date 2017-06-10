@@ -6,14 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import modelo.excepciones.PosicionFueraDeRango;
+import modelo.juego.Casillero;
+import modelo.juego.Posicion;
+import modelo.juego.Tablero;
 import modelo.personajes.Cell;
 import modelo.personajes.Freezer;
 import modelo.personajes.Gohan;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
-import modelo.tablero.Casillero;
-import modelo.tablero.Posicion;
-import modelo.tablero.Tablero;
 
 public class TestTablero {
 	private int sizeTablero;

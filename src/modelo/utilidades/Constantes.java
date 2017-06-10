@@ -1,6 +1,6 @@
 package modelo.utilidades;
 
-import modelo.tablero.Posicion;
+import modelo.juego.Posicion;
 
 public class Constantes {
 

@@ -1,4 +1,4 @@
-package modelo.tablero;
+package modelo.juego;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package modelo.tablero;
+package modelo.juego;
 
 import modelo.consumibles.Efecto;
 import modelo.personajes.Personaje;

@@ -1,4 +1,4 @@
-package modelo.tablero;
+package modelo.juego;
 
 public class Posicion {
 	private int pos_x;

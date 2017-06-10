@@ -11,11 +11,11 @@ import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
+import modelo.juego.Posicion;
+import modelo.juego.Tablero;
 import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
-import modelo.tablero.Posicion;
-import modelo.tablero.Tablero;
 import modelo.utilidades.Constantes;
 
 public class TestPersonaje {

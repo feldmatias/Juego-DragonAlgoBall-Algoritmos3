@@ -4,10 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import modelo.juego.Casillero;
+import modelo.juego.Posicion;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
-import modelo.tablero.Casillero;
-import modelo.tablero.Posicion;
 
 public class TestCasillero {
 	

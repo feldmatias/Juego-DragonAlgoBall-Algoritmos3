@@ -11,8 +11,6 @@ import modelo.excepciones.PersonajeNoPerteneceAEquipo;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Personaje;
-import modelo.tablero.Posicion;
-import modelo.tablero.Tablero;
 
 
 public class Turno {

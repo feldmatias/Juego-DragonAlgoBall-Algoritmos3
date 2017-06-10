@@ -9,10 +9,10 @@ import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
+import modelo.juego.Posicion;
+import modelo.juego.Tablero;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoInmovilizado;
-import modelo.tablero.Posicion;
-import modelo.tablero.Tablero;
 
 public abstract class Personaje {
 	

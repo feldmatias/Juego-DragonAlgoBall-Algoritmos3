@@ -13,6 +13,7 @@ import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
+import modelo.juego.Posicion;
 import modelo.personajes.Cell;
 import modelo.personajes.Freezer;
 import modelo.personajes.Gohan;
@@ -20,7 +21,6 @@ import modelo.personajes.Goku;
 import modelo.personajes.MajinBoo;
 import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
-import modelo.tablero.Posicion;
 import modelo.utilidades.Constantes;
 
 public class TestIntegracion {

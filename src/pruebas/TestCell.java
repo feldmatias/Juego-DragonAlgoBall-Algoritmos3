@@ -8,8 +8,8 @@ import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
+import modelo.juego.Posicion;
 import modelo.personajes.Personaje;
-import modelo.tablero.Posicion;
 import modelo.utilidades.Constantes;
 
 public class TestCell {

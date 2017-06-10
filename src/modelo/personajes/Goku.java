@@ -1,11 +1,11 @@
 package modelo.personajes;
 
 
+import modelo.juego.Tablero;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoNormal;
 import modelo.personajes.modos.PrimeraTransformacion;
 import modelo.personajes.modos.SegundaTransformacion;
-import modelo.tablero.Tablero;
 
 public class Goku extends Personaje{
 	

@@ -5,7 +5,6 @@ import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PersonajeNoPerteneceAEquipo;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Personaje;
-import modelo.tablero.Posicion;
 
 public class Jugador {
 	

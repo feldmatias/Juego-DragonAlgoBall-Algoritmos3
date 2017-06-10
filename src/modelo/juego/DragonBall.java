@@ -24,8 +24,6 @@ import modelo.personajes.Goku;
 import modelo.personajes.MajinBoo;
 import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
-import modelo.tablero.Posicion;
-import modelo.tablero.Tablero;
 import modelo.utilidades.Constantes;
 
 public class DragonBall {
