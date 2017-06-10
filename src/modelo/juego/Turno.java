@@ -12,6 +12,7 @@ import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Personaje;
 import modelo.tablero.Posicion;
+import modelo.tablero.Tablero;
 
 
 public class Turno {
@@ -19,11 +20,13 @@ public class Turno {
 	private Queue<Jugador> jugadores;
 	private boolean movimientoRealizado = false;
 	private boolean ataqueRealizado = false;
+	private Tablero tablero;
 	
-	public Turno(Jugador jugadorInicial, Jugador otroJugador){
+	public Turno(Jugador jugadorInicial, Jugador otroJugador, Tablero tablero){
 		this.jugadores = new LinkedList<Jugador>();
 		jugadores.add(jugadorInicial);
 		jugadores.add(otroJugador);
+		this.tablero = tablero;
 		this.empezarTurno();
 	}
 	
@@ -32,7 +35,8 @@ public class Turno {
 		this.jugadorActual().comprobarPersonajeSeleccionado();
 		this.jugadorActual().empezarTurno();	
 		this.movimientoRealizado = false;
-		this.ataqueRealizado = false;	
+		this.ataqueRealizado = false;
+		this.tablero.generarConsumibles();
 	}
 	
 	public void atacarEnemigo(Personaje enemigo) throws AtaqueYaRealizado, AtaqueNoPosible{

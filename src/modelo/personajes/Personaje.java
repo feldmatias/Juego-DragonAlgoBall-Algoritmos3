@@ -157,9 +157,6 @@ public abstract class Personaje {
 	public void empezarTurno(){
 		for(Efecto efecto: listadoEfectos){
 			efecto.empezarTurno();
-			if(efecto.terminoTiempo()){
-				listadoEfectos.remove(efecto);
-			}
 		}
 		this.modoActual.empezarTurno(this);
 	}

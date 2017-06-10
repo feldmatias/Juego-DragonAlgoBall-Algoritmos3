@@ -1,7 +1,5 @@
 package modelo.juego;
 
-import java.util.function.Function;
-
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PersonajeNoPerteneceAEquipo;
@@ -10,6 +8,7 @@ import modelo.personajes.Personaje;
 import modelo.tablero.Posicion;
 
 public class Jugador {
+	
 	private Equipo equipo;
 	private Personaje personajeSeleccionado;
 	
