@@ -101,10 +101,11 @@ public class TestGohan {
 		
 		goku.recibirAtaque(420);
 		piccolo.recibirAtaque(420);
-		int kiActual = gohan.getKi();
+		int costoKiTransformacion = 30;
+		int kiEsperado = gohan.getKi() - costoKiTransformacion;
 		try {
 			gohan.transformar();
-			Assert.assertEquals(kiActual - 30, gohan.getKi());
+			Assert.assertEquals( kiEsperado, gohan.getKi());
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
