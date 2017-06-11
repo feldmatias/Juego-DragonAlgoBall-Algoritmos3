@@ -45,4 +45,8 @@ public class Casillero {
 		}
 	}
 
+	public Personaje getPersonaje() {
+		return this.personaje;
+	}
+
 }
