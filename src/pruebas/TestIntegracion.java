@@ -41,17 +41,17 @@ public class TestIntegracion {
 			
 			List<Personaje> miembrosGuerreros = dragonBall.getJugador1().getEquipo().getMiembros();
 			for (Personaje personaje : miembrosGuerreros){
-				boolean flag = personaje.getClass() == Goku.class;
-				flag = flag || personaje.getClass() == Gohan.class;
-				flag = flag || personaje.getClass() == Piccolo.class;
+				boolean flag = personaje.getNombre() == "Goku";
+				flag = flag || personaje.getNombre() == "Gohan";
+				flag = flag || personaje.getNombre() == "Piccolo";
 				Assert.assertTrue(flag);
 			}
 			
 			List<Personaje> miembrosEnemigos = dragonBall.getJugador2().getEquipo().getMiembros();
 			for (Personaje personaje : miembrosEnemigos){
-				boolean flag = personaje.getClass() == Cell.class;
-				flag = flag || personaje.getClass() == Freezer.class;
-				flag = flag || personaje.getClass() == MajinBoo.class;
+				boolean flag = personaje.getNombre() == "Cell";
+				flag = flag || personaje.getNombre() == "Freezer";
+				flag = flag || personaje.getNombre() == "Majin Boo";
 				Assert.assertTrue(flag);
 			}
 			int size = Constantes.SIZE_TABLERO;
