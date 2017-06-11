@@ -144,7 +144,7 @@ public abstract class Personaje {
 	}
 	
 	private void comprobarSiEstaMuerto(){
-		if (this.vidaActual == 0){
+		if (this.vidaActual <= 0){
 			this.equipo.personajeMuerto(this);
 			this.tablero.personajeMuerto(this);
 		}
