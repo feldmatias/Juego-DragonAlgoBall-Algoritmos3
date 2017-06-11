@@ -42,10 +42,7 @@ public class Turno {
 			throw new AtaqueYaRealizado();
 		}
 		this.jugadorActual().atacar(enemigo);
-		//aca comprobar con el segundo jugador si el equipo esta muerto
-		// if(segundoJugador.equipoMuerto() ){
-		//		throw new JuegoTerminado;
-		//	}
+
 		this.ataqueRealizado = true;
 		this.comprobarTurnoTerminado();
 	}
@@ -56,9 +53,6 @@ public class Turno {
 		}
 		this.jugadorActual().mover(destino);
 		this.movimientoRealizado = true;
-		if( this.jugadorActual().coleccionDeEsferasCompleta() ){
-			//throw new JuegoTerminado;
-		}
 		this.comprobarTurnoTerminado();
 	}
 	
