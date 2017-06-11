@@ -45,16 +45,21 @@ public class Equipo {
 		this.personajes.remove(personaje);
 	}
 	
-	public boolean equipoMuerto(){
+	public boolean estaMuerto(){
 		return this.personajes.isEmpty();
 	}
 
 	public void agregarEsferaAColeccion() {
 		this.cantidadEsferas += 1;
+
 	}
 	
 	public int getCantidadEsferas(){
 		return this.cantidadEsferas;
+	}
+
+	public boolean coleccionDeEsferasCompleta() {
+		return this.getCantidadEsferas() == 7;
 	}
 
 }

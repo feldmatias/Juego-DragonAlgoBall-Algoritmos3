@@ -81,7 +81,6 @@ public class DragonBall {
 	}
 
 	
-	//aca puse el iniciar turno porque no sabia donde ponerlo
 	public void iniciar(){
 		this.iniciarTurno();
 	}

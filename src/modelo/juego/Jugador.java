@@ -56,4 +56,11 @@ public class Jugador {
 	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible {
 		this.personajeSeleccionado.realizarAtaqueEspecial(enemigo);
 	}
+	
+	public boolean equipoMuerto(){
+		return this.equipo.estaMuerto();
+	}
+	public boolean coleccionDeEsferasCompleta(){
+		return equipo.coleccionDeEsferasCompleta();
+	}
 }
