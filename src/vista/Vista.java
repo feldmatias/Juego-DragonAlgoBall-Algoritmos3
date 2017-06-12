@@ -66,7 +66,7 @@ public class Vista extends Application {
 				modelo.juego.Posicion pos = new modelo.juego.Posicion(i,j);
 				botonCasillero = new Button();
 				botonCasillero.setMinWidth(100);
-				botonCasillero.setMinHeight(100);
+				botonCasillero.setMinHeight(60);
 				modelo.juego.Casillero casillero = tablero.getCasillero(pos);
 				if (casillero.estaVacio()){
 					BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this);
