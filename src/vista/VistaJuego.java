@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -21,6 +22,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
@@ -36,12 +38,13 @@ import vista.controlador.BotonMoverEventHandler;
 import vista.controlador.BotonTerminarTurnoEventHandler;
 import vista.controlador.BotonTransformarEventHandler;
 
-public class VistaJuego extends BorderPane{
+public class VistaJuego extends VBox{
 
 	private DragonBall juego;
 	private List <BotonInvisible> botonesCasilleros;
 	private Map <Personaje,BotonInvisible> botonesPersonajes;
 	private Label labelAcciones;
+	private HBox contenedorBotonesAcciones;
 	
 	public VistaJuego(DragonBall juego){
 		
@@ -50,37 +53,38 @@ public class VistaJuego extends BorderPane{
 		
 		this.juego = juego;
 		this.labelAcciones = new Label();
-		this.actualizarVista();
 		this.crearBotonesAcciones();
-		this.crearFondo();
-		this.espacioJugador1();
-		this.espacioJugador2();
+		this.actualizarVista();
 	}
 
 
-	private void espacioJugador1() {
+	private VBox espacioJugador1() {
 		Label nombre = new Label();
 		nombre.setText(juego.getJugador1().getEquipo().getNombre());
-		this.setLeft(nombre);
+		VBox contenedor = new VBox (nombre);
+		contenedor.setAlignment(Pos.CENTER);
+		return contenedor;
 	}
 	
-	private void espacioJugador2() {
+	private VBox espacioJugador2() {
 		Label nombre = new Label();
 		nombre.setText(juego.getJugador2().getEquipo().getNombre());
-		this.setRight(nombre);
+		VBox contenedor = new VBox (nombre);
+		contenedor.setAlignment(Pos.CENTER);
+		return contenedor;
 	}
 
 
-	private void crearFondo() {
+	private ImageView crearFondo() {
 		InputStream entradaImagen;
 		try {
 			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo.jpg"));
 			Image imagen = new Image(entradaImagen);
 			entradaImagen.close();
-			BackgroundImage vistaImagen = new BackgroundImage(imagen,
-					BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
-			this.setBackground(new Background(vistaImagen));
+			ImageView vistaImagen = new ImageView(imagen);
+			return vistaImagen;
 		} catch (IOException e) {
+			return null;
 		}
 		
 	}
@@ -113,32 +117,43 @@ public class VistaJuego extends BorderPane{
 		ataqueEspecial.setText("Ataque Especial");
 		
 		
-		HBox botones = new HBox(terminarTurno, transformar, mover,atacar,ataqueEspecial);
-		botones.setPadding(new Insets(20));
-		botones.setSpacing(10);
+		contenedorBotonesAcciones = new HBox(terminarTurno, transformar, mover,atacar,ataqueEspecial);
+		contenedorBotonesAcciones.setPadding(new Insets(20));
+		contenedorBotonesAcciones.setSpacing(10);
 		
-		botones.setAlignment(Pos.CENTER);
-		this.setBottom(botones);
+		contenedorBotonesAcciones.setAlignment(Pos.CENTER);
 		
 	}
 
 
 	public void actualizarVista() {
-		
-		this.actualizarCasilleros();
-		this.actualizarTurnos();
+		this.getChildren().clear();
+		this.getChildren().add(this.actualizarTurnos());
+		HBox contenedorHorizontal = new HBox();
+		contenedorHorizontal.setAlignment(Pos.CENTER);
+		contenedorHorizontal.getChildren().add(this.espacioJugador1());
+		contenedorHorizontal.getChildren().add(this.actualizarCasilleros());
+		contenedorHorizontal.getChildren().add(this.espacioJugador2());
+		contenedorHorizontal.setPadding(new Insets(20));
+		contenedorHorizontal.setSpacing(100);
+		this.getChildren().add(contenedorHorizontal);
+		this.getChildren().add(this.contenedorBotonesAcciones);
+		this.setAlignment(Pos.CENTER);
 	}
 		
-	private void actualizarTurnos() {
+	private VBox actualizarTurnos() {
 		Label labelTurnos = new Label();
 		labelTurnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
 		labelAcciones.setText("Selecciona un personaje");
 		VBox contenedorLabels = new VBox(labelTurnos, labelAcciones);
-		this.setTop(contenedorLabels);
+		contenedorLabels.setAlignment(Pos.CENTER);
+		return contenedorLabels;
 	}
 
 
-	private void actualizarCasilleros() {
+	private StackPane actualizarCasilleros() {
+		StackPane contenedor = new StackPane();
+		contenedor.getChildren().add(this.crearFondo());
 		botonesCasilleros.clear();
 		botonesPersonajes.clear();
 		
@@ -160,7 +175,9 @@ public class VistaJuego extends BorderPane{
 			columnas.getChildren().add(fila);
 		}
 		columnas.setAlignment(Pos.CENTER);
-		this.setCenter(columnas);
+		contenedor.getChildren().add(columnas);
+		contenedor.setAlignment(Pos.CENTER);
+		return contenedor;
 	}
 
 	private void nuevoBotonPersonaje(HBox fila, Personaje personaje) {
