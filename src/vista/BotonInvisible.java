@@ -15,7 +15,6 @@ public abstract class BotonInvisible extends StackPane{
 	public static int altoBoton = 80;
 	private Rectangle boton;
 	private Node imagenFondo;
-	private EventHandler<MouseEvent> eventoAlPresionar;
 	
 	public BotonInvisible(Node imagenFondo){
 		this.imagenFondo = imagenFondo;
@@ -36,10 +35,6 @@ public abstract class BotonInvisible extends StackPane{
 			
 		});
 		
-	}
-	
-	public void habilitar(){
-		
 		DropShadow sombra = new DropShadow(50,Color.WHITE);
 		sombra.setInput(new Glow());
 		
@@ -49,19 +44,20 @@ public abstract class BotonInvisible extends StackPane{
 			boton.setEffect(sombra);
 		});
 		
-		this.setOnMousePressed(this.eventoAlPresionar);
+	}
+	
+	public void habilitar(){
+		this.setDisable(false);
 		
 	}
 	
 	public void deshabilitar(){
-
-		this.setOnMouseEntered(null);
-		this.setOnMousePressed(null);
+		this.setDisable(true);
 		
 	}
 	
 	public void setOnAction(EventHandler<MouseEvent> evento){
-		this.eventoAlPresionar = evento;
+		this.setOnMouseClicked(evento);
 	}
 	
 	protected void seleccionar(){

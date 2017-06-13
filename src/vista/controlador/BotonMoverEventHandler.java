@@ -26,7 +26,7 @@ public class BotonMoverEventHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		for (BotonInvisible boton: personajes.values()){
-			boton.setDisable(true);
+			boton.deshabilitar();
 		}
 		for (BotonInvisible boton: casilleros){
 			boton.habilitar();

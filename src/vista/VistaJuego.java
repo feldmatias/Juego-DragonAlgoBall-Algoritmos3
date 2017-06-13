@@ -43,6 +43,10 @@ public class VistaJuego extends BorderPane{
 	private Label labelAcciones;
 	
 	public VistaJuego(DragonBall juego){
+		
+		botonesCasilleros = new ArrayList<BotonInvisible>();
+		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
+		
 		this.juego = juego;
 		this.labelAcciones = new Label();
 		this.actualizarVista();
@@ -117,8 +121,8 @@ public class VistaJuego extends BorderPane{
 
 
 	private void actualizarCasilleros() {
-		botonesCasilleros = new ArrayList<BotonInvisible>();
-		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
+		botonesCasilleros.clear();
+		botonesPersonajes.clear();
 		
 		Tablero tablero = juego.getTablero();
 		VBox columnas = new VBox();
@@ -141,23 +145,24 @@ public class VistaJuego extends BorderPane{
 	}
 
 	private void nuevoBotonPersonaje(HBox fila, Personaje personaje) {
-		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, new Label(), new Label(), this);
+		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, labelAcciones, this);
 		//Ver labels
 		BotonInvisible boton = new BotonPersonaje(personaje, juego);
 		boton.setOnAction(eventHandler);
 		boton.habilitar();
 		fila.getChildren().add(boton);
-		
+		this.botonesPersonajes.put(personaje, boton);
 	}
 
 
 	private void nuevoBotonCasilleroVacio(HBox fila, Posicion pos) {
-		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,new Label(), this);
+		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this);
 		//ver LABELS
 		BotonInvisible boton = new BotonCasilleroVacio();
 		boton.setOnAction(eventHandler);
 		boton.deshabilitar();
 		fila.getChildren().add(boton);
+		this.botonesCasilleros.add(boton);
 	}
 	
 }
