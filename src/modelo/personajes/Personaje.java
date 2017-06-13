@@ -13,8 +13,9 @@ import modelo.juego.Posicion;
 import modelo.juego.Tablero;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoInmovilizado;
+import vista.Posicionable;
 
-public abstract class Personaje {
+public abstract class Personaje implements Posicionable{
 	
 	private String nombre;
 	private int vidaInicial;

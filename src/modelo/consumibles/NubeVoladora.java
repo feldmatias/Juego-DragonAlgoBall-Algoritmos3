@@ -5,7 +5,7 @@ public class NubeVoladora extends Efecto{
 	private int aumentoVelocidad;
 	
 	public NubeVoladora() {
-		super(3); 
+		super(3, "Nube Voladora"); 
 		this.aumentoVelocidad = 2;
 	}
 	

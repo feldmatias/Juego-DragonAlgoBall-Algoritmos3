@@ -48,5 +48,9 @@ public class Casillero {
 	public Personaje getPersonaje() {
 		return this.personaje;
 	}
+	
+	public Efecto getConsumible(){
+		return this.consumible;
+	}
 
 }

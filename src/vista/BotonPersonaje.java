@@ -1,5 +1,6 @@
 package vista;
 
+import javafx.scene.paint.Color;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
 
@@ -23,5 +24,9 @@ public class BotonPersonaje extends BotonInvisible {
 		
 	}
 
+	@Override
+	protected Color getColorMouseEntered() {
+		return Color.LIGHTBLUE;
+	}
 
 }

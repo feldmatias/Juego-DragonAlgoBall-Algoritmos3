@@ -154,11 +154,11 @@ public class Tablero {
 	}
 
 	public void generarConsumibles() {
-		//Genera un solo consumible en una posicion al azar con una probabilidad de 50%
+		//Genera un solo consumible en una posicion al azar con una probabilidad de 30%
 		Collections.shuffle(consumibles);
 		
 		double probabilidad = Math.random() * 10;
-		if (probabilidad >= 5){	
+		if (probabilidad <= 3){	
 			int x = (int) (Math.random() * (this.size - 1));
 			int y = (int) (Math.random() * (this.size - 1));
 			Posicion pos = new Posicion (x,y); //Posicion al azar

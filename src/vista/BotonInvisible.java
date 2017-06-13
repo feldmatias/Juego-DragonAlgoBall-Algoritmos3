@@ -29,23 +29,32 @@ public abstract class BotonInvisible extends StackPane{
 		boton.setStroke(Color.BLACK);
 		this.getChildren().add(boton);
 		
+		this.setEfectoMouseEntered();
+		
+	}
+	
+	protected void setEfectoMouseEntered() {
+		DropShadow sombra = new DropShadow(50,Color.WHITE);
+		sombra.setInput(new Glow());
+		
+		this.setOnMouseEntered(evento -> {
+			boton.setFill(this.getColorMouseEntered());
+			boton.setOpacity(0.5);
+			boton.setEffect(sombra);
+		});
+		
 		this.setOnMouseExited(evento2 -> {
 			boton.setFill(Color.TRANSPARENT);
 			boton.setEffect(null);
 			
 		});
 		
-		DropShadow sombra = new DropShadow(50,Color.WHITE);
-		sombra.setInput(new Glow());
-		
-		this.setOnMouseEntered(evento -> {
-			boton.setFill(Color.WHITE);
-			boton.setOpacity(0.5);
-			boton.setEffect(sombra);
-		});
-		
 	}
-	
+
+
+	protected abstract Color getColorMouseEntered() ;
+
+
 	public void habilitar(){
 		this.setDisable(false);
 		

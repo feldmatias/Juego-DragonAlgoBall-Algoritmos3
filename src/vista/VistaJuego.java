@@ -133,7 +133,7 @@ public class VistaJuego extends BorderPane{
 				Posicion pos = new Posicion(i,j);
 				Casillero casillero = tablero.getCasillero(pos);
 					if (casillero.estaVacio()){
-						this.nuevoBotonCasilleroVacio(fila, pos);
+						this.nuevoBotonCasilleroVacio(fila, pos, casillero);
 					}else{
 						Personaje ocupante = casillero.getPersonaje();
 						this.nuevoBotonPersonaje(fila, ocupante);
@@ -155,10 +155,10 @@ public class VistaJuego extends BorderPane{
 	}
 
 
-	private void nuevoBotonCasilleroVacio(HBox fila, Posicion pos) {
+	private void nuevoBotonCasilleroVacio(HBox fila, Posicion pos, Casillero casillero) {
 		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this);
 		//ver LABELS
-		BotonInvisible boton = new BotonCasilleroVacio();
+		BotonInvisible boton = new BotonCasilleroVacio(casillero);
 		boton.setOnAction(eventHandler);
 		boton.deshabilitar();
 		fila.getChildren().add(boton);
