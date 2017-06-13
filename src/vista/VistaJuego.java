@@ -15,17 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
+import modelo.juego.Jugador;
 import modelo.juego.Posicion;
 import modelo.juego.Tablero;
 import modelo.personajes.Personaje;
@@ -56,22 +51,32 @@ public class VistaJuego extends VBox{
 		this.crearBotonesAcciones();
 		this.actualizarVista();
 	}
-
+	
+	private VBox crearEspacioJugador(Jugador jugador){
+		Label nombre = new Label();
+		nombre.setText(jugador.getEquipo().getNombre());
+		VBox contenedor = new VBox (nombre);
+		int cantidadEsferas = jugador.getEquipo().getCantidadEsferas();
+		InputStream entradaImagen;
+		try {
+			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/esferas/" + cantidadEsferas + "Esferas.png"));
+			Image imagen = new Image(entradaImagen);
+			entradaImagen.close();
+			ImageView vistaImagen = new ImageView(imagen);
+			contenedor.getChildren().add(vistaImagen);
+		} catch (IOException e) {
+		}
+		
+		contenedor.setAlignment(Pos.TOP_CENTER);
+		return contenedor;
+	}
 
 	private VBox espacioJugador1() {
-		Label nombre = new Label();
-		nombre.setText(juego.getJugador1().getEquipo().getNombre());
-		VBox contenedor = new VBox (nombre);
-		contenedor.setAlignment(Pos.CENTER);
-		return contenedor;
+		return this.crearEspacioJugador(juego.getJugador1());
 	}
 	
 	private VBox espacioJugador2() {
-		Label nombre = new Label();
-		nombre.setText(juego.getJugador2().getEquipo().getNombre());
-		VBox contenedor = new VBox (nombre);
-		contenedor.setAlignment(Pos.CENTER);
-		return contenedor;
+		return this.crearEspacioJugador(juego.getJugador2());
 	}
 
 
