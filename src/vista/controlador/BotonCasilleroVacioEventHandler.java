@@ -30,8 +30,10 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 		try {
 			juego.jugadorActualMoverAPosicion(pos);
 			vista.actualizarVista();
-		} catch (MovimientoYaRealizado | MovimientoNoPosible e) {
-			acciones.setText("No puede moverse ahi");
+		} catch (MovimientoYaRealizado e) {
+			acciones.setText("No puede moverse ahi, movimiento ya realizado");
+		} catch (MovimientoNoPosible e){
+			acciones.setText("No puede moverse ahi, movimiento no posible");
 		}
 	}
 
