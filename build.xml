@@ -7,15 +7,19 @@
         <property name="version" value="1.0.0" />
     </target>
  
-    <target name="main" depends="init, compila, empaqueta" description="Compila y empaqueta">
+    <target name="main" depends="init, compila, empaqueta, jugar" description="Compila y empaqueta">
         <echo message="Compilando y creando el archivo .jar" />
     </target>
  
+	<target name="jugar" depends="empaqueta">
+	        <java jar="${name}.jar" fork = "true" />
+	    </target>
+	
     <target name="compila" description="Compila">
         <javac srcdir="src" destdir="bin" />
     </target>
  
-    <target name="empaqueta" depends="init" description="Empaqueta">
+    <target name="empaqueta" depends="init, compila" description="Empaqueta">
         <jar jarfile="${name}.jar" basedir="bin" index="no" compress="yes">
             <manifest>
                 <attribute name="Specification-Title" value="${name}" />
