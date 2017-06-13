@@ -2,12 +2,16 @@ package vista;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
@@ -139,7 +143,15 @@ public class MenuJuego extends Application {
 			
 			BotonMenu btnSalir = new BotonMenu( "SALIR" );
 			btnSalir.setOnMouseClicked( evento -> {
-				System.exit(0);
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Confirmación de salida");
+				alert.setHeaderText("Se ha seleccionado la opción de SALIR de la aplicación");
+				alert.setContentText("¿Está seguro que desea salir?");
+				alert.showAndWait();
+				if (alert.getResult() == ButtonType.OK){
+					System.exit(0);
+				}				
+				
 			});
 			
 			
