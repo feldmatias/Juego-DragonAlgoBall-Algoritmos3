@@ -9,13 +9,13 @@ import modelo.personajes.modos.SegundaTransformacion;
 public class Gohan extends Personaje{
 	
 	public Gohan(Tablero tablero) {
-		super("Gohan", 300, new ModoNormal(15,2,2), new AtaquePotenciador(10,1.25), tablero, 10, 30);
+		super(300, new ModoNormal(15,2,2, "Gohan"), new AtaquePotenciador(10,1.25), tablero, 10, 30);
 	}
 
 	@Override
 	public Modo realizarPrimeraTransformacion(){
 		super.restarKiPrimeraTransformacion();
-		return new PrimeraTransformacion(30,2,2);
+		return new PrimeraTransformacion(30,2,2, "Gohan Super Sayajin 1");
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class Gohan extends Personaje{
 	@Override
 	public Modo realizarSegundaTransformacion() {
 		super.restarKiSegundaTransformacion();
-		return new SegundaTransformacion(100,4,3);
+		return new SegundaTransformacion(100,4,3, "Gohan Super Sayajin 2");
 	}
 	
 

@@ -4,8 +4,8 @@ import modelo.personajes.Personaje;
 
 public class ModoNormal extends Modo{
 
-	public ModoNormal(int poderPelea, int distanciaAtaque, int velocidad) {
-		super(poderPelea, distanciaAtaque, velocidad);
+	public ModoNormal(int poderPelea, int distanciaAtaque, int velocidad, String nombre) {
+		super(poderPelea, distanciaAtaque, velocidad, nombre);
 	}
 
 	@Override

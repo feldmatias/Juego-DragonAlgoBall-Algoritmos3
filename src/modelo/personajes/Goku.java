@@ -11,7 +11,7 @@ public class Goku extends Personaje{
 	
 	
 	public Goku(Tablero tablero){
-		super("Goku", 500, new ModoNormal(20,2,2), new AtaquePotenciador(20,1.5), tablero, 20, 50);
+		super( 500, new ModoNormal(20,2,2,"Goku"), new AtaquePotenciador(20,1.5), tablero, 20, 50);
 	}
 	
 	public double getPoderPelea(){
@@ -25,13 +25,13 @@ public class Goku extends Personaje{
 	@Override
 	public Modo realizarPrimeraTransformacion(){
 		super.restarKiPrimeraTransformacion();
-		return new PrimeraTransformacion(40,4,3);
+		return new PrimeraTransformacion(40,4,3, "Goku KaioKen");
 	}
 	
 	@Override
 	public Modo realizarSegundaTransformacion() {
 		super.restarKiSegundaTransformacion();
-		return new SegundaTransformacion(60,4,5);
+		return new SegundaTransformacion(60,4,5, "Goku Super Sayajin");
 	}
 
 }

@@ -17,7 +17,6 @@ import vista.Posicionable;
 
 public abstract class Personaje implements Posicionable{
 	
-	private String nombre;
 	private int vidaInicial;
 	private float vidaActual;
 	private int ki;
@@ -29,8 +28,7 @@ public abstract class Personaje implements Posicionable{
 	private int kiNecesarioModoTransformado;
 	private int kiNecesarioModoFinal;
 	
-	public Personaje(String nombre,int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, Tablero tablero, int kiNecesarioModoTransformado, int kiNecesarioModoFinal){
-		this.nombre = nombre;
+	public Personaje(int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, Tablero tablero, int kiNecesarioModoTransformado, int kiNecesarioModoFinal){
 		this.vidaInicial = vidaInicial;
 		this.vidaActual = vidaInicial;
 		this.ki = 0;
@@ -47,7 +45,7 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	public String getNombre(){
-		return this.nombre;
+		return this.modoActual.getNombre();
 	}
 	
 	public double getPoderPelea() {

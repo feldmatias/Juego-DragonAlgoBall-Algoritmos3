@@ -9,13 +9,13 @@ import modelo.personajes.modos.SegundaTransformacion;
 public class Cell extends Personaje {
 
 	public Cell( Tablero tablero) {
-		super("Cell", 500, new ModoNormal(20,3,2), new AtaqueAbsorver(5), tablero, 0, 0);
+		super(500, new ModoNormal(20,3,2, "Cell"), new AtaqueAbsorver(5), tablero, 0, 0);
 	}
 
 
 	@Override
 	public Modo realizarPrimeraTransformacion() {
-		return new PrimeraTransformacion(40,4,3);
+		return new PrimeraTransformacion(40,4,3, "Cell Semi Perfecto");
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class Cell extends Personaje {
 
 	@Override
 	public Modo realizarSegundaTransformacion() {
-		return new SegundaTransformacion(80,4,4);
+		return new SegundaTransformacion(80,4,4, "Cell Perfecto");
 	}
 
 	@Override

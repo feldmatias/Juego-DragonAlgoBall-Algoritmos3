@@ -7,11 +7,13 @@ public abstract class Modo {
 	private double poderPelea;
 	private int distanciaAtaque;
 	private int velocidad;
+	private String nombre;
 	
-	public Modo(double poderPelea, int distanciaAtaque, int velocidad){
+	public Modo(double poderPelea, int distanciaAtaque, int velocidad, String nombre){
 		this.poderPelea = poderPelea;
 		this.distanciaAtaque = distanciaAtaque;
 		this.velocidad = velocidad;
+		this.nombre = nombre;
 	}
 	
 	public double getPoderPelea(){
@@ -32,5 +34,9 @@ public abstract class Modo {
 	
 	public void empezarTurno(Personaje personaje){
 		personaje.generarKi();
+	}
+
+	public String getNombre() {
+		return this.nombre;
 	}
 }

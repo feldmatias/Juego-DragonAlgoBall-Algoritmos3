@@ -5,8 +5,8 @@ import modelo.personajes.Personaje;
 public class PrimeraTransformacion extends Modo {
 
 	
-	public PrimeraTransformacion(int poderPelea, int distanciaAtaque, int velocidad) {
-		super(poderPelea, distanciaAtaque, velocidad);
+	public PrimeraTransformacion(int poderPelea, int distanciaAtaque, int velocidad, String nombre) {
+		super(poderPelea, distanciaAtaque, velocidad, nombre);
 	}
 
 	@Override

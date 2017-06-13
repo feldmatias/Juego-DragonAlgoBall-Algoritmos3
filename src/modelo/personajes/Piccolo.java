@@ -9,18 +9,18 @@ import modelo.personajes.modos.SegundaTransformacion;
 public class Piccolo extends Personaje {
 
 	public Piccolo(Tablero tablero) {
-		super("Piccolo", 500, new ModoNormal(20,2,2), new AtaquePotenciador(10,1.25), tablero, 20 ,0);
+		super(500, new ModoNormal(20,2,2, "Piccolo"), new AtaquePotenciador(10,1.25), tablero, 20 ,0);
 	}
 	
 	public Modo realizarPrimeraTransformacion(){
 		super.restarKiPrimeraTransformacion();
-		return new PrimeraTransformacion(40,4,3);
+		return new PrimeraTransformacion(40,4,3, "Piccolo Fortalecido");
 	}
 
 	@Override
 	public Modo realizarSegundaTransformacion() {
 		super.restarKiSegundaTransformacion();
-		return new SegundaTransformacion(60,6,4);
+		return new SegundaTransformacion(60,6,4, "Piccolo Protector");
 	}
 	
 	@Override
