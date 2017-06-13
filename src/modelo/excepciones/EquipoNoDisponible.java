@@ -1,6 +1,6 @@
 package modelo.excepciones;
 
-public class EquipoNoDisponible extends Exception {
+public class EquipoNoDisponible extends RuntimeException {
 
 	/**
 	 * 

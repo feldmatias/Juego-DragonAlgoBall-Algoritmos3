@@ -1,36 +1,40 @@
-package vista;
+package vista.controlador;
 
-import javafx.event.ActionEvent;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.AtaqueYaRealizado;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
+import vista.VistaJuego;
 
-public class BotonPersonajeAtacableEventHandler implements EventHandler<ActionEvent> {
+public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<MouseEvent> {
 
 	private DragonBall juego;
-	private Personaje personaje;
 	private Label acciones;
-	private Vista vista;
+	private Personaje personaje;
+	private VistaJuego vista;
 
-	public BotonPersonajeAtacableEventHandler(DragonBall juego, Personaje personaje, Label labelAcciones, Vista vista) {
+	public BotonPersonajeAtacableEspecialEventHandler(DragonBall juego, Personaje personaje, Label labelAcciones,
+			VistaJuego vista) {
 		this.juego = juego;
 		this.personaje = personaje;
 		this.acciones = labelAcciones;
 		this.vista = vista;
 	}
 
+
+
 	@Override
-	public void handle(ActionEvent event) {
+	public void handle(MouseEvent event) {
 		try {
-			juego.jugadorActualAtacarAEnemigo(personaje);
+			juego.jugadorActualRealizarAtaqueEspecial(personaje);
 			vista.actualizarVista();
 		} catch (AtaqueYaRealizado | AtaqueNoPosible e) {
 			acciones.setText("No puede atacar a ese personaje");
 		}
-
 	}
 
 }

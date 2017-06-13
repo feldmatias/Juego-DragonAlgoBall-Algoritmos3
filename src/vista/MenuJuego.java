@@ -3,7 +3,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -19,22 +18,28 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import modelo.juego.DragonBall;
+import modelo.utilidades.Constantes;
 
 
 public class MenuJuego extends Application {
 
 	private MenuPrincipal menuJuego;
+	private Stage stage;
+	
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		this.stage = primaryStage;
 		
 		Pane root = new Pane();
 		root.setPrefSize(800, 600);
 		
-		InputStream entradaImagen = Files.newInputStream(Paths.get("Recursos/sheng long 2.jpg"));
+		InputStream entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/sheng long 2.jpg"));
 		
 		Image imagen = new Image(entradaImagen);
 		
@@ -50,8 +55,8 @@ public class MenuJuego extends Application {
 		
 		Scene scene = new Scene(root);
 		
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		stage.setScene(scene);
+		stage.show();
 		
 		
 	}
@@ -73,13 +78,21 @@ public class MenuJuego extends Application {
 			
 			menu2.setTranslateX(compensacion);
 			
+			DragonBall juego = new DragonBall();
+			//HAcer logica de seleccion de equipos
+			juego.establecerEquipoJugador1(Constantes.GUERREROS);
+			juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
+			juego.iniciar();
+			
 			BotonMenu btnEmpezar = new BotonMenu ("NUEVA PARTIDA");
 			btnEmpezar.setOnMouseClicked( evento1 -> {
-				FadeTransition transicion= new FadeTransition(Duration.seconds(0.5),this);
-				transicion.setFromValue(1);
-				transicion.setToValue(0);
-				transicion.setOnFinished(evtento2 -> this.setVisible(false));
-				transicion.play();
+				
+				stage.hide();
+				stage.setFullScreen(true);
+				Scene scene = new Scene(new VistaJuego(juego));
+				stage.setScene(scene);
+				stage.show();
+				
 			});
 	
 			
@@ -150,7 +163,7 @@ public class MenuJuego extends Application {
 		
 		public BotonMenu(String nombre){
 			texto = new Text(nombre);
-			texto.setFont(this.texto.getFont().font(20));
+			texto.setFont(Font.font(20));
 			texto.setFill(Color.WHITE);
 			
 			Rectangle fondo = new Rectangle(250,30);

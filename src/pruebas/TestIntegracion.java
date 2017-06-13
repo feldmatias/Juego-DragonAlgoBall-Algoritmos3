@@ -14,13 +14,7 @@ import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
-import modelo.personajes.Cell;
-import modelo.personajes.Freezer;
-import modelo.personajes.Gohan;
-import modelo.personajes.Goku;
-import modelo.personajes.MajinBoo;
 import modelo.personajes.Personaje;
-import modelo.personajes.Piccolo;
 import modelo.utilidades.Constantes;
 
 public class TestIntegracion {
@@ -54,7 +48,6 @@ public class TestIntegracion {
 				flag = flag || personaje.getNombre() == "Majin Boo";
 				Assert.assertTrue(flag);
 			}
-			int size = Constantes.SIZE_TABLERO;
 			
 			Posicion posicionEsperadaGuerreros1 = Constantes.POS_INICIAL1;
 			Posicion posicionEsperadaGuerreros2 = posicionEsperadaGuerreros1.sumarPosicion( new Posicion (0, 1) );
@@ -84,7 +77,7 @@ public class TestIntegracion {
 	}
 	
 	@Test
-	public void testIntegracionJugarJuego() throws EquipoNoDisponible, MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible{
+	public void testIntegracionJugarJuego() throws MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible{
 		
 		//La prueba falla si lanza una excepcion
 		

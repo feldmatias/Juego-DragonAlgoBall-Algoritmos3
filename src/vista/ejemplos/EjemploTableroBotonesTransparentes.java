@@ -5,9 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -19,7 +17,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import modelo.utilidades.Constantes;
 
 public class EjemploTableroBotonesTransparentes extends Application{
 		
@@ -29,7 +26,7 @@ public void start(Stage primaryStage) throws Exception {
 		Pane root = new Pane();
 		root.setPrefSize(1000, 700);
 		
-		InputStream entradaImagen = Files.newInputStream(Paths.get("Recursos/mapa feo.jpg"));
+		InputStream entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/mapa feo.jpg"));
 		
 		Image imagen = new Image(entradaImagen);
 		

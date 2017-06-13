@@ -60,7 +60,12 @@ public class Jugador {
 	public boolean equipoMuerto(){
 		return this.equipo.estaMuerto();
 	}
+	
 	public boolean coleccionDeEsferasCompleta(){
 		return equipo.coleccionDeEsferasCompleta();
+	}
+	
+	public Personaje getPersonajeSeleccionado(){
+		return this.personajeSeleccionado;
 	}
 }
