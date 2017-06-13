@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -52,17 +53,32 @@ public class VistaJuego extends BorderPane{
 		this.actualizarVista();
 		this.crearBotonesAcciones();
 		this.crearFondo();
+		this.espacioJugador1();
+		this.espacioJugador2();
+	}
+
+
+	private void espacioJugador1() {
+		Label nombre = new Label();
+		nombre.setText(juego.getJugador1().getEquipo().getNombre());
+		this.setLeft(nombre);
+	}
+	
+	private void espacioJugador2() {
+		Label nombre = new Label();
+		nombre.setText(juego.getJugador2().getEquipo().getNombre());
+		this.setRight(nombre);
 	}
 
 
 	private void crearFondo() {
-		InputStream entradaImagen = null;
+		InputStream entradaImagen;
 		try {
-			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo.png"));
+			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo.jpg"));
 			Image imagen = new Image(entradaImagen);
 			entradaImagen.close();
 			BackgroundImage vistaImagen = new BackgroundImage(imagen,
-					BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.DEFAULT,BackgroundSize.DEFAULT);
+					BackgroundRepeat.NO_REPEAT,BackgroundRepeat.NO_REPEAT,BackgroundPosition.CENTER,BackgroundSize.DEFAULT);
 			this.setBackground(new Background(vistaImagen));
 		} catch (IOException e) {
 		}
@@ -101,6 +117,7 @@ public class VistaJuego extends BorderPane{
 		botones.setPadding(new Insets(20));
 		botones.setSpacing(10);
 		
+		botones.setAlignment(Pos.CENTER);
 		this.setBottom(botones);
 		
 	}
@@ -115,6 +132,7 @@ public class VistaJuego extends BorderPane{
 	private void actualizarTurnos() {
 		Label labelTurnos = new Label();
 		labelTurnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
+		labelAcciones.setText("Selecciona un personaje");
 		VBox contenedorLabels = new VBox(labelTurnos, labelAcciones);
 		this.setTop(contenedorLabels);
 	}
@@ -141,6 +159,7 @@ public class VistaJuego extends BorderPane{
 			}
 			columnas.getChildren().add(fila);
 		}
+		columnas.setAlignment(Pos.CENTER);
 		this.setCenter(columnas);
 	}
 
