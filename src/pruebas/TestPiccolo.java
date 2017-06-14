@@ -9,9 +9,14 @@ import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Equipo;
 import modelo.personajes.Personaje;
+import modelo.personajes.Piccolo;
 import modelo.utilidades.Constantes;
 
 public class TestPiccolo {
+	
+	public static final int danioParaPocaVidaGohan = 270;
+	public static final int danioParaPocaVidaGoku = 480;
+	public static final int danioParaMuerteDeGohan = 1000;
 
 	private Personaje gohan;
 	private Personaje piccolo;
@@ -24,7 +29,7 @@ public class TestPiccolo {
 		this.gohan = equipo.getMiembros().get(1);
 		this.piccolo = equipo.getMiembros().get(2);
 		
-		for (int i = 0; i < 15; i ++){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i ++){
 			piccolo.empezarTurno();
 		}
 		try {
@@ -40,17 +45,17 @@ public class TestPiccolo {
 			piccolo.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(40, piccolo.getPoderPelea(), 0.01);
+			Assert.assertEquals(Piccolo.poderPeleaFortalecido, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	
 	@Test
 	public void testPiccoloPuedeTransformarseGohanPocaVida(){
 		
-		gohan.recibirAtaque(270);
+		gohan.recibirAtaque(danioParaPocaVidaGohan);
 		try {
 			piccolo.transformar();
-			Assert.assertEquals(60, piccolo.getPoderPelea(), 0.01);
+			Assert.assertEquals(Piccolo.poderPeleaProtector, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -59,10 +64,10 @@ public class TestPiccolo {
 	@Test
 	public void testPiccoloPuedeTransformarseGohanMuerto(){
 		
-		gohan.recibirAtaque(1000);
+		gohan.recibirAtaque(danioParaMuerteDeGohan);
 		try {
 			piccolo.transformar();
-			Assert.assertEquals(60, piccolo.getPoderPelea(), 0.01);
+			Assert.assertEquals(Piccolo.poderPeleaProtector, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -72,12 +77,12 @@ public class TestPiccolo {
 	public void testPiccoloNoPuedeTransformarseGohanVidaCompletaYGokuVidaVacia(){
 		
 		Personaje goku = piccolo.getEquipo().getMiembros().get(0);
-		goku.recibirAtaque(480);
+		goku.recibirAtaque(danioParaPocaVidaGoku);
 		try {
 			piccolo.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(40, piccolo.getPoderPelea(), 0.01);
+			Assert.assertEquals(Piccolo.poderPeleaFortalecido, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 }

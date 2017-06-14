@@ -7,20 +7,31 @@ import modelo.personajes.modos.PrimeraTransformacion;
 import modelo.personajes.modos.SegundaTransformacion;
 
 public class Piccolo extends Personaje {
+	
+	public static final int vidaInicial = 500;
+	public static final int poderPeleaNormal = 20;
+	public static final int poderPeleaFortalecido = 40;
+	public static final int poderPeleaProtector = 60;
+	public static final int distanciaAtaqueNormal=2;
+	public static final int distanciaAtaqueFortalecido=4;
+	public static final int distanciaAtaqueProtector=6;
+	public static final int velocidadNormal = 2;
+	public static final int velocidadPrimerTranformacion = 3;
+	public static final int velocidadSegundaTranformacion = 4;
 
 	public Piccolo(Tablero tablero) {
-		super(500, new ModoNormal(20,2,2, "Piccolo"), new AtaquePotenciador(10,1.25), tablero, 20 ,0);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Piccolo"), new AtaquePotenciador(10,1.25), tablero, 20 ,0);
 	}
 	
 	public Modo realizarPrimeraTransformacion(){
 		super.restarKiPrimeraTransformacion();
-		return new PrimeraTransformacion(40,4,3, "Piccolo Fortalecido");
+		return new PrimeraTransformacion(poderPeleaFortalecido,distanciaAtaqueFortalecido,velocidadPrimerTranformacion, "Piccolo Fortalecido");
 	}
 
 	@Override
 	public Modo realizarSegundaTransformacion() {
 		super.restarKiSegundaTransformacion();
-		return new SegundaTransformacion(60,6,4, "Piccolo Protector");
+		return new SegundaTransformacion(poderPeleaProtector,distanciaAtaqueProtector,velocidadSegundaTranformacion, "Piccolo Protector");
 	}
 	
 	@Override
