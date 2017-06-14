@@ -28,6 +28,7 @@ import modelo.utilidades.Constantes;
 public class VistaSeleccionarEquipo extends VBox{
 	private DragonBall juego;
 	private Stage stage;
+	public static final int ALTURA_EQUIPOS = 0;
 	public VistaSeleccionarEquipo(DragonBall juego, Stage stage){
 		
 		this.juego = juego;
@@ -51,6 +52,16 @@ public class VistaSeleccionarEquipo extends VBox{
 	    
 	}
 	
+	private void crearNombre(String nombre, VBox vboxGuerreros) {
+
+		Text nombreGuerreros = new Text(nombre);
+		nombreGuerreros.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 120));
+		nombreGuerreros.setFill(Color.YELLOW);
+		nombreGuerreros.setTextAlignment(TextAlignment.CENTER);
+		vboxGuerreros.getChildren().add(nombreGuerreros);
+		
+	}
+
 	private void crearHbox() {
 		HBox hbox = new HBox();
 		hbox.setFillHeight(true);
@@ -58,10 +69,15 @@ public class VistaSeleccionarEquipo extends VBox{
 		
 		this.crearSeleccionables(hbox);
 		this.getChildren().add(hbox);
+
 		
 	}
 
 	private void crearSeleccionables(HBox hbox) {
+		VBox vboxGuerreros = new VBox();
+		vboxGuerreros.setAlignment(Pos.CENTER);
+		VBox vboxEnemigos = new VBox();
+		vboxEnemigos.setAlignment(Pos.CENTER);
 		
 		InputStream archivoImagenGuerreros = null;
 		try {
@@ -81,6 +97,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		}
 		vistaImagenGuerreros.setFitWidth(700);
 		vistaImagenGuerreros.setPreserveRatio(true);
+		vistaImagenGuerreros.setTranslateY(ALTURA_EQUIPOS);
 		
 		DropShadow dsGuerreros= new DropShadow( 20, Color.GREEN );
 		DropShadow dsGuerreros2= new DropShadow();
@@ -104,7 +121,8 @@ public class VistaSeleccionarEquipo extends VBox{
 			
 		});
 		
-		hbox.getChildren().add(vistaImagenGuerreros);
+		vboxGuerreros.getChildren().add(vistaImagenGuerreros);
+		this.crearNombre(Constantes.GUERREROS, vboxGuerreros);
 		
 		InputStream archivoImagenEnemigos = null;
 		try {
@@ -123,7 +141,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		}
 		vistaImagenEnemigos.setFitWidth(700);
 		vistaImagenEnemigos.setPreserveRatio(true);
-		
+		vistaImagenEnemigos.setTranslateY(ALTURA_EQUIPOS);
 		
 		DropShadow dsEnemigos= new DropShadow( 20, Color.RED );
 		DropShadow dsEnemigos2= new DropShadow();
@@ -143,7 +161,13 @@ public class VistaSeleccionarEquipo extends VBox{
 			stage.setScene(scene);
 			stage.show();
 		});
-		hbox.getChildren().add(vistaImagenEnemigos);
+		vboxEnemigos.getChildren().add(vistaImagenEnemigos);
+		this.crearNombre(Constantes.ENEMIGOS, vboxEnemigos);
+		
+		hbox.getChildren().add(vboxGuerreros);
+		hbox.getChildren().add(vboxEnemigos);
 		
 	}
+
+	
 }
