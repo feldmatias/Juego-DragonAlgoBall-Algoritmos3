@@ -15,26 +15,53 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import modelo.utilidades.Constantes;
 
-public class VistaSeleccionarEquipo extends HBox{
+public class VistaSeleccionarEquipo extends VBox{
 	private DragonBall juego;
 	private Stage stage;
 	public VistaSeleccionarEquipo(DragonBall juego, Stage stage){
 		
 		this.juego = juego;
 		this.stage = stage;
-		this.crearSeleccionables();
-		this.setAlignment(Pos.CENTER);
+		
 		Image imagen = new Image("file:src/vista/imagenes/FondoElegir.jpg");
-		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-	    this.setBackground(new Background(imagenDeFondo));
+		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+		this.setBackground(new Background(imagenDeFondo));
+		
+		Text title = new Text("Jugador I: Elegir equipo");
+        
+        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 120));
+        title.setFill(Color.YELLOW);
+        title.setTextAlignment(TextAlignment.CENTER);
+        
+        this.getChildren().add(title);
+		
+		this.crearHbox();
+		
+		
+	    
 	}
 	
-	private void crearSeleccionables() {
+	private void crearHbox() {
+		HBox hbox = new HBox();
+		hbox.setFillHeight(true);
+		hbox.setAlignment(Pos.CENTER);
+		
+		this.crearSeleccionables(hbox);
+		this.getChildren().add(hbox);
+		
+	}
+
+	private void crearSeleccionables(HBox hbox) {
 		
 		InputStream archivoImagenGuerreros = null;
 		try {
@@ -77,7 +104,7 @@ public class VistaSeleccionarEquipo extends HBox{
 			
 		});
 		
-		this.getChildren().add(vistaImagenGuerreros);
+		hbox.getChildren().add(vistaImagenGuerreros);
 		
 		InputStream archivoImagenEnemigos = null;
 		try {
@@ -96,7 +123,8 @@ public class VistaSeleccionarEquipo extends HBox{
 		}
 		vistaImagenEnemigos.setFitWidth(700);
 		vistaImagenEnemigos.setPreserveRatio(true);
-
+		
+		
 		DropShadow dsEnemigos= new DropShadow( 20, Color.RED );
 		DropShadow dsEnemigos2= new DropShadow();
 		vistaImagenEnemigos.setOnMouseMoved(evento ->{
@@ -115,7 +143,7 @@ public class VistaSeleccionarEquipo extends HBox{
 			stage.setScene(scene);
 			stage.show();
 		});
-		this.getChildren().add(vistaImagenEnemigos);
+		hbox.getChildren().add(vistaImagenEnemigos);
 		
 	}
 }
