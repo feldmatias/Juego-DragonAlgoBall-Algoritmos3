@@ -3,11 +3,14 @@ package modelo.personajes;
 import modelo.excepciones.AtaqueNoPosible;
 
 public class AtaqueInmovilizador extends AtaqueEspecial {
+	
+	public static final int cantidadDeTurnosParaDesaparecer = 4;
+	public static final int cantidadDeTurnosDeDuracion = 3;
 
 	public AtaqueInmovilizador(int kiNecesario) {
 		super(kiNecesario);
 	}
-
+	
 	@Override
 	public double getPoderAtaqueEspecial(Personaje atacante) {
 		return 0;

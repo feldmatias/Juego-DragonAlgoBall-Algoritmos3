@@ -10,6 +10,7 @@ import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
+import modelo.personajes.AtaqueInmovilizador;
 import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 
@@ -29,7 +30,7 @@ public class TestAtaqueInmovilizador {
 		juego.getTablero().reposicionarPersonaje(goku, new Posicion(5,5));
 		juego.getTablero().reposicionarPersonaje(majinBoo, new Posicion(5,6));
 		
-		for (int i = 0; i < 15; i++){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			majinBoo.generarKi();
 		}
 	}
@@ -39,7 +40,6 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		try {
 			goku.atacarAPersonaje(majinBoo);
@@ -54,12 +54,10 @@ public class TestAtaqueInmovilizador {
 		try{
 			majinBoo.realizarAtaqueEspecial(goku);
 		}catch(AtaqueNoPosible e){
-			Assert.fail("El ataque de Majin Boo deberia haberse realizado");
 		}
-		for(int i = 0; i < 3; i++){
+		for(int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; i++){
 			goku.empezarTurno(); 
 		}
-		goku.empezarTurno(); //empieza el 4 turno
 		try{
 			goku.atacarAPersonaje(majinBoo);
 			Assert.assertTrue(true);
@@ -73,7 +71,6 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		try {
 			goku.realizarAtaqueEspecial(majinBoo);
@@ -88,10 +85,9 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
-		for(int j=0; j < 4; j++){
-			goku.empezarTurno();
+		for(int j = 0; j < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; j++){
+			goku.empezarTurno(); 
 		}
 		try {
 			goku.realizarAtaqueEspecial(majinBoo);
@@ -105,14 +101,13 @@ public class TestAtaqueInmovilizador {
 	@Test
 	public void testPersonajeInmovilizadoNoRealizaAtaqueEspecialConKiSuficiente(){
 		
-		for(int i=0 ; i < 5; i++){
-			goku.generarKi(); //Obteniendo ki necesario para ataque
+		for(int i=0 ; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
+			goku.generarKi();
 		}
 		
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		try {
 			goku.realizarAtaqueEspecial(majinBoo);
@@ -124,17 +119,15 @@ public class TestAtaqueInmovilizador {
 	
 	@Test
 	public void testPersonajeInmovilizadoRealizaAtaqueEspecialConKiSuficienteLuegoDeTresTurnos(){
-		for(int i=0 ; i < 5; i++){
-			goku.generarKi(); //Obteniendo ki necesario para ataque
+		for(int i=0 ; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
+			goku.generarKi();
 		}
-		
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
-		for(int j = 0; j < 4; j++){
-			goku.empezarTurno();
+		for(int j = 0; j < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; j++){
+			goku.empezarTurno(); 
 		}
 		try {
 			goku.realizarAtaqueEspecial(majinBoo);
@@ -149,7 +142,6 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		try {
 			goku.mover(new Posicion (5,4));
@@ -166,9 +158,8 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
-		for( int i = 0; i < 4; i++){
+		for( int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer ; i++){
 			goku.empezarTurno();
 		}
 		try {
@@ -185,7 +176,6 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		try {
 			goku.transformar();
@@ -201,9 +191,8 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
-		for( int i = 0; i < 4; i++){
+		for( int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; i++){
 			goku.empezarTurno();
 		}
 		try {
@@ -217,14 +206,13 @@ public class TestAtaqueInmovilizador {
 	
 	@Test
 	public void testPersonajeInmovilizadoNoPuedeHacerPrimeraTransformacionAunConKiSuficiente(){
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			goku.generarKi();
 		}
 		
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		try {
 			goku.transformar();
@@ -236,16 +224,15 @@ public class TestAtaqueInmovilizador {
 	
 	@Test
 	public void testPersonajeInmovilizadoHacePrimeraTransformacionTeniendoKiLuegoDeTresTurnos(){
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			goku.generarKi();
 		}
 		
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
-		for(int j = 0; j < 4; j++){
+		for(int j = 0; j < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; j++){
 			goku.empezarTurno();
 		}
 		
@@ -261,18 +248,16 @@ public class TestAtaqueInmovilizador {
 	
 	@Test
 	public void testPersonajeInmovilizadoNoPuedeHacerSegundaTransformacionAunConKiSuficiente(){
-		for(int i = 0; i < 15; i++){
+		for(int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			goku.generarKi(); //obteniendo ki necesario para 2 transformaciones
 		}
 		try {
 			goku.transformar(); //primera transformacion
 		} catch (TransformacionNoPosible e) {
-			Assert.fail("La prueba fallo goku deberia haberse transformado la primera vez");
 		}
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		try {
 			goku.transformar();
@@ -286,20 +271,18 @@ public class TestAtaqueInmovilizador {
 	
 	@Test
 	public void testPersonajeInmovilizadoPuedeHacerSegundaTransformacionLuegoDeTresTurnos(){
-		for(int i = 0; i < 15; i++){
+		for(int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			goku.generarKi(); //obteniendo ki necesario para 2 transformaciones
 		}
 		try {
 			goku.transformar();
 		} catch (TransformacionNoPosible e) {
-			Assert.fail("La prueba fallo goku deberia haberse transformado la primera vez");
 		}
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
-		for(int j = 0; j < 4; j++){
+		for(int j = 0; j < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; j++){
 			goku.empezarTurno();
 		}
 		
@@ -317,9 +300,8 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
-		for(int i=0; i<3 ; i++){
+		for(int i=0; i< AtaqueInmovilizador.cantidadDeTurnosDeDuracion ; i++){
 			goku.empezarTurno();
 		}
 		int kiFinal = goku.getKi();
@@ -333,9 +315,8 @@ public class TestAtaqueInmovilizador {
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
-		for(int i=0; i < 4 ; i++){
+		for(int i=0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer ; i++){
 			goku.empezarTurno();
 		}
 		int kiFinal = goku.getKi() ;
@@ -345,17 +326,16 @@ public class TestAtaqueInmovilizador {
 	
 	@Test
 	public void testPersonajeInmovilizadoNoPuedeHacerNadaPorTresTurnosTeniendoKiSuficiente(){
-		for (int j = 0; j < 15; j++){
+		for (int j = 0; j < Constantes.cantidadParaGenerarKiSuficiente; j++){
 			goku.generarKi();
 		}
 		
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		int kiActual = goku.getKi();
-		for (int i = 0; i < 3; i++){
+		for (int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosDeDuracion; i++){
 			goku.empezarTurno();
 			try{
 				goku.transformar();
@@ -380,16 +360,15 @@ public class TestAtaqueInmovilizador {
 	
 	@Test
 	public void testPersonajeInmovilizadoVuelveALaNormalidadDespuesDeTresTurnos(){
-		for( int j = 0; j < 15 ; j++){
+		for( int j = 0; j < Constantes.cantidadParaGenerarKiSuficiente ; j++){
 			goku.generarKi();
 		}
 		try {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia realizarse");
 		}
 		int kiActual = goku.getKi();
-		for (int i = 0; i < 4; i++){
+		for (int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; i++){
 			goku.empezarTurno();
 		}
 		Assert.assertEquals(kiActual + 5, goku.getKi());
