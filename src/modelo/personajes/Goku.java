@@ -8,7 +8,9 @@ import modelo.personajes.modos.PrimeraTransformacion;
 import modelo.personajes.modos.SegundaTransformacion;
 
 public class Goku extends Personaje{
-	
+
+	public static final int POS_X = 5;
+	public static final int POS_Y = 0;
 	
 	public Goku(Tablero tablero){
 		super( 500, new ModoNormal(20,2,2,"Goku"), new AtaquePotenciador(20,1.5), tablero, 20, 50);
