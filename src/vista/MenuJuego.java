@@ -87,9 +87,9 @@ public class MenuJuego extends Application {
 			
 			DragonBall juego = new DragonBall();
 			//HAcer logica de seleccion de equipos
-			juego.establecerEquipoJugador1(Constantes.GUERREROS);
+			/*juego.establecerEquipoJugador1(Constantes.GUERREROS);
 			juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
-			juego.iniciar();
+			juego.iniciar();*/
 			
 			BotonMenu btnEmpezar = new BotonMenu ("NUEVA PARTIDA");
 			btnEmpezar.setOnMouseClicked( evento1 -> {
@@ -98,7 +98,8 @@ public class MenuJuego extends Application {
 				
 				stage.hide();
 				stage.setFullScreen(true);
-				Scene scene = new Scene(new VistaJuego(juego));
+				//Scene scene = new Scene(new VistaJuego(juego));
+				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage));
 				stage.setScene(scene);
 				stage.show();
 				
