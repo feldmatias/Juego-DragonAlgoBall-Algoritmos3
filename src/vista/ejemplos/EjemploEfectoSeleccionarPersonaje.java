@@ -19,7 +19,7 @@ public class EjemploEfectoSeleccionarPersonaje extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 	
-		InputStream archivoImagen = Files.newInputStream(Paths.get("Recursos/gokuKamehameha recortado.png"));
+		InputStream archivoImagen = Files.newInputStream(Paths.get("src/vista/imagenes/gokuKamehameha recortado.png"));
 	
 		Image imagen = new Image(archivoImagen);
 		ImageView vistaImagen = new ImageView(imagen);

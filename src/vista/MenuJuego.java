@@ -42,15 +42,13 @@ public class MenuJuego extends Application {
 		Pane root = new Pane();
 		root.setPrefSize(800, 600);
 		
-		InputStream entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/sheng long 2.jpg"));
+		InputStream entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo menu esferas.jpg"));
 		
 		Image imagen = new Image(entradaImagen);
 		
 		entradaImagen.close();
 		
 		ImageView vistaImagen = new ImageView(imagen);
-		vistaImagen.setFitWidth(800);
-		vistaImagen.setFitHeight(600);
 		
 		this.menuJuego = new MenuPrincipal();
 		
@@ -59,6 +57,11 @@ public class MenuJuego extends Application {
 		Scene scene = new Scene(root);
 		
 		stage.setScene(scene);
+		stage.setFullScreen(true);
+		stage.setResizable(false);
+		stage.setMinWidth(1200);
+		stage.setMinHeight(700);
+		stage.setTitle("DRAGON ALGO BALL");
 		stage.show();
 		
 		
@@ -179,7 +182,7 @@ public class MenuJuego extends Application {
 			
 			Rectangle fondo = new Rectangle(250,30);
 			fondo.setOpacity(0.6);
-			fondo.setFill(Color.BLUE);
+			fondo.setFill(Color.ORANGE);
 			
 			GaussianBlur desenfoque = new GaussianBlur(3.5);
 			fondo.setEffect(desenfoque);
@@ -192,13 +195,13 @@ public class MenuJuego extends Application {
 				fondo.setTranslateX(10);
 				texto.setTranslateX(10);
 				fondo.setFill(Color.WHITE);
-				texto.setFill(Color.BLUE);
+				texto.setFill(Color.ORANGE);
 			});
 			
 			this.setOnMouseExited(event ->{
 				fondo.setTranslateX(0);
 				texto.setTranslateX(0);
-				fondo.setFill(Color.BLUE);
+				fondo.setFill(Color.ORANGE);
 				texto.setFill(Color.WHITE);
 			});
 			
