@@ -66,9 +66,33 @@ public class VistaJuego extends VBox{
 			contenedor.getChildren().add(vistaImagen);
 		} catch (IOException e) {
 		}
-		
+		for (Personaje personaje: jugador.getEquipo().getMiembros()){
+			contenedor.getChildren().add(this.crearBoxPersonaje(personaje));
+		}
 		contenedor.setAlignment(Pos.TOP_CENTER);
 		return contenedor;
+	}
+
+	private HBox crearBoxPersonaje(Personaje personaje) {
+		HBox box = new HBox(new ImagenFondo(personaje, true));
+		VBox parametrosPersonaje = new VBox();
+		parametrosPersonaje.setPadding(new Insets(10));
+		
+		Label nombre = new Label();
+		nombre.setText(personaje.getNombre());
+		Label vida = new Label();
+		vida.setText("Vida: " + personaje.getVidaActual());
+		Label ki = new Label();
+		ki.setText("Ki: " + String.valueOf(personaje.getKi()));
+		Label velocidad = new Label();
+		velocidad.setText("Velocidad: " + String.valueOf(personaje.getVelocidad()));
+		Label distanciaAtaque = new Label();
+		distanciaAtaque.setText("Distancia Ataque: " + String.valueOf(personaje.getDistanciaAtaque()));
+		
+		parametrosPersonaje.getChildren().addAll(nombre,vida,ki,velocidad,distanciaAtaque);
+		box.getChildren().add(parametrosPersonaje);
+		box.setAlignment(Pos.CENTER);
+		return box;
 	}
 
 	private VBox espacioJugador1() {
@@ -170,7 +194,7 @@ public class VistaJuego extends VBox{
 		for (int i = 0; i < Constantes.SIZE_TABLERO; i++){
 			fila = new HBox();
 			for (int j = 0; j < Constantes.SIZE_TABLERO; j++){
-				Posicion pos = new Posicion(i,j);
+				Posicion pos = new Posicion(j,i);
 				Casillero casillero = tablero.getCasillero(pos);
 					if (casillero.estaVacio()){
 						this.nuevoBotonCasilleroVacio(fila, pos, casillero);

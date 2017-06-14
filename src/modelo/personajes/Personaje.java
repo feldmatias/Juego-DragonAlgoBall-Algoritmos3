@@ -72,6 +72,10 @@ public abstract class Personaje implements Posicionable{
 		return (100 * this.vidaActual / this.vidaInicial);
 	}
 	
+	public float getVidaActual() {
+		return this.vidaActual;
+	}
+	
 	public int getKi() {
 		return this.ki;
 	}
