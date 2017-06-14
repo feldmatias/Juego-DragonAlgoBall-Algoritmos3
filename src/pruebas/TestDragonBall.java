@@ -20,6 +20,10 @@ import modelo.utilidades.Constantes;
 
 
 public class TestDragonBall {
+	
+	public static final String equipoInexistente1 = "Equipo Verde";
+	public static final String equipoInexistente2 = "Equipo Rojo";
+	
 	private DragonBall dragonBall;
 	
 	@Before
@@ -57,9 +61,7 @@ public class TestDragonBall {
 			Equipo equipo = dragonBall.getJugador1().getEquipo();
 			String nombreEquipoObtenido = equipo.getNombre();
 			Assert.assertEquals(nombreEquipoEsperado, nombreEquipoObtenido);
-		}catch(EquipoNoDisponible e){
-			Assert.fail("La prueba fallo, deberia estar disponible el equipo");
-		}
+		}catch(EquipoNoDisponible e){}
 	}
 	
 //AGREGAR PRUEBAS PARA JUGADOR2 ??	
@@ -76,9 +78,7 @@ public class TestDragonBall {
 				flag = flag || personaje.getClass() == Piccolo.class;
 				Assert.assertTrue(flag);
 			}
-		}catch(EquipoNoDisponible e){
-			Assert.fail("La prueba fallo, el equipo deberia estar disponible");
-		}
+		}catch(EquipoNoDisponible e){}
 	}
 	
 	@Test
@@ -93,9 +93,7 @@ public class TestDragonBall {
 				flag = flag || personaje.getClass() == MajinBoo.class;
 				Assert.assertTrue(flag);
 			}
-		}catch(EquipoNoDisponible e){
-			Assert.fail("La prueba fallo, el equipo deberia existir");
-		}
+		}catch(EquipoNoDisponible e){}
 	}
 	
 	@Test
@@ -110,9 +108,7 @@ public class TestDragonBall {
 			Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Guerreros Z", Constantes.GUERREROS, nombreEquipo1);
 			Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Enemigos de la Tierra", Constantes.ENEMIGOS, nombreEquipo2);
 			
-		}catch( EquipoNoDisponible e ){
-				Assert.fail("La prueba fallo, los equipos deberian estar disponibles");
-		}
+		}catch( EquipoNoDisponible e ){}
 	}
 	
 	@Test
@@ -128,25 +124,19 @@ public class TestDragonBall {
 			Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Enemigos de la Tierra", Constantes.ENEMIGOS, nombreEquipo1);
 			Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Guerreros Z", Constantes.GUERREROS, nombreEquipo2);
 		
-			}catch (EquipoNoDisponible e){
-			Assert.fail("La prueba fallo, los equipos deberian estar disponibles");
-		}
-		
+			}catch (EquipoNoDisponible e){}	
 	}
 	
 	@Test
 	public void elegirUnEquipoInexistenteLanzaExcepcion() {
-		String equipoInexistente = "Equipo Verde";
 		try {
-			dragonBall.establecerEquipoJugador1( equipoInexistente );
+			dragonBall.establecerEquipoJugador1( equipoInexistente1 );
 		} catch( EquipoNoDisponible e ){}
 		
 	}
 	
 	@Test
 	public void elegirDosEquiposInexistentesLanzaExcepcion() {
-		String equipoInexistente1 = "Equipo Verde";
-		String equipoInexistente2 = "Equipo Rojo";
 		try {
 			dragonBall.establecerEquipoJugador1(equipoInexistente1);
 			dragonBall.establecerEquipoJugador2(equipoInexistente2);

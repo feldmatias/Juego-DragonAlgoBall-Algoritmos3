@@ -128,12 +128,9 @@ public class TestConsumibles {
 		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
 		try {
 			personaje1.atacarAPersonaje(personaje2); //se espera danio de 25
-		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia haberse realizado");
-		}
+		} catch (AtaqueNoPosible e) {}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
 		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, porcentajeDeVidaEsperado);
-		
 	}
 	
 	@Test
@@ -143,16 +140,12 @@ public class TestConsumibles {
 		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
 		try {
 			personaje1.atacarAPersonaje(personaje2); //se espera danio de 25
-		} catch (AtaqueNoPosible e) {
-			Assert.fail("El ataque deberia haberse realizado");
-		}
+		} catch (AtaqueNoPosible e) {}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
 		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, porcentajeDeVidaEsperado);
 		try {
 			personaje1.atacarAPersonaje(personaje2);
-		}catch (AtaqueNoPosible e){
-			Assert.fail("El ataque deberia haberse realizado");
-		}
+		}catch (AtaqueNoPosible e){}
 		porcentajeVidaFinal = personaje2.getPorcentajeVida();
 		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial -12.5 , porcentajeDeVidaEsperado);
 	}
@@ -164,15 +157,11 @@ public class TestConsumibles {
 		try {
 			personaje1.atacarAPersonaje(personaje2);
 			personaje1.atacarAPersonaje(personaje2);
-		} catch (AtaqueNoPosible e) {
-			Assert.fail("Deberia haber atacado");
-		}
+		} catch (AtaqueNoPosible e) {}
 		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
 		try{
 			personaje1.atacarAPersonaje(personaje2);
-		}catch(AtaqueNoPosible e){
-			Assert.fail("Deberia haber realizado el tercer ataque");
-		}
+		}catch(AtaqueNoPosible e){}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); //se espera danio del 5%
 		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 5, porcentajeDeVidaEsperado);
 	}
