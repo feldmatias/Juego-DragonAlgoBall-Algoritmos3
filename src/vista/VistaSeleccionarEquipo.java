@@ -4,33 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
-import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
-import vista.controlador.BotonAtacarEventHandler;
-import vista.controlador.BotonAtaqueEspecialEventHandler;
-import vista.controlador.BotonCasilleroVacioEventHandler;
-import vista.controlador.BotonMoverEventHandler;
-import vista.controlador.BotonTerminarTurnoEventHandler;
-import vista.controlador.BotonTransformarEventHandler;
 
 public class VistaSeleccionarEquipo extends HBox{
 	private DragonBall juego;
@@ -64,8 +47,17 @@ public class VistaSeleccionarEquipo extends HBox{
 		vistaImagenGuerreros.setFitWidth(700);
 		vistaImagenGuerreros.setPreserveRatio(true);
 		
+		DropShadow dsGuerreros= new DropShadow( 20, Color.GREEN );
+		DropShadow dsGuerreros2= new DropShadow();
+		vistaImagenGuerreros.setOnMouseMoved(evento ->{
+			vistaImagenGuerreros.setEffect(dsGuerreros);
+		});
+		vistaImagenGuerreros.setOnMouseExited(evento ->{
+			vistaImagenGuerreros.setEffect(dsGuerreros2);
+		});
 		
 		vistaImagenGuerreros.setOnMouseClicked(evento -> {
+			
 			System.out.println("El jugador 1 eligió " + Constantes.GUERREROS); //el jugador 1 elige equipo GUERREROS
 			
 			juego.establecerEquipoJugador1(Constantes.GUERREROS);
@@ -78,13 +70,6 @@ public class VistaSeleccionarEquipo extends HBox{
 		});
 		
 		this.getChildren().add(vistaImagenGuerreros);
-		
-		/*Button elegirGuerreros = new Button();
-		EventHandler<MouseEvent> eventHandler = new BotonElegirGuerrerosEventHandler(juego, this);
-		elegirGuerreros.setOnAction(eventHandler);
-		elegirGuerreros.setText("Elijo Guerreros");
-		
-		this.getChildren().add(elegirGuerreros);*/
 		
 		InputStream archivoImagenEnemigos = null;
 		try {
@@ -103,6 +88,15 @@ public class VistaSeleccionarEquipo extends HBox{
 		}
 		vistaImagenEnemigos.setFitWidth(700);
 		vistaImagenEnemigos.setPreserveRatio(true);
+
+		DropShadow dsEnemigos= new DropShadow( 20, Color.RED );
+		DropShadow dsEnemigos2= new DropShadow();
+		vistaImagenEnemigos.setOnMouseMoved(evento ->{
+			vistaImagenEnemigos.setEffect(dsEnemigos);
+		});
+		vistaImagenEnemigos.setOnMouseExited(evento ->{
+			vistaImagenEnemigos.setEffect(dsEnemigos2);
+		});
 		
 		vistaImagenEnemigos.setOnMouseClicked(evento -> {
 			System.out.println("El jugador 1 eligió "+ Constantes.ENEMIGOS); //el jugador 1 elige equipo ENEMIGOS
@@ -116,5 +110,4 @@ public class VistaSeleccionarEquipo extends HBox{
 		this.getChildren().add(vistaImagenEnemigos);
 		
 	}
-	
 }
