@@ -55,6 +55,7 @@ public class MenuJuego extends Application {
 		MediaPlayer cancionFondo = new MediaPlayer(mediaCancionFondo);
 		cancionFondo.setAutoPlay(true);
 		cancionFondo.setVolume(0.2);
+//		cancionFondo.setMute(true);
 		
 		ImageView vistaImagen = new ImageView(imagen);
 		
