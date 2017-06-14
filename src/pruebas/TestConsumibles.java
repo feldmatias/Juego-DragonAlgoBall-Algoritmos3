@@ -20,6 +20,10 @@ import modelo.personajes.Personaje;
 
 public class TestConsumibles {
 
+	public static final double porcentajeDeVidaEsperado = 0.01;
+	public static final int consumible_pos_x = 1;
+	public static final int consumible_pos_y = 1;
+	
 	private Personaje personaje1;
 	private Personaje personaje2;
 	private Tablero tablero;
@@ -33,7 +37,7 @@ public class TestConsumibles {
 		
 		tablero.posicionarPersonaje(personaje1, new Posicion (0,0));
 		tablero.posicionarPersonaje(personaje2, new Posicion (0,1));
-		posConsumible = new Posicion (1,1);
+		posConsumible = new Posicion (consumible_pos_x,consumible_pos_y);
 
 		List<Personaje> equipo = new ArrayList<Personaje>();
 		equipo.add(personaje1);
@@ -44,16 +48,16 @@ public class TestConsumibles {
 	public void testConsumibleDesapareceAlAgarrarse(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		
-		Assert.assertEquals(100, personaje1.getPorcentajeVida(), 0.01);
+		Assert.assertEquals(SemillaDelErmitanio.regeneracionDeVida, personaje1.getPorcentajeVida(), porcentajeDeVidaEsperado);
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		//Personaje1 Agarro el consumible
-		Assert.assertTrue(personaje1.getPorcentajeVida() > 100);
+		Assert.assertTrue(personaje1.getPorcentajeVida() > SemillaDelErmitanio.regeneracionDeVida);
 		
 		tablero.reposicionarPersonaje(personaje1, new Posicion (0,0));
 		
 		tablero.reposicionarPersonaje(personaje2, posConsumible);
 		//Personaje2 no agarro el consumible
-		Assert.assertFalse(personaje2.getPorcentajeVida() > 100);
+		Assert.assertFalse(personaje2.getPorcentajeVida() > SemillaDelErmitanio.regeneracionDeVida);
 	}
 	
 	@Test
@@ -62,7 +66,7 @@ public class TestConsumibles {
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		float porcentajeVidaFinal = personaje1.getPorcentajeVida(); //se espera aumento del 20%
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial + 20, 0.01);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial + 20, porcentajeDeVidaEsperado);
 	}
 	
 	@Test
@@ -71,7 +75,7 @@ public class TestConsumibles {
 		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		double poderPeleaFinal = personaje1.getPoderPelea();
-		Assert.assertEquals(poderPeleaInicial + 5, poderPeleaFinal, 0.01);
+		Assert.assertEquals(poderPeleaInicial + 5, poderPeleaFinal, porcentajeDeVidaEsperado);
 	}
 	
 	@Test
@@ -111,9 +115,9 @@ public class TestConsumibles {
 	public void testSemillaDelErmitanioNoGeneraVidaDosVeces(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		Assert.assertEquals(120, personaje1.getPorcentajeVida(), 0.01);
+		Assert.assertEquals(120, personaje1.getPorcentajeVida(), porcentajeDeVidaEsperado);
 		personaje1.empezarTurno();
-		Assert.assertEquals(120, personaje1.getPorcentajeVida(), 0.01);
+		Assert.assertEquals(120, personaje1.getPorcentajeVida(), porcentajeDeVidaEsperado);
 	}
 	
 	
@@ -128,7 +132,7 @@ public class TestConsumibles {
 			Assert.fail("El ataque deberia haberse realizado");
 		}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, 0.01);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, porcentajeDeVidaEsperado);
 		
 	}
 	
@@ -143,14 +147,14 @@ public class TestConsumibles {
 			Assert.fail("El ataque deberia haberse realizado");
 		}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, 0.01);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, porcentajeDeVidaEsperado);
 		try {
 			personaje1.atacarAPersonaje(personaje2);
 		}catch (AtaqueNoPosible e){
 			Assert.fail("El ataque deberia haberse realizado");
 		}
 		porcentajeVidaFinal = personaje2.getPorcentajeVida();
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial -12.5 , 0.01);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial -12.5 , porcentajeDeVidaEsperado);
 	}
 	
 	@Test
@@ -170,7 +174,7 @@ public class TestConsumibles {
 			Assert.fail("Deberia haber realizado el tercer ataque");
 		}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); //se espera danio del 5%
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 5, 0.01);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 5, porcentajeDeVidaEsperado);
 	}
 	
 
