@@ -4,7 +4,7 @@ import modelo.personajes.Personaje;
 
 public class SegundaTransformacion extends Modo {
 
-	public SegundaTransformacion(int poderPelea, int distanciaAtaque, int velocidad, String nombre) {
+	public SegundaTransformacion(double poderPelea, int distanciaAtaque, int velocidad, String nombre) {
 		super(poderPelea, distanciaAtaque, velocidad, nombre);
 	}
 
