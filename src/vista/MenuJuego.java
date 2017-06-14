@@ -1,4 +1,5 @@
 package vista;
+import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -45,8 +48,13 @@ public class MenuJuego extends Application {
 		InputStream entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo menu esferas.jpg"));
 		
 		Image imagen = new Image(entradaImagen);
-		
 		entradaImagen.close();
+
+		
+		Media mediaCancionFondo = new Media(new File("src/vista/sonidos/Dragon Ball opening.mp3").toURI().toString());
+		MediaPlayer cancionFondo = new MediaPlayer(mediaCancionFondo);
+		cancionFondo.setAutoPlay(true);
+		cancionFondo.setVolume(0.2);
 		
 		ImageView vistaImagen = new ImageView(imagen);
 		
