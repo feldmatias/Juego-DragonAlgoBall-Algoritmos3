@@ -11,4 +11,5 @@ public class Constantes {
 	public static final String GUERREROS = "Guerreros Z";
 	public static final String ENEMIGOS = "Enemigos de la Tierra";
 	public static final int cantidadParaGenerarKiSuficiente = 20;
+	public static final double porcentajeEsperado = 0.01;
 }
