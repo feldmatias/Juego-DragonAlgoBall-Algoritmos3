@@ -9,6 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -24,6 +29,9 @@ public class VistaSeleccionarEquipo extends HBox{
 		this.stage = stage;
 		this.crearSeleccionables();
 		this.setAlignment(Pos.CENTER);
+		Image imagen = new Image("file:src/vista/imagenes/FondoElegir.jpg");
+		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+	    this.setBackground(new Background(imagenDeFondo));
 	}
 	
 	private void crearSeleccionables() {
