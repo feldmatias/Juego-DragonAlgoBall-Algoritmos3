@@ -8,6 +8,7 @@ import modelo.personajes.modos.SegundaTransformacion;
 
 public class Gohan extends Personaje{
 	
+	public static final int vidaInicial = 300;
 	public static final int poderPeleaNormal = 15;
 	public static final int poderPeleaFase1 = 30;
 	public static final int poderPeleaFase2 = 100;
@@ -19,7 +20,7 @@ public class Gohan extends Personaje{
 	public static final int velocidadFase2 = 3;
 	
 	public Gohan(Tablero tablero) {
-		super(300, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Gohan"), new AtaquePotenciador(10,1.25), tablero, 10, 30);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Gohan"), new AtaquePotenciador(10,1.25), tablero, 10, 30);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Equipo;
+import modelo.personajes.Gohan;
 import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 
@@ -45,7 +46,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(30, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaFase1, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	
@@ -56,7 +57,7 @@ public class TestGohan {
 		piccolo.recibirAtaque(danioPocavidaCompanieros);
 		try {
 			gohan.transformar();
-			Assert.assertEquals(100, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaFase2, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -69,7 +70,7 @@ public class TestGohan {
 		piccolo.recibirAtaque(danioMataCompanieros);
 		try {
 			gohan.transformar();
-			Assert.assertEquals(100, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaFase2, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -83,7 +84,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(30, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaFase1, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	
@@ -95,7 +96,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(30, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaFase1, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	

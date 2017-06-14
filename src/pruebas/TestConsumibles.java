@@ -17,10 +17,10 @@ import modelo.juego.Tablero;
 import modelo.personajes.Freezer;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
+import modelo.utilidades.Constantes;
 
 public class TestConsumibles {
 
-	public static final double porcentajeDeVidaEsperado = 0.01;
 	public static final int consumible_pos_x = 1;
 	public static final int consumible_pos_y = 1;
 	
@@ -48,7 +48,7 @@ public class TestConsumibles {
 	public void testConsumibleDesapareceAlAgarrarse(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		
-		Assert.assertEquals(SemillaDelErmitanio.regeneracionDeVida, personaje1.getPorcentajeVida(), porcentajeDeVidaEsperado);
+		Assert.assertEquals(SemillaDelErmitanio.regeneracionDeVida, personaje1.getPorcentajeVida(), Constantes.porcentajeEsperado);
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		//Personaje1 Agarro el consumible
 		Assert.assertTrue(personaje1.getPorcentajeVida() > SemillaDelErmitanio.regeneracionDeVida);
@@ -66,7 +66,7 @@ public class TestConsumibles {
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		float porcentajeVidaFinal = personaje1.getPorcentajeVida(); //se espera aumento del 20%
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial + 20, porcentajeDeVidaEsperado);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial + 20, Constantes.porcentajeEsperado);
 	}
 	
 	@Test
@@ -75,7 +75,7 @@ public class TestConsumibles {
 		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		double poderPeleaFinal = personaje1.getPoderPelea();
-		Assert.assertEquals(poderPeleaInicial + 5, poderPeleaFinal, porcentajeDeVidaEsperado);
+		Assert.assertEquals(poderPeleaInicial + 5, poderPeleaFinal, Constantes.porcentajeEsperado);
 	}
 	
 	@Test
@@ -115,9 +115,9 @@ public class TestConsumibles {
 	public void testSemillaDelErmitanioNoGeneraVidaDosVeces(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		Assert.assertEquals(120, personaje1.getPorcentajeVida(), porcentajeDeVidaEsperado);
+		Assert.assertEquals(120, personaje1.getPorcentajeVida(), Constantes.porcentajeEsperado);
 		personaje1.empezarTurno();
-		Assert.assertEquals(120, personaje1.getPorcentajeVida(), porcentajeDeVidaEsperado);
+		Assert.assertEquals(120, personaje1.getPorcentajeVida(), Constantes.porcentajeEsperado);
 	}
 	
 	
@@ -130,7 +130,7 @@ public class TestConsumibles {
 			personaje1.atacarAPersonaje(personaje2); //se espera danio de 25
 		} catch (AtaqueNoPosible e) {}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, porcentajeDeVidaEsperado);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, Constantes.porcentajeEsperado);
 	}
 	
 	@Test
@@ -142,12 +142,12 @@ public class TestConsumibles {
 			personaje1.atacarAPersonaje(personaje2); //se espera danio de 25
 		} catch (AtaqueNoPosible e) {}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, porcentajeDeVidaEsperado);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, Constantes.porcentajeEsperado);
 		try {
 			personaje1.atacarAPersonaje(personaje2);
 		}catch (AtaqueNoPosible e){}
 		porcentajeVidaFinal = personaje2.getPorcentajeVida();
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial -12.5 , porcentajeDeVidaEsperado);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial -12.5 , Constantes.porcentajeEsperado);
 	}
 	
 	@Test
@@ -163,7 +163,7 @@ public class TestConsumibles {
 			personaje1.atacarAPersonaje(personaje2);
 		}catch(AtaqueNoPosible e){}
 		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); //se espera danio del 5%
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 5, porcentajeDeVidaEsperado);
+		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 5, Constantes.porcentajeEsperado);
 	}
 	
 

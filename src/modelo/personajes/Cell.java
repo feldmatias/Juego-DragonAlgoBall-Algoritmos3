@@ -8,6 +8,7 @@ import modelo.personajes.modos.SegundaTransformacion;
 
 public class Cell extends Personaje {
 	
+	public static final int vidaInicial = 500;
 	public static final int poderPeleaNormal = 20;
 	public static final int poderPeleaSemiPerfecto = 40;
 	public static final int poderPeleaPerfecto = 80;
@@ -20,7 +21,7 @@ public class Cell extends Personaje {
 	public static final int velocidadSegundaTranformacion = 4;
 	
 	public Cell( Tablero tablero) {
-		super(500, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Cell"), new AtaqueAbsorver(5), tablero, 0, 0);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Cell"), new AtaqueAbsorver(5), tablero, 0, 0);
 	}
 
 

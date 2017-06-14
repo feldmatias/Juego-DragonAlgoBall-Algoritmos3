@@ -6,11 +6,18 @@ import org.junit.Test;
 
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Goku;
+import modelo.utilidades.Constantes;
 
 
 
 public class TestGoku {
 
+	public static final int danioParaPocaVida = 480;
+	public static final double poderPeleaconPocavida = 24;
+	public static final double poderPeleaconPocavidaKaioKen = 48;
+	public static final double poderPeleaconPocavidaSayajin = 72;
+	
+	
 	private Goku goku;
 	
 	@Before
@@ -20,42 +27,38 @@ public class TestGoku {
 		
 	@Test
 	public void testGokuVidaCompletaTienePoderPeleaNormal(){
-		Assert.assertEquals(20, goku.getPoderPelea(), 0.01);
+		Assert.assertEquals(Goku.poderPeleaNormal, goku.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testGokuPocaVidaTienePoderPeleaMayor(){
-		goku.recibirAtaque(480);
-		Assert.assertEquals(24, goku.getPoderPelea(), 0.01);
+		goku.recibirAtaque(danioParaPocaVida);
+		Assert.assertEquals(poderPeleaconPocavida, goku.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testGokuTransformadoPocaVidaTienePoderPeleaMayor(){
-		for(int i = 0; i< 10; i++){
+		for(int i = 0; i< Constantes.cantidadParaGenerarKiSuficiente; i++){
 			goku.generarKi();
 		}
-		goku.recibirAtaque(480);
+		goku.recibirAtaque(danioParaPocaVida);
 		try {
 			goku.transformar();
-		} catch (TransformacionNoPosible e) {
-			Assert.fail("Deberia haberse transformado");
-		}
-		Assert.assertEquals(48, goku.getPoderPelea(), 0.01);
+		} catch (TransformacionNoPosible e) {}
+		Assert.assertEquals(poderPeleaconPocavidaKaioKen, goku.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testGokuTransformadoModoFinalPocaVidaTienePoderPeleaMayor(){
-		for(int i = 0; i< 15; i++){
+		for(int i = 0; i< Constantes.cantidadParaGenerarKiSuficiente; i++){
 			goku.generarKi();
 		}
-		goku.recibirAtaque(480);
+		goku.recibirAtaque(danioParaPocaVida);
 		try {
 			goku.transformar();
 			goku.transformar();
-		} catch (TransformacionNoPosible e) {
-			Assert.fail("Deberia haberse transformado");
-		}
-		Assert.assertEquals(72, goku.getPoderPelea(), 0.01);
+		} catch (TransformacionNoPosible e) {}
+		Assert.assertEquals(poderPeleaconPocavidaSayajin, goku.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 
 }

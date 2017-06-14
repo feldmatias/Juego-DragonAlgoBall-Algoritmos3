@@ -11,9 +11,18 @@ public class Goku extends Personaje{
 
 	public static final int POS_X = 5;
 	public static final int POS_Y = 0;
+	public static final int vidaInicial = 500;
+	public static final int poderPeleaNormal = 20;
+	public static final int poderPeleaKaioKen = 40;
+	public static final int poderPeleaSayajin = 60;
+	public static final int distanciaAtaqueNormal=2;
+	public static final int distanciaAtaqueTranformado=4;
+	public static final int velocidadNormal = 2;
+	public static final int velocidadPrimerTranformacion = 3;
+	public static final int velocidadSegundaTranformacion = 5;
 	
 	public Goku(Tablero tablero){
-		super( 500, new ModoNormal(20,2,2,"Goku"), new AtaquePotenciador(20,1.5), tablero, 20, 50);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal,"Goku"), new AtaquePotenciador(20,1.5), tablero, 20, 50);
 	}
 	
 	public double getPoderPelea(){
@@ -27,13 +36,13 @@ public class Goku extends Personaje{
 	@Override
 	public Modo realizarPrimeraTransformacion(){
 		super.restarKiPrimeraTransformacion();
-		return new PrimeraTransformacion(40,4,3, "Goku KaioKen");
+		return new PrimeraTransformacion(poderPeleaKaioKen,distanciaAtaqueTranformado,velocidadPrimerTranformacion, "Goku KaioKen");
 	}
 	
 	@Override
 	public Modo realizarSegundaTransformacion() {
 		super.restarKiSegundaTransformacion();
-		return new SegundaTransformacion(60,4,5, "Goku Super Sayajin");
+		return new SegundaTransformacion(poderPeleaSayajin,distanciaAtaqueTranformado,velocidadSegundaTranformacion, "Goku Super Sayajin");
 	}
 
 }
