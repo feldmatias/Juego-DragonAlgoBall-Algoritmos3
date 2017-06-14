@@ -70,9 +70,11 @@ public abstract class BotonInvisible extends StackPane{
 	}
 	
 	protected void seleccionar(){
-		 DropShadow ds= new DropShadow( 1, Color.BLACK );
-		 ds.setRadius(5.0);
-		 imagenFondo.setEffect(ds);
+		 DropShadow sombra= new DropShadow( 1, Color.AQUA );
+		 sombra.setWidth(anchoBoton / 2);
+		 sombra.setHeight(altoBoton);
+		 sombra.setSpread(0.6);
+		 imagenFondo.setEffect(sombra);
 	}
 	
 }
