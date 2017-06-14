@@ -87,6 +87,8 @@ public class VistaJuego extends VBox{
 			Image imagen = new Image(entradaImagen);
 			entradaImagen.close();
 			ImageView vistaImagen = new ImageView(imagen);
+			vistaImagen.setFitWidth(Constantes.SIZE_TABLERO * BotonInvisible.anchoBoton);
+			vistaImagen.setFitHeight(Constantes.SIZE_TABLERO * BotonInvisible.altoBoton);
 			return vistaImagen;
 		} catch (IOException e) {
 			return null;

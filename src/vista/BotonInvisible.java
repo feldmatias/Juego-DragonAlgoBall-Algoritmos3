@@ -11,8 +11,8 @@ import javafx.scene.shape.Rectangle;
 
 public abstract class BotonInvisible extends StackPane{
 
-	public static int anchoBoton = 80;
-	public static int altoBoton = 80;
+	public static int anchoBoton = 60;
+	public static int altoBoton = 60;
 	private Rectangle boton;
 	private Node imagenFondo;
 	

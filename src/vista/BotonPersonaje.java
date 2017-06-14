@@ -8,9 +8,10 @@ public class BotonPersonaje extends BotonInvisible {
 
 	private Personaje personaje;
 	private DragonBall juego;
+	private static boolean redimensionable = true;
 	
 	public BotonPersonaje(Personaje personaje, DragonBall juego) {
-		super(new ImagenFondo(personaje));
+		super(new ImagenFondo(personaje, redimensionable));
 		this.personaje = personaje;
 		this.juego = juego;
 		this.comprobarPersonajeSeleccionado();
