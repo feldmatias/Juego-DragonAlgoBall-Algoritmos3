@@ -6,26 +6,17 @@ import java.nio.file.Paths;
 
 import javafx.animation.TranslateTransition;
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import modelo.juego.DragonBall;
@@ -54,8 +45,9 @@ public class MenuJuego extends Application {
 		Media mediaCancionFondo = new Media(new File("src/vista/sonidos/Dragon Ball opening.mp3").toURI().toString());
 		MediaPlayer cancionFondo = new MediaPlayer(mediaCancionFondo);
 		cancionFondo.setAutoPlay(true);
-		cancionFondo.setVolume(0.2);
+		cancionFondo.setVolume(0.1);
 //		cancionFondo.setMute(true);
+		
 		
 		ImageView vistaImagen = new ImageView(imagen);
 		
@@ -101,6 +93,8 @@ public class MenuJuego extends Application {
 			
 			BotonMenu btnEmpezar = new BotonMenu ("NUEVA PARTIDA");
 			btnEmpezar.setOnMouseClicked( evento1 -> {
+				
+	
 				
 				stage.hide();
 				stage.setFullScreen(true);
@@ -181,51 +175,51 @@ public class MenuJuego extends Application {
 	
 	
 	
-	private static class BotonMenu extends StackPane {
-		private Text texto;
+//	private static class BotonMenu extends StackPane {
+//		private Text texto;
+//		
+//		public BotonMenu(String nombre){
+//			texto = new Text(nombre);
+//			texto.setFont(Font.font(20));
+//			texto.setFill(Color.WHITE);
+//			
+//			Rectangle fondo = new Rectangle(250,30);
+//			fondo.setOpacity(0.6);
+//			fondo.setFill(Color.ORANGE);
+//			
+//			GaussianBlur desenfoque = new GaussianBlur(3.5);
+//			fondo.setEffect(desenfoque);
+//			
+//			this.setAlignment(Pos.CENTER_LEFT);
+//			this.setRotate(-0.5);
+//			this.getChildren().addAll(fondo,texto);
+//			
+//			this.setOnMouseEntered(evento -> {
+//				fondo.setTranslateX(10);
+//				texto.setTranslateX(10);
+//				fondo.setFill(Color.WHITE);
+//				texto.setFill(Color.ORANGE);
+//			});
+//			
+//			this.setOnMouseExited(event ->{
+//				fondo.setTranslateX(0);
+//				texto.setTranslateX(0);
+//				fondo.setFill(Color.ORANGE);
+//				texto.setFill(Color.WHITE);
+//			});
+//			
+//			
+//			DropShadow sombra = new DropShadow(50,Color.WHITE);
+//			sombra.setInput(new Glow());
+//			
+//			this.setOnMousePressed(evento -> setEffect(sombra));
+//			this.setOnMouseReleased(evento -> setEffect(null)); //remuevo el efecto
+//			
+//		}
 		
-		public BotonMenu(String nombre){
-			texto = new Text(nombre);
-			texto.setFont(Font.font(20));
-			texto.setFill(Color.WHITE);
-			
-			Rectangle fondo = new Rectangle(250,30);
-			fondo.setOpacity(0.6);
-			fondo.setFill(Color.ORANGE);
-			
-			GaussianBlur desenfoque = new GaussianBlur(3.5);
-			fondo.setEffect(desenfoque);
-			
-			this.setAlignment(Pos.CENTER_LEFT);
-			this.setRotate(-0.5);
-			this.getChildren().addAll(fondo,texto);
-			
-			this.setOnMouseEntered(evento -> {
-				fondo.setTranslateX(10);
-				texto.setTranslateX(10);
-				fondo.setFill(Color.WHITE);
-				texto.setFill(Color.ORANGE);
-			});
-			
-			this.setOnMouseExited(event ->{
-				fondo.setTranslateX(0);
-				texto.setTranslateX(0);
-				fondo.setFill(Color.ORANGE);
-				texto.setFill(Color.WHITE);
-			});
-			
-			
-			DropShadow sombra = new DropShadow(50,Color.WHITE);
-			sombra.setInput(new Glow());
-			
-			this.setOnMousePressed(evento -> setEffect(sombra));
-			this.setOnMouseReleased(evento -> setEffect(null)); //remuevo el efecto
-			
-		}
 		
 		
-		
-	}
+//	}
 	
 	public static void main(String [] args){
 		launch(args);

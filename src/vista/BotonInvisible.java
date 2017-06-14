@@ -1,11 +1,15 @@
 package vista;
 
+import java.io.File;
+
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -15,10 +19,13 @@ public abstract class BotonInvisible extends StackPane{
 	public static int altoBoton = 60;
 	private Rectangle boton;
 	private Node imagenFondo;
+	private MediaPlayer sonidoError;
 	
-	public BotonInvisible(Node imagenFondo){
+	public BotonInvisible(Node imagenFondo,MediaPlayer sonidoError){
 		this.imagenFondo = imagenFondo;
 		this.getChildren().add(imagenFondo);
+		this.sonidoError = sonidoError;
+		this.sonidoError.setVolume(0.1);
 		this.crearBoton();
 	}
 
@@ -75,6 +82,13 @@ public abstract class BotonInvisible extends StackPane{
 		 sombra.setHeight(altoBoton);
 		 sombra.setSpread(0.6);
 		 imagenFondo.setEffect(sombra);
+	}
+	
+	public void lanzarSonidoError(){
+		this.sonidoError.play();
+	}
+	public void pararSonidoError(){
+		this.sonidoError.stop();
 	}
 	
 }

@@ -1,5 +1,6 @@
 package vista;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -18,6 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
 import modelo.juego.Jugador;
@@ -40,6 +43,9 @@ public class VistaJuego extends VBox{
 	private Map <Personaje,BotonInvisible> botonesPersonajes;
 	private Label labelAcciones;
 	private HBox contenedorBotonesAcciones;
+	public Media archivoSonidoError = new Media(new File("src/vista/sonidos/sonido error.wav").toURI().toString());
+	public MediaPlayer sonidoError = new MediaPlayer(archivoSonidoError);
+
 	
 	public VistaJuego(DragonBall juego){
 		
@@ -214,7 +220,7 @@ public class VistaJuego extends VBox{
 	private void nuevoBotonPersonaje(HBox fila, Personaje personaje) {
 		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, labelAcciones, this);
 		//Ver labels
-		BotonInvisible boton = new BotonPersonaje(personaje, juego);
+		BotonInvisible boton = new BotonPersonaje(personaje, juego,sonidoError);
 		boton.setOnAction(eventHandler);
 		boton.habilitar();
 		fila.getChildren().add(boton);
@@ -223,9 +229,10 @@ public class VistaJuego extends VBox{
 
 
 	private void nuevoBotonCasilleroVacio(HBox fila, Posicion pos, Casillero casillero) {
-		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this);
+		BotonInvisible boton = new BotonCasilleroVacio(casillero,sonidoError);
+
+		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this,boton);
 		//ver LABELS
-		BotonInvisible boton = new BotonCasilleroVacio(casillero);
 		boton.setOnAction(eventHandler);
 		boton.deshabilitar();
 		fila.getChildren().add(boton);

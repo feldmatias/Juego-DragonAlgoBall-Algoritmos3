@@ -7,6 +7,7 @@ import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.MovimientoYaRealizado;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
+import vista.BotonInvisible;
 import vista.VistaJuego;
 
 public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>{
@@ -15,12 +16,14 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 	private Posicion pos;
 	private Label acciones;
 	private VistaJuego vista;
+	private BotonInvisible boton;
 	
-	public BotonCasilleroVacioEventHandler(DragonBall juego, Posicion pos, Label acciones, VistaJuego vista) {
+	public BotonCasilleroVacioEventHandler(DragonBall juego, Posicion pos, Label acciones, VistaJuego vista,BotonInvisible boton) {
 		this.juego = juego;
 		this.pos = pos;
 		this.acciones = acciones;
 		this.vista = vista;
+		this.boton = boton;
 	}
 
 
@@ -31,9 +34,13 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 			juego.jugadorActualMoverAPosicion(pos);
 			vista.actualizarVista();
 		} catch (MovimientoYaRealizado e) {
+			this.boton.lanzarSonidoError();
 			acciones.setText("No puede moverse ahi, movimiento ya realizado");
+			this.boton.pararSonidoError();
 		} catch (MovimientoNoPosible e){
+			this.boton.lanzarSonidoError();
 			acciones.setText("No puede moverse ahi, movimiento no posible");
+			this.boton.pararSonidoError();
 		}
 	}
 

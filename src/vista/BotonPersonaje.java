@@ -1,5 +1,6 @@
 package vista;
 
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
@@ -10,8 +11,8 @@ public class BotonPersonaje extends BotonInvisible {
 	private DragonBall juego;
 	private static boolean redimensionable = true;
 	
-	public BotonPersonaje(Personaje personaje, DragonBall juego) {
-		super(new ImagenFondo(personaje, redimensionable));
+	public BotonPersonaje(Personaje personaje, DragonBall juego,MediaPlayer sonidoError) {
+		super(new ImagenFondo(personaje, redimensionable), sonidoError);
 		this.personaje = personaje;
 		this.juego = juego;
 		this.comprobarPersonajeSeleccionado();
