@@ -18,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -83,8 +82,6 @@ public class VistaSeleccionarEquipo extends VBox{
 		try {
 			archivoImagenGuerreros = Files.newInputStream(Paths.get("src/vista/imagenes/guerreros.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		Image imagenGuerreros = new Image(archivoImagenGuerreros);
@@ -92,8 +89,6 @@ public class VistaSeleccionarEquipo extends VBox{
 		try {
 			archivoImagenGuerreros.close();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 		vistaImagenGuerreros.setFitWidth(700);
 		vistaImagenGuerreros.setPreserveRatio(true);
@@ -110,12 +105,12 @@ public class VistaSeleccionarEquipo extends VBox{
 		
 		vistaImagenGuerreros.setOnMouseClicked(evento -> {
 			
-			System.out.println("El jugador 1 eligió " + Constantes.GUERREROS); //el jugador 1 elige equipo GUERREROS
+			 //el jugador 1 elige equipo GUERREROS
 			
 			juego.establecerEquipoJugador1(Constantes.GUERREROS);
 			juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
 			juego.iniciar();
-			Scene scene = new Scene(new VistaJuego(juego));
+			Scene scene = new Scene(new VistaJuego(juego, stage));
 			stage.setScene(scene);
 			stage.show();
 			
@@ -128,16 +123,12 @@ public class VistaSeleccionarEquipo extends VBox{
 		try {
 			archivoImagenEnemigos = Files.newInputStream(Paths.get("src/vista/imagenes/enemigos.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		Image imagenEnemigos = new Image(archivoImagenEnemigos);
 		ImageView vistaImagenEnemigos = new ImageView(imagenEnemigos);
 		try {
 			archivoImagenEnemigos.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		vistaImagenEnemigos.setFitWidth(700);
 		vistaImagenEnemigos.setPreserveRatio(true);
@@ -153,11 +144,11 @@ public class VistaSeleccionarEquipo extends VBox{
 		});
 		
 		vistaImagenEnemigos.setOnMouseClicked(evento -> {
-			System.out.println("El jugador 1 eligió "+ Constantes.ENEMIGOS); //el jugador 1 elige equipo ENEMIGOS
+			//el jugador 1 elige equipo ENEMIGOS
 			juego.establecerEquipoJugador1(Constantes.ENEMIGOS);
 			juego.establecerEquipoJugador2(Constantes.GUERREROS);
 			juego.iniciar();
-			Scene scene = new Scene(new VistaJuego(juego));
+			Scene scene = new Scene(new VistaJuego(juego, stage));
 			stage.setScene(scene);
 			stage.show();
 		});

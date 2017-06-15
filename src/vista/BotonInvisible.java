@@ -1,6 +1,6 @@
 package vista;
 
-import java.io.File;
+
 
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -8,7 +8,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

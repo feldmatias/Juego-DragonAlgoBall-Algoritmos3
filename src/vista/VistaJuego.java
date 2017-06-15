@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -21,6 +22,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
 import modelo.juego.Jugador;
@@ -45,9 +47,11 @@ public class VistaJuego extends VBox{
 	private HBox contenedorBotonesAcciones;
 	public Media archivoSonidoError = new Media(new File("src/vista/sonidos/sonido error.wav").toURI().toString());
 	public MediaPlayer sonidoError = new MediaPlayer(archivoSonidoError);
+	private Stage stage;
 
 	
-	public VistaJuego(DragonBall juego){
+	public VistaJuego(DragonBall juego, Stage stage){
+		this.stage = stage;
 		
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
@@ -164,6 +168,9 @@ public class VistaJuego extends VBox{
 
 
 	public void actualizarVista() {
+		if (juego.estaTerminado()){
+			this.terminarJuego();
+		}
 		this.getChildren().clear();
 		this.getChildren().add(this.actualizarTurnos());
 		HBox contenedorHorizontal = new HBox();
@@ -178,6 +185,12 @@ public class VistaJuego extends VBox{
 		this.setAlignment(Pos.CENTER);
 	}
 		
+	private void terminarJuego() {
+		Scene fin = new Scene (new VistaFinDelJuego(juego,stage));
+		stage.setScene(fin);
+		
+	}
+
 	private VBox actualizarTurnos() {
 		Label labelTurnos = new Label();
 		labelTurnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
