@@ -34,7 +34,7 @@ public abstract class Efecto implements Posicionable{
 	}
 	
 	public boolean terminoTiempo(){
-		return this.duracion == 0 ;
+		return this.duracion <= 0 ;
 	}
 	
 	public String getNombre(){

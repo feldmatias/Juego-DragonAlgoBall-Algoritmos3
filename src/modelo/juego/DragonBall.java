@@ -33,6 +33,7 @@ public class DragonBall {
 	private Jugador jugador2;
 	private Map<String,Equipo> equipos;
 	private Turno turno;
+	private String ganador;
 
 	public DragonBall () {
 		
@@ -158,6 +159,30 @@ public class DragonBall {
 	
 	public void jugadorActualTerminarTurno(){
 		this.turno.terminarTurno();
+	}
+	
+	public boolean estaTerminado(){
+		if (jugador1.equipoMuerto()){
+			ganador = jugador2.getEquipo().getNombre() + ": Derroto al otro equipo";
+			return true;
+		}
+		if (jugador2.equipoMuerto()){
+			ganador = jugador1.getEquipo().getNombre() + ": Derroto al otro equipo";
+			return true;
+		}
+		if (jugador1.coleccionDeEsferasCompleta()){
+			ganador = jugador1.getEquipo().getNombre() + ": Encontro siete esferas del dragon";
+			return true;
+		}
+		if (jugador2.coleccionDeEsferasCompleta()){
+			ganador = jugador2.getEquipo().getNombre() + ": Encontro siete esferas del dragon";
+			return true;
+		}
+		return false;
+	}
+	
+	public String getGanador(){
+		return ganador;
 	}
 
 }
