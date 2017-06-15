@@ -13,6 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -72,18 +73,25 @@ public class MenuJuego extends Application {
 		
 		public MenuPrincipal(){
 			
-			VBox menu1 = new VBox(10);
-			VBox menu2 = new VBox(10);
+			VBox menuPrincipal = new VBox(10);
+			VBox menuOpciones = new VBox(10);
+			HBox opcionesMusica = new HBox(10);
+			HBox opcionesEfectosSonido = new HBox(10);
 			
-			menu1.setTranslateX(100);
-			menu1.setTranslateY(200);
+			menuPrincipal.setTranslateX(100);
+			menuPrincipal.setTranslateY(200);
 
-			menu2.setTranslateX(100);
-			menu2.setTranslateY(200);
+			menuOpciones.setTranslateX(100);
+			menuOpciones.setTranslateY(200);
+			
+			opcionesMusica.setTranslateX(200);
+			opcionesEfectosSonido.setTranslateX(200);
 			
 			final int compensacion = 400;
 			
-			menu2.setTranslateX(compensacion);
+			menuOpciones.setTranslateX(compensacion);
+			opcionesMusica.setTranslateY(menuOpciones.getTranslateY() + compensacion);
+			opcionesEfectosSonido.setTranslateY(menuOpciones.getTranslateY() +compensacion  + 50);
 			
 			DragonBall juego = new DragonBall();
 			//HAcer logica de seleccion de equipos
@@ -108,43 +116,75 @@ public class MenuJuego extends Application {
 			
 			BotonMenu btnOpciones = new BotonMenu("OPCIONES");
 			btnOpciones.setOnMouseClicked(evento1 -> {
-				this.getChildren().add(menu2);
-				TranslateTransition transicionTraslado1 = new TranslateTransition(Duration.seconds(0.25),menu1);
-				transicionTraslado1.setToX( menu1.getTranslateX() - compensacion );
+				this.getChildren().addAll(menuOpciones);
+				TranslateTransition transicionTraslado1 = new TranslateTransition(Duration.seconds(0.25),menuPrincipal);
+				transicionTraslado1.setToX( menuPrincipal.getTranslateX() - compensacion );
 				
-				TranslateTransition transicionTraslado2 = new TranslateTransition(Duration.seconds(0.5),menu2);
-				transicionTraslado2.setToX( menu1.getTranslateX() );
+				TranslateTransition transicionTraslado2 = new TranslateTransition(Duration.seconds(0.5),menuOpciones);
+				transicionTraslado2.setToX( menuPrincipal.getTranslateX() );
 				
 				transicionTraslado1.play();
 				transicionTraslado2.play();
 				
 				transicionTraslado1.setOnFinished( evento2 -> {
-					this.getChildren().remove(menu1);
+					this.getChildren().remove(menuPrincipal);
 				});
 				
 			});
 			
 			BotonMenu btnAtras =new BotonMenu("ATRAS");
 			btnAtras.setOnMouseClicked( evento -> {
-				this.getChildren().add(menu1);
+				this.getChildren().add(menuPrincipal);
 				
-				TranslateTransition transicionTraslado = new TranslateTransition(Duration.seconds(0.25), menu2);
-				transicionTraslado.setToX( menu2.getTranslateX() + compensacion );
+				TranslateTransition transicionOpciones = new TranslateTransition(Duration.seconds(0.25), menuOpciones);
+				transicionOpciones.setToX( menuOpciones.getTranslateX() + compensacion );
 				
-				TranslateTransition transicionTraslado2 = new TranslateTransition(Duration.seconds(0.5), menu1);
-				transicionTraslado2.setToX( menu2.getTranslateX() );
+				TranslateTransition transicionMusica = new TranslateTransition(Duration.seconds(0.1),opcionesMusica);
+				transicionMusica.setToY(menuOpciones.getTranslateY() + compensacion);
 				
-				transicionTraslado.play();
-				transicionTraslado2.play();
+				TranslateTransition transicionEfectos = new TranslateTransition(Duration.seconds(0.1),opcionesEfectosSonido);
+				transicionEfectos.setToY(menuOpciones.getTranslateY() + compensacion + 50);
 				
-				transicionTraslado.setOnFinished( evento2 -> {
-					this.getChildren().remove( menu2 );
+				TranslateTransition transicionMenuPrincipal = new TranslateTransition(Duration.seconds(0.5), menuPrincipal);
+				transicionMenuPrincipal.setToX( menuOpciones.getTranslateX() );
+				
+				transicionOpciones.play();
+				transicionMusica.play();
+				transicionEfectos.play();
+				transicionMenuPrincipal.play();
+				
+				
+				transicionOpciones.setOnFinished( evento2 -> {
+					this.getChildren().removeAll( menuOpciones, opcionesMusica, opcionesEfectosSonido );
+				
 				});
 				
 			});
 			
 			
 			BotonMenu btnSonido = new BotonMenu("SONIDO");
+			btnSonido.setOnMouseClicked( evento-> {
+				this.getChildren().addAll(opcionesMusica,opcionesEfectosSonido);
+				TranslateTransition transicionTraslado = new TranslateTransition(Duration.seconds(0.5),opcionesMusica);
+				transicionTraslado.setToY(	menuOpciones.getTranslateY() + 200);		
+				
+				TranslateTransition transicionTraslado2 = new TranslateTransition(Duration.seconds(0.5),opcionesEfectosSonido);
+				transicionTraslado2.setToY( menuOpciones.getTranslateY() + 250 );
+				
+				transicionTraslado.play();
+				transicionTraslado2.play();
+				
+			});
+			
+			
+			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF");
+			
+			BotonMenu btnMusicaOn = new BotonMenu("MUSICA ON");
+			
+			BotonMenu btnEfectosOn = new BotonMenu("EFECTOS DE SONIDO ON");
+			
+			BotonMenu btnEfectosOff = new BotonMenu("EFECTOS DE SONIDO OFF");
+			
 			
 			
 			BotonMenu btnSalir = new BotonMenu( "SALIR" );
@@ -161,11 +201,13 @@ public class MenuJuego extends Application {
 			});
 			
 			
-			menu1.getChildren().addAll(btnEmpezar , btnOpciones, btnSalir);
-			menu2.getChildren().addAll(btnAtras, btnSonido);
+			menuPrincipal.getChildren().addAll(btnEmpezar , btnOpciones, btnSalir);
+			menuOpciones.getChildren().addAll(btnAtras, btnSonido);
+			opcionesMusica.getChildren().addAll(btnMusicaOn,btnMusicaOff);
+			opcionesEfectosSonido.getChildren().addAll(btnEfectosOn,btnEfectosOff);
 			
 			
-			this.getChildren().addAll(menu1);
+			this.getChildren().addAll(menuPrincipal);
 			
 			
 		}

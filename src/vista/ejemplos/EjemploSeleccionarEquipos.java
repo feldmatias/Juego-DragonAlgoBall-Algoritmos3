@@ -84,7 +84,7 @@ public class EjemploSeleccionarEquipos extends Application{
 	
 	private class Contenedor extends VBox{
 		
-		Rectangle fondo;
+		
 		StackPane imagenes;
 		VistaEquipo imagenActual;
 		VistaEquipo proximaImagen;
@@ -92,9 +92,6 @@ public class EjemploSeleccionarEquipos extends Application{
 		
 		public Contenedor(VistaEquipo enemigos, VistaEquipo guerreros){
 			
-			this.fondo = new Rectangle(1000,600);
-			this.fondo.setFill(Color.RED);
-			this.fondo.setOpacity(1);
 			this.imagenActual = enemigos;
 			this.proximaImagen = guerreros;
 			this.imagenes = new StackPane();
