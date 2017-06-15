@@ -63,6 +63,7 @@ public class MenuPrincipal extends StackPane{
 			
 			if (vistaJuego == null){
 				btnContinuar.setDisable(true);
+				btnContinuar.efectoDeshabilitado();
 			}
 				
 			
@@ -70,7 +71,7 @@ public class MenuPrincipal extends StackPane{
 			btnEmpezar.setOnMouseClicked( evento1 -> {
 				DragonBall juego = new DragonBall();
 	
-				
+				btnContinuar.efectoHabilitado();
 				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage, this));
 				stage.setScene(scene);
 				stage.setFullScreen(true);

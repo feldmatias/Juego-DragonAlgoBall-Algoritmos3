@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 public class BotonMenu extends StackPane {
 	private Text texto;
 	private MediaPlayer sonido;
+	private Rectangle fondo;
 	
 	public BotonMenu(String nombre){
 		texto = new Text(nombre);
@@ -26,30 +27,30 @@ public class BotonMenu extends StackPane {
 		Media archivoSonido= new Media(new File("src/vista/sonidos/sonido deslizarse por boton.wav").toURI().toString());
 		MediaPlayer sonido = new MediaPlayer(archivoSonido);
 		
-		Rectangle fondo = new Rectangle(250,30);
-		fondo.setOpacity(0.6);
-		fondo.setFill(Color.ORANGE);
+		this.fondo = new Rectangle(250,30);
+		this.fondo.setOpacity(0.6);
+		this.fondo.setFill(Color.ORANGE);
 		
 		GaussianBlur desenfoque = new GaussianBlur(3.5);
-		fondo.setEffect(desenfoque);
+		this.fondo.setEffect(desenfoque);
 		
 		this.setAlignment(Pos.CENTER_LEFT);
 		this.setRotate(-0.5);
 		this.getChildren().addAll(fondo,texto);
 		
 		this.setOnMouseEntered(evento -> {
-			fondo.setTranslateX(10);
-			texto.setTranslateX(10);
-			fondo.setFill(Color.WHITE);
-			texto.setFill(Color.ORANGE);
+			this.fondo.setTranslateX(10);
+			this.texto.setTranslateX(10);
+			this.fondo.setFill(Color.WHITE);
+			this.texto.setFill(Color.ORANGE);
 			sonido.play();
 		});
 		
 		this.setOnMouseExited(event ->{
-			fondo.setTranslateX(0);
-			texto.setTranslateX(0);
-			fondo.setFill(Color.ORANGE);
-			texto.setFill(Color.WHITE);
+			this.fondo.setTranslateX(0);
+			this.texto.setTranslateX(0);
+			this.fondo.setFill(Color.ORANGE);
+			this.texto.setFill(Color.WHITE);
 			sonido.stop();
 		});
 		
@@ -61,5 +62,13 @@ public class BotonMenu extends StackPane {
 		this.setOnMouseReleased(evento -> setEffect(null));
 		
 	}
+	
+	public void efectoDeshabilitado(){
+		this.fondo.setFill(Color.GRAY);
+	}
+	public void efectoHabilitado(){
+		this.fondo.setFill(Color.ORANGE);
+	}
+	
 }
 	
