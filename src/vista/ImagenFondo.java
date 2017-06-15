@@ -12,7 +12,7 @@ import javafx.scene.layout.StackPane;
 public class ImagenFondo extends StackPane {
 
 	
-	public ImagenFondo (Posicionable posicionable, boolean redimensionable){
+	public ImagenFondo (Posicionable posicionable, double width, double height){
 		
 		if (posicionable == null){
 			return;
@@ -24,10 +24,8 @@ public class ImagenFondo extends StackPane {
 			Image imagen = new Image(entradaImagen);
 			entradaImagen.close();
 			ImageView vistaImagen = new ImageView(imagen);
-			if (redimensionable){
-				vistaImagen.setFitWidth(BotonInvisible.anchoBoton);
-				vistaImagen.setFitHeight(BotonInvisible.altoBoton);
-			}
+			vistaImagen.setFitWidth(width);
+			vistaImagen.setFitHeight(height);
 			this.getChildren().add(vistaImagen);
 		} catch (IOException e) {
 		}

@@ -125,7 +125,8 @@ public class VistaJuego extends VBox{
 	}
 
 	private HBox crearBoxPersonaje(Personaje personaje) {
-		HBox box = new HBox(new ImagenFondo(personaje, true));
+		
+		HBox box = new HBox(new ImagenFondo(personaje, BotonPersonaje.width, BotonPersonaje.height));
 		VBox parametrosPersonaje = new VBox();
 		parametrosPersonaje.setPadding(new Insets(10));
 		
