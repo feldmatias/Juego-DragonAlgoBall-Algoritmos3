@@ -112,6 +112,9 @@ public class VistaSeleccionarEquipo extends VBox{
 			juego.iniciar();
 			Scene scene = new Scene(new VistaJuego(juego, stage));
 			stage.setScene(scene);
+			stage.setFullScreen(true);
+			stage.setFullScreenExitHint("");
+			stage.setResizable(false);
 			stage.show();
 			
 		});
@@ -150,6 +153,9 @@ public class VistaSeleccionarEquipo extends VBox{
 			juego.iniciar();
 			Scene scene = new Scene(new VistaJuego(juego, stage));
 			stage.setScene(scene);
+			stage.setFullScreen(true);
+			stage.setFullScreenExitHint("");
+			stage.setResizable(false);
 			stage.show();
 		});
 		vboxEnemigos.getChildren().add(vistaImagenEnemigos);

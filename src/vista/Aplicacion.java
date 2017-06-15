@@ -9,7 +9,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 
-public class MenuJuego extends Application {
+public class Aplicacion extends Application {
 
 	private MenuPrincipal menuJuego;
 	private Stage stage;
@@ -34,6 +34,7 @@ public class MenuJuego extends Application {
 		
 		stage.setScene(scene);
 		stage.setFullScreen(true);
+		stage.setFullScreenExitHint("");
 		stage.setResizable(false);
 		stage.setMinWidth(1200);
 		stage.setMinHeight(700);

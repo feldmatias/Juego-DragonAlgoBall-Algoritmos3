@@ -188,6 +188,9 @@ public class VistaJuego extends VBox{
 	private void terminarJuego() {
 		Scene fin = new Scene (new VistaFinDelJuego(juego,stage));
 		stage.setScene(fin);
+		stage.setFullScreen(true);
+		stage.setFullScreenExitHint("");
+		stage.setResizable(false);
 		
 	}
 

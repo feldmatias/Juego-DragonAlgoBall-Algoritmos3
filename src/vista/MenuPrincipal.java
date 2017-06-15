@@ -55,22 +55,17 @@ public class MenuPrincipal extends StackPane{
 			opcionesMusica.setTranslateY(menuOpciones.getTranslateY() + compensacion);
 			opcionesEfectosSonido.setTranslateY(menuOpciones.getTranslateY() +compensacion  + 50);
 			
-			DragonBall juego = new DragonBall();
-			//HAcer logica de seleccion de equipos
-			/*juego.establecerEquipoJugador1(Constantes.GUERREROS);
-			juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
-			juego.iniciar();*/
 			
 			BotonMenu btnEmpezar = new BotonMenu ("NUEVA PARTIDA");
 			btnEmpezar.setOnMouseClicked( evento1 -> {
-				
+				DragonBall juego = new DragonBall();
 	
 				
-				stage.hide();
-				stage.setFullScreen(true);
-				//Scene scene = new Scene(new VistaJuego(juego));
 				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage));
 				stage.setScene(scene);
+				stage.setFullScreen(true);
+				stage.setFullScreenExitHint("");
+				stage.setResizable(false);
 				stage.show();
 				
 			});

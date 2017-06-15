@@ -37,6 +37,9 @@ public class VistaFinDelJuego extends VBox {
 				MenuPrincipal menu = new MenuPrincipal(stage);
 				Scene escenaMenu = new Scene (menu);
 				stage.setScene(escenaMenu);
+				stage.setFullScreen(true);
+				stage.setFullScreenExitHint("");
+				stage.setResizable(false);
 		});
 		this.getChildren().add(volver);
 	}

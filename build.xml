@@ -24,7 +24,7 @@
             <manifest>
                 <attribute name="Specification-Title" value="${name}" />
                 <attribute name="Specification-Version" value="${version}" />
-                <attribute name="Main-Class" value="vista.MenuJuego" />
+                <attribute name="Main-Class" value="vista.Aplicacion" />
             </manifest>
         </jar>
     </target>
