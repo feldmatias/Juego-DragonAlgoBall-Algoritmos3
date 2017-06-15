@@ -23,15 +23,20 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import modelo.utilidades.Constantes;
+import vista.controlador.VolverAlMenuEventHandler;
 
 public class VistaSeleccionarEquipo extends VBox{
+	
 	private DragonBall juego;
 	private Stage stage;
+	private MenuPrincipal menu;
 	public static final int ALTURA_EQUIPOS = 0;
-	public VistaSeleccionarEquipo(DragonBall juego, Stage stage){
+	
+	public VistaSeleccionarEquipo(DragonBall juego, Stage stage, MenuPrincipal menu){
 		
 		this.juego = juego;
 		this.stage = stage;
+		this.menu = menu;
 		
 		Image imagen = new Image("file:src/vista/imagenes/FondoElegir.jpg");
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -111,6 +116,7 @@ public class VistaSeleccionarEquipo extends VBox{
 			juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
 			juego.iniciar();
 			Scene scene = new Scene(new VistaJuego(juego, stage));
+			scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
 			stage.setScene(scene);
 			stage.setFullScreen(true);
 			stage.setFullScreenExitHint("");
@@ -152,6 +158,7 @@ public class VistaSeleccionarEquipo extends VBox{
 			juego.establecerEquipoJugador2(Constantes.GUERREROS);
 			juego.iniciar();
 			Scene scene = new Scene(new VistaJuego(juego, stage));
+			scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
 			stage.setScene(scene);
 			stage.setFullScreen(true);
 			stage.setFullScreenExitHint("");

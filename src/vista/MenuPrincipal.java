@@ -21,8 +21,12 @@ import modelo.juego.DragonBall;
 
 public class MenuPrincipal extends StackPane{
 	
+		private Scene vistaJuego = null;
+		private BotonMenu btnContinuar;
+		private Stage stage;
 		
 		public MenuPrincipal(Stage stage) {
+			this.stage = stage;
 			
 			InputStream entradaImagen;
 			try {
@@ -55,13 +59,19 @@ public class MenuPrincipal extends StackPane{
 			opcionesMusica.setTranslateY(menuOpciones.getTranslateY() + compensacion);
 			opcionesEfectosSonido.setTranslateY(menuOpciones.getTranslateY() +compensacion  + 50);
 			
+			btnContinuar = new BotonMenu ("CONTINUAR PARTIDA");
+			
+			if (vistaJuego == null){
+				btnContinuar.setDisable(true);
+			}
+				
 			
 			BotonMenu btnEmpezar = new BotonMenu ("NUEVA PARTIDA");
 			btnEmpezar.setOnMouseClicked( evento1 -> {
 				DragonBall juego = new DragonBall();
 	
 				
-				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage));
+				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage, this));
 				stage.setScene(scene);
 				stage.setFullScreen(true);
 				stage.setFullScreenExitHint("");
@@ -134,6 +144,36 @@ public class MenuPrincipal extends StackPane{
 			});
 			
 			
+			stage.setFullScreen(true);
+			BotonMenu btnPantallaCompletaOn = new BotonMenu("Habilitar Pantalla Completa");
+			BotonMenu btnPantallaCompletaOff = new BotonMenu("Deshabilitar Pantalla Completa");
+			btnPantallaCompletaOn.setOnMouseClicked( evento-> {
+				stage.setFullScreen(true);
+				stage.setFullScreenExitHint("");
+				btnPantallaCompletaOff.setDisable(false);
+				btnPantallaCompletaOn.setDisable(true);
+			});
+			
+			if (stage.isFullScreen()){
+				btnPantallaCompletaOn.setDisable(true);
+			}
+			if (!stage.isFullScreen()){
+				btnPantallaCompletaOn.setDisable(false);
+			}
+			
+			btnPantallaCompletaOff.setOnMouseClicked( evento-> {
+				stage.setFullScreen(false);
+				btnPantallaCompletaOff.setDisable(true);
+				btnPantallaCompletaOn.setDisable(false);
+			});
+			if (!stage.isFullScreen()){
+				btnPantallaCompletaOff.setDisable(true);
+			}
+			if (stage.isFullScreen()){
+				btnPantallaCompletaOff.setDisable(false);
+			}
+			
+			
 			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF");
 			
 			BotonMenu btnMusicaOn = new BotonMenu("MUSICA ON");
@@ -158,8 +198,8 @@ public class MenuPrincipal extends StackPane{
 			});
 			
 			
-			menuPrincipal.getChildren().addAll(btnEmpezar , btnOpciones, btnSalir);
-			menuOpciones.getChildren().addAll(btnAtras, btnSonido);
+			menuPrincipal.getChildren().addAll(btnContinuar, btnEmpezar , btnOpciones, btnSalir);
+			menuOpciones.getChildren().addAll(btnAtras, btnSonido, btnPantallaCompletaOn, btnPantallaCompletaOff);
 			opcionesMusica.getChildren().addAll(btnMusicaOn,btnMusicaOff);
 			opcionesEfectosSonido.getChildren().addAll(btnEfectosOn,btnEfectosOff);
 			
@@ -168,6 +208,22 @@ public class MenuPrincipal extends StackPane{
 			
 			
 		}
+		
+		public void habilitarContinuar(Scene vista){
+			this.vistaJuego = vista;
+			btnContinuar.setDisable(false);
+			btnContinuar.setOnMouseClicked( evento1 -> {
+
+				stage.setScene(vistaJuego);
+				stage.setFullScreen(true);
+				stage.setFullScreenExitHint("");
+				stage.setResizable(false);
+				stage.show();
+				
+			});
+			
+		}
+
 		
 		
 }

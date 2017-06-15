@@ -62,6 +62,8 @@ public class VistaJuego extends VBox{
 		this.actualizarVista();
 	}
 	
+
+
 	private VBox crearEspacioJugador(Jugador jugador){
 		Label nombre = new Label();
 		nombre.setText(jugador.getEquipo().getNombre());

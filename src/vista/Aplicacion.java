@@ -4,6 +4,7 @@ import java.io.File;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -29,11 +30,11 @@ public class Aplicacion extends Application {
 		
 		this.menuJuego = new MenuPrincipal(stage);
 		
-		
 		Scene scene = new Scene(menuJuego);
 		
 		stage.setScene(scene);
 		stage.setFullScreen(true);
+		stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
 		stage.setFullScreenExitHint("");
 		stage.setResizable(false);
 		stage.setMinWidth(1200);
