@@ -55,16 +55,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		
 	    
 	}
-	
-	private void crearNombre(String nombre, VBox vboxGuerreros) {
 
-		Text nombreGuerreros = new Text(nombre);
-		nombreGuerreros.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 120));
-		nombreGuerreros.setFill(Color.YELLOW);
-		nombreGuerreros.setTextAlignment(TextAlignment.CENTER);
-		vboxGuerreros.getChildren().add(nombreGuerreros);
-		
-	}
 
 	private void crearHbox() {
 		HBox hbox = new HBox();
@@ -78,98 +69,75 @@ public class VistaSeleccionarEquipo extends VBox{
 	}
 
 	private void crearSeleccionables(HBox hbox) {
-		VBox vboxGuerreros = new VBox();
-		vboxGuerreros.setAlignment(Pos.CENTER);
-		VBox vboxEnemigos = new VBox();
-		vboxEnemigos.setAlignment(Pos.CENTER);
-		
-		InputStream archivoImagenGuerreros = null;
-		try {
-			archivoImagenGuerreros = Files.newInputStream(Paths.get("src/vista/imagenes/guerreros.png"));
-		} catch (IOException e) {
-		}
-		
-		Image imagenGuerreros = new Image(archivoImagenGuerreros);
-		ImageView vistaImagenGuerreros = new ImageView(imagenGuerreros);
-		try {
-			archivoImagenGuerreros.close();
-		} catch (IOException e1) {
-		}
-		vistaImagenGuerreros.setFitWidth(700);
-		vistaImagenGuerreros.setPreserveRatio(true);
-		vistaImagenGuerreros.setTranslateY(ALTURA_EQUIPOS);
-		
-		DropShadow dsGuerreros= new DropShadow( 20, Color.GREEN );
-		DropShadow dsGuerreros2= new DropShadow();
-		vistaImagenGuerreros.setOnMouseMoved(evento ->{
-			vistaImagenGuerreros.setEffect(dsGuerreros);
-		});
-		vistaImagenGuerreros.setOnMouseExited(evento ->{
-			vistaImagenGuerreros.setEffect(dsGuerreros2);
-		});
-		
-		vistaImagenGuerreros.setOnMouseClicked(evento -> {
-			
-			 //el jugador 1 elige equipo GUERREROS
-			
-			juego.establecerEquipoJugador1(Constantes.GUERREROS);
-			juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
-			juego.iniciar();
-			Scene scene = new Scene(new VistaJuego(juego, stage));
-			scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
-			stage.setScene(scene);
-			stage.setFullScreen(true);
-			stage.setFullScreenExitHint("");
-			stage.setResizable(false);
-			stage.show();
-			
-		});
-		
-		vboxGuerreros.getChildren().add(vistaImagenGuerreros);
-		this.crearNombre(Constantes.GUERREROS, vboxGuerreros);
-		
-		InputStream archivoImagenEnemigos = null;
-		try {
-			archivoImagenEnemigos = Files.newInputStream(Paths.get("src/vista/imagenes/enemigos.png"));
-		} catch (IOException e) {
-		}
-		Image imagenEnemigos = new Image(archivoImagenEnemigos);
-		ImageView vistaImagenEnemigos = new ImageView(imagenEnemigos);
-		try {
-			archivoImagenEnemigos.close();
-		} catch (IOException e) {
-		}
-		vistaImagenEnemigos.setFitWidth(700);
-		vistaImagenEnemigos.setPreserveRatio(true);
-		vistaImagenEnemigos.setTranslateY(ALTURA_EQUIPOS);
-		
-		DropShadow dsEnemigos= new DropShadow( 20, Color.RED );
-		DropShadow dsEnemigos2= new DropShadow();
-		vistaImagenEnemigos.setOnMouseMoved(evento ->{
-			vistaImagenEnemigos.setEffect(dsEnemigos);
-		});
-		vistaImagenEnemigos.setOnMouseExited(evento ->{
-			vistaImagenEnemigos.setEffect(dsEnemigos2);
-		});
-		
-		vistaImagenEnemigos.setOnMouseClicked(evento -> {
-			//el jugador 1 elige equipo ENEMIGOS
-			juego.establecerEquipoJugador1(Constantes.ENEMIGOS);
-			juego.establecerEquipoJugador2(Constantes.GUERREROS);
-			juego.iniciar();
-			Scene scene = new Scene(new VistaJuego(juego, stage));
-			scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
-			stage.setScene(scene);
-			stage.setFullScreen(true);
-			stage.setFullScreenExitHint("");
-			stage.setResizable(false);
-			stage.show();
-		});
-		vboxEnemigos.getChildren().add(vistaImagenEnemigos);
-		this.crearNombre(Constantes.ENEMIGOS, vboxEnemigos);
+		VBox vboxGuerreros = this.crearSeleccionableEquipo(Constantes.GUERREROS, Constantes.ENEMIGOS);
+		VBox vboxEnemigos = this.crearSeleccionableEquipo(Constantes.ENEMIGOS, Constantes.GUERREROS);
 		
 		hbox.getChildren().add(vboxGuerreros);
 		hbox.getChildren().add(vboxEnemigos);
+		
+	}
+	
+	private VBox crearSeleccionableEquipo(String equipo, String enemigo){
+		
+		VBox vbox = new VBox();
+		vbox.setAlignment(Pos.CENTER);
+		
+		
+		InputStream archivoImagen = null;
+		try {
+			archivoImagen = Files.newInputStream(Paths.get("src/vista/imagenes/" + equipo + ".png"));
+		} catch (IOException e) {
+		}
+		
+		Image imagen = new Image(archivoImagen);
+		ImageView vistaImagen = new ImageView(imagen);
+		try {
+			archivoImagen.close();
+		} catch (IOException e1) {
+		}
+		vistaImagen.setFitWidth(700);
+		vistaImagen.setPreserveRatio(true);
+		vistaImagen.setTranslateY(ALTURA_EQUIPOS);
+		
+		DropShadow sombra1= new DropShadow( 20, Color.GREEN );
+		DropShadow sombra2= new DropShadow();
+		vistaImagen.setOnMouseMoved(evento ->{
+			vistaImagen.setEffect(sombra1);
+		});
+		vistaImagen.setOnMouseExited(evento ->{
+			vistaImagen.setEffect(sombra2);
+		});
+		
+		vistaImagen.setOnMouseClicked(evento -> {
+			
+			 
+			
+			juego.establecerEquipoJugador1(equipo);
+			juego.establecerEquipoJugador2(enemigo);
+			juego.iniciar();
+			Scene scene = new Scene(new VistaJuego(juego, stage));
+			scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
+			stage.setScene(scene);
+			stage.setFullScreen(true);
+			stage.setFullScreenExitHint("");
+			stage.setResizable(false);
+			stage.show();
+			
+		});
+		
+		vbox.getChildren().add(vistaImagen);
+		this.crearNombre(equipo, vbox);
+		
+		return vbox;
+	}
+	
+	private void crearNombre(String nombre, VBox vboxGuerreros) {
+
+		Text nombreGuerreros = new Text(nombre);
+		nombreGuerreros.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 120));
+		nombreGuerreros.setFill(Color.YELLOW);
+		nombreGuerreros.setTextAlignment(TextAlignment.CENTER);
+		vboxGuerreros.getChildren().add(nombreGuerreros);
 		
 	}
 
