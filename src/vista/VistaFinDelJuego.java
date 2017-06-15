@@ -1,5 +1,6 @@
 package vista;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -15,19 +16,21 @@ public class VistaFinDelJuego extends VBox {
 		this.mensajeFinJuego();
 		this.mensajeGanador(juego);
 		this.botonMenu(stage);
+		this.setAlignment(Pos.CENTER);
+		this.setSpacing(100);
 	}
 
 	private void mensajeFinJuego() {
-		Text finJuego = new Text("Termino El Juego");
-		finJuego.setFont(Font.font(30));
+		Text finJuego = new Text("Termino el Juego");
+		finJuego.setFont(Font.font("Castellar", 60));
 		this.getChildren().add(finJuego);
 	}
 	
 	private void mensajeGanador(DragonBall juego) {
 		Text mensaje = new Text("El ganador es:");
-		mensaje.setFont(Font.font(30));
+		mensaje.setFont(Font.font("Bahaus 93", 50));
 		Text ganador = new Text(juego.getGanador());
-		ganador.setFont(Font.font(20));
+		ganador.setFont(Font.font("Comic Sans MS", 40));
 		this.getChildren().addAll(mensaje, ganador);
 	}
 	
@@ -40,6 +43,7 @@ public class VistaFinDelJuego extends VBox {
 				stage.setScene(escenaMenu);
 				stage.setFullScreen(pantallaCompleta);
 		});
+		volver.setAlignment(Pos.CENTER);
 		this.getChildren().add(volver);
 	}
 

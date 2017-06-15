@@ -22,6 +22,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
@@ -58,15 +59,52 @@ public class VistaJuego extends VBox{
 		
 		this.juego = juego;
 		this.labelAcciones = new Label();
+		labelAcciones.setFont(Font.font("Calibri", 18));
 		this.crearBotonesAcciones();
 		this.actualizarVista();
 	}
 	
-
+	public void actualizarVista() {
+		if (juego.estaTerminado()){
+			this.terminarJuego();
+		}
+		this.getChildren().clear();
+		this.getChildren().add(this.actualizarTurnos());
+		HBox contenedorHorizontal = new HBox();
+		contenedorHorizontal.setAlignment(Pos.CENTER);
+		contenedorHorizontal.getChildren().add(this.espacioJugador1());
+		contenedorHorizontal.getChildren().add(this.actualizarCasilleros());
+		contenedorHorizontal.getChildren().add(this.espacioJugador2());
+		contenedorHorizontal.setPadding(new Insets(20));
+		contenedorHorizontal.setSpacing(100);
+		this.getChildren().add(contenedorHorizontal);
+		this.getChildren().add(this.contenedorBotonesAcciones);
+		this.setAlignment(Pos.CENTER);
+	}
+		
+	private void terminarJuego() {
+		Boolean pantallaCompleta = this.comprobarPantallaCompleta();
+		Scene fin = new Scene (new VistaFinDelJuego(juego,stage));
+		stage.setScene(fin);
+		stage.setFullScreen(pantallaCompleta);
+	}
+	
+	private Boolean comprobarPantallaCompleta() {
+		return stage.isFullScreen();
+	}
+	
+	private VBox espacioJugador1() {
+		return this.crearEspacioJugador(juego.getJugador1());
+	}
+	
+	private VBox espacioJugador2() {
+		return this.crearEspacioJugador(juego.getJugador2());
+	}
 
 	private VBox crearEspacioJugador(Jugador jugador){
 		Label nombre = new Label();
 		nombre.setText(jugador.getEquipo().getNombre());
+		nombre.setFont(Font.font("Comic Sans MS", 20));
 		VBox contenedor = new VBox (nombre);
 		int cantidadEsferas = jugador.getEquipo().getCantidadEsferas();
 		InputStream entradaImagen;
@@ -82,6 +120,7 @@ public class VistaJuego extends VBox{
 			contenedor.getChildren().add(this.crearBoxPersonaje(personaje));
 		}
 		contenedor.setAlignment(Pos.TOP_CENTER);
+		contenedor.setSpacing(10);
 		return contenedor;
 	}
 
@@ -92,8 +131,13 @@ public class VistaJuego extends VBox{
 		
 		Label nombre = new Label();
 		nombre.setText(personaje.getNombre());
+		nombre.setFont(Font.font("Bell MT", 17));
+		nombre.setUnderline(true);
+		
+		Label labelVacio = new Label();
+		
 		Label vida = new Label();
-		vida.setText("Vida: " + personaje.getVidaActual());
+		vida.setText("Vida: " + String.valueOf((int)personaje.getVidaActual()));
 		Label ki = new Label();
 		ki.setText("Ki: " + String.valueOf(personaje.getKi()));
 		Label velocidad = new Label();
@@ -101,35 +145,18 @@ public class VistaJuego extends VBox{
 		Label distanciaAtaque = new Label();
 		distanciaAtaque.setText("Distancia Ataque: " + String.valueOf(personaje.getDistanciaAtaque()));
 		
-		parametrosPersonaje.getChildren().addAll(nombre,vida,ki,velocidad,distanciaAtaque);
+		String letraParametros = "Calibri";
+		double tamanioParametros = 15;
+		
+		vida.setFont(Font.font(letraParametros, tamanioParametros));
+		ki.setFont(Font.font(letraParametros, tamanioParametros));
+		velocidad.setFont(Font.font(letraParametros, tamanioParametros));
+		distanciaAtaque.setFont(Font.font(letraParametros, tamanioParametros));
+		
+		parametrosPersonaje.getChildren().addAll(nombre,labelVacio,vida,ki,velocidad,distanciaAtaque);
 		box.getChildren().add(parametrosPersonaje);
 		box.setAlignment(Pos.CENTER);
 		return box;
-	}
-
-	private VBox espacioJugador1() {
-		return this.crearEspacioJugador(juego.getJugador1());
-	}
-	
-	private VBox espacioJugador2() {
-		return this.crearEspacioJugador(juego.getJugador2());
-	}
-
-
-	private ImageView crearFondo() {
-		InputStream entradaImagen;
-		try {
-			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo.jpg"));
-			Image imagen = new Image(entradaImagen);
-			entradaImagen.close();
-			ImageView vistaImagen = new ImageView(imagen);
-			vistaImagen.setFitWidth(Constantes.SIZE_TABLERO * BotonInvisible.anchoBoton);
-			vistaImagen.setFitHeight(Constantes.SIZE_TABLERO * BotonInvisible.altoBoton);
-			return vistaImagen;
-		} catch (IOException e) {
-			return null;
-		}
-		
 	}
 
 
@@ -169,51 +196,23 @@ public class VistaJuego extends VBox{
 	}
 
 
-	public void actualizarVista() {
-		if (juego.estaTerminado()){
-			this.terminarJuego();
-		}
-		this.getChildren().clear();
-		this.getChildren().add(this.actualizarTurnos());
-		HBox contenedorHorizontal = new HBox();
-		contenedorHorizontal.setAlignment(Pos.CENTER);
-		contenedorHorizontal.getChildren().add(this.espacioJugador1());
-		contenedorHorizontal.getChildren().add(this.actualizarCasilleros());
-		contenedorHorizontal.getChildren().add(this.espacioJugador2());
-		contenedorHorizontal.setPadding(new Insets(20));
-		contenedorHorizontal.setSpacing(100);
-		this.getChildren().add(contenedorHorizontal);
-		this.getChildren().add(this.contenedorBotonesAcciones);
-		this.setAlignment(Pos.CENTER);
-	}
-		
-	private void terminarJuego() {
-		Boolean pantallaCompleta = this.comprobarPantallaCompleta();
-		Scene fin = new Scene (new VistaFinDelJuego(juego,stage));
-		stage.setScene(fin);
-		stage.setFullScreen(pantallaCompleta);
-		
-	}
-
-	private Boolean comprobarPantallaCompleta() {
-		return stage.isFullScreen();
-	}
-
-
 
 	private VBox actualizarTurnos() {
 		Label labelTurnos = new Label();
 		labelTurnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
+		labelTurnos.setFont(Font.font("Comic Sans MS", 40));
+		labelTurnos.setUnderline(true);
 		labelAcciones.setText("Selecciona un personaje");
 		VBox contenedorLabels = new VBox(labelTurnos, labelAcciones);
 		contenedorLabels.setAlignment(Pos.CENTER);
+		contenedorLabels.setSpacing(12);
 		return contenedorLabels;
 	}
 
 
 	private StackPane actualizarCasilleros() {
 		StackPane contenedor = new StackPane();
-		contenedor.getChildren().add(this.crearFondo());
+		contenedor.getChildren().add(this.crearFondoTablero());
 		botonesCasilleros.clear();
 		botonesPersonajes.clear();
 		
@@ -260,6 +259,22 @@ public class VistaJuego extends VBox{
 		boton.deshabilitar();
 		fila.getChildren().add(boton);
 		this.botonesCasilleros.add(boton);
+	}
+	
+	private ImageView crearFondoTablero() {
+		InputStream entradaImagen;
+		try {
+			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo.jpg"));
+			Image imagen = new Image(entradaImagen);
+			entradaImagen.close();
+			ImageView vistaImagen = new ImageView(imagen);
+			vistaImagen.setFitWidth(Constantes.SIZE_TABLERO * BotonInvisible.anchoBoton);
+			vistaImagen.setFitHeight(Constantes.SIZE_TABLERO * BotonInvisible.altoBoton);
+			return vistaImagen;
+		} catch (IOException e) {
+			return null;
+		}
+		
 	}
 	
 }
