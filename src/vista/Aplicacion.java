@@ -25,6 +25,8 @@ public class Aplicacion extends Application {
 		MediaPlayer cancionFondo = new MediaPlayer(mediaCancionFondo);
 		cancionFondo.setAutoPlay(true);
 		cancionFondo.setVolume(0.1);
+		cancionFondo.setCycleCount(MediaPlayer.INDEFINITE);
+		
 //		cancionFondo.setMute(true);
 		
 		
