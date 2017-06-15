@@ -46,7 +46,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Gohan.poderPeleaFase1, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class TestGohan {
 		piccolo.recibirAtaque(danioPocavidaCompanieros);
 		try {
 			gohan.transformar();
-			Assert.assertEquals(Gohan.poderPeleaFase2, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -70,7 +70,7 @@ public class TestGohan {
 		piccolo.recibirAtaque(danioMataCompanieros);
 		try {
 			gohan.transformar();
-			Assert.assertEquals(Gohan.poderPeleaFase2, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -84,7 +84,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Gohan.poderPeleaFase1, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Gohan.poderPeleaFase1, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	

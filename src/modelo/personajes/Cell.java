@@ -10,15 +10,16 @@ public class Cell extends Personaje {
 	
 	public static final int vidaInicial = 500;
 	public static final int poderPeleaNormal = 20;
-	public static final int poderPeleaSemiPerfecto = 40;
-	public static final int poderPeleaPerfecto = 80;
-	public static final int cantidadAbsorcionesPrimerTranformacion=4;
-	public static final int cantidadAbsorcionesSegundaTranformacion=8;
+	public static final int poderPeleaPrimerTransformacion = 40;
+	public static final int poderPeleaSegundaTransformacion = 80;
 	public static final int distanciaAtaqueNormal=3;
-	public static final int distanciaAtaqueTranformado=4;
+	public static final int distanciaAtaquePrimerTransformacion=4;
+	public static final int distanciaAtaqueSegundaTransformacion=4;
 	public static final int velocidadNormal = 2;
 	public static final int velocidadPrimerTranformacion = 3;
 	public static final int velocidadSegundaTranformacion = 4;
+	public static final int cantidadAbsorcionesPrimerTranformacion=4;
+	public static final int cantidadAbsorcionesSegundaTranformacion=8;
 	
 	public Cell( Tablero tablero) {
 		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Cell"), new AtaqueAbsorver(5), tablero, 0, 0);
@@ -27,7 +28,7 @@ public class Cell extends Personaje {
 
 	@Override
 	public Modo realizarPrimeraTransformacion() {
-		return new PrimeraTransformacion(poderPeleaSemiPerfecto,distanciaAtaqueTranformado,velocidadPrimerTranformacion, "Cell Semi Perfecto");
+		return new PrimeraTransformacion(poderPeleaPrimerTransformacion,distanciaAtaquePrimerTransformacion,velocidadPrimerTranformacion, "Cell Semi Perfecto");
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class Cell extends Personaje {
 
 	@Override
 	public Modo realizarSegundaTransformacion() {
-		return new SegundaTransformacion(poderPeleaPerfecto,distanciaAtaqueTranformado,velocidadSegundaTranformacion, "Cell Perfecto");
+		return new SegundaTransformacion(poderPeleaSegundaTransformacion,distanciaAtaqueSegundaTransformacion,velocidadSegundaTranformacion, "Cell Perfecto");
 	}
 
 	@Override

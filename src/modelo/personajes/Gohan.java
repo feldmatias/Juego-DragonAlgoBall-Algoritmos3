@@ -10,14 +10,15 @@ public class Gohan extends Personaje{
 	
 	public static final int vidaInicial = 300;
 	public static final int poderPeleaNormal = 15;
-	public static final int poderPeleaFase1 = 30;
-	public static final int poderPeleaFase2 = 100;
+	public static final int poderPeleaPrimerTransformacion = 30;
+	public static final int poderPeleaSegundaTransformacion = 100;
 	public static final int distanciaAtaqueNormal=2;
-	public static final int distanciaAtaqueFase1=2;
-	public static final int distanciaAtaqueFase2=4;
+	public static final int distanciaAtaquePrimerTransformacion=2;
+	public static final int distanciaAtaqueSegundaTransformacion=4;
 	public static final int velocidadNormal = 2;
-	public static final int velocidadFase1 = 2;
-	public static final int velocidadFase2 = 3;
+	public static final int velocidadPrimerTransformacion = 2;
+	public static final int velocidadSegundaTransformacion = 3;
+	public static final int porcentajeVidaCompanierosParaSegundaTransformacion = 30;
 	
 	public Gohan(Tablero tablero) {
 		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Gohan"), new AtaquePotenciador(10,1.25), tablero, 10, 30);
@@ -26,7 +27,7 @@ public class Gohan extends Personaje{
 	@Override
 	public Modo realizarPrimeraTransformacion(){
 		super.restarKiPrimeraTransformacion();
-		return new PrimeraTransformacion(poderPeleaFase1,distanciaAtaqueFase1,velocidadFase1, "Gohan Super Sayajin 1");
+		return new PrimeraTransformacion(poderPeleaPrimerTransformacion,distanciaAtaquePrimerTransformacion,velocidadPrimerTransformacion, "Gohan Super Sayajin 1");
 	}
 	
 	@Override
@@ -37,7 +38,7 @@ public class Gohan extends Personaje{
 			if (personaje == this){
 				continue;
 			}
-			puedeTransformarse = puedeTransformarse && (personaje.getPorcentajeVida() < 30);
+			puedeTransformarse = puedeTransformarse && (personaje.getPorcentajeVida() < porcentajeVidaCompanierosParaSegundaTransformacion);
 		}
 		return puedeTransformarse;
 	}
@@ -45,6 +46,6 @@ public class Gohan extends Personaje{
 	@Override
 	public Modo realizarSegundaTransformacion() {
 		super.restarKiSegundaTransformacion();
-		return new SegundaTransformacion(poderPeleaFase2,distanciaAtaqueFase2,velocidadFase2, "Gohan Super Sayajin 2");
+		return new SegundaTransformacion(poderPeleaSegundaTransformacion,distanciaAtaqueSegundaTransformacion,velocidadSegundaTransformacion, "Gohan Super Sayajin 2");
 	}
 }

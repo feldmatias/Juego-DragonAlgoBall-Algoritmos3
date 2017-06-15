@@ -17,7 +17,7 @@ public class TestCasillero {
 	@Before
 	public void setUp() {
 		personaje = new Goku(null);
-		casillero1 = new Casillero(Goku.POS_X,Goku.POS_Y);
+		casillero1 = new Casillero(5,0);
 	}
 	
 	@Test

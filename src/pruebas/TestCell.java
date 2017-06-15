@@ -10,6 +10,7 @@ import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
 import modelo.personajes.Cell;
+import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 
@@ -71,7 +72,7 @@ public class TestCell {
 		} catch (AtaqueNoPosible e1) {}
 		try {
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaSemiPerfecto, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -87,7 +88,7 @@ public class TestCell {
 		}
 		try {
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaSemiPerfecto, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -104,7 +105,7 @@ public class TestCell {
 		} catch (AtaqueNoPosible e1) {}
 		try {
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaSemiPerfecto, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado: primera transformacion");
 		}
@@ -112,7 +113,7 @@ public class TestCell {
 			cell.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Cell.poderPeleaSemiPerfecto, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	
@@ -126,7 +127,7 @@ public class TestCell {
 		try {
 			cell.transformar();
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaPerfecto, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaSegundaTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -143,7 +144,7 @@ public class TestCell {
 		try {
 			cell.transformar();
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaPerfecto, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaSegundaTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -154,29 +155,29 @@ public class TestCell {
 	
 	@Test
 	public void testAbsorberRegeneraVida(){
-		double porcentajeVidaEsperado = 104; //se espera aumento 4% aumento luego del ataque
+		double vidaEsperada = Cell.vidaInicial + Cell.poderPeleaNormal;;
 		try {
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(porcentajeVidaEsperado, cell.getPorcentajeVida(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(vidaEsperada, cell.getVidaActual(), Constantes.porcentajeEsperado);
 		} catch (AtaqueNoPosible e) {}	
 	}
 	
 	@Test
 	public void testAbsorberDosVecesRegeneraVida(){
-		double porcentajeVidaEsperado = 108; // se espera aumento 8% luego de dos ataques
+		double vidaEsperada = Cell.vidaInicial + Cell.poderPeleaNormal * 2;
 		try {
 			cell.realizarAtaqueEspecial(goku);
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(porcentajeVidaEsperado,cell.getPorcentajeVida() , Constantes.porcentajeEsperado);
+			Assert.assertEquals(vidaEsperada,cell.getVidaActual() , Constantes.porcentajeEsperado);
 		} catch (AtaqueNoPosible e) {}
 	}
 	
 	@Test
 	public void testRealizarAtaqueEspecialYComprobarVidaEnemigo(){
-		double porcentajeVidaEsperado = 96; //se espera que tenga 4% menos de vida
+		double vidaEsperada = Goku.vidaInicial - Cell.poderPeleaNormal;
 		try {
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(porcentajeVidaEsperado, goku.getPorcentajeVida(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(vidaEsperada, goku.getVidaActual(), Constantes.porcentajeEsperado);
 		} catch (AtaqueNoPosible e) {}
 	}
 }

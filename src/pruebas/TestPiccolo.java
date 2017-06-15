@@ -45,7 +45,7 @@ public class TestPiccolo {
 			piccolo.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Piccolo.poderPeleaFortalecido, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Piccolo.poderPeleaPrimerTransformacion, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	
@@ -55,7 +55,7 @@ public class TestPiccolo {
 		gohan.recibirAtaque(danioParaPocaVidaGohan);
 		try {
 			piccolo.transformar();
-			Assert.assertEquals(Piccolo.poderPeleaProtector, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Piccolo.poderPeleaSegundaTransformacion, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -67,7 +67,7 @@ public class TestPiccolo {
 		gohan.recibirAtaque(danioParaMuerteDeGohan);
 		try {
 			piccolo.transformar();
-			Assert.assertEquals(Piccolo.poderPeleaProtector, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Piccolo.poderPeleaSegundaTransformacion, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("deberia haberse Transformado");
 		}
@@ -82,7 +82,7 @@ public class TestPiccolo {
 			piccolo.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Piccolo.poderPeleaFortalecido, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Piccolo.poderPeleaPrimerTransformacion, piccolo.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 }

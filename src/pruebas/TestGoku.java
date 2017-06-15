@@ -13,9 +13,6 @@ import modelo.utilidades.Constantes;
 public class TestGoku {
 
 	public static final int danioParaPocaVida = 480;
-	public static final double poderPeleaconPocavida = 24;
-	public static final double poderPeleaconPocavidaKaioKen = 48;
-	public static final double poderPeleaconPocavidaSayajin = 72;
 	
 	
 	private Goku goku;
@@ -33,7 +30,8 @@ public class TestGoku {
 	@Test
 	public void testGokuPocaVidaTienePoderPeleaMayor(){
 		goku.recibirAtaque(danioParaPocaVida);
-		Assert.assertEquals(poderPeleaconPocavida, goku.getPoderPelea(), Constantes.porcentajeEsperado);
+		double poderPeleaEsperado = Goku.poderPeleaNormal * Goku.multiplicadorPocaVida;
+		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
@@ -42,10 +40,11 @@ public class TestGoku {
 			goku.generarKi();
 		}
 		goku.recibirAtaque(danioParaPocaVida);
+		double poderPeleaEsperado = Goku.poderPeleaPrimerTransformacion * Goku.multiplicadorPocaVida;
 		try {
 			goku.transformar();
 		} catch (TransformacionNoPosible e) {}
-		Assert.assertEquals(poderPeleaconPocavidaKaioKen, goku.getPoderPelea(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
@@ -54,11 +53,12 @@ public class TestGoku {
 			goku.generarKi();
 		}
 		goku.recibirAtaque(danioParaPocaVida);
+		double poderPeleaEsperado = Goku.poderPeleaSegundaTransformacion * Goku.multiplicadorPocaVida;
 		try {
 			goku.transformar();
 			goku.transformar();
 		} catch (TransformacionNoPosible e) {}
-		Assert.assertEquals(poderPeleaconPocavidaSayajin, goku.getPoderPelea(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 
 }
