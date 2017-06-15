@@ -34,13 +34,16 @@ public class VistaFinDelJuego extends VBox {
 	private void botonMenu(Stage stage) {
 		BotonMenu volver = new BotonMenu("Volver al Menu Principal");
 		volver.setOnMouseClicked( evento -> {
+				Boolean pantallaCompleta = this.comprobarPantallaCompleta(stage);
 				MenuPrincipal menu = new MenuPrincipal(stage);
 				Scene escenaMenu = new Scene (menu);
 				stage.setScene(escenaMenu);
-				stage.setFullScreen(true);
-				stage.setFullScreenExitHint("");
-				stage.setResizable(false);
+				stage.setFullScreen(pantallaCompleta);
 		});
 		this.getChildren().add(volver);
+	}
+
+	private Boolean comprobarPantallaCompleta(Stage stage) {
+		return stage.isFullScreen();
 	}
 }

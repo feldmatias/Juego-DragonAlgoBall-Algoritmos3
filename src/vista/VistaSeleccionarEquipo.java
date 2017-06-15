@@ -115,12 +115,11 @@ public class VistaSeleccionarEquipo extends VBox{
 			juego.establecerEquipoJugador1(equipo);
 			juego.establecerEquipoJugador2(enemigo);
 			juego.iniciar();
+			Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 			Scene scene = new Scene(new VistaJuego(juego, stage));
 			scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
 			stage.setScene(scene);
-			stage.setFullScreen(true);
-			stage.setFullScreenExitHint("");
-			stage.setResizable(false);
+			stage.setFullScreen(pantallaCompleta);
 			stage.show();
 			
 		});
@@ -131,6 +130,11 @@ public class VistaSeleccionarEquipo extends VBox{
 		return vbox;
 	}
 	
+	private Boolean comprobarPantallaCompleta() {
+		return stage.isFullScreen();
+	}
+
+
 	private void crearNombre(String nombre, VBox vboxGuerreros) {
 
 		Text nombreGuerreros = new Text(nombre);

@@ -63,11 +63,13 @@ public class BotonMenu extends StackPane {
 		
 	}
 	
-	public void efectoDeshabilitado(){
+	public void deshabilitar(){
 		this.fondo.setFill(Color.GRAY);
+		this.setDisable(true);
 	}
-	public void efectoHabilitado(){
+	public void habilitar(){
 		this.fondo.setFill(Color.ORANGE);
+		this.setDisable(false);
 	}
 	
 }

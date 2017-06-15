@@ -60,23 +60,18 @@ public class MenuPrincipal extends StackPane{
 			opcionesEfectosSonido.setTranslateY(menuOpciones.getTranslateY() +compensacion  + 50);
 			
 			btnContinuar = new BotonMenu ("CONTINUAR PARTIDA");
-			
-			if (vistaJuego == null){
-				btnContinuar.setDisable(true);
-				btnContinuar.efectoDeshabilitado();
-			}
+			btnContinuar.deshabilitar();
 				
 			
 			BotonMenu btnEmpezar = new BotonMenu ("NUEVA PARTIDA");
 			btnEmpezar.setOnMouseClicked( evento1 -> {
 				DragonBall juego = new DragonBall();
 	
-				btnContinuar.efectoHabilitado();
+				btnContinuar.habilitar();
+				Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage, this));
 				stage.setScene(scene);
-				stage.setFullScreen(true);
-				stage.setFullScreenExitHint("");
-				stage.setResizable(false);
+				stage.setFullScreen(pantallaCompleta);
 				stage.show();
 				
 			});
@@ -210,15 +205,18 @@ public class MenuPrincipal extends StackPane{
 			
 		}
 		
+		private Boolean comprobarPantallaCompleta() {
+			return stage.isFullScreen();
+		}
+
 		public void habilitarContinuar(Scene vista){
 			this.vistaJuego = vista;
 			btnContinuar.setDisable(false);
 			btnContinuar.setOnMouseClicked( evento1 -> {
-
+				
+				Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 				stage.setScene(vistaJuego);
-				stage.setFullScreen(true);
-				stage.setFullScreenExitHint("");
-				stage.setResizable(false);
+				stage.setFullScreen(pantallaCompleta);
 				stage.show();
 				
 			});

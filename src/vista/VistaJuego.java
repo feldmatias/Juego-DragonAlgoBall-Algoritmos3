@@ -188,13 +188,18 @@ public class VistaJuego extends VBox{
 	}
 		
 	private void terminarJuego() {
+		Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 		Scene fin = new Scene (new VistaFinDelJuego(juego,stage));
 		stage.setScene(fin);
-		stage.setFullScreen(true);
-		stage.setFullScreenExitHint("");
-		stage.setResizable(false);
+		stage.setFullScreen(pantallaCompleta);
 		
 	}
+
+	private Boolean comprobarPantallaCompleta() {
+		return stage.isFullScreen();
+	}
+
+
 
 	private VBox actualizarTurnos() {
 		Label labelTurnos = new Label();

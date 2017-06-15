@@ -23,13 +23,14 @@ public class VolverAlMenuEventHandler implements EventHandler<KeyEvent> {
 	public void handle(KeyEvent event) {
 		if (event.getCode() == KeyCode.ESCAPE) {
 			menu.habilitarContinuar(vistaJuego);
-			
+			Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 			stage.setScene(menu.getScene());
-			stage.setFullScreen(true);
-			stage.setFullScreenExitHint("");
-			stage.setResizable(false);
-			stage.show();
+			stage.setFullScreen(pantallaCompleta);
         }
+	}
+
+	private Boolean comprobarPantallaCompleta() {
+		return stage.isFullScreen();
 	}
 
 }
