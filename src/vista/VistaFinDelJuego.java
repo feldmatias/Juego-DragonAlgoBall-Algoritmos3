@@ -38,5 +38,6 @@ public class VistaFinDelJuego extends VBox {
 				Scene escenaMenu = new Scene (menu);
 				stage.setScene(escenaMenu);
 		});
+		this.getChildren().add(volver);
 	}
 }
