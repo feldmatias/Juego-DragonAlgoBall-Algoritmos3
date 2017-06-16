@@ -1,6 +1,10 @@
 package modelo.excepciones;
 
-public class TransformacionNoPosible extends Exception{
+public class TransformacionNoPosible extends ExcepcionConMensaje{
+
+	public TransformacionNoPosible(String mensaje) {
+		super(mensaje);
+	}
 
 	/**
 	 * 

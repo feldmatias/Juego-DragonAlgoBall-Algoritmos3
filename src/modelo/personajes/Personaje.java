@@ -6,13 +6,13 @@ import java.util.List;
 import modelo.consumibles.Efecto;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.MovimientoNoPosible;
-import modelo.excepciones.PosicionFueraDeRango;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Equipo;
 import modelo.juego.Posicion;
 import modelo.juego.Tablero;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoInmovilizado;
+import modelo.utilidades.Constantes;
 import vista.Posicionable;
 
 public abstract class Personaje implements Posicionable{
@@ -25,10 +25,11 @@ public abstract class Personaje implements Posicionable{
 	private Tablero tablero;
 	private List<Efecto> listadoEfectos;
 	protected AtaqueEspecial ataqueEspecial;
-	private int kiNecesarioModoTransformado;
-	private int kiNecesarioModoFinal;
+	private int kiNecesarioPrimeraTransformacion;
+	private int kiNecesarioSegundaTransformacion;
 	
-	public Personaje(int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, Tablero tablero, int kiNecesarioModoTransformado, int kiNecesarioModoFinal){
+	public Personaje(int vidaInicial, Modo modoInicial, AtaqueEspecial ataqueEspecial, Tablero tablero, 
+			int kiNecesarioPrimeraTransformacion, int kiNecesarioSegundaTransformacion){
 		this.vidaInicial = vidaInicial;
 		this.vidaActual = vidaInicial;
 		this.ki = 0;
@@ -36,8 +37,8 @@ public abstract class Personaje implements Posicionable{
 		this.tablero = tablero;
 		this.listadoEfectos = new ArrayList<Efecto>();
 		this.ataqueEspecial = ataqueEspecial;
-		this.kiNecesarioModoTransformado = kiNecesarioModoTransformado;
-		this.kiNecesarioModoFinal = kiNecesarioModoFinal;
+		this.kiNecesarioPrimeraTransformacion = kiNecesarioPrimeraTransformacion;
+		this.kiNecesarioSegundaTransformacion = kiNecesarioSegundaTransformacion;
 	}
 	
 	public void setEquipo(Equipo equipo){
@@ -99,14 +100,17 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	public void atacarAPersonaje(Personaje enemigo) throws AtaqueNoPosible{
-		if (!this.puedeAtacarA(enemigo)){
-			throw new AtaqueNoPosible();
-		}
+		this.puedeAtacarA(enemigo);
 		enemigo.recibirAtaque(this.getPoderPelea());
 	}
 	
-	public boolean puedeAtacarA(Personaje enemigo){
-		return (!this.equipo.pertenece(enemigo)) && this.alcanzaDistanciaAtaque(enemigo);
+	public void puedeAtacarA(Personaje enemigo) throws AtaqueNoPosible{
+		if (this.equipo.pertenece(enemigo)){
+			throw new AtaqueNoPosible(Constantes.ErrorAtaqueEnemigoMismoEquipo);
+		}
+		if (!this.alcanzaDistanciaAtaque(enemigo)){
+			throw new AtaqueNoPosible(Constantes.ErrorAtaqueEnemigoLejano);
+		}
 	}
 
 	private boolean alcanzaDistanciaAtaque(Personaje enemigo) {
@@ -122,27 +126,20 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	public void mover(Posicion nuevaPosicion) throws MovimientoNoPosible{
-		if (! this.puedeMoverse(nuevaPosicion)){
-			throw new MovimientoNoPosible();
-		}
-		try {
-			this.tablero.reposicionarPersonaje(this , nuevaPosicion);
-		}
-		catch(PosicionFueraDeRango e){
-			throw new MovimientoNoPosible();
-		}
+		this.puedeMoverse(nuevaPosicion);
+		this.tablero.reposicionarPersonaje(this , nuevaPosicion);
 	}
 	
-	private boolean puedeMoverse(Posicion nuevaPosicion){
+	private void puedeMoverse(Posicion nuevaPosicion) throws MovimientoNoPosible{
 		
-		return this.tablero.personajePuedeMoverse(this, nuevaPosicion);
+		if (!this.tablero.personajePuedeMoverse(this, nuevaPosicion)){
+			throw new MovimientoNoPosible(Constantes.ErrorMovimientoLejano);
+		}
 		
 	}
 	
 	public void transformar() throws TransformacionNoPosible{
-		if (!this.modoActual.puedeTransformarse(this)){
-			throw new TransformacionNoPosible();
-		}
+		this.modoActual.puedeTransformarse(this);
 		this.modoActual = this.modoActual.transformar(this);
 	}
 	
@@ -179,14 +176,18 @@ public abstract class Personaje implements Posicionable{
 
 	public abstract Modo realizarPrimeraTransformacion();
 
-	public boolean puedeRealizarPrimeraTransformacion(){
-		return this.comprobarKiNecesario(kiNecesarioModoTransformado);
+	public void puedeRealizarPrimeraTransformacion() throws TransformacionNoPosible{
+		if (!this.comprobarKiNecesario(kiNecesarioPrimeraTransformacion)){
+			throw new TransformacionNoPosible(Constantes.ErrorTransformacionKiInsuficiente);
+		}
 	}
 
 	public abstract Modo realizarSegundaTransformacion();
 
-	public boolean puedeRealizarSegundaTransformacion(){
-		return this.comprobarKiNecesario(kiNecesarioModoFinal);
+	public void puedeRealizarSegundaTransformacion() throws TransformacionNoPosible{
+		if (!this.comprobarKiNecesario(kiNecesarioSegundaTransformacion)){
+			throw new TransformacionNoPosible(Constantes.ErrorTransformacionKiInsuficiente);
+		}
 	}
 
 	public void agregarEsferaAColeccion() {
@@ -195,11 +196,11 @@ public abstract class Personaje implements Posicionable{
 	}
 	
 	public void restarKiPrimeraTransformacion(){
-		this.restarKi(kiNecesarioModoTransformado);
+		this.restarKi(kiNecesarioPrimeraTransformacion);
 	}
 	
 	public void restarKiSegundaTransformacion(){
-		this.restarKi(kiNecesarioModoFinal);
+		this.restarKi(kiNecesarioSegundaTransformacion);
 	}
 
 

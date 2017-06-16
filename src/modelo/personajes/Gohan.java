@@ -1,10 +1,12 @@
 package modelo.personajes;
 
+import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Tablero;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoNormal;
 import modelo.personajes.modos.PrimeraTransformacion;
 import modelo.personajes.modos.SegundaTransformacion;
+import modelo.utilidades.Constantes;
 
 public class Gohan extends Personaje{
 	
@@ -31,16 +33,17 @@ public class Gohan extends Personaje{
 	}
 	
 	@Override
-	public boolean puedeRealizarSegundaTransformacion() {
-		boolean puedeTransformarse = super.puedeRealizarSegundaTransformacion();
+	public void puedeRealizarSegundaTransformacion() throws TransformacionNoPosible {
+		super.puedeRealizarSegundaTransformacion();
 		
 		for (Personaje personaje: this.getEquipo().getMiembros()){
 			if (personaje == this){
 				continue;
 			}
-			puedeTransformarse = puedeTransformarse && (personaje.getPorcentajeVida() < porcentajeVidaCompanierosParaSegundaTransformacion);
+			if (personaje.getPorcentajeVida() >= porcentajeVidaCompanierosParaSegundaTransformacion){
+				throw new TransformacionNoPosible(Constantes.ErrorTransformacionGohan);
+			}
 		}
-		return puedeTransformarse;
 	}
 
 	@Override

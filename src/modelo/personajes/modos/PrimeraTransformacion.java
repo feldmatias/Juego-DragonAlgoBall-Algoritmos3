@@ -1,5 +1,6 @@
 package modelo.personajes.modos;
 
+import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Personaje;
 
 public class PrimeraTransformacion extends Modo {
@@ -15,8 +16,8 @@ public class PrimeraTransformacion extends Modo {
 	}
 
 	@Override
-	public boolean puedeTransformarse(Personaje personaje) {
-		return personaje.puedeRealizarSegundaTransformacion();
+	public void puedeTransformarse(Personaje personaje) throws TransformacionNoPosible {
+		personaje.puedeRealizarSegundaTransformacion();
 	}
 
 }

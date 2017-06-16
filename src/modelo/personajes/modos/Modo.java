@@ -1,5 +1,6 @@
 package modelo.personajes.modos;
 
+import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Personaje;
 
 public abstract class Modo {
@@ -30,7 +31,7 @@ public abstract class Modo {
 
 	public abstract Modo transformar(Personaje personaje);
 
-	public abstract boolean puedeTransformarse(Personaje personaje);
+	public abstract void puedeTransformarse(Personaje personaje) throws TransformacionNoPosible;
 	
 	public void empezarTurno(Personaje personaje){
 		personaje.generarKi();

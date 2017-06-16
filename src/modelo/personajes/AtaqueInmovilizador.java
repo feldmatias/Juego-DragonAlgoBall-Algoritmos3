@@ -18,9 +18,8 @@ public class AtaqueInmovilizador extends AtaqueEspecial {
 	
 	@Override
 	public void ataqueEspecial(Personaje atacante, Personaje enemigo) throws AtaqueNoPosible{
-		if (!this.ataquePosible(atacante, enemigo)){
-			throw new AtaqueNoPosible();
-		}
+		this.ataquePosible(atacante, enemigo);
+			
 		enemigo.inmovilizar();
 		this.restarKi(atacante);
 	}

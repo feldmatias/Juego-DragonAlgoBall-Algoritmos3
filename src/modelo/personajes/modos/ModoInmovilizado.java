@@ -2,6 +2,7 @@ package modelo.personajes.modos;
 
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Personaje;
+import modelo.utilidades.Constantes;
 
 public class ModoInmovilizado extends Modo {
 
@@ -21,20 +22,27 @@ public class ModoInmovilizado extends Modo {
 	}
 
 	@Override
-	public boolean puedeTransformarse(Personaje personaje) {
-		return this.turnosRestantes == 0;
+	public void puedeTransformarse(Personaje personaje) throws TransformacionNoPosible {
+		if (! (this.turnosRestantes <= 0)){
+			throw new TransformacionNoPosible(Constantes.ErrorTransformacionInmovilizado);
+		}
 	}
 	
 	@Override
 	public void empezarTurno(Personaje personaje){
 		this.turnosRestantes -= 1;
-		if (this.turnosRestantes == 0){
-			try {
-				personaje.transformar();
-			} catch (TransformacionNoPosible e) {
-			}
-			personaje.empezarTurno();
+		if (this.turnosRestantes <= 0){
+			this.volverAModoNormal(personaje);
 		}
+	}
+
+
+	private void volverAModoNormal(Personaje personaje) {
+		try {
+			personaje.transformar();
+		} catch (TransformacionNoPosible e) {
+		}
+		personaje.empezarTurno();
 	}
 
 }

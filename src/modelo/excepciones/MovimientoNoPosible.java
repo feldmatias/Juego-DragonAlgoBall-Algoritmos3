@@ -1,6 +1,10 @@
 package modelo.excepciones;
 
-public class MovimientoNoPosible extends Exception {
+public class MovimientoNoPosible extends ExcepcionConMensaje {
+
+	public MovimientoNoPosible(String mensaje) {
+		super(mensaje);
+	}
 
 	/**
 	 * 

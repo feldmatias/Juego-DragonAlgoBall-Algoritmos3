@@ -1,10 +1,12 @@
 package modelo.personajes;
 
+import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Tablero;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoNormal;
 import modelo.personajes.modos.PrimeraTransformacion;
 import modelo.personajes.modos.SegundaTransformacion;
+import modelo.utilidades.Constantes;
 
 public class Cell extends Personaje {
 	
@@ -32,8 +34,10 @@ public class Cell extends Personaje {
 	}
 
 	@Override
-	public boolean puedeRealizarPrimeraTransformacion() {
-		return this.getCantidadAbsorciones() >= cantidadAbsorcionesPrimerTranformacion;
+	public void puedeRealizarPrimeraTransformacion() throws TransformacionNoPosible {
+		if (this.getCantidadAbsorciones() < cantidadAbsorcionesPrimerTranformacion){
+			throw new TransformacionNoPosible(Constantes.ErrorTransformacionCell);
+		}
 	}
 
 
@@ -43,8 +47,10 @@ public class Cell extends Personaje {
 	}
 
 	@Override
-	public boolean puedeRealizarSegundaTransformacion() {
-		return this.getCantidadAbsorciones() >= cantidadAbsorcionesSegundaTranformacion;
+	public void puedeRealizarSegundaTransformacion() throws TransformacionNoPosible {
+		if (this.getCantidadAbsorciones() < cantidadAbsorcionesSegundaTranformacion){
+			throw new TransformacionNoPosible(Constantes.ErrorTransformacionCell);
+		}
 	}
 	
 	private int getCantidadAbsorciones(){

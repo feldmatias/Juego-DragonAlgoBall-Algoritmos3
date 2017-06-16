@@ -1,10 +1,12 @@
 package modelo.personajes;
 
+import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.Tablero;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoNormal;
 import modelo.personajes.modos.PrimeraTransformacion;
 import modelo.personajes.modos.SegundaTransformacion;
+import modelo.utilidades.Constantes;
 
 public class Piccolo extends Personaje {
 	
@@ -36,14 +38,15 @@ public class Piccolo extends Personaje {
 	}
 	
 	@Override
-	public boolean puedeRealizarSegundaTransformacion() {
+	public void puedeRealizarSegundaTransformacion() throws TransformacionNoPosible {
 
 		for (Personaje personaje: this.getEquipo().getMiembros()){
 			if (personaje.getNombre() == "Gohan"){
-				return personaje.getPorcentajeVida() < porcentajeVidaGohanParaSegundaTransformacion;
+				if (personaje.getPorcentajeVida() >= porcentajeVidaGohanParaSegundaTransformacion){
+					throw new TransformacionNoPosible(Constantes.ErrorTransformacionPiccolo);
+				}
 			}
 		}
-		return true; //Gohan esta muerto
 	}
 
 }
