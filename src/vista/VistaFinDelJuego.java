@@ -9,10 +9,11 @@ import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 
 public class VistaFinDelJuego extends VBox {
-
+	LibreriaSonidos sonidos;
 	
-	public VistaFinDelJuego(DragonBall juego, Stage stage){
+	public VistaFinDelJuego(DragonBall juego, Stage stage,LibreriaSonidos sonidos){
 		
+		this.sonidos = sonidos;
 		this.mensajeFinJuego();
 		this.mensajeGanador(juego);
 		this.botonMenu(stage);
@@ -38,7 +39,7 @@ public class VistaFinDelJuego extends VBox {
 		BotonMenu volver = new BotonMenu("Volver al Menu Principal");
 		volver.setOnMouseClicked( evento -> {
 				Boolean pantallaCompleta = this.comprobarPantallaCompleta(stage);
-				MenuPrincipal menu = new MenuPrincipal(stage);
+				MenuPrincipal menu = new MenuPrincipal(stage,sonidos);
 				Scene escenaMenu = new Scene (menu);
 				stage.setScene(escenaMenu);
 				stage.setFullScreen(pantallaCompleta);

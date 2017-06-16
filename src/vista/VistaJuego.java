@@ -46,20 +46,22 @@ public class VistaJuego extends VBox{
 	private Map <Personaje,BotonInvisible> botonesPersonajes;
 	private Label labelAcciones;
 	private HBox contenedorBotonesAcciones;
-	public Media archivoSonidoError = new Media(new File("src/vista/sonidos/sonido error.wav").toURI().toString());
-	public MediaPlayer sonidoError = new MediaPlayer(archivoSonidoError);
+	public LibreriaSonidos sonidos;
 	private Stage stage;
 
 	
-	public VistaJuego(DragonBall juego, Stage stage){
+	public VistaJuego(DragonBall juego, Stage stage,LibreriaSonidos sonidos){
+		
 		this.stage = stage;
-		
-		botonesCasilleros = new ArrayList<BotonInvisible>();
-		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
-		
+		this.sonidos = sonidos;
 		this.juego = juego;
 		this.labelAcciones = new Label();
 		labelAcciones.setFont(Font.font("Calibri", 18));
+		
+		botonesCasilleros = new ArrayList<BotonInvisible>();
+		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
+
+		
 		this.crearBotonesAcciones();
 		this.actualizarVista();
 	}
@@ -84,7 +86,7 @@ public class VistaJuego extends VBox{
 		
 	private void terminarJuego() {
 		Boolean pantallaCompleta = this.comprobarPantallaCompleta();
-		Scene fin = new Scene (new VistaFinDelJuego(juego,stage));
+		Scene fin = new Scene (new VistaFinDelJuego(juego,stage,this.sonidos));
 		stage.setScene(fin);
 		stage.setFullScreen(pantallaCompleta);
 	}
@@ -243,7 +245,7 @@ public class VistaJuego extends VBox{
 	private void nuevoBotonPersonaje(HBox fila, Personaje personaje) {
 		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, labelAcciones, this);
 		//Ver labels
-		BotonInvisible boton = new BotonPersonaje(personaje, juego,sonidoError);
+		BotonInvisible boton = new BotonPersonaje(personaje, juego,this.sonidos);
 		boton.setOnAction(eventHandler);
 		boton.habilitar();
 		fila.getChildren().add(boton);
@@ -252,7 +254,7 @@ public class VistaJuego extends VBox{
 
 
 	private void nuevoBotonCasilleroVacio(HBox fila, Posicion pos, Casillero casillero) {
-		BotonInvisible boton = new BotonCasilleroVacio(casillero,sonidoError);
+		BotonInvisible boton = new BotonCasilleroVacio(casillero,this.sonidos);
 
 		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this,boton);
 		//ver LABELS

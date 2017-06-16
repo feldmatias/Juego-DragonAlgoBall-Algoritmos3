@@ -14,15 +14,16 @@ public class Aplicacion extends Application {
 
 	private MenuPrincipal menuJuego;
 	private Stage stage;
+	private LibreriaSonidos sonidos ;
 	
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.stage = primaryStage;
+		this.sonidos = new LibreriaSonidos();
 		
 
-		Media mediaCancionFondo = new Media(new File("src/vista/sonidos/Dragon Ball opening.mp3").toURI().toString());
-		MediaPlayer cancionFondo = new MediaPlayer(mediaCancionFondo);
+		MediaPlayer cancionFondo = sonidos.getMusica();
 		cancionFondo.setAutoPlay(true);
 		cancionFondo.setVolume(0.1);
 		cancionFondo.setCycleCount(MediaPlayer.INDEFINITE);
@@ -30,7 +31,9 @@ public class Aplicacion extends Application {
 //		cancionFondo.setMute(true);
 		
 		
-		this.menuJuego = new MenuPrincipal(stage);
+		this.menuJuego = new MenuPrincipal(stage,sonidos);
+		
+		
 		
 		Scene scene = new Scene(menuJuego);
 		

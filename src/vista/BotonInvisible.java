@@ -11,20 +11,26 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Screen;
 
 public abstract class BotonInvisible extends StackPane{
+	
+	public static int medida = (int) (Screen.getPrimary().getVisualBounds().getHeight()/12.5);
 
-	public static int anchoBoton = 60;
-	public static int altoBoton = 60;
+	public static int anchoBoton = medida;
+	public static int altoBoton = medida;
 	private Rectangle boton;
 	private Node imagenFondo;
 	private MediaPlayer sonidoError;
+	LibreriaSonidos sonidos;
 	
-	public BotonInvisible(Node imagenFondo,MediaPlayer sonidoError){
+	
+	public BotonInvisible(Node imagenFondo,LibreriaSonidos sonidos){
 		this.imagenFondo = imagenFondo;
 		this.getChildren().add(imagenFondo);
-		this.sonidoError = sonidoError;
-		this.sonidoError.setVolume(0.1);
+//		this.sonidoError = soni
+		this.sonidos = sonidos;
+//		this.sonidoError.setVolume(0.1);
 		this.crearBoton();
 	}
 
@@ -84,10 +90,11 @@ public abstract class BotonInvisible extends StackPane{
 	}
 	
 	public void lanzarSonidoError(){
-		this.sonidoError.play();
+		this.sonidos.getSonidoError().play();
 	}
+	
 	public void pararSonidoError(){
-		this.sonidoError.stop();
+		this.sonidos.getSonidoError().stop();
 	}
 	
 }

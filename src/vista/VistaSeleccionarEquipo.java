@@ -31,9 +31,10 @@ public class VistaSeleccionarEquipo extends VBox{
 	private Stage stage;
 	private MenuPrincipal menu;
 	public static final int ALTURA_EQUIPOS = 0;
+	private LibreriaSonidos sonidos;
 	
-	public VistaSeleccionarEquipo(DragonBall juego, Stage stage, MenuPrincipal menu){
-		
+	public VistaSeleccionarEquipo(DragonBall juego, Stage stage, MenuPrincipal menu,LibreriaSonidos sonidos){
+		this.sonidos = sonidos;
 		this.juego = juego;
 		this.stage = stage;
 		this.menu = menu;
@@ -69,15 +70,15 @@ public class VistaSeleccionarEquipo extends VBox{
 	}
 
 	private void crearSeleccionables(HBox hbox) {
-		VBox vboxGuerreros = this.crearSeleccionableEquipo(Constantes.GUERREROS, Constantes.ENEMIGOS);
-		VBox vboxEnemigos = this.crearSeleccionableEquipo(Constantes.ENEMIGOS, Constantes.GUERREROS);
+		VBox vboxGuerreros = this.crearSeleccionableEquipo(Constantes.GUERREROS, Constantes.ENEMIGOS, Color.GREEN);
+		VBox vboxEnemigos = this.crearSeleccionableEquipo(Constantes.ENEMIGOS, Constantes.GUERREROS, Color.RED);
 		
 		hbox.getChildren().add(vboxGuerreros);
 		hbox.getChildren().add(vboxEnemigos);
 		
 	}
 	
-	private VBox crearSeleccionableEquipo(String equipo, String enemigo){
+	private VBox crearSeleccionableEquipo(String equipo, String enemigo,Color color){
 		
 		VBox vbox = new VBox();
 		vbox.setAlignment(Pos.CENTER);
@@ -99,7 +100,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		vistaImagen.setPreserveRatio(true);
 		vistaImagen.setTranslateY(ALTURA_EQUIPOS);
 		
-		DropShadow sombra1= new DropShadow( 20, Color.GREEN );
+		DropShadow sombra1= new DropShadow( 20, color);
 		DropShadow sombra2= new DropShadow();
 		vistaImagen.setOnMouseMoved(evento ->{
 			vistaImagen.setEffect(sombra1);
@@ -116,7 +117,7 @@ public class VistaSeleccionarEquipo extends VBox{
 			juego.establecerEquipoJugador2(enemigo);
 			juego.iniciar();
 			Boolean pantallaCompleta = this.comprobarPantallaCompleta();
-			Scene scene = new Scene(new VistaJuego(juego, stage));
+			Scene scene = new Scene(new VistaJuego(juego, stage,this.sonidos));
 			scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
 			stage.setScene(scene);
 			stage.setFullScreen(pantallaCompleta);

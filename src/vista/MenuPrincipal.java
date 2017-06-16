@@ -24,9 +24,11 @@ public class MenuPrincipal extends StackPane{
 		private Scene vistaJuego = null;
 		private BotonMenu btnContinuar;
 		private Stage stage;
+		private LibreriaSonidos sonidos;
 		
-		public MenuPrincipal(Stage stage) {
+		public MenuPrincipal(Stage stage,LibreriaSonidos sonidos) {
 			this.stage = stage;
+			this.sonidos = sonidos;
 			
 			InputStream entradaImagen;
 			try {
@@ -69,7 +71,7 @@ public class MenuPrincipal extends StackPane{
 	
 				btnContinuar.habilitar();
 				Boolean pantallaCompleta = this.comprobarPantallaCompleta();
-				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage, this));
+				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage, this,this.sonidos));
 				stage.setScene(scene);
 				stage.setFullScreen(pantallaCompleta);
 				stage.show();
@@ -80,6 +82,9 @@ public class MenuPrincipal extends StackPane{
 			BotonMenu btnOpciones = new BotonMenu("OPCIONES");
 			btnOpciones.setOnMouseClicked(evento1 -> {
 				this.getChildren().addAll(menuOpciones);
+				
+			
+				
 				TranslateTransition transicionTraslado1 = new TranslateTransition(Duration.seconds(0.25),menuPrincipal);
 				transicionTraslado1.setToX( menuPrincipal.getTranslateX() - compensacion );
 				
@@ -129,15 +134,21 @@ public class MenuPrincipal extends StackPane{
 			btnSonido.setOnMouseClicked( evento-> {
 				this.getChildren().addAll(opcionesMusica,opcionesEfectosSonido);
 				TranslateTransition transicionTraslado = new TranslateTransition(Duration.seconds(0.5),opcionesMusica);
-				transicionTraslado.setToY(	menuOpciones.getTranslateY() + 200);		
+				transicionTraslado.setToY(	menuOpciones.getTranslateY() + 100);		
 				
 				TranslateTransition transicionTraslado2 = new TranslateTransition(Duration.seconds(0.5),opcionesEfectosSonido);
-				transicionTraslado2.setToY( menuOpciones.getTranslateY() + 250 );
+				transicionTraslado2.setToY( menuOpciones.getTranslateY() + 150 );
 				
 				transicionTraslado.play();
 				transicionTraslado2.play();
 				
+				transicionTraslado.setOnFinished(evento2-> {
+//					btnSonido.setDisable(true);
+//					btnSonido.deshabilitar();
+				
+				});
 			});
+			
 			
 			
 			stage.setFullScreen(true);
@@ -146,28 +157,29 @@ public class MenuPrincipal extends StackPane{
 			btnPantallaCompletaOn.setOnMouseClicked( evento-> {
 				stage.setFullScreen(true);
 				stage.setFullScreenExitHint("");
-				btnPantallaCompletaOff.setDisable(false);
-				btnPantallaCompletaOn.setDisable(true);
+				btnPantallaCompletaOff.habilitar();
+				btnPantallaCompletaOn.deshabilitar();
 			});
 			
-			if (stage.isFullScreen()){
-				btnPantallaCompletaOn.setDisable(true);
-			}
-			if (!stage.isFullScreen()){
-				btnPantallaCompletaOn.setDisable(false);
-			}
+			btnPantallaCompletaOn.deshabilitar();
+//			if (stage.isFullScreen()){
+//				btnPantallaCompletaOn.setDisable(true);
+//			}
+//			if (!stage.isFullScreen()){
+//				btnPantallaCompletaOn.setDisable(false);
+//			}
 			
 			btnPantallaCompletaOff.setOnMouseClicked( evento-> {
 				stage.setFullScreen(false);
-				btnPantallaCompletaOff.setDisable(true);
-				btnPantallaCompletaOn.setDisable(false);
+				btnPantallaCompletaOff.deshabilitar();
+				btnPantallaCompletaOn.habilitar();
 			});
-			if (!stage.isFullScreen()){
-				btnPantallaCompletaOff.setDisable(true);
-			}
-			if (stage.isFullScreen()){
-				btnPantallaCompletaOff.setDisable(false);
-			}
+//			if (!stage.isFullScreen()){
+//				btnPantallaCompletaOff.setDisable(true);
+//			}
+//			if (stage.isFullScreen()){
+//				btnPantallaCompletaOff.setDisable(false);
+//			}
 			
 			
 			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF");
