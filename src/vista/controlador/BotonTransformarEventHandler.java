@@ -30,7 +30,7 @@ public class BotonTransformarEventHandler implements EventHandler<ActionEvent> {
 			vista.actualizarVista();
 		} catch (TransformacionNoPosible error) {
 			labelAcciones.setText("El personaje no puede Transformarse: " + error.getMensaje());
-			sonidos.getSonidoError().play();
+			sonidos.reproducirSonidoError();
 		}
 	}
 

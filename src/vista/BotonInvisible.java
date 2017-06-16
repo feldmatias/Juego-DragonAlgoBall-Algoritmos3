@@ -79,16 +79,13 @@ public abstract class BotonInvisible extends StackPane{
 		 DropShadow sombra= new DropShadow( 1, Color.AQUA );
 		 sombra.setWidth(anchoBoton / 2);
 		 sombra.setHeight(altoBoton);
-		 sombra.setSpread(0.6);
+		 sombra.setSpread(0.5);
 		 imagenFondo.setEffect(sombra);
 	}
 	
 	public void lanzarSonidoError(){
-		this.sonidos.getSonidoError().play();
+		this.sonidos.reproducirSonidoError();
 	}
 	
-	public void pararSonidoError(){
-		this.sonidos.getSonidoError().stop();
-	}
 	
 }
