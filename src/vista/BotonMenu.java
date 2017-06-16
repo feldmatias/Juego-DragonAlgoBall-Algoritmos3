@@ -27,7 +27,7 @@ public class BotonMenu extends StackPane {
 		texto.setFill(Color.WHITE);
 		
 		Media archivoSonido= new Media(new File("src/vista/sonidos/sonido deslizarse por boton.wav").toURI().toString());
-		MediaPlayer sonido = new MediaPlayer(archivoSonido);
+		sonido = new MediaPlayer(archivoSonido);
 		
 		this.colorActualBoton =Color.ORANGE;
 		this.colorAuxiliarBoton = Color.WHITE;

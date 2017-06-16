@@ -1,5 +1,9 @@
 package vista;
 
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.effect.DropShadow;
@@ -18,7 +22,7 @@ public abstract class BotonInvisible extends StackPane{
 	public static int altoBoton = medida;
 	private Rectangle boton;
 	private Node imagenFondo;
-	LibreriaSonidos sonidos;
+	private LibreriaSonidos sonidos;
 	
 	
 	public BotonInvisible(Node imagenFondo,LibreriaSonidos sonidos){
@@ -90,5 +94,26 @@ public abstract class BotonInvisible extends StackPane{
 	public void pararSonidoError(){
 		this.sonidos.getSonidoError().stop();
 	}
+	
+	public void titilar(Color color){
+		boton.setOpacity(0.5);
+		for (int i = 0; i < 100; i++){
+		Timer timer = new Timer();
+		TimerTask timerTask = new TimerTask(){
+            public void run() {
+                if (boton.getFill() == color){
+                	boton.setFill(Color.TRANSPARENT);
+                }else {
+                	boton.setFill(color);
+                }
+            }
+		};
+		timer.scheduleAtFixedRate(timerTask, 0,100);
+			
+		}
+	}
+
+
+
 	
 }

@@ -167,7 +167,7 @@ public class VistaJuego extends VBox{
 		terminarTurno.setText("Terminar Turno");
 		
 		Button transformar = new Button();
-		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones, sonidos);
+		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones, botonesPersonajes);
 		transformar.setOnAction(eventHandler2);
 		transformar.setText("Transformar");
 		
