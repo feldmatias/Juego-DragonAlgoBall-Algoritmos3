@@ -43,7 +43,7 @@ public class TestCell {
 			cell.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Cell.poderPeleaNormal, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaNormal, cell.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -59,7 +59,7 @@ public class TestCell {
 			cell.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Cell.poderPeleaNormal, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaNormal, cell.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -72,7 +72,7 @@ public class TestCell {
 		} catch (AtaqueNoPosible e1) {}
 		try {
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -88,7 +88,7 @@ public class TestCell {
 		}
 		try {
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -105,7 +105,7 @@ public class TestCell {
 		} catch (AtaqueNoPosible e1) {}
 		try {
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado: primera transformacion");
 		}
@@ -113,7 +113,7 @@ public class TestCell {
 			cell.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaPrimerTransformacion, cell.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -127,7 +127,7 @@ public class TestCell {
 		try {
 			cell.transformar();
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaSegundaTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaSegundaTransformacion, cell.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -144,7 +144,7 @@ public class TestCell {
 		try {
 			cell.transformar();
 			cell.transformar();
-			Assert.assertEquals(Cell.poderPeleaSegundaTransformacion, cell.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Cell.poderPeleaSegundaTransformacion, cell.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse transformado");
 		}
@@ -158,7 +158,7 @@ public class TestCell {
 		double vidaEsperada = Cell.vidaInicial + Cell.poderPeleaNormal;;
 		try {
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(vidaEsperada, cell.getVidaActual(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(vidaEsperada, cell.getVidaActual(), Constantes.diferenciaMaximaFloats);
 		} catch (AtaqueNoPosible e) {}	
 	}
 	
@@ -168,7 +168,7 @@ public class TestCell {
 		try {
 			cell.realizarAtaqueEspecial(goku);
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(vidaEsperada,cell.getVidaActual() , Constantes.porcentajeEsperado);
+			Assert.assertEquals(vidaEsperada,cell.getVidaActual() , Constantes.diferenciaMaximaFloats);
 		} catch (AtaqueNoPosible e) {}
 	}
 	
@@ -177,7 +177,7 @@ public class TestCell {
 		double vidaEsperada = Goku.vidaInicial - Cell.poderPeleaNormal;
 		try {
 			cell.realizarAtaqueEspecial(goku);
-			Assert.assertEquals(vidaEsperada, goku.getVidaActual(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(vidaEsperada, goku.getVidaActual(), Constantes.diferenciaMaximaFloats);
 		} catch (AtaqueNoPosible e) {}
 	}
 }

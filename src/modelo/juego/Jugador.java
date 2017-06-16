@@ -23,9 +23,18 @@ public class Jugador {
 	public void atacar(Personaje enemigo) throws AtaqueNoPosible {
 		personajeSeleccionado.atacarAPersonaje(enemigo);
 	}
+	
+
+	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible {
+		this.personajeSeleccionado.realizarAtaqueEspecial(enemigo);
+	}
 
 	public void mover(Posicion destino) throws MovimientoNoPosible {
 		personajeSeleccionado.mover(destino);
+	}
+	
+	public void transformarPersonaje() throws TransformacionNoPosible {
+		this.personajeSeleccionado.transformar();
 	}
 	
 	public void seleccionarPersonaje(Personaje personaje){
@@ -47,14 +56,6 @@ public class Jugador {
 
 	public void empezarTurno() {
 		this.equipo.empezarTurno();
-	}
-
-	public void transformarPersonaje() throws TransformacionNoPosible {
-		this.personajeSeleccionado.transformar();
-	}
-
-	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible {
-		this.personajeSeleccionado.realizarAtaqueEspecial(enemigo);
 	}
 	
 	public boolean equipoMuerto(){

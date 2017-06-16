@@ -3,6 +3,7 @@ package modelo.juego;
 import java.util.List;
 
 import modelo.personajes.Personaje;
+import modelo.utilidades.Constantes;
 
 public class Equipo {
 	
@@ -17,15 +18,15 @@ public class Equipo {
 		this.cantidadEsferas = 0;
 	}
 
-	public boolean pertenece(Personaje personaje) {
-		return this.personajes.contains(personaje);
-	}
-
 	private void inicializarMiembros(){
 		for(Personaje personaje: this.personajes ){
 			personaje.setEquipo(this);
 		}
 	} 
+	
+	public boolean pertenece(Personaje personaje) {
+		return this.personajes.contains(personaje);
+	}
 	
 	public String getNombre() {
 		return this.nombre;
@@ -59,7 +60,7 @@ public class Equipo {
 	}
 
 	public boolean coleccionDeEsferasCompleta() {
-		return this.getCantidadEsferas() == 7;
+		return this.getCantidadEsferas() >= Constantes.cantidadEsferasParaGanar;
 	}
 
 }

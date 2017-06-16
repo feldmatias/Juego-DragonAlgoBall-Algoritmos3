@@ -36,14 +36,30 @@ public class Turno {
 		this.tablero.generarConsumibles();
 	}
 	
+	public void seleccionarPersonaje (Personaje personaje) throws PersonajeNoSeleccionable{
+		try{
+			this.jugadorActual().seleccionarPersonaje(personaje);
+		} catch (PersonajeNoPerteneceAEquipo e){
+			throw new PersonajeNoSeleccionable();
+		}
+	}
+	
 	public void atacarEnemigo(Personaje enemigo) throws AtaqueNoPosible{
 		if (ataqueRealizado){
 			throw new AtaqueNoPosible(Constantes.ErrorAtaqueYaRealizado);
 		}
 		this.jugadorActual().atacar(enemigo);
 
-		this.ataqueRealizado = true;
-		this.comprobarTurnoTerminado();
+		this.terminarAtaque();
+	}
+	
+	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible {
+		if (ataqueRealizado){
+			throw new AtaqueNoPosible(Constantes.ErrorAtaqueYaRealizado);
+		}
+		this.jugadorActual().realizarAtaqueEspecial(enemigo);
+		
+		this.terminarAtaque();
 	}
 
 	public void moverPersonaje(Posicion destino) throws  MovimientoNoPosible{
@@ -51,8 +67,13 @@ public class Turno {
 			throw new MovimientoNoPosible(Constantes.ErrorMovimientoYaRealizado);
 		}
 		this.jugadorActual().mover(destino);
+		
 		this.movimientoRealizado = true;
 		this.comprobarTurnoTerminado();
+	}
+	
+	public void transformar() throws TransformacionNoPosible {
+		this.jugadorActual().transformarPersonaje();
 	}
 	
 	public void terminarTurno() {
@@ -70,27 +91,10 @@ public class Turno {
 		return jugadores.element();
 	}
 	
-	public void seleccionarPersonaje (Personaje personaje) throws PersonajeNoSeleccionable{
-		try{
-			this.jugadorActual().seleccionarPersonaje(personaje);
-		} catch (PersonajeNoPerteneceAEquipo e){
-			throw new PersonajeNoSeleccionable();
-		}
-	}
-
-
-	public void transformar() throws TransformacionNoPosible {
-		this.jugadorActual().transformarPersonaje();
-	}
-
-
-	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible {
-		if (ataqueRealizado){
-			throw new AtaqueNoPosible(Constantes.ErrorAtaqueYaRealizado);
-		}
-		this.jugadorActual().realizarAtaqueEspecial(enemigo);
+	private void terminarAtaque (){
 		this.ataqueRealizado = true;
 		this.comprobarTurnoTerminado();
 	}
+
 }
 	

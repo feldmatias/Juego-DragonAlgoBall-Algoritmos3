@@ -11,8 +11,8 @@ public class Constantes {
 	public static final String GUERREROS = "Guerreros Z";
 	public static final String ENEMIGOS = "Enemigos de la Tierra";
 	public static final int cantidadParaGenerarKiSuficiente = 20;
-	public static final double porcentajeEsperado = 0.01;
-	
+	public static final double diferenciaMaximaFloats = 0.01;
+	public static final int cantidadEsferasParaGanar = 7;
 	
 	public static final String ErrorAtaqueEnemigoMismoEquipo = "El personaje pertenece al mismo equipo";
 	public static final String ErrorAtaqueEnemigoLejano = "El personaje esta muy lejos";
@@ -26,4 +26,7 @@ public class Constantes {
 	public static final String ErrorTransformacionFinal = "No puede realizar mas transformaciones";
 	public static final String ErrorAtaqueYaRealizado = "Ya realizo un ataque en este turno";
 	public static final String ErrorMovimientoYaRealizado = "Ya realizo un movimiento en este turno";
+	
+	public static final String GanadorPorDerrotarEnemigo = ": Derroto al otro equipo";
+	public static final String GanadorPorEncontrarSieteEsferas = ": Encontro siete esferas del dragon";
 }

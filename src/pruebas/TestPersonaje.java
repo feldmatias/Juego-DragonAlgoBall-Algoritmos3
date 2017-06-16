@@ -53,12 +53,12 @@ public class TestPersonaje {
 	
 	@Test
 	public void testPorcentajeVidaInicialEs100(){
-		Assert.assertEquals(100, personaje.getPorcentajeVida(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(100, personaje.getPorcentajeVida(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
 	public void testObtenerPoderPeleaModoNormal(){
-		Assert.assertEquals(Goku.poderPeleaNormal, personaje.getPoderPelea(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(Goku.poderPeleaNormal, personaje.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ public class TestPersonaje {
 		double danioAtaque = Goku.poderPeleaNormal * 2;
 		personaje.recibirAtaque(danioAtaque); 
 		double vidaEsperada = Goku.vidaInicial - danioAtaque;
-		Assert.assertEquals(vidaEsperada, personaje.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ public class TestPersonaje {
 		double danioAtaque = Goku.poderPeleaNormal / 2;
 		personaje.recibirAtaque(danioAtaque); 
 		double vidaEsperada = Goku.vidaInicial - danioAtaque * Personaje.disminucionPoderPeleaAlAtacarConMenorPoderPelea;
-		Assert.assertEquals(vidaEsperada, personaje.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 		
 	//Test transformaciones con ki, igual para todos los personajes sin transformaciones especiales
@@ -96,7 +96,7 @@ public class TestPersonaje {
 			personaje.transformar();
 			Assert.fail("La transformacion no deberia realizarse");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Goku.poderPeleaNormal, personaje.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Goku.poderPeleaNormal, personaje.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -108,7 +108,7 @@ public class TestPersonaje {
 		}
 		try {
 			personaje.transformar();
-			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion,personaje.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion,personaje.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("La transformacion deberia realizarse");
 		}
@@ -167,7 +167,7 @@ public class TestPersonaje {
 		}
 		try {
 			personaje.transformar();
-			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion,personaje.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion,personaje.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("La transformacion deberia realizarse");
 		}
@@ -175,7 +175,7 @@ public class TestPersonaje {
 			personaje.transformar();
 			Assert.fail("La transformacion no deberia realizarse");
 		} catch (TransformacionNoPosible f) {
-			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion, personaje.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion, personaje.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		}
 	}
 
@@ -204,7 +204,7 @@ public class TestPersonaje {
 		try {
 			personaje.transformar();
 			personaje.transformar();
-			Assert.assertEquals(Goku.poderPeleaSegundaTransformacion, personaje.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Goku.poderPeleaSegundaTransformacion, personaje.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Las transformaciones deberian realizarse");
 		}
@@ -345,7 +345,7 @@ public class TestPersonaje {
 		try {
 			personaje.atacarAPersonaje(enemigo);
 			double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal;
-			Assert.assertEquals(vidaEsperada, enemigo.getVidaActual(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(vidaEsperada, enemigo.getVidaActual(), Constantes.diferenciaMaximaFloats);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("El ataque deberia realizarse");
 		}
@@ -365,7 +365,7 @@ public class TestPersonaje {
 			personaje.atacarAPersonaje(enemigo);
 			Assert.fail("El ataque no deberia realizarse");
 		} catch (AtaqueNoPosible e) {
-			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.porcentajeEsperado);
+			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -382,7 +382,7 @@ public class TestPersonaje {
 			personaje.atacarAPersonaje(enemigo);
 			Assert.fail("El ataque no deberia realizarse");
 		} catch (AtaqueNoPosible e) {
-			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.porcentajeEsperado);
+			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -408,7 +408,7 @@ public class TestPersonaje {
 				personaje.transformar();
 				personaje.atacarAPersonaje(enemigo);
 				double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaPrimerTransformacion;
-				Assert.assertEquals(vidaEsperada, enemigo.getVidaActual(), Constantes.porcentajeEsperado);
+				Assert.assertEquals(vidaEsperada, enemigo.getVidaActual(), Constantes.diferenciaMaximaFloats);
 			} catch (TransformacionNoPosible e1) {
 				Assert.fail("La transformacion deberia realizarse");
 			} catch (AtaqueNoPosible e1) {
@@ -432,7 +432,7 @@ public class TestPersonaje {
 			personaje.realizarAtaqueEspecial(enemigo);
 			Assert.fail("El ataque no deberia realizarse");
 		} catch (AtaqueNoPosible e) {
-			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.porcentajeEsperado);
+			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -451,7 +451,7 @@ public class TestPersonaje {
 		try {
 			personaje.realizarAtaqueEspecial(enemigo);
 			double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal * Goku.multiplicadorAtaqueEspecial;
-			Assert.assertEquals(vidaEsperada , enemigo.getVidaActual(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(vidaEsperada , enemigo.getVidaActual(), Constantes.diferenciaMaximaFloats);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("El ataque deberia realizarse");
 		}
