@@ -30,7 +30,7 @@ public class VistaSeleccionarEquipo extends VBox{
 	private Stage stage;
 	private MenuPrincipal menu;
 	private Text title;
-	public static final int ALTURA_EQUIPOS = 600;
+	public static final int ALTURA_EQUIPOS = 550;
 	private LibreriaSonidos sonidos;
 	
 	public VistaSeleccionarEquipo(DragonBall juego, Stage stage, MenuPrincipal menu,LibreriaSonidos sonidos){
@@ -45,7 +45,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		
 		title = new Text("Jugador I: Elegir equipo");
         
-        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 120));
+        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 100));
         title.setFill(Color.YELLOW);
         title.setTextAlignment(TextAlignment.CENTER);
         
@@ -70,8 +70,8 @@ public class VistaSeleccionarEquipo extends VBox{
 	}
 
 	private void crearSeleccionables(HBox hbox) {
-		VBox vboxGuerreros = this.crearSeleccionableEquipo(Constantes.GUERREROS, Constantes.ENEMIGOS, Color.GREEN);
-		VBox vboxEnemigos = this.crearSeleccionableEquipo(Constantes.ENEMIGOS, Constantes.GUERREROS, Color.RED);
+		VBox vboxGuerreros = this.crearSeleccionableEquipo(Constantes.GUERREROS, Constantes.ENEMIGOS, Color.LIME);
+		VBox vboxEnemigos = this.crearSeleccionableEquipo(Constantes.ENEMIGOS, Constantes.GUERREROS, Color.MAGENTA);
 		this.agregarEventHandler(vboxGuerreros, vboxEnemigos, Constantes.GUERREROS, Constantes.ENEMIGOS);
 		this.agregarEventHandler( vboxEnemigos, vboxGuerreros, Constantes.ENEMIGOS, Constantes.GUERREROS);
 		hbox.getChildren().add(vboxGuerreros);
@@ -127,11 +127,11 @@ public class VistaSeleccionarEquipo extends VBox{
 
 	private void crearNombre(String nombre, VBox vboxGuerreros) {
 
-		Text nombreGuerreros = new Text(nombre);
-		nombreGuerreros.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 120));
-		nombreGuerreros.setFill(Color.YELLOW);
-		nombreGuerreros.setTextAlignment(TextAlignment.CENTER);
-		vboxGuerreros.getChildren().add(nombreGuerreros);
+		Text textoNombre = new Text(nombre);
+		textoNombre.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 80));
+		textoNombre.setFill(Color.YELLOW);
+		textoNombre.setTextAlignment(TextAlignment.CENTER);
+		vboxGuerreros.getChildren().add(textoNombre);
 		
 	}
 
