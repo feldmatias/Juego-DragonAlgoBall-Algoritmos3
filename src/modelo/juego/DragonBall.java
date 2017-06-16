@@ -11,10 +11,8 @@ import modelo.consumibles.EsferaDeDragon;
 import modelo.consumibles.NubeVoladora;
 import modelo.consumibles.SemillaDelErmitanio;
 import modelo.excepciones.AtaqueNoPosible;
-import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.MovimientoNoPosible;
-import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Cell;
@@ -137,15 +135,15 @@ public class DragonBall {
 		return this.turno.jugadorActual();
 	}
 	
-	public void jugadorActualAtacarAEnemigo(Personaje enemigo) throws AtaqueYaRealizado, AtaqueNoPosible{
+	public void jugadorActualAtacarAEnemigo(Personaje enemigo) throws AtaqueNoPosible{
 		this.turno.atacarEnemigo(enemigo);
 	}
 	
-	public void jugadorActualRealizarAtaqueEspecial(Personaje enemigo) throws AtaqueYaRealizado, AtaqueNoPosible{
+	public void jugadorActualRealizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible{
 		this.turno.realizarAtaqueEspecial(enemigo);
 	}
 	
-	public void jugadorActualMoverAPosicion(Posicion destino) throws MovimientoYaRealizado, MovimientoNoPosible{
+	public void jugadorActualMoverAPosicion(Posicion destino) throws MovimientoNoPosible{
 		this.turno.moverPersonaje(destino);
 	}
 	

@@ -41,7 +41,7 @@ public class Piccolo extends Personaje {
 	public void puedeRealizarSegundaTransformacion() throws TransformacionNoPosible {
 
 		for (Personaje personaje: this.getEquipo().getMiembros()){
-			if (personaje.getNombre() == "Gohan"){
+			if (personaje.getNombre().startsWith("Gohan")){
 				if (personaje.getPorcentajeVida() >= porcentajeVidaGohanParaSegundaTransformacion){
 					throw new TransformacionNoPosible(Constantes.ErrorTransformacionPiccolo);
 				}

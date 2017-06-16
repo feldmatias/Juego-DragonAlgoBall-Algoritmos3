@@ -25,8 +25,8 @@ public class BotonTransformarEventHandler implements EventHandler<ActionEvent> {
 		try {
 			juego.jugadorActualTransformar();
 			vista.actualizarVista();
-		} catch (TransformacionNoPosible e) {
-			labelAcciones.setText("El personaje no puede Transformarse");
+		} catch (TransformacionNoPosible error) {
+			labelAcciones.setText("El personaje no puede Transformarse: " + error.getMensaje());
 		}
 	}
 

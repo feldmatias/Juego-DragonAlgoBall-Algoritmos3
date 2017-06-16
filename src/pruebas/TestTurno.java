@@ -6,10 +6,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import modelo.excepciones.AtaqueNoPosible;
-import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.MovimientoNoPosible;
-import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.juego.DragonBall;
 import modelo.juego.Jugador;
@@ -63,7 +61,7 @@ public class TestTurno {
 	}
 	
 	@Test
-	public void testJugadorActualPuedeAtacarEnemigo() throws AtaqueYaRealizado{
+	public void testJugadorActualPuedeAtacarEnemigo(){
 		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
 		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
 		
@@ -76,7 +74,7 @@ public class TestTurno {
 	}
 	
 	@Test
-	public void testDespuesDeAtacarNoCambiaElTurno() throws AtaqueNoPosible, AtaqueYaRealizado{
+	public void testDespuesDeAtacarNoCambiaElTurno() throws AtaqueNoPosible{
 		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
 		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
 		turno.atacarEnemigo(enemigo);
@@ -84,7 +82,7 @@ public class TestTurno {
 	}
 	
 	@Test
-	public void testJugadorActualPuedeMover() throws MovimientoYaRealizado{
+	public void testJugadorActualPuedeMover() {
 		Posicion destino = new Posicion (1, Constantes.SIZE_TABLERO / 2);
 		
 		try {
@@ -96,7 +94,7 @@ public class TestTurno {
 	}
 	
 	@Test
-	public void testDespuesDeMoverNoCambiaElTurno() throws MovimientoNoPosible, MovimientoYaRealizado{
+	public void testDespuesDeMoverNoCambiaElTurno() throws MovimientoNoPosible{
 		turno.moverPersonaje(new Posicion (1, Constantes.SIZE_TABLERO / 2) );
 		Assert.assertEquals(jugador1, turno.jugadorActual());
 	}
@@ -107,14 +105,14 @@ public class TestTurno {
 		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
 		try {
 			turno.atacarEnemigo(enemigo);
-		} catch (AtaqueYaRealizado e) {
+		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
 		try {
 			turno.atacarEnemigo(enemigo);
 			Assert.fail("No deberia haber atacado");
-		} catch (AtaqueYaRealizado e) {
-			Assert.assertTrue(true);
+		} catch (AtaqueNoPosible error) {
+			Assert.assertEquals(Constantes.ErrorAtaqueYaRealizado, error.getMensaje());
 		}
 	}
 	
@@ -124,14 +122,14 @@ public class TestTurno {
 		Posicion destino2 = new Posicion (2, Constantes.SIZE_TABLERO / 2);
 		try {
 			turno.moverPersonaje(destino1);
-		} catch (MovimientoYaRealizado e) {
+		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia haberse movido");
 		}
 		try {
 			turno.moverPersonaje(destino2);
 			Assert.fail("No deberia haberse movido");
-		} catch (MovimientoYaRealizado e) {
-			Assert.assertTrue(true);
+		} catch (MovimientoNoPosible error) {
+			Assert.assertEquals(Constantes.ErrorMovimientoYaRealizado, error.getMensaje());
 		}
 	}
 	
@@ -143,12 +141,12 @@ public class TestTurno {
 		
 		try {
 			turno.atacarEnemigo(enemigo);
-		} catch (AtaqueYaRealizado | AtaqueNoPosible e) {
+		} catch ( AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
 		try {
 			turno.moverPersonaje(destino);
-		} catch (MovimientoYaRealizado | MovimientoNoPosible e) {
+		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia haberse movido");
 		}
 		Assert.assertTrue(true);
@@ -162,12 +160,12 @@ public class TestTurno {
 		
 		try {
 			turno.moverPersonaje(destino);
-		} catch (MovimientoYaRealizado | MovimientoNoPosible e) {
+		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia haberse movido");
 		}
 		try {
 			turno.atacarEnemigo(enemigo);
-		} catch (AtaqueYaRealizado | AtaqueNoPosible e) {
+		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
 		Assert.assertTrue(true);
@@ -181,19 +179,19 @@ public class TestTurno {
 		
 		try {
 			turno.atacarEnemigo(enemigo);
-		} catch (AtaqueYaRealizado | AtaqueNoPosible e) {
+		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
 		try {
 			turno.moverPersonaje(destino);
-		} catch (MovimientoYaRealizado | MovimientoNoPosible e) {
+		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia haberse movido");
 		}
 		Assert.assertEquals(jugador2, turno.jugadorActual());
 	}
 	
 	@Test
-	public void testAlCambiarDeTurnoGeneraKiNuevoJugador() throws AtaqueYaRealizado, AtaqueNoPosible, MovimientoYaRealizado, MovimientoNoPosible{
+	public void testAlCambiarDeTurnoGeneraKiNuevoJugador() throws AtaqueNoPosible,  MovimientoNoPosible{
 		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
 		int kiActual = enemigo.getKi();
 		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
@@ -207,7 +205,7 @@ public class TestTurno {
 	}
 	
 	@Test
-	public void testPuedoSeleccionarOtroPersonajeDelJugadorYMoverlo() throws MovimientoYaRealizado, MovimientoNoPosible{
+	public void testPuedoSeleccionarOtroPersonajeDelJugadorYMoverlo() throws MovimientoNoPosible{
 		Posicion origen = new Posicion (0, Constantes.SIZE_TABLERO / 2);
 		Posicion destino = new Posicion (1, Constantes.SIZE_TABLERO / 2);
 		Personaje personaje1 = jugador1.getEquipo().getMiembros().get(1);

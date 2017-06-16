@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import modelo.excepciones.AtaqueNoPosible;
-import modelo.excepciones.AtaqueYaRealizado;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
 import vista.VistaJuego;
@@ -32,8 +31,8 @@ public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<
 		try {
 			juego.jugadorActualRealizarAtaqueEspecial(personaje);
 			vista.actualizarVista();
-		} catch (AtaqueYaRealizado | AtaqueNoPosible e) {
-			acciones.setText("No puede atacar a ese personaje");
+		} catch ( AtaqueNoPosible error) {
+			acciones.setText("No puede realizar ataque especial: " + error.getMensaje());
 		}
 	}
 

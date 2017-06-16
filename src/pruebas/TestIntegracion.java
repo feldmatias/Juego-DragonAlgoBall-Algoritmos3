@@ -6,10 +6,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import modelo.excepciones.AtaqueNoPosible;
-import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.MovimientoNoPosible;
-import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
@@ -77,7 +75,7 @@ public class TestIntegracion {
 	}
 	
 	@Test
-	public void testIntegracionJugarJuego() throws MovimientoYaRealizado, MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueYaRealizado, AtaqueNoPosible, TransformacionNoPosible{
+	public void testIntegracionJugarJuego() throws  MovimientoNoPosible, PersonajeNoSeleccionable, AtaqueNoPosible, TransformacionNoPosible{
 		
 		//La prueba falla si lanza una excepcion
 		

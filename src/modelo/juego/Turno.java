@@ -4,13 +4,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import modelo.excepciones.AtaqueNoPosible;
-import modelo.excepciones.AtaqueYaRealizado;
 import modelo.excepciones.MovimientoNoPosible;
-import modelo.excepciones.MovimientoYaRealizado;
 import modelo.excepciones.PersonajeNoPerteneceAEquipo;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.personajes.Personaje;
+import modelo.utilidades.Constantes;
 
 
 public class Turno {
@@ -37,9 +36,9 @@ public class Turno {
 		this.tablero.generarConsumibles();
 	}
 	
-	public void atacarEnemigo(Personaje enemigo) throws AtaqueYaRealizado, AtaqueNoPosible{
+	public void atacarEnemigo(Personaje enemigo) throws AtaqueNoPosible{
 		if (ataqueRealizado){
-			throw new AtaqueYaRealizado();
+			throw new AtaqueNoPosible(Constantes.ErrorAtaqueYaRealizado);
 		}
 		this.jugadorActual().atacar(enemigo);
 
@@ -47,9 +46,9 @@ public class Turno {
 		this.comprobarTurnoTerminado();
 	}
 
-	public void moverPersonaje(Posicion destino) throws MovimientoYaRealizado, MovimientoNoPosible{
+	public void moverPersonaje(Posicion destino) throws  MovimientoNoPosible{
 		if (movimientoRealizado){
-			throw new MovimientoYaRealizado();
+			throw new MovimientoNoPosible(Constantes.ErrorMovimientoYaRealizado);
 		}
 		this.jugadorActual().mover(destino);
 		this.movimientoRealizado = true;
@@ -85,9 +84,9 @@ public class Turno {
 	}
 
 
-	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueYaRealizado, AtaqueNoPosible {
+	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible {
 		if (ataqueRealizado){
-			throw new AtaqueYaRealizado();
+			throw new AtaqueNoPosible(Constantes.ErrorAtaqueYaRealizado);
 		}
 		this.jugadorActual().realizarAtaqueEspecial(enemigo);
 		this.ataqueRealizado = true;

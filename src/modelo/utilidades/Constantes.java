@@ -16,7 +16,7 @@ public class Constantes {
 	
 	public static final String ErrorAtaqueEnemigoMismoEquipo = "El personaje pertenece al mismo equipo";
 	public static final String ErrorAtaqueEnemigoLejano = "El personaje esta muy lejos";
-	public static final String ErrorMovimientoLejano = "La posicion esta muy legos o el camino esta bloqueado";
+	public static final String ErrorMovimientoLejano = "La posicion esta muy lejos o el camino esta bloqueado";
 	public static final String ErrorTransformacionKiInsuficiente = "El ki no es suficiente para realizar la transformacion";
 	public static final String ErrorAtaqueEspecialKiInsuficiente = "El ki no es suficiente para realizar el ataque especial";
 	public static final String ErrorTransformacionInmovilizado = "Esta inmovilizado";
@@ -24,4 +24,6 @@ public class Constantes {
 	public static final String ErrorTransformacionGohan = "Los aliados tienen mucha vida";
 	public static final String ErrorTransformacionCell = "Debe realizar mas absorciones de vida";
 	public static final String ErrorTransformacionFinal = "No puede realizar mas transformaciones";
+	public static final String ErrorAtaqueYaRealizado = "Ya realizo un ataque en este turno";
+	public static final String ErrorMovimientoYaRealizado = "Ya realizo un movimiento en este turno";
 }

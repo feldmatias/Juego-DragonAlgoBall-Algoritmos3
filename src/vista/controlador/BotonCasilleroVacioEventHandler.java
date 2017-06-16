@@ -4,7 +4,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import modelo.excepciones.MovimientoNoPosible;
-import modelo.excepciones.MovimientoYaRealizado;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
 import vista.BotonInvisible;
@@ -33,14 +32,9 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 		try {
 			juego.jugadorActualMoverAPosicion(pos);
 			vista.actualizarVista();
-		} catch (MovimientoYaRealizado e) {
+		} catch (MovimientoNoPosible error){
 			this.boton.lanzarSonidoError();
-			acciones.setText("No puede moverse ahi, movimiento ya realizado");
-			this.boton.pararSonidoError();
-		} catch (MovimientoNoPosible e){
-			this.boton.lanzarSonidoError();
-			acciones.setText("No puede moverse ahi, movimiento no posible");
-			this.boton.pararSonidoError();
+			acciones.setText("No puede moverse: " + error.getMensaje());
 		}
 	}
 
