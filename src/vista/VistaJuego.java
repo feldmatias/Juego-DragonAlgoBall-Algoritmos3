@@ -167,7 +167,7 @@ public class VistaJuego extends VBox{
 		terminarTurno.setText("Terminar Turno");
 		
 		Button transformar = new Button();
-		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones);
+		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones, sonidos);
 		transformar.setOnAction(eventHandler2);
 		transformar.setText("Transformar");
 		
@@ -240,9 +240,9 @@ public class VistaJuego extends VBox{
 	}
 
 	private void nuevoBotonPersonaje(HBox fila, Personaje personaje) {
-		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, labelAcciones, this);
-		//Ver labels
 		BotonInvisible boton = new BotonPersonaje(personaje, juego,this.sonidos);
+		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, labelAcciones, this, boton);
+
 		boton.setOnAction(eventHandler);
 		boton.habilitar();
 		fila.getChildren().add(boton);
@@ -253,8 +253,7 @@ public class VistaJuego extends VBox{
 	private void nuevoBotonCasilleroVacio(HBox fila, Posicion pos, Casillero casillero) {
 		BotonInvisible boton = new BotonCasilleroVacio(casillero,this.sonidos);
 
-		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this,boton);
-		//ver LABELS
+		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this, boton);
 		boton.setOnAction(eventHandler);
 		boton.deshabilitar();
 		fila.getChildren().add(boton);

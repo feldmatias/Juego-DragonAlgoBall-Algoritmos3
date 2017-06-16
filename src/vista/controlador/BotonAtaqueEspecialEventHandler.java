@@ -38,7 +38,7 @@ public class BotonAtaqueEspecialEventHandler implements EventHandler<ActionEvent
 		for (Personaje personaje: personajes.keySet()){
 			BotonInvisible boton = personajes.get(personaje);
 			boton.habilitar();
-			boton.setOnAction(new BotonPersonajeAtacableEspecialEventHandler(juego,personaje, labelAcciones, vista));
+			boton.setOnAction(new BotonPersonajeAtacableEspecialEventHandler(juego,personaje, labelAcciones, vista, boton));
 		}
 	}
 

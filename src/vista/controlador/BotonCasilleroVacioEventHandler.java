@@ -17,7 +17,7 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 	private VistaJuego vista;
 	private BotonInvisible boton;
 	
-	public BotonCasilleroVacioEventHandler(DragonBall juego, Posicion pos, Label acciones, VistaJuego vista,BotonInvisible boton) {
+	public BotonCasilleroVacioEventHandler(DragonBall juego, Posicion pos, Label acciones, VistaJuego vista, BotonInvisible boton) {
 		this.juego = juego;
 		this.pos = pos;
 		this.acciones = acciones;

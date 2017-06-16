@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
+import vista.BotonInvisible;
 import vista.VistaJuego;
 
 public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<MouseEvent> {
@@ -15,13 +16,15 @@ public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<
 	private Label acciones;
 	private Personaje personaje;
 	private VistaJuego vista;
+	private BotonInvisible boton;
 
 	public BotonPersonajeAtacableEspecialEventHandler(DragonBall juego, Personaje personaje, Label labelAcciones,
-			VistaJuego vista) {
+			VistaJuego vista, BotonInvisible boton) {
 		this.juego = juego;
 		this.personaje = personaje;
 		this.acciones = labelAcciones;
 		this.vista = vista;
+		this.boton = boton;
 	}
 
 
@@ -33,6 +36,7 @@ public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<
 			vista.actualizarVista();
 		} catch ( AtaqueNoPosible error) {
 			acciones.setText("No puede realizar ataque especial: " + error.getMensaje());
+			boton.lanzarSonidoError();
 		}
 	}
 
