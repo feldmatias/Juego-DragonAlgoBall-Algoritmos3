@@ -4,11 +4,11 @@ import modelo.personajes.Personaje;
 
 public class EsferaDeDragon extends Efecto{
 
-	private double aumentoDeDanio;
+	public static final double aumentoDanio = 0.25;
+	public static final int duracionAtaques = 2;
 	
 	public EsferaDeDragon() {
-		super(2, "Esfera Dragon");
-		this.aumentoDeDanio =  0.25;
+		super(duracionAtaques, "Esfera Dragon");
 	}
 
 	@Override
@@ -17,7 +17,7 @@ public class EsferaDeDragon extends Efecto{
 			return poderPelea;
 		}
 		this.restarDuracion();
-		return poderPelea + (poderPelea * aumentoDeDanio);
+		return poderPelea + (poderPelea * aumentoDanio);
 	}
 	
 	@Override

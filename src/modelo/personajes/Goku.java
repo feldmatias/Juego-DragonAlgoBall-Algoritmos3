@@ -20,10 +20,16 @@ public class Goku extends Personaje{
 	public static final int velocidadNormal = 2;
 	public static final int velocidadPrimerTranformacion = 3;
 	public static final int velocidadSegundaTranformacion = 5;
+	public static final int kiNecesarioPrimerTransformacion = 20;
+	public static final int kiNecesarioSegundaTransformacion = 50;
 	public static final double multiplicadorPocaVida = 1.2;
+	public static final int kiNecesarioAtaqueEspecial = 20;
+	public static final double multiplicadorAtaqueEspecial = 1.5;
 	
 	public Goku(Tablero tablero){
-		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal,"Goku"), new AtaquePotenciador(20,1.5), tablero, 20, 50);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal,"Goku"),
+				new AtaquePotenciador(kiNecesarioAtaqueEspecial,multiplicadorAtaqueEspecial), 
+				tablero, kiNecesarioPrimerTransformacion, kiNecesarioSegundaTransformacion);
 	}
 	
 	public double getPoderPelea(){

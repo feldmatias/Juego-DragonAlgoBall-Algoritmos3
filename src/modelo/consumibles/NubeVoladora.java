@@ -2,11 +2,11 @@ package modelo.consumibles;
 
 public class NubeVoladora extends Efecto{
 	
-	private int aumentoVelocidad;
+	public static final int aumentoVelocidad = 2;
+	public static final int duracionTurnos = 3;
 	
 	public NubeVoladora() {
-		super(3, "Nube Voladora"); 
-		this.aumentoVelocidad = 2;
+		super(duracionTurnos, "Nube Voladora"); 
 	}
 	
 	@Override
@@ -14,7 +14,7 @@ public class NubeVoladora extends Efecto{
 		if (this.terminoTiempo()){
 			return velocidad;
 		}
-		return velocidad * this.aumentoVelocidad;
+		return velocidad * aumentoVelocidad;
 	}
 	
 	@Override

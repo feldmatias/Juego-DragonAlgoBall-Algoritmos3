@@ -20,10 +20,16 @@ public class Gohan extends Personaje{
 	public static final int velocidadNormal = 2;
 	public static final int velocidadPrimerTransformacion = 2;
 	public static final int velocidadSegundaTransformacion = 3;
+	public static final int kiNecesarioPrimerTransformacion = 10;
+	public static final int kiNecesarioSegundaTransformacion = 30;
 	public static final int porcentajeVidaCompanierosParaSegundaTransformacion = 30;
+	public static final int kiNecesarioAtaqueEspecial = 10;
+	public static final double multiplicadorAtaqueEspecial = 1.25;
 	
 	public Gohan(Tablero tablero) {
-		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Gohan"), new AtaquePotenciador(10,1.25), tablero, 10, 30);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Gohan"), 
+				new AtaquePotenciador(kiNecesarioAtaqueEspecial,multiplicadorAtaqueEspecial), 
+				tablero, kiNecesarioPrimerTransformacion, kiNecesarioSegundaTransformacion);
 	}
 
 	@Override
