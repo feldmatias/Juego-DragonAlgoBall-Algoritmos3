@@ -17,6 +17,8 @@ import vista.Posicionable;
 
 public abstract class Personaje implements Posicionable{
 	
+	public static final int kiGeneradoAlComienzoTurno = 5;
+	
 	private int vidaInicial;
 	private float vidaActual;
 	private int ki;
@@ -87,8 +89,7 @@ public abstract class Personaje implements Posicionable{
 	
 	
 	public void generarKi(){
-		int kiGenerado = 5;
-		this.ki += kiGenerado;
+		this.ki += kiGeneradoAlComienzoTurno;
 	}
 	
 	public void restarKi(int kiPerdido) {

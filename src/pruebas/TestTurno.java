@@ -22,16 +22,23 @@ public class TestTurno {
 	private Jugador jugador1;
 	private Jugador jugador2;
 	private Turno turno;
+	private Personaje personajeJugador2;
+	private Personaje personajeJugadorActual;
+	private Posicion destino;
 	
 	@Before
 	public void setUp() throws EquipoNoDisponible{
 		juego = new DragonBall();
-//		juego.elegirEquipos(Constantes.GUERREROS, Constantes.ENEMIGOS); //Crea un turno interno que no uso
 		juego.establecerEquipoJugador1(Constantes.GUERREROS);
 		juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
 		this.jugador1 = juego.getJugador1();
 		this.jugador2 = juego.getJugador2();
 		this.turno = new Turno (jugador1, jugador2, juego.getTablero());
+		this.personajeJugadorActual = jugador1.getPersonajeSeleccionado(); //Elijo cualquier personaje
+		this.personajeJugador2 = jugador2.getEquipo().getMiembros().get(0);
+		juego.getTablero().reposicionarPersonaje(personajeJugadorActual ,new Posicion (0,0));
+		juego.getTablero().reposicionarPersonaje(personajeJugador2 ,new Posicion (0,1)); // Los posiciono cerca
+		this.destino = new Posicion (1,1); //Posicion cercana a ambos para poder moverse
 	}
 	
 	@Test
@@ -46,28 +53,28 @@ public class TestTurno {
 		
 	@Test
 	public void testGenerarKiAlComienzoDelTurno(){
-		Personaje personaje = jugador1.getEquipo().getMiembros().get(0);
-		int kiActual = personaje.getKi();
-		new Turno (jugador1, jugador2, juego.getTablero());
-		Assert.assertEquals(kiActual + 5, personaje.getKi());
+		for (Personaje personaje : jugador1.getEquipo().getMiembros()){
+			int kiEsperado = personaje.getKi() + Personaje.kiGeneradoAlComienzoTurno;
+			new Turno (jugador1, jugador2, juego.getTablero());
+			Assert.assertEquals(kiEsperado, personaje.getKi());
+		}
 	}
 	
 	@Test
 	public void testNoGenerarKiAlComienzoDelTurnoDelOtroJugador(){
-		Personaje personaje = jugador2.getEquipo().getMiembros().get(0);
-		int kiActual = personaje.getKi();
-		new Turno (jugador1, jugador2, juego.getTablero());
-		Assert.assertEquals(kiActual, personaje.getKi());
+		for (Personaje personaje : jugador2.getEquipo().getMiembros()){
+			int kiEsperado = personaje.getKi() ;
+			new Turno (jugador1, jugador2, juego.getTablero());
+			Assert.assertEquals(kiEsperado, personaje.getKi());
+		}
 	}
 	
 	@Test
 	public void testJugadorActualPuedeAtacarEnemigo(){
-		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
-		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
 		
 		try {
-			turno.atacarEnemigo(enemigo);
-			Assert.assertTrue(enemigo.getPorcentajeVida() < 100); 
+			turno.atacarEnemigo(personajeJugador2);
+			Assert.assertTrue(personajeJugador2.getPorcentajeVida() < 100); 
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
@@ -75,19 +82,16 @@ public class TestTurno {
 	
 	@Test
 	public void testDespuesDeAtacarNoCambiaElTurno() throws AtaqueNoPosible{
-		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
-		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
-		turno.atacarEnemigo(enemigo);
+		turno.atacarEnemigo(personajeJugador2);
 		Assert.assertEquals(jugador1, turno.jugadorActual());
 	}
 	
 	@Test
 	public void testJugadorActualPuedeMover() {
-		Posicion destino = new Posicion (1, Constantes.SIZE_TABLERO / 2);
 		
 		try {
 			turno.moverPersonaje(destino);
-			Assert.assertTrue(juego.getTablero().getPosicionPersonaje(jugador1.getEquipo().getMiembros().get(0)).equals(destino)); 
+			Assert.assertTrue(juego.getTablero().getPosicionPersonaje(personajeJugadorActual).equals(destino)); 
 		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia haberse movido");
 		}
@@ -95,21 +99,19 @@ public class TestTurno {
 	
 	@Test
 	public void testDespuesDeMoverNoCambiaElTurno() throws MovimientoNoPosible{
-		turno.moverPersonaje(new Posicion (1, Constantes.SIZE_TABLERO / 2) );
+		turno.moverPersonaje(destino );
 		Assert.assertEquals(jugador1, turno.jugadorActual());
 	}
 	
 	@Test
 	public void testDespuesDeAtacarNoPuedeVolverAAtacar() throws AtaqueNoPosible{
-		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
-		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
 		try {
-			turno.atacarEnemigo(enemigo);
+			turno.atacarEnemigo(personajeJugador2);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
 		try {
-			turno.atacarEnemigo(enemigo);
+			turno.atacarEnemigo(personajeJugador2);
 			Assert.fail("No deberia haber atacado");
 		} catch (AtaqueNoPosible error) {
 			Assert.assertEquals(Constantes.ErrorAtaqueYaRealizado, error.getMensaje());
@@ -118,10 +120,9 @@ public class TestTurno {
 	
 	@Test
 	public void testDespuesDeMoverNoPuedeVolverAMover() throws MovimientoNoPosible{
-		Posicion destino1 = new Posicion (1, Constantes.SIZE_TABLERO / 2);
-		Posicion destino2 = new Posicion (2, Constantes.SIZE_TABLERO / 2);
+		Posicion destino2 = destino.sumarPosicion(destino);
 		try {
-			turno.moverPersonaje(destino1);
+			turno.moverPersonaje(destino);
 		} catch (MovimientoNoPosible e) {
 			Assert.fail("Deberia haberse movido");
 		}
@@ -135,12 +136,9 @@ public class TestTurno {
 	
 	@Test
 	public void testJugadorPuedeMoverYDespuesAtacar(){
-		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
-		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
-		Posicion destino = new Posicion (2, Constantes.SIZE_TABLERO / 2);
 		
 		try {
-			turno.atacarEnemigo(enemigo);
+			turno.atacarEnemigo(personajeJugador2);
 		} catch ( AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
@@ -154,9 +152,6 @@ public class TestTurno {
 	
 	@Test
 	public void testJugadorPuedeAtacarYDespuesMover(){
-		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
-		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
-		Posicion destino = new Posicion (2, Constantes.SIZE_TABLERO / 2);
 		
 		try {
 			turno.moverPersonaje(destino);
@@ -164,7 +159,7 @@ public class TestTurno {
 			Assert.fail("Deberia haberse movido");
 		}
 		try {
-			turno.atacarEnemigo(enemigo);
+			turno.atacarEnemigo(personajeJugador2);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
@@ -173,12 +168,9 @@ public class TestTurno {
 	
 	@Test
 	public void testDespuesDeMoverYAtacarCambiaDeTurno(){
-		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
-		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
-		Posicion destino = new Posicion (2, Constantes.SIZE_TABLERO / 2);
 		
 		try {
-			turno.atacarEnemigo(enemigo);
+			turno.atacarEnemigo(personajeJugador2);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("Deberia haber atacado");
 		}
@@ -192,29 +184,24 @@ public class TestTurno {
 	
 	@Test
 	public void testAlCambiarDeTurnoGeneraKiNuevoJugador() throws AtaqueNoPosible,  MovimientoNoPosible{
-		Personaje enemigo = jugador2.getEquipo().getMiembros().get(0);
-		int kiActual = enemigo.getKi();
-		juego.getTablero().reposicionarPersonaje(enemigo,new Posicion (1, Constantes.SIZE_TABLERO / 2));
-		Posicion destino = new Posicion (2, Constantes.SIZE_TABLERO / 2);
-
-		turno.atacarEnemigo(enemigo);
+		int kiEsperado = personajeJugador2.getKi() + Personaje.kiGeneradoAlComienzoTurno;
+		turno.atacarEnemigo(personajeJugador2);
 		turno.moverPersonaje(destino);
 		
-		Assert.assertEquals(kiActual + 5, enemigo.getKi());
+		Assert.assertEquals(kiEsperado, personajeJugador2.getKi());
 
 	}
 	
 	@Test
 	public void testPuedoSeleccionarOtroPersonajeDelJugadorYMoverlo() throws MovimientoNoPosible{
-		Posicion origen = new Posicion (0, Constantes.SIZE_TABLERO / 2);
-		Posicion destino = new Posicion (1, Constantes.SIZE_TABLERO / 2);
-		Personaje personaje1 = jugador1.getEquipo().getMiembros().get(1);
-		Personaje personaje2 = jugador1.getEquipo().getMiembros().get(0);
+		Posicion origen = juego.getTablero().getPosicionPersonaje(personajeJugadorActual);
+		Personaje companiero = jugador1.getEquipo().getMiembros().get(1); //Elijo un personaje cualquiera
+		juego.getTablero().reposicionarPersonaje(companiero ,new Posicion (1,0)); //Lo posicion cerca de los otros
 		try {
-			turno.seleccionarPersonaje(personaje1);
+			turno.seleccionarPersonaje(companiero);
 			turno.moverPersonaje(destino);
-			Assert.assertTrue(juego.getTablero().getPosicionPersonaje(personaje1).equals(destino));
-			Assert.assertTrue(juego.getTablero().getPosicionPersonaje(personaje2).equals(origen));
+			Assert.assertTrue(juego.getTablero().getPosicionPersonaje(companiero).equals(destino));
+			Assert.assertTrue(juego.getTablero().getPosicionPersonaje(personajeJugadorActual).equals(origen));
 		} catch (PersonajeNoSeleccionable e) {
 			Assert.fail("Deberia haber seleccionado el personaje");
 		}
@@ -222,9 +209,8 @@ public class TestTurno {
 	
 	@Test
 	public void testNoPuedoSeleccionarOtroPersonajeDelOtroJugador(){
-		Personaje personaje1 = jugador2.getEquipo().getMiembros().get(0);
 		try {
-			turno.seleccionarPersonaje(personaje1);
+			turno.seleccionarPersonaje(personajeJugador2);
 			Assert.fail("No deberia haber seleccionado al personaje");
 		} catch (PersonajeNoSeleccionable e){
 			Assert.assertTrue(true);

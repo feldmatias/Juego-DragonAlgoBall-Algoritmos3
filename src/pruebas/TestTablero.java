@@ -29,22 +29,18 @@ public class TestTablero {
 	public void alCrearTableroTodosLosCasillerosEstanVacios(){
 		Posicion pos;
 		Casillero casillero;
-		boolean estaVacio = true;
 		
 		for(int x=0 ; x < this.sizeTablero ; x++){
 			for(int y=0 ; y < this.sizeTablero ; y++){
 				pos= new Posicion(x,y);
 				casillero = this.tablero.getCasillero(pos);
-				 if(!casillero.estaVacio()){
-					 estaVacio = false;
-				 }
+				Assert.assertTrue(casillero.estaVacio());
 			}
 		}
-		Assert.assertTrue(estaVacio);
 	}
 	
 	@Test
-	public void getCasilleroSegunPosicionDevuelveElCasilleroConLaMismaPosicion() throws PosicionFueraDeRango {
+	public void getCasilleroSegunPosicionDevuelveElCasilleroConLaMismaPosicion() {
 		Posicion posBuscada = new Posicion(2,2);
 		Casillero casillero = tablero.getCasillero(posBuscada);
 		Posicion posCasillero = casillero.getPosicion();
