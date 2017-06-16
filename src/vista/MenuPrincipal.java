@@ -129,12 +129,24 @@ public class MenuPrincipal extends StackPane{
 
 			
 			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF");
+			btnMusicaOff.setOnMouseClicked(evento -> {
+				sonidos.mutearMusica();
+			});
 			
 			BotonMenu btnMusicaOn = new BotonMenu("MUSICA ON");
+			btnMusicaOn.setOnMouseClicked(evento -> {
+				sonidos.desmutearMusica();
+			});
 			
 			BotonMenu btnEfectosOn = new BotonMenu("EFECTOS DE SONIDO ON");
+			btnEfectosOn.setOnMouseClicked(evento -> {
+				sonidos.desmutearEfectosSonido();
+			});
 			
 			BotonMenu btnEfectosOff = new BotonMenu("EFECTOS DE SONIDO OFF");
+			btnEfectosOff.setOnMouseClicked(evento-> {
+				sonidos.mutearEfectosSonido();
+			});
 			
 			
 			

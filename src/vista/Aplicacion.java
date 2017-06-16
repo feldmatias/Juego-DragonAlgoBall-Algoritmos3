@@ -20,10 +20,7 @@ public class Aplicacion extends Application {
 		this.sonidos = new LibreriaSonidos();
 		
 
-		MediaPlayer cancionFondo = sonidos.getMusica();
-		cancionFondo.setAutoPlay(true);
-		cancionFondo.setVolume(0.1);
-		cancionFondo.setCycleCount(MediaPlayer.INDEFINITE);
+		this.sonidos.reproducirMusica();
 		
 //		cancionFondo.setMute(true);
 		
