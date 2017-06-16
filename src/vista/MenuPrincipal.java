@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import modelo.juego.DragonBall;
+import vista.controlador.TransicionMenuEventHandler;
 
 public class MenuPrincipal extends StackPane{
 	
@@ -29,6 +30,8 @@ public class MenuPrincipal extends StackPane{
 		public MenuPrincipal(Stage stage,LibreriaSonidos sonidos) {
 			this.stage = stage;
 			this.sonidos = sonidos;
+			stage.setFullScreen(true);
+
 			
 			InputStream entradaImagen;
 			try {
@@ -41,25 +44,23 @@ public class MenuPrincipal extends StackPane{
 			}
 			
 			
-			VBox menuPrincipal = new VBox(10);
-			VBox menuOpciones = new VBox(10);
+			Submenu menuPrincipal = new Submenu();
+			Submenu menuOpciones = new Submenu();
+			Submenu menuSonido = new Submenu();
+			Submenu menuPantalla = new Submenu();
+			
+
 			HBox opcionesMusica = new HBox(10);
 			HBox opcionesEfectosSonido = new HBox(10);
-			
-			menuPrincipal.setTranslateX(100);
-			menuPrincipal.setTranslateY(200);
 
-			menuOpciones.setTranslateX(100);
-			menuOpciones.setTranslateY(200);
 			
-			opcionesMusica.setTranslateX(200);
-			opcionesEfectosSonido.setTranslateX(200);
+			final double posSubmenu1 = 400;
+			final double posSubmenu2 = 800;
 			
-			final int compensacion = 400;
+			menuOpciones.setTranslateX(posSubmenu1);
+			menuSonido.setTranslateX( posSubmenu2 );
+			menuPantalla.setTranslateX( posSubmenu2 );
 			
-			menuOpciones.setTranslateX(compensacion);
-			opcionesMusica.setTranslateY(menuOpciones.getTranslateY() + compensacion);
-			opcionesEfectosSonido.setTranslateY(menuOpciones.getTranslateY() +compensacion  + 50);
 			
 			btnContinuar = new BotonMenu ("CONTINUAR PARTIDA");
 			btnContinuar.deshabilitar();
@@ -80,80 +81,39 @@ public class MenuPrincipal extends StackPane{
 	
 			
 			BotonMenu btnOpciones = new BotonMenu("OPCIONES");
-			btnOpciones.setOnMouseClicked(evento1 -> {
-				this.getChildren().addAll(menuOpciones);
-				
+			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuPrincipal,menuOpciones,posSubmenu1);
+			btnOpciones.setOnMouseClicked(eventoTransicion);
 			
-				
-				TranslateTransition transicionTraslado1 = new TranslateTransition(Duration.seconds(0.25),menuPrincipal);
-				transicionTraslado1.setToX( menuPrincipal.getTranslateX() - compensacion );
-				
-				TranslateTransition transicionTraslado2 = new TranslateTransition(Duration.seconds(0.5),menuOpciones);
-				transicionTraslado2.setToX( menuPrincipal.getTranslateX() );
-				
-				transicionTraslado1.play();
-				transicionTraslado2.play();
-				
-				transicionTraslado1.setOnFinished( evento2 -> {
-					this.getChildren().remove(menuPrincipal);
-				});
-				
-			});
 			
-			BotonMenu btnAtras =new BotonMenu("ATRAS");
-			btnAtras.setOnMouseClicked( evento -> {
-				this.getChildren().add(menuPrincipal);
-				
-				TranslateTransition transicionOpciones = new TranslateTransition(Duration.seconds(0.25), menuOpciones);
-				transicionOpciones.setToX( menuOpciones.getTranslateX() + compensacion );
-				
-				TranslateTransition transicionMusica = new TranslateTransition(Duration.seconds(0.1),opcionesMusica);
-				transicionMusica.setToY(menuOpciones.getTranslateY() + compensacion);
-				
-				TranslateTransition transicionEfectos = new TranslateTransition(Duration.seconds(0.1),opcionesEfectosSonido);
-				transicionEfectos.setToY(menuOpciones.getTranslateY() + compensacion + 50);
-				
-				TranslateTransition transicionMenuPrincipal = new TranslateTransition(Duration.seconds(0.5), menuPrincipal);
-				transicionMenuPrincipal.setToX( menuOpciones.getTranslateX() );
-				
-				transicionOpciones.play();
-				transicionMusica.play();
-				transicionEfectos.play();
-				transicionMenuPrincipal.play();
-				
-				
-				transicionOpciones.setOnFinished( evento2 -> {
-					this.getChildren().removeAll( menuOpciones, opcionesMusica, opcionesEfectosSonido );
-				
-				});
-				
-			});
+			BotonMenu btnAtrasPrincipal =new BotonMenu("ATRAS");
+			TransicionMenuEventHandler eventoTransicion2 = new TransicionMenuEventHandler(this,menuOpciones,menuPrincipal,-posSubmenu1);
+			btnAtrasPrincipal.setOnMouseClicked(eventoTransicion2);
 			
 			
 			BotonMenu btnSonido = new BotonMenu("SONIDO");
-			btnSonido.setOnMouseClicked( evento-> {
-				this.getChildren().addAll(opcionesMusica,opcionesEfectosSonido);
-				TranslateTransition transicionTraslado = new TranslateTransition(Duration.seconds(0.5),opcionesMusica);
-				transicionTraslado.setToY(	menuOpciones.getTranslateY() + 100);		
-				
-				TranslateTransition transicionTraslado2 = new TranslateTransition(Duration.seconds(0.5),opcionesEfectosSonido);
-				transicionTraslado2.setToY( menuOpciones.getTranslateY() + 150 );
-				
-				transicionTraslado.play();
-				transicionTraslado2.play();
-				
-				transicionTraslado.setOnFinished(evento2-> {
-//					btnSonido.setDisable(true);
-//					btnSonido.deshabilitar();
-				
-				});
-			});
+			TransicionMenuEventHandler eventoTransicion3 = new TransicionMenuEventHandler(this, menuOpciones, menuSonido, posSubmenu2);
+			btnSonido.setOnMouseClicked(eventoTransicion3);
+			
+			
+			BotonMenu btnAtrasSonido = new BotonMenu("ATRAS");
+			TransicionMenuEventHandler eventoTransicion4 = new TransicionMenuEventHandler(this, menuSonido, menuOpciones, -posSubmenu2);
+			btnAtrasSonido.setOnMouseClicked(eventoTransicion4);
+			
+						
+			BotonMenu btnPantalla = new BotonMenu("PANTALLA");
+			TransicionMenuEventHandler eventoTransicion5 = new TransicionMenuEventHandler(this,menuOpciones,menuPantalla, posSubmenu1);
+			btnPantalla.setOnMouseClicked(eventoTransicion5);
 			
 			
 			
-			stage.setFullScreen(true);
-			BotonMenu btnPantallaCompletaOn = new BotonMenu("Habilitar Pantalla Completa");
-			BotonMenu btnPantallaCompletaOff = new BotonMenu("Deshabilitar Pantalla Completa");
+			BotonMenu btnAtrasPantalla = new BotonMenu("ATRAS");
+			TransicionMenuEventHandler eventoTransicion6 = new TransicionMenuEventHandler(this,menuPantalla,menuOpciones,-posSubmenu2);
+			btnAtrasPantalla.setOnMouseClicked(eventoTransicion6);
+			
+			
+			BotonMenu btnPantallaCompletaOn = new BotonMenu("PANTALLA COMPLETA");
+			BotonMenu btnPantallaCompletaOff = new BotonMenu("MODO VENTANA");
+			
 			btnPantallaCompletaOn.setOnMouseClicked( evento-> {
 				stage.setFullScreen(true);
 				stage.setFullScreenExitHint("");
@@ -162,25 +122,14 @@ public class MenuPrincipal extends StackPane{
 			});
 			
 			btnPantallaCompletaOn.deshabilitar();
-//			if (stage.isFullScreen()){
-//				btnPantallaCompletaOn.setDisable(true);
-//			}
-//			if (!stage.isFullScreen()){
-//				btnPantallaCompletaOn.setDisable(false);
-//			}
+
 			
 			btnPantallaCompletaOff.setOnMouseClicked( evento-> {
 				stage.setFullScreen(false);
 				btnPantallaCompletaOff.deshabilitar();
 				btnPantallaCompletaOn.habilitar();
 			});
-//			if (!stage.isFullScreen()){
-//				btnPantallaCompletaOff.setDisable(true);
-//			}
-//			if (stage.isFullScreen()){
-//				btnPantallaCompletaOff.setDisable(false);
-//			}
-			
+
 			
 			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF");
 			
@@ -207,9 +156,11 @@ public class MenuPrincipal extends StackPane{
 			
 			
 			menuPrincipal.getChildren().addAll(btnContinuar, btnEmpezar , btnOpciones, btnSalir);
-			menuOpciones.getChildren().addAll(btnAtras, btnSonido, btnPantallaCompletaOn, btnPantallaCompletaOff);
+			menuOpciones.getChildren().addAll(btnAtrasPrincipal, btnSonido, btnPantalla);
 			opcionesMusica.getChildren().addAll(btnMusicaOn,btnMusicaOff);
 			opcionesEfectosSonido.getChildren().addAll(btnEfectosOn,btnEfectosOff);
+			menuSonido.getChildren().addAll(btnAtrasSonido,opcionesMusica,opcionesEfectosSonido);
+			menuPantalla.getChildren().addAll(btnAtrasPantalla,btnPantallaCompletaOn,btnPantallaCompletaOff);
 			
 			
 			this.getChildren().addAll(menuPrincipal);
