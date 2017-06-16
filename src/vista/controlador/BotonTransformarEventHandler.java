@@ -35,12 +35,14 @@ public class BotonTransformarEventHandler implements EventHandler<ActionEvent> {
 		BotonInvisible boton = botonesPersonajes.get(juego.getJugadorActual().getPersonajeSeleccionado());
 		try {
 			juego.jugadorActualTransformar();
-			boton.titilar(Color.BLUE);
-			PauseTransition pausa = new PauseTransition(Duration.seconds(0.7));
+			boton.titilar(Color.YELLOW);
+			PauseTransition pausa = new PauseTransition(Duration.seconds(2));
 			pausa.setOnFinished(finPausa -> {
 				vista.actualizarVista();
 			});
 			pausa.play();
+			boton.lanzarSonidoTransformacion();
+
 		} catch (TransformacionNoPosible error) {
 			labelAcciones.setText("El personaje no puede Transformarse: " + error.getMensaje());
 			boton.lanzarSonidoError();

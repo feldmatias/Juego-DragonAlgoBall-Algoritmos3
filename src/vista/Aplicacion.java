@@ -20,14 +20,9 @@ public class Aplicacion extends Application {
 		this.sonidos = new LibreriaSonidos();
 		
 
-		this.sonidos.reproducirMusica();
-		
-//		cancionFondo.setMute(true);
-		
+		this.sonidos.reproducirMusica();		
 		
 		this.menuJuego = new MenuPrincipal(stage,sonidos);
-		
-		
 		
 		Scene scene = new Scene(menuJuego);
 		
