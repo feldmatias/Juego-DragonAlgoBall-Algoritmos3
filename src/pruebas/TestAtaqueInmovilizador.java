@@ -10,8 +10,8 @@ import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
-import modelo.personajes.AtaqueInmovilizador;
 import modelo.personajes.Personaje;
+import modelo.personajes.modos.ModoInmovilizado;
 import modelo.utilidades.Constantes;
 
 public class TestAtaqueInmovilizador {
@@ -19,6 +19,7 @@ public class TestAtaqueInmovilizador {
 	private Personaje majinBoo;
 	private Personaje goku;
 	private DragonBall juego;
+	private static int cantidadTurnosParaDesinmovilizarse = ModoInmovilizado.duracionTurnos + 1;
 	
 	@Before
 	public void setUp() throws EquipoNoDisponible{
@@ -55,7 +56,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		}catch(AtaqueNoPosible e){
 		}
-		for(int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; i++){
+		for(int i = 0; i < cantidadTurnosParaDesinmovilizarse; i++){
 			goku.empezarTurno(); 
 		}
 		try{
@@ -86,7 +87,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
 		}
-		for(int j = 0; j < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; j++){
+		for(int j = 0; j < cantidadTurnosParaDesinmovilizarse; j++){
 			goku.empezarTurno(); 
 		}
 		try {
@@ -126,7 +127,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
 		}
-		for(int j = 0; j < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; j++){
+		for(int j = 0; j < cantidadTurnosParaDesinmovilizarse; j++){
 			goku.empezarTurno(); 
 		}
 		try {
@@ -159,7 +160,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
 		}
-		for( int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer ; i++){
+		for( int i = 0; i < cantidadTurnosParaDesinmovilizarse ; i++){
 			goku.empezarTurno();
 		}
 		try {
@@ -192,7 +193,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
 		}
-		for( int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; i++){
+		for( int i = 0; i <  cantidadTurnosParaDesinmovilizarse; i++){
 			goku.empezarTurno();
 		}
 		try {
@@ -232,7 +233,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
 		}
-		for(int j = 0; j < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; j++){
+		for(int j = 0; j <  cantidadTurnosParaDesinmovilizarse; j++){
 			goku.empezarTurno();
 		}
 		
@@ -282,7 +283,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
 		}
-		for(int j = 0; j < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; j++){
+		for(int j = 0; j <  cantidadTurnosParaDesinmovilizarse; j++){
 			goku.empezarTurno();
 		}
 		
@@ -301,7 +302,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
 		}
-		for(int i=0; i< AtaqueInmovilizador.cantidadDeTurnosDeDuracion ; i++){
+		for(int i=0; i<  ModoInmovilizado.duracionTurnos ; i++){
 			goku.empezarTurno();
 		}
 		int kiFinal = goku.getKi();
@@ -316,7 +317,7 @@ public class TestAtaqueInmovilizador {
 			majinBoo.realizarAtaqueEspecial(goku);
 		} catch (AtaqueNoPosible e) {
 		}
-		for(int i=0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer ; i++){
+		for(int i=0; i < cantidadTurnosParaDesinmovilizarse ; i++){
 			goku.empezarTurno();
 		}
 		int kiFinal = goku.getKi() ;
@@ -335,7 +336,7 @@ public class TestAtaqueInmovilizador {
 		} catch (AtaqueNoPosible e) {
 		}
 		int kiActual = goku.getKi();
-		for (int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosDeDuracion; i++){
+		for (int i = 0; i < ModoInmovilizado.duracionTurnos; i++){
 			goku.empezarTurno();
 			try{
 				goku.transformar();
@@ -368,7 +369,7 @@ public class TestAtaqueInmovilizador {
 		} catch (AtaqueNoPosible e) {
 		}
 		int kiActual = goku.getKi();
-		for (int i = 0; i < AtaqueInmovilizador.cantidadDeTurnosParaDesaparecer; i++){
+		for (int i = 0; i < cantidadTurnosParaDesinmovilizarse; i++){
 			goku.empezarTurno();
 		}
 		Assert.assertEquals(kiActual + 5, goku.getKi());
