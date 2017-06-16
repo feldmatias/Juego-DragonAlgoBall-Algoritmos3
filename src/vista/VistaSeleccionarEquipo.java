@@ -30,7 +30,7 @@ public class VistaSeleccionarEquipo extends VBox{
 	private Stage stage;
 	private MenuPrincipal menu;
 	private Text title;
-	public static final int ALTURA_EQUIPOS = 0;
+	public static final int ALTURA_EQUIPOS = 600;
 	private LibreriaSonidos sonidos;
 	
 	public VistaSeleccionarEquipo(DragonBall juego, Stage stage, MenuPrincipal menu,LibreriaSonidos sonidos){
@@ -104,9 +104,9 @@ public class VistaSeleccionarEquipo extends VBox{
 			archivoImagen.close();
 		} catch (IOException e1) {
 		}
-		vistaImagen.setFitWidth(700);
+		vistaImagen.setFitHeight(ALTURA_EQUIPOS);
 		vistaImagen.setPreserveRatio(true);
-		vistaImagen.setTranslateY(ALTURA_EQUIPOS);
+		//vistaImagen.setTranslateY(ALTURA_EQUIPOS);
 		
 		DropShadow sombra1= new DropShadow( 20, color);
 		DropShadow sombra2= new DropShadow();
