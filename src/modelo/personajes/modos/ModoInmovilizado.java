@@ -6,12 +6,13 @@ import modelo.utilidades.Constantes;
 
 public class ModoInmovilizado extends Modo {
 
+	public static final int duracionTurnos = 3;
 	private int turnosRestantes;
 	private Modo modoAnterior;
 	
 	public ModoInmovilizado(Modo modoAnterior){
 		super(0,0,0,modoAnterior.getNombre());
-		this.turnosRestantes = 4;
+		this.turnosRestantes = duracionTurnos + 1;
 		this.modoAnterior = modoAnterior;
 	}
 	
