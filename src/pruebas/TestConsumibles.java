@@ -48,66 +48,63 @@ public class TestConsumibles {
 	public void testConsumibleDesapareceAlAgarrarse(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		
-		Assert.assertEquals(SemillaDelErmitanio.regeneracionDeVida, personaje1.getPorcentajeVida(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(Goku.vidaInicial, personaje1.getVidaActual(), Constantes.porcentajeEsperado);
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
+		
 		//Personaje1 Agarro el consumible
-		Assert.assertTrue(personaje1.getPorcentajeVida() > SemillaDelErmitanio.regeneracionDeVida);
+		int vidaEsperada = Goku.vidaInicial + SemillaDelErmitanio.regeneracionDeVida;
+		Assert.assertEquals(vidaEsperada , personaje1.getVidaActual(), Constantes.porcentajeEsperado);
 		
 		tablero.reposicionarPersonaje(personaje1, new Posicion (0,0));
 		
 		tablero.reposicionarPersonaje(personaje2, posConsumible);
 		//Personaje2 no agarro el consumible
-		Assert.assertFalse(personaje2.getPorcentajeVida() > SemillaDelErmitanio.regeneracionDeVida);
+		Assert.assertEquals(Freezer.vidaInicial, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testSemillaDelErmitanioRegeneraVida(){
-		float porcentajeVidaInicial = personaje1.getPorcentajeVida();
+		int vidaEsperada = Goku.vidaInicial + SemillaDelErmitanio.regeneracionDeVida;
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		float porcentajeVidaFinal = personaje1.getPorcentajeVida(); //se espera aumento del 20%
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial + 20, Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testEsferaDelDragonAumentaElPoderDePelea(){
-		double poderPeleaInicial = personaje1.getPoderPelea();
 		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		double poderPeleaFinal = personaje1.getPoderPelea();
-		Assert.assertEquals(poderPeleaInicial + 5, poderPeleaFinal, Constantes.porcentajeEsperado);
+		double poderPeleaEsperado = Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio;
+		Assert.assertEquals(poderPeleaEsperado, personaje1.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testNubeVoladoraAumentaVelocidadAlDoble(){
-		int velocidadInicial = personaje1.getVelocidad();
 		tablero.getCasillero(posConsumible).agregarConsumible(new NubeVoladora());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		int velocidadFinal = personaje1.getVelocidad();
-		Assert.assertEquals(velocidadFinal , velocidadInicial * 2 );
+		int velocidadEsperada = Goku.velocidadNormal * NubeVoladora.aumentoVelocidad;
+		Assert.assertEquals(velocidadEsperada , personaje1.getVelocidad() );
 	}
 	
 	@Test
 	public void testNubeVoladoraAumentaVelocidadAlDobleDuranteSegundoTurno(){
-		int velocidadInicial = personaje1.getVelocidad();
 		tablero.getCasillero(posConsumible).agregarConsumible(new NubeVoladora());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		personaje1.empezarTurno();
 		personaje1.empezarTurno(); //segundo turno
-		int velocidadFinal = personaje1.getVelocidad();
-		Assert.assertEquals(velocidadFinal , velocidadInicial * 2 );
+		int velocidadEsperada = Goku.velocidadNormal * NubeVoladora.aumentoVelocidad;
+		Assert.assertEquals(velocidadEsperada , personaje1.getVelocidad() );
 		
 	}
 	
 	@Test
-	public void testNubeVoladoraPierdeEfectoEnElTercerTurno(){
-		int velocidadInicial = personaje1.getVelocidad();
+	public void testNubeVoladoraPierdeEfectoAlPasarTurnosNecesarios(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new NubeVoladora());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		personaje1.empezarTurno();
-		personaje1.empezarTurno();
-		personaje1.empezarTurno(); //En el tercer turno ya no tiene efecto
-		Assert.assertEquals(velocidadInicial, personaje1.getVelocidad());
+		for (int i = 0; i < NubeVoladora.duracionTurnos; i++){
+			personaje1.empezarTurno();
+		}
+		Assert.assertEquals(Goku.velocidadNormal, personaje1.getVelocidad());
 	}
 	
 	
@@ -115,9 +112,10 @@ public class TestConsumibles {
 	public void testSemillaDelErmitanioNoGeneraVidaDosVeces(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		Assert.assertEquals(120, personaje1.getPorcentajeVida(), Constantes.porcentajeEsperado);
+		int vidaEsperada = Goku.vidaInicial + SemillaDelErmitanio.regeneracionDeVida;
+		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.porcentajeEsperado);
 		personaje1.empezarTurno();
-		Assert.assertEquals(120, personaje1.getPorcentajeVida(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.porcentajeEsperado);
 	}
 	
 	
@@ -125,29 +123,27 @@ public class TestConsumibles {
 	public void testEsferaDelDragonAumentaElDanioARecibirPorElEnemigo() {
 		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
 		try {
-			personaje1.atacarAPersonaje(personaje2); //se espera danio de 25
+			personaje1.atacarAPersonaje(personaje2);
 		} catch (AtaqueNoPosible e) {}
-		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, Constantes.porcentajeEsperado);
+		double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio;
+		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testEsferaDelDragonAumentaElDanioARecibirPorEnemigoPorDosAtaques(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
 		try {
-			personaje1.atacarAPersonaje(personaje2); //se espera danio de 25
+			personaje1.atacarAPersonaje(personaje2); 
 		} catch (AtaqueNoPosible e) {}
-		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); // se espera 6.25% menos de vida
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 6.25, Constantes.porcentajeEsperado);
+		double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio;
+		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
 		try {
 			personaje1.atacarAPersonaje(personaje2);
 		}catch (AtaqueNoPosible e){}
-		porcentajeVidaFinal = personaje2.getPorcentajeVida();
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial -12.5 , Constantes.porcentajeEsperado);
+		vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio * 2;
+		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
@@ -158,21 +154,22 @@ public class TestConsumibles {
 			personaje1.atacarAPersonaje(personaje2);
 			personaje1.atacarAPersonaje(personaje2);
 		} catch (AtaqueNoPosible e) {}
-		float porcentajeVidaInicial = personaje2.getPorcentajeVida();
+		double vidaTrasDosAtaques = Freezer.vidaInicial - Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio * 2;
 		try{
 			personaje1.atacarAPersonaje(personaje2);
 		}catch(AtaqueNoPosible e){}
-		float porcentajeVidaFinal = personaje2.getPorcentajeVida(); //se espera danio del 5%
-		Assert.assertEquals(porcentajeVidaFinal, porcentajeVidaInicial - 5, Constantes.porcentajeEsperado);
+		double vidaEsperada = vidaTrasDosAtaques - Goku.poderPeleaNormal;
+		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
 	}
 	
 
 	@Test
 	public void testEsferaDelDragonSumaEsferaAEquipo(){
-		personaje1.sumarEfecto(new EsferaDeDragon());
-		personaje1.sumarEfecto(new EsferaDeDragon());
-		personaje1.sumarEfecto(new EsferaDeDragon());
-		Assert.assertEquals(3, personaje1.getEquipo().getCantidadEsferas());
+		int cantidadEsferas = 3;
+		for (int i = 0; i< cantidadEsferas; i++){
+			personaje1.sumarEfecto(new EsferaDeDragon());
+		}
+		Assert.assertEquals(cantidadEsferas, personaje1.getEquipo().getCantidadEsferas());
 	}
 	
 }
