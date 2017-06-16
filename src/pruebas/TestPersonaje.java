@@ -25,7 +25,8 @@ public class TestPersonaje {
 	
 	@Before
 	public void setUp(){
-		this.tablero = new Tablero(8);
+		int sizeTablero = 8;
+		this.tablero = new Tablero(sizeTablero);
 		this.personaje = new Goku(tablero);
 	}
 	
@@ -37,50 +38,56 @@ public class TestPersonaje {
 	@Test
 	public void testGenerarKiUnaVez(){
 		personaje.generarKi();
-		Assert.assertEquals(5, personaje.getKi());
+		Assert.assertEquals(Personaje.kiGeneradoAlComienzoTurno, personaje.getKi());
 	}
 	
 	@Test
-	public void testGenerarKiTresVeces(){
-		personaje.generarKi();
-		personaje.generarKi();
-		personaje.generarKi();
-		Assert.assertEquals(15, personaje.getKi());
+	public void testGenerarKiVariasVeces(){
+		int cantidadVeces = 4;
+		for (int i = 0; i< cantidadVeces; i++){
+			personaje.generarKi();
+		}
+		int kiEsperado = Personaje.kiGeneradoAlComienzoTurno * cantidadVeces;
+		Assert.assertEquals(kiEsperado, personaje.getKi());
 	}
 	
 	@Test
 	public void testPorcentajeVidaInicialEs100(){
-		Assert.assertEquals(100, personaje.getPorcentajeVida(), 0.01);
+		Assert.assertEquals(100, personaje.getPorcentajeVida(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testObtenerPoderPeleaModoNormal(){
-		Assert.assertEquals(20, personaje.getPoderPelea(), 0.01);
+		Assert.assertEquals(Goku.poderPeleaNormal, personaje.getPoderPelea(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testDistanciaAtaqueModoNormal(){
-		Assert.assertEquals(2, personaje.getDistanciaAtaque());
+		Assert.assertEquals(Goku.distanciaAtaqueNormal, personaje.getDistanciaAtaque());
 	}
 	
 	@Test
 	public void testObtenerVelocidadModoNormal(){
-		Assert.assertEquals(2, personaje.getVelocidad());
+		Assert.assertEquals(Goku.velocidadNormal, personaje.getVelocidad());
 	}
 	
 	@Test
 	public void testRecibirAtaqueDeMayorPoderDePelea(){
-		personaje.recibirAtaque(50); //Poder pelea 20 < 50
-		Assert.assertEquals(90, personaje.getPorcentajeVida(), 0.01);
+		double danioAtaque = Goku.poderPeleaNormal * 2;
+		personaje.recibirAtaque(danioAtaque); 
+		double vidaEsperada = Goku.vidaInicial - danioAtaque;
+		Assert.assertEquals(vidaEsperada, personaje.getVidaActual(), Constantes.porcentajeEsperado);
 	}
 	
 	@Test
 	public void testRecibirAtaqueDeMenorPoderDePelea(){
-		personaje.recibirAtaque(10);  //Poder pelea 20 > 10
-		Assert.assertEquals(98.4, personaje.getPorcentajeVida(), 0.01);
+		double danioAtaque = Goku.poderPeleaNormal / 2;
+		personaje.recibirAtaque(danioAtaque); 
+		double vidaEsperada = Goku.vidaInicial - danioAtaque * Personaje.disminucionPoderPeleaAlAtacarConMenorPoderPelea;
+		Assert.assertEquals(vidaEsperada, personaje.getVidaActual(), Constantes.porcentajeEsperado);
 	}
 		
-	//Test transformaciones con ki
+	//Test transformaciones con ki, igual para todos los personajes sin transformaciones especiales
 	
 	@Test 
 	public void testTransformacionDeKiRealizarSinKiLanzaExcepcion(){
@@ -89,19 +96,19 @@ public class TestPersonaje {
 			personaje.transformar();
 			Assert.fail("La transformacion no deberia realizarse");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(20, personaje.getPoderPelea(), 0.01);
+			Assert.assertEquals(Goku.poderPeleaNormal, personaje.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 	
 	@Test 
 	public void testTransformacionDeKiRealizarConKiComprobarNuevoPoderPelea(){
 		
-		for (int i = 0; i < 6; i++){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			personaje.generarKi();
 		}
 		try {
 			personaje.transformar();
-			Assert.assertEquals(40,personaje.getPoderPelea(), 0.01);
+			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion,personaje.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("La transformacion deberia realizarse");
 		}
@@ -110,12 +117,12 @@ public class TestPersonaje {
 	@Test 
 	public void testTransformacionDeKiRealizarConKiComprobarNuevaDistanciaAtaque(){
 		
-		for (int i = 0; i < 6; i++){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			personaje.generarKi();
 		}
 		try {
 			personaje.transformar();
-			Assert.assertEquals(4,personaje.getDistanciaAtaque());
+			Assert.assertEquals(Goku.distanciaAtaquePrimerTransformacion, personaje.getDistanciaAtaque());
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("La transformacion deberia realizarse");
 		}
@@ -124,12 +131,12 @@ public class TestPersonaje {
 	@Test 
 	public void testTransformacionDeKiRealizarConKiComprobarNuevaVelocidad(){
 		
-		for (int i = 0; i < 6; i++){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			personaje.generarKi();
 		}
 		try {
 			personaje.transformar();
-			Assert.assertEquals(3,personaje.getVelocidad());
+			Assert.assertEquals(Goku.velocidadPrimerTranformacion,personaje.getVelocidad());
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("La transformacion deberia realizarse");
 		}
@@ -138,12 +145,13 @@ public class TestPersonaje {
 	@Test 
 	public void testTransformacionDeKiRealizarConKiComprobarKiRestante(){
 		
-		for (int i = 0; i < 6; i++){
-			personaje.generarKi(); //ki=30
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
+			personaje.generarKi(); 
 		}
+		int kiEsperado = personaje.getKi() - Goku.kiNecesarioPrimerTransformacion;
 		try {
 			personaje.transformar();
-			Assert.assertEquals(10,personaje.getKi());
+			Assert.assertEquals(kiEsperado,personaje.getKi());
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("La transformacion deberia realizarse");
 		}
@@ -152,12 +160,14 @@ public class TestPersonaje {
 	@Test 
 	public void testTransformacionDeKiTransformarDosVecesLanzaExcepcionEnLaSegunda(){
 
-		for (int i = 0; i < 6; i++){
+		int cantidadVecesGenerarKi = Goku.kiNecesarioPrimerTransformacion / Personaje.kiGeneradoAlComienzoTurno;
+		
+		for (int i = 0; i < cantidadVecesGenerarKi; i++){
 			personaje.generarKi(); 
 		}
 		try {
 			personaje.transformar();
-			Assert.assertEquals(10,personaje.getKi());
+			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion,personaje.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("La transformacion deberia realizarse");
 		}
@@ -165,20 +175,21 @@ public class TestPersonaje {
 			personaje.transformar();
 			Assert.fail("La transformacion no deberia realizarse");
 		} catch (TransformacionNoPosible f) {
-			Assert.assertEquals(40, personaje.getPoderPelea(), 0.01);
+			Assert.assertEquals(Goku.poderPeleaPrimerTransformacion, personaje.getPoderPelea(), Constantes.porcentajeEsperado);
 		}
 	}
 
 	@Test 
 	public void testTransformacionDeKiRealizarDosVecesConKiComprobarKiRestante(){
 		
-		for (int i = 0; i < 20; i++){
-			personaje.generarKi(); //ki=100
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
+			personaje.generarKi(); 
 		}
 		try {
+			int kiEsperado = personaje.getKi() - Goku.kiNecesarioPrimerTransformacion - Goku.kiNecesarioSegundaTransformacion;
 			personaje.transformar();
 			personaje.transformar();
-			Assert.assertEquals(30,personaje.getKi());
+			Assert.assertEquals(kiEsperado,personaje.getKi());
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Las transformaciones deberian realizarse");
 		}
@@ -187,13 +198,13 @@ public class TestPersonaje {
 	@Test 
 	public void testTransformacionDeKiRealizarDosVecesConKiComprobarPoderPelea(){
 		
-		for (int i = 0; i < 20; i++){
-			personaje.generarKi(); //ki=100
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
+			personaje.generarKi(); 
 		}
 		try {
 			personaje.transformar();
 			personaje.transformar();
-			Assert.assertEquals(60,personaje.getPoderPelea(), 0.01);
+			Assert.assertEquals(Goku.poderPeleaSegundaTransformacion, personaje.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Las transformaciones deberian realizarse");
 		}
@@ -202,20 +213,20 @@ public class TestPersonaje {
 	@Test 
 	public void testTransformacionDeKiRealizarTresVecesConKiLanzaExcepcionEnLaTercera(){
 		
-		for (int i = 0; i < 30; i++){
-			personaje.generarKi(); //ki=150
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente * 3 ; i++){
+			personaje.generarKi(); 
 		}
+		int kiEsperado = personaje.getKi() - Goku.kiNecesarioPrimerTransformacion - Goku.kiNecesarioSegundaTransformacion;
 		try {
 			personaje.transformar();
 			personaje.transformar();
 		} catch (TransformacionNoPosible e) {
-			Assert.fail("Las primeras dos transformaciones deberian realizarse");
 		}
 		try {
 			personaje.transformar();
 			Assert.fail("La tercera transformacion no deberia realizarse");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(60, personaje.getPoderPelea(), 0.01);
+			Assert.assertEquals(kiEsperado, personaje.getKi());
 		}
 	}
 	
@@ -224,8 +235,9 @@ public class TestPersonaje {
 	@Test
 	public void testMoverPersonajeAcordeALaVelocidadYComprobarNuevaPosicion(){
 		
+		Posicion posActual = new Posicion(0,0);
 		Posicion destino = new Posicion(0,1);
-		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
+		tablero.posicionarPersonaje(personaje, posActual);
 		
 		try {
 			personaje.mover(destino);
@@ -270,10 +282,11 @@ public class TestPersonaje {
 	@Test
 	public void testMoverPersonajeAPosicionDespuesDeTransformacion(){
 
-		Posicion destino = new Posicion(0,3);
-		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
+		Posicion posActual = new Posicion(0,0);
+		Posicion destino = new Posicion(0,Goku.velocidadPrimerTranformacion);
+		tablero.posicionarPersonaje(personaje, posActual);
 		
-		for (int i = 0; i < 6; i++){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			personaje.generarKi(); 
 		}
 		
@@ -286,7 +299,6 @@ public class TestPersonaje {
 				personaje.mover(destino);
 				Assert.assertTrue(destino.equals(tablero.getPosicionPersonaje(personaje)));
 			} catch (TransformacionNoPosible f){
-				Assert.fail("Deberia haberse transformado");
 			} catch (MovimientoNoPosible g){
 				Assert.fail("Deberia haberse movido");
 			}
@@ -317,7 +329,6 @@ public class TestPersonaje {
 		List<Personaje> lista = new ArrayList<Personaje>();
 		lista.add(personaje);
 		Equipo equipo = new Equipo (nombreEquipo, lista);
-		personaje.setEquipo(equipo);
 		return equipo;
 	}
 	
@@ -333,7 +344,8 @@ public class TestPersonaje {
 		
 		try {
 			personaje.atacarAPersonaje(enemigo);
-			Assert.assertEquals(95, enemigo.getPorcentajeVida(), 0.01);
+			double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal;
+			Assert.assertEquals(vidaEsperada, enemigo.getVidaActual(), Constantes.porcentajeEsperado);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("El ataque deberia realizarse");
 		}
@@ -347,13 +359,13 @@ public class TestPersonaje {
 		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
 		
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
-		tablero.posicionarPersonaje(enemigo, new Posicion(5,5));
+		tablero.posicionarPersonaje(enemigo, new Posicion(0,Goku.distanciaAtaqueNormal * 2));
 		
 		try {
 			personaje.atacarAPersonaje(enemigo);
 			Assert.fail("El ataque no deberia realizarse");
 		} catch (AtaqueNoPosible e) {
-			Assert.assertEquals(100,enemigo.getPorcentajeVida(),0.01);
+			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.porcentajeEsperado);
 		}
 	}
 	
@@ -370,7 +382,7 @@ public class TestPersonaje {
 			personaje.atacarAPersonaje(enemigo);
 			Assert.fail("El ataque no deberia realizarse");
 		} catch (AtaqueNoPosible e) {
-			Assert.assertEquals(100,enemigo.getPorcentajeVida(),0.01);
+			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.porcentajeEsperado);
 		}
 	}
 	
@@ -382,9 +394,9 @@ public class TestPersonaje {
 		this.crearEquipoUnPersonaje(enemigo, Constantes.ENEMIGOS);
 		
 		tablero.posicionarPersonaje(personaje, new Posicion(0,0));
-		tablero.posicionarPersonaje(enemigo, new Posicion(0,4));
+		tablero.posicionarPersonaje(enemigo, new Posicion(0,Goku.distanciaAtaquePrimerTransformacion));
 		
-		for (int i = 0; i < 6; i++){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++){
 			personaje.generarKi();
 		}
 		
@@ -395,7 +407,8 @@ public class TestPersonaje {
 			try {
 				personaje.transformar();
 				personaje.atacarAPersonaje(enemigo);
-				Assert.assertEquals(90, enemigo.getPorcentajeVida(), 0.01);
+				double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaPrimerTransformacion;
+				Assert.assertEquals(vidaEsperada, enemigo.getVidaActual(), Constantes.porcentajeEsperado);
 			} catch (TransformacionNoPosible e1) {
 				Assert.fail("La transformacion deberia realizarse");
 			} catch (AtaqueNoPosible e1) {
@@ -419,13 +432,13 @@ public class TestPersonaje {
 			personaje.realizarAtaqueEspecial(enemigo);
 			Assert.fail("El ataque no deberia realizarse");
 		} catch (AtaqueNoPosible e) {
-			Assert.assertEquals(100,enemigo.getPorcentajeVida(),0.01);
+			Assert.assertEquals(Freezer.vidaInicial,enemigo.getVidaActual(),Constantes.porcentajeEsperado);
 		}
 	}
 	
 	@Test 
 	public void testRealizarAtaqueEspecialYComprobarVida(){
-		for (int i = 0; i < 10; i++ ){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++ ){
 			personaje.generarKi();
 		}
 		
@@ -437,7 +450,8 @@ public class TestPersonaje {
 		
 		try {
 			personaje.realizarAtaqueEspecial(enemigo);
-			Assert.assertEquals(92.5, enemigo.getPorcentajeVida(), 0.01);
+			double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal * Goku.multiplicadorAtaqueEspecial;
+			Assert.assertEquals(vidaEsperada , enemigo.getVidaActual(), Constantes.porcentajeEsperado);
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("El ataque deberia realizarse");
 		}
@@ -445,10 +459,10 @@ public class TestPersonaje {
 	
 	@Test 
 	public void testRealizarAtaqueEspecialYComprobarKi(){
-		for (int i = 0; i < 10; i++ ){
+		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i++ ){
 			personaje.generarKi();
 		}
-		int kiActual = personaje.getKi();
+		int kiEsperado = personaje.getKi() - Goku.kiNecesarioAtaqueEspecial;
 		
 		Personaje enemigo = new Freezer(tablero);
 		this.crearEquipoUnPersonaje(personaje, Constantes.GUERREROS);
@@ -458,7 +472,7 @@ public class TestPersonaje {
 		
 		try {
 			personaje.realizarAtaqueEspecial(enemigo);
-			Assert.assertEquals(kiActual - 20, personaje.getKi());
+			Assert.assertEquals(kiEsperado, personaje.getKi());
 		} catch (AtaqueNoPosible e) {
 			Assert.fail("El ataque deberia realizarse");
 		}

@@ -18,6 +18,7 @@ import vista.Posicionable;
 public abstract class Personaje implements Posicionable{
 	
 	public static final int kiGeneradoAlComienzoTurno = 5;
+	public static final double disminucionPoderPeleaAlAtacarConMenorPoderPelea = 0.8;
 	
 	private int vidaInicial;
 	private float vidaActual;
@@ -120,7 +121,7 @@ public abstract class Personaje implements Posicionable{
 
 	public void recibirAtaque(double poderPeleaEnemigo) {
 		if (this.getPoderPelea() > poderPeleaEnemigo){
-			poderPeleaEnemigo *= 0.8; //Disminuye 20%
+			poderPeleaEnemigo *= disminucionPoderPeleaAlAtacarConMenorPoderPelea;
 		}
 		this.vidaActual -= poderPeleaEnemigo;
 		this.comprobarSiEstaMuerto();
