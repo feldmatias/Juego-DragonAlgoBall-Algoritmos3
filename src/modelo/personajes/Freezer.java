@@ -18,9 +18,15 @@ public class Freezer extends Personaje{
 	public static final int velocidadNormal = 4;
 	public static final int velocidadPrimerTranformacion = 4;
 	public static final int velocidadSegundaTranformacion = 6;
+	public static final int kiNecesarioPrimerTransformacion = 20;
+	public static final int kiNecesarioSegundaTransformacion = 50;
+	public static final int kiNecesarioAtaqueEspecial = 20;
+	public static final double multiplicadorAtaqueEspecial = 1.5;
 
 	public Freezer(Tablero tablero) {
-		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Freezer"), new AtaquePotenciador(20,1.5), tablero, 20, 50);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Freezer"),
+				new AtaquePotenciador(kiNecesarioAtaqueEspecial,multiplicadorAtaqueEspecial), 
+				tablero, kiNecesarioPrimerTransformacion, kiNecesarioSegundaTransformacion);
 	}
 	
 	@Override

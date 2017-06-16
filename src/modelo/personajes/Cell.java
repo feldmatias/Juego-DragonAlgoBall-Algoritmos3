@@ -22,9 +22,13 @@ public class Cell extends Personaje {
 	public static final int velocidadSegundaTranformacion = 4;
 	public static final int cantidadAbsorcionesPrimerTranformacion=4;
 	public static final int cantidadAbsorcionesSegundaTranformacion=8;
+	public static final int kiNecesarioPrimerTransformacion = 0;
+	public static final int kiNecesarioSegundaTransformacion = 0;
+	public static final int kiNecesarioAtaqueEspecial = 5;
 	
 	public Cell( Tablero tablero) {
-		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Cell"), new AtaqueAbsorver(5), tablero, 0, 0);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Cell"), new AtaqueAbsorver(kiNecesarioAtaqueEspecial), 
+				tablero, kiNecesarioPrimerTransformacion, kiNecesarioSegundaTransformacion);
 	}
 
 

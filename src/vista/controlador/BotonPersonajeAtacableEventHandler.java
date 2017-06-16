@@ -1,9 +1,12 @@
 package vista.controlador;
 
 
+import javafx.animation.PauseTransition;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
@@ -32,7 +35,12 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 	public void handle(MouseEvent event) {
 		try {
 			juego.jugadorActualAtacarAEnemigo(personaje);
-			vista.actualizarVista();
+			boton.titilar(Color.RED);
+			PauseTransition pausa = new PauseTransition(Duration.seconds(1));
+			pausa.setOnFinished(finPausa -> {
+				vista.actualizarVista();
+			});
+			pausa.play();
 		} catch (AtaqueNoPosible error) {
 			acciones.setText("No puede atacar: " + error.getMensaje());
 			boton.lanzarSonidoError();

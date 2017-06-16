@@ -20,10 +20,16 @@ public class Piccolo extends Personaje {
 	public static final int velocidadNormal = 2;
 	public static final int velocidadPrimerTranformacion = 3;
 	public static final int velocidadSegundaTranformacion = 4;
+	public static final int kiNecesarioPrimerTransformacion = 20;
+	public static final int kiNecesarioSegundaTransformacion = 0;
 	public static final int porcentajeVidaGohanParaSegundaTransformacion = 20;
+	public static final int kiNecesarioAtaqueEspecial = 10;
+	public static final double multiplicadorAtaqueEspecial = 1.25;
 
 	public Piccolo(Tablero tablero) {
-		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Piccolo"), new AtaquePotenciador(10,1.25), tablero, 20 ,0);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Piccolo"),
+				new AtaquePotenciador(kiNecesarioAtaqueEspecial,multiplicadorAtaqueEspecial), 
+				tablero, kiNecesarioPrimerTransformacion, kiNecesarioSegundaTransformacion);
 	}
 	
 	public Modo realizarPrimeraTransformacion(){

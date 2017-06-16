@@ -4,9 +4,9 @@ public class AtaquePotenciador extends AtaqueEspecial {
 
 	private double multiplicador;
 	
-	public AtaquePotenciador(int kiNecesario, double d) {
+	public AtaquePotenciador(int kiNecesario, double multiplicador) {
 		super(kiNecesario);
-		this.multiplicador = d;
+		this.multiplicador = multiplicador;
 	}
 
 	@Override

@@ -54,6 +54,7 @@ public class VistaJuego extends VBox{
 		this.juego = juego;
 		this.labelAcciones = new Label();
 		labelAcciones.setFont(Font.font("Calibri", 18));
+		Font fuenteDragon = Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 20);
 		
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
@@ -103,7 +104,7 @@ public class VistaJuego extends VBox{
 	private VBox crearEspacioJugador(Jugador jugador){
 		Label nombre = new Label();
 		nombre.setText(jugador.getEquipo().getNombre());
-		nombre.setFont(Font.font("Comic Sans MS", 20));
+		nombre.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 35));
 		VBox contenedor = new VBox (nombre);
 		int cantidadEsferas = jugador.getEquipo().getCantidadEsferas();
 		InputStream entradaImagen;
@@ -131,7 +132,7 @@ public class VistaJuego extends VBox{
 		
 		Label nombre = new Label();
 		nombre.setText(personaje.getNombre());
-		nombre.setFont(Font.font("Bell MT", 17));
+		nombre.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 30));
 		nombre.setUnderline(true);
 		
 		Label labelVacio = new Label();
@@ -167,7 +168,7 @@ public class VistaJuego extends VBox{
 		terminarTurno.setText("Terminar Turno");
 		
 		Button transformar = new Button();
-		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones, sonidos);
+		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones, botonesPersonajes);
 		transformar.setOnAction(eventHandler2);
 		transformar.setText("Transformar");
 		
@@ -200,7 +201,7 @@ public class VistaJuego extends VBox{
 	private VBox actualizarTurnos() {
 		Label labelTurnos = new Label();
 		labelTurnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
-		labelTurnos.setFont(Font.font("Comic Sans MS", 40));
+		labelTurnos.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 60));
 		labelTurnos.setUnderline(true);
 		labelAcciones.setText("Selecciona un personaje");
 		VBox contenedorLabels = new VBox(labelTurnos, labelAcciones);

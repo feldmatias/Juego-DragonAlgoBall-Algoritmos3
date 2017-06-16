@@ -18,9 +18,15 @@ public class MajinBoo extends Personaje {
 	public static final int velocidadNormal = 2;
 	public static final int velocidadPrimerTranformacion = 3;
 	public static final int velocidadSegundaTranformacion = 4;
+	public static final int kiNecesarioPrimerTransformacion = 20;
+	public static final int kiNecesarioSegundaTransformacion = 50;
+	public static final int kiNecesarioAtaqueEspecial = 30;
+	
 
 	public MajinBoo(Tablero tablero) {
-		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Majin Boo"), new AtaqueInmovilizador(30), tablero, 20, 50);
+		super(vidaInicial, new ModoNormal(poderPeleaNormal,distanciaAtaqueNormal,velocidadNormal, "Majin Boo"), 
+				new AtaqueInmovilizador(kiNecesarioAtaqueEspecial), 
+				tablero, kiNecesarioPrimerTransformacion, kiNecesarioSegundaTransformacion);
 	}
 
 	@Override
