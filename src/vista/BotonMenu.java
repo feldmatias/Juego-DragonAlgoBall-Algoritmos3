@@ -18,6 +18,8 @@ public class BotonMenu extends StackPane {
 	private Text texto;
 	private MediaPlayer sonido;
 	private Rectangle fondo;
+	private Color colorActualBoton;
+	private Color colorAuxiliarBoton;
 	
 	public BotonMenu(String nombre){
 		texto = new Text(nombre);
@@ -27,9 +29,11 @@ public class BotonMenu extends StackPane {
 		Media archivoSonido= new Media(new File("src/vista/sonidos/sonido deslizarse por boton.wav").toURI().toString());
 		MediaPlayer sonido = new MediaPlayer(archivoSonido);
 		
+		this.colorActualBoton =Color.ORANGE;
+		this.colorAuxiliarBoton = Color.WHITE;
 		this.fondo = new Rectangle(250,30);
 		this.fondo.setOpacity(0.6);
-		this.fondo.setFill(Color.ORANGE);
+		this.fondo.setFill(colorActualBoton);
 		
 		GaussianBlur desenfoque = new GaussianBlur(3.5);
 		this.fondo.setEffect(desenfoque);
@@ -41,7 +45,7 @@ public class BotonMenu extends StackPane {
 		this.setOnMouseEntered(evento -> {
 			this.fondo.setTranslateX(10);
 			this.texto.setTranslateX(10);
-			this.fondo.setFill(Color.WHITE);
+			this.fondo.setFill(colorAuxiliarBoton);
 			this.texto.setFill(Color.ORANGE);
 			sonido.play();
 		});
@@ -49,7 +53,7 @@ public class BotonMenu extends StackPane {
 		this.setOnMouseExited(event ->{
 			this.fondo.setTranslateX(0);
 			this.texto.setTranslateX(0);
-			this.fondo.setFill(Color.ORANGE);
+			this.fondo.setFill(colorActualBoton);
 			this.texto.setFill(Color.WHITE);
 			sonido.stop();
 		});
@@ -64,11 +68,13 @@ public class BotonMenu extends StackPane {
 	}
 	
 	public void deshabilitar(){
-		this.fondo.setFill(Color.GRAY);
+		colorActualBoton = Color.GRAY;
+		this.fondo.setFill(colorActualBoton);
 		this.setDisable(true);
 	}
 	public void habilitar(){
-		this.fondo.setFill(Color.ORANGE);
+		colorActualBoton = Color.ORANGE;
+		this.fondo.setFill(colorActualBoton);
 		this.setDisable(false);
 	}
 	

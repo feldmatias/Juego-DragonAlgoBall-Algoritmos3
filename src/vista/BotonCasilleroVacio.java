@@ -1,8 +1,5 @@
 package vista;
 
-
-
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import modelo.juego.Casillero;
 
