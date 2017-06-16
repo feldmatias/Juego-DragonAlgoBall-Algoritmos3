@@ -125,9 +125,10 @@ public class VistaJuego extends VBox{
 		return contenedor;
 	}
 
-	private HBox crearBoxPersonaje(Personaje personaje) {
+	private VBox crearBoxPersonaje(Personaje personaje) {
 		
-		HBox box = new HBox(new ImagenFondo(personaje, BotonPersonaje.width, BotonPersonaje.height));
+		VBox boxPersonaje = new VBox();
+		HBox boxDatos = new HBox(new ImagenFondo(personaje, BotonPersonaje.width, BotonPersonaje.height));
 		VBox parametrosPersonaje = new VBox();
 		parametrosPersonaje.setPadding(new Insets(10));
 		
@@ -136,7 +137,6 @@ public class VistaJuego extends VBox{
 		nombre.setFont(Font.loadFont(rutaFuente, 30));
 		nombre.setUnderline(true);
 		
-		Label labelVacio = new Label();
 		
 		Label vida = new Label();
 		vida.setText("Vida: " + String.valueOf((int)personaje.getVidaActual()));
@@ -155,10 +155,12 @@ public class VistaJuego extends VBox{
 		velocidad.setFont(Font.font(letraParametros, tamanioParametros));
 		distanciaAtaque.setFont(Font.font(letraParametros, tamanioParametros));
 		
-		parametrosPersonaje.getChildren().addAll(nombre,labelVacio,vida,ki,velocidad,distanciaAtaque);
-		box.getChildren().add(parametrosPersonaje);
-		box.setAlignment(Pos.CENTER);
-		return box;
+		parametrosPersonaje.getChildren().addAll(nombre,vida,ki,velocidad,distanciaAtaque);
+		boxDatos.getChildren().add(parametrosPersonaje);
+		boxDatos.setAlignment(Pos.CENTER);
+		boxPersonaje.getChildren().addAll(nombre, boxDatos);
+		boxPersonaje.setAlignment(Pos.CENTER);
+		return boxPersonaje;
 	}
 
 
