@@ -9,13 +9,14 @@ import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Equipo;
 import modelo.personajes.Gohan;
+import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
+import modelo.personajes.Piccolo;
 import modelo.utilidades.Constantes;
 
 public class TestGohan {
 	
-	public static final int danioMataCompanieros = 1000;
-	public static final int danioPocavidaCompanieros = 420;
+
 
 	private Personaje gohan;
 	private Personaje goku;
@@ -52,8 +53,8 @@ public class TestGohan {
 	@Test
 	public void testGohanPuedeTransformarseCompanierosConPocaVida(){
 		
-		goku.recibirAtaque(danioPocavidaCompanieros);
-		piccolo.recibirAtaque(danioPocavidaCompanieros);
+		goku.recibirAtaque(Goku.vidaInicial * 0.98);
+		piccolo.recibirAtaque(Piccolo.vidaInicial * 0.98);
 		try {
 			gohan.transformar();
 			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
@@ -65,8 +66,8 @@ public class TestGohan {
 	@Test
 	public void testGohanPuedeTransformarseCompanierosMuertos(){
 		
-		goku.recibirAtaque(danioMataCompanieros);
-		piccolo.recibirAtaque(danioMataCompanieros);
+		goku.recibirAtaque(Goku.vidaInicial * 2);
+		piccolo.recibirAtaque(Piccolo.vidaInicial * 2);
 		try {
 			gohan.transformar();
 			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
@@ -78,7 +79,7 @@ public class TestGohan {
 	@Test
 	public void testGohanNoPuedeTransformarseVidaPiccoloCompanieroCompleta(){
 		
-		goku.recibirAtaque(danioPocavidaCompanieros);
+		goku.recibirAtaque(Goku.vidaInicial * 0.98);
 		try {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
@@ -90,7 +91,7 @@ public class TestGohan {
 	@Test
 	public void testGohanNoPuedeTransformarseVidaGokuCompanieroCompleta(){
 		
-		piccolo.recibirAtaque(danioPocavidaCompanieros);
+		piccolo.recibirAtaque(Piccolo.vidaInicial * 0.98);
 		try {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
@@ -102,8 +103,8 @@ public class TestGohan {
 	@Test
 	public void testGohanTransformarYComprobarKi(){
 		
-		goku.recibirAtaque(danioPocavidaCompanieros);
-		piccolo.recibirAtaque(danioPocavidaCompanieros);
+		goku.recibirAtaque(Goku.vidaInicial * 0.98);
+		piccolo.recibirAtaque(Piccolo.vidaInicial * 0.98);
 		int kiEsperado = gohan.getKi() - Gohan.kiNecesarioSegundaTransformacion;
 		try {
 			gohan.transformar();

@@ -8,15 +8,17 @@ import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Equipo;
+import modelo.personajes.Gohan;
+import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
 import modelo.utilidades.Constantes;
 
 public class TestPiccolo {
 	
-	public static final int danioParaPocaVidaGohan = 270;
-	public static final int danioParaPocaVidaGoku = 480;
-	public static final int danioParaMuerteDeGohan = 1000;
+	public static final double danioParaPocaVidaGohan = Gohan.vidaInicial * 0.98;
+	public static final double danioParaPocaVidaGoku = Goku.vidaInicial * 0.98;
+	public static final double danioParaMuerteDeGohan = Gohan.vidaInicial * 3;
 
 	private Personaje gohan;
 	private Personaje piccolo;
