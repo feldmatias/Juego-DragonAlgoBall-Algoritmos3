@@ -36,7 +36,6 @@ public class TestGohan {
 		try {
 			gohan.transformar();
 		} catch (TransformacionNoPosible e) {
-			Assert.fail("Deberia haberse transformado: Primera transformacion");
 		}
 	}
 	
@@ -59,7 +58,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
-			Assert.fail("deberia haberse Transformado");
+			Assert.fail("Deberia haberse Transformado");
 		}
 	}
 	
@@ -72,7 +71,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
 		} catch (TransformacionNoPosible e) {
-			Assert.fail("deberia haberse Transformado");
+			Assert.fail("Deberia haberse Transformado");
 		}
 	}
 	
@@ -105,13 +104,11 @@ public class TestGohan {
 		
 		goku.recibirAtaque(danioPocavidaCompanieros);
 		piccolo.recibirAtaque(danioPocavidaCompanieros);
-		int costoKiTransformacion = 30;
-		int kiEsperado = gohan.getKi() - costoKiTransformacion;
+		int kiEsperado = gohan.getKi() - Gohan.kiNecesarioSegundaTransformacion;
 		try {
 			gohan.transformar();
 			Assert.assertEquals( kiEsperado, gohan.getKi());
 		} catch (TransformacionNoPosible e) {
-			Assert.fail("deberia haberse Transformado");
 		}
 	}
 	
