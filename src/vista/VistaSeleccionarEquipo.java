@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,13 +22,14 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import modelo.utilidades.Constantes;
-import vista.controlador.VolverAlMenuEventHandler;
+import vista.controlador.ElegirEquipoPrimerJugadorEventHandler;
 
 public class VistaSeleccionarEquipo extends VBox{
 	
 	private DragonBall juego;
 	private Stage stage;
 	private MenuPrincipal menu;
+	private Text title;
 	public static final int ALTURA_EQUIPOS = 0;
 	private LibreriaSonidos sonidos;
 	
@@ -43,7 +43,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 		this.setBackground(new Background(imagenDeFondo));
 		
-		Text title = new Text("Jugador I: Elegir equipo");
+		title = new Text("Jugador I: Elegir equipo");
         
         title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 120));
         title.setFill(Color.YELLOW);
@@ -72,12 +72,20 @@ public class VistaSeleccionarEquipo extends VBox{
 	private void crearSeleccionables(HBox hbox) {
 		VBox vboxGuerreros = this.crearSeleccionableEquipo(Constantes.GUERREROS, Constantes.ENEMIGOS, Color.GREEN);
 		VBox vboxEnemigos = this.crearSeleccionableEquipo(Constantes.ENEMIGOS, Constantes.GUERREROS, Color.RED);
-		
+		this.agregarEventHandler(vboxGuerreros, vboxEnemigos, Constantes.GUERREROS, Constantes.ENEMIGOS);
+		this.agregarEventHandler( vboxEnemigos, vboxGuerreros, Constantes.ENEMIGOS, Constantes.GUERREROS);
 		hbox.getChildren().add(vboxGuerreros);
 		hbox.getChildren().add(vboxEnemigos);
 		
 	}
 	
+	private void agregarEventHandler(VBox vboxActual, VBox vboxContrario, String nombrePropio, String nombreContrario) {
+		ElegirEquipoPrimerJugadorEventHandler eventHandler = new ElegirEquipoPrimerJugadorEventHandler(juego, nombrePropio, nombreContrario, 
+				vboxActual, vboxContrario, stage, sonidos, menu, title);
+		vboxActual.setOnMouseClicked(eventHandler);
+	}
+
+
 	private VBox crearSeleccionableEquipo(String equipo, String enemigo,Color color){
 		
 		VBox vbox = new VBox();
@@ -109,21 +117,6 @@ public class VistaSeleccionarEquipo extends VBox{
 			vistaImagen.setEffect(sombra2);
 		});
 		
-		vistaImagen.setOnMouseClicked(evento -> {
-			
-			 
-			
-			juego.establecerEquipoJugador1(equipo);
-			juego.establecerEquipoJugador2(enemigo);
-			juego.iniciar();
-			Boolean pantallaCompleta = this.comprobarPantallaCompleta();
-			Scene scene = new Scene(new VistaJuego(juego, stage,this.sonidos));
-			scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
-			stage.setScene(scene);
-			stage.setFullScreen(pantallaCompleta);
-			stage.show();
-			
-		});
 		
 		vbox.getChildren().add(vistaImagen);
 		this.crearNombre(equipo, vbox);
@@ -131,10 +124,6 @@ public class VistaSeleccionarEquipo extends VBox{
 		return vbox;
 	}
 	
-	private Boolean comprobarPantallaCompleta() {
-		return stage.isFullScreen();
-	}
-
 
 	private void crearNombre(String nombre, VBox vboxGuerreros) {
 
