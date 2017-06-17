@@ -2,7 +2,14 @@ package vista;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -10,6 +17,7 @@ import modelo.juego.DragonBall;
 
 public class VistaFinDelJuego extends VBox {
 	LibreriaSonidos sonidos;
+	
 	
 	public VistaFinDelJuego(DragonBall juego, Stage stage,LibreriaSonidos sonidos){
 		
@@ -19,19 +27,28 @@ public class VistaFinDelJuego extends VBox {
 		this.botonMenu(stage);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(100);
+		
+		Image imagen = new Image("file:src/vista/imagenes/TexturaFin.jpg");
+		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		this.setBackground(new Background(imagenDeFondo));
+		
 	}
 
 	private void mensajeFinJuego() {
 		Text finJuego = new Text("Termino el Juego");
-		finJuego.setFont(Font.font("Castellar", 60));
+		finJuego.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 80));
+		finJuego.setFill(Color.RED);
+		finJuego.setStroke(Color.ORANGERED);
 		this.getChildren().add(finJuego);
 	}
 	
 	private void mensajeGanador(DragonBall juego) {
 		Text mensaje = new Text("El ganador es:");
-		mensaje.setFont(Font.font("Bahaus 93", 50));
+		mensaje.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 40));
+		mensaje.setFill(Color.DARKCYAN);
 		Text ganador = new Text(juego.getGanador());
-		ganador.setFont(Font.font("Comic Sans MS", 40));
+		ganador.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 50));
+		ganador.setFill(Color.YELLOW);
 		this.getChildren().addAll(mensaje, ganador);
 	}
 	
