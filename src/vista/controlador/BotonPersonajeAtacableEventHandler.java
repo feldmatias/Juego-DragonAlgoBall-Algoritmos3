@@ -50,7 +50,6 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 			
 			
 			juego.jugadorActualAtacarAEnemigo(personaje);
-<<<<<<< HEAD
 		
 			
 			
