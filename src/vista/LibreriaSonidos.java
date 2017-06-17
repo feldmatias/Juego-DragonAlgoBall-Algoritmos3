@@ -13,20 +13,26 @@ public class LibreriaSonidos {
 	private MediaPlayer musica;
 	private MediaPlayer sonidoTransformacion;
 	private MediaPlayer sonidoMovimiento;
+	private MediaPlayer sonidoAtaque;
+	private MediaPlayer sonidoAtaqueEspecial;
 	private MediaPlayer sonidoBotonMenu;
 	private double volumenMusica;
 	private double volumenEfectosSonido;
+	
+	private final String carpetaSonidos = "src/vista/sonidos/";
 
 
 	public LibreriaSonidos(){
-		this.musica =  new MediaPlayer(new Media(new File("src/vista/sonidos/Dragon Ball opening.mp3").toURI().toString()));
+		this.musica =  new MediaPlayer(new Media(new File(carpetaSonidos + "Dragon Ball opening.mp3").toURI().toString()));
 		
-		this.sonidoBotonMenu = new MediaPlayer(new Media(new File("src/vista/sonidos/sonido deslizarse por boton.wav").toURI().toString()));
+		this.sonidoBotonMenu = new MediaPlayer(new Media(new File(carpetaSonidos + "sonido deslizarse por boton.wav").toURI().toString()));
 		
-		this.sonidoError = new MediaPlayer(new Media(new File("src/vista/sonidos/sonido error.wav").toURI().toString()));
+		this.sonidoError = new MediaPlayer(new Media(new File(carpetaSonidos + "sonido error.wav").toURI().toString()));
 		
-		this.sonidoTransformacion = new MediaPlayer(new Media(new File("src/vista/sonidos/transformacion.wav").toURI().toString()));
-		this.sonidoMovimiento = new MediaPlayer(new Media(new File("src/vista/sonidos/teleport.wav").toURI().toString()));
+		this.sonidoTransformacion = new MediaPlayer(new Media(new File(carpetaSonidos + "transformacion.wav").toURI().toString()));
+		this.sonidoMovimiento = new MediaPlayer(new Media(new File(carpetaSonidos + "teleport.wav").toURI().toString()));
+		this.sonidoAtaque = new MediaPlayer(new Media(new File(carpetaSonidos + "ataque.wav").toURI().toString()));
+		this.sonidoAtaqueEspecial = new MediaPlayer(new Media(new File(carpetaSonidos + "ataque especial.wav").toURI().toString()));
 		
 		
 		this.volumenMusica = 0.1;
@@ -69,6 +75,14 @@ public class LibreriaSonidos {
 	
 	public void reproducirSonidoMovimiento(){
 		this.reproducirSonidoEfecto(sonidoMovimiento);
+	}
+	
+	public void reproducirSonidoAtaque(){
+		this.reproducirSonidoEfecto(sonidoAtaque);
+	}
+	
+	public void reproducirSonidoAtaqueEspecial(){
+		this.reproducirSonidoEfecto(sonidoAtaqueEspecial);
 	}
 	
 	public void reproducirSonidoBotonMenu() {

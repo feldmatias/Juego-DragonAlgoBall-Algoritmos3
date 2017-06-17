@@ -36,6 +36,7 @@ public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<
 	public void handle(MouseEvent event) {
 		try {
 			juego.jugadorActualRealizarAtaqueEspecial(personaje);
+			boton.reproducirSonidoAtaqueEspecial();
 			boton.parpadear(Color.RED);
 			PauseTransition pausa = new PauseTransition(Duration.seconds(1));
 			pausa.setOnFinished(finPausa -> {
