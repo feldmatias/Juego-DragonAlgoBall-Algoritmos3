@@ -26,8 +26,8 @@ public class TestAtaqueInmovilizador {
 		juego = new DragonBall();
 		juego.establecerEquipoJugador1(Constantes.GUERREROS);
 		juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
-		this.goku = juego.getJugador1().getEquipo().getMiembros().get(0);
-		this.majinBoo = juego.getJugador2().getEquipo().getMiembros().get(2);
+		this.goku = juego.getJugador1().getEquipo().getMiembros().get("Goku");
+		this.majinBoo = juego.getJugador2().getEquipo().getMiembros().get("Majin Boo");
 		juego.getTablero().reposicionarPersonaje(goku, new Posicion(5,5));
 		juego.getTablero().reposicionarPersonaje(majinBoo, new Posicion(5,6));
 		

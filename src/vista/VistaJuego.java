@@ -129,7 +129,7 @@ public class VistaJuego extends VBox{
 			contenedor.getChildren().add(vistaImagen);
 		} catch (IOException e) {
 		}
-		for (Personaje personaje: jugador.getEquipo().getMiembros()){
+		for (Personaje personaje: jugador.getEquipo().getMiembros().values()){
 			contenedor.getChildren().add(this.crearBoxPersonaje(personaje));
 		}
 		contenedor.setAlignment(Pos.TOP_CENTER);

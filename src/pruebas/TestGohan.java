@@ -27,9 +27,9 @@ public class TestGohan {
 		DragonBall juego = new DragonBall();
 		juego.establecerEquipoJugador1(Constantes.GUERREROS);
 		Equipo equipo = juego.getJugador1().getEquipo();
-		this.goku = equipo.getMiembros().get(0);
-		this.gohan = equipo.getMiembros().get(1);
-		this.piccolo = equipo.getMiembros().get(2);
+		this.goku = equipo.getMiembros().get("Goku");
+		this.gohan = equipo.getMiembros().get("Gohan");
+		this.piccolo = equipo.getMiembros().get("Piccolo");
 		
 		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente ;i ++){
 			gohan.empezarTurno();

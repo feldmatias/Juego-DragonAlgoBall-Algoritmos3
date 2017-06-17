@@ -42,7 +42,7 @@ public class Gohan extends Personaje{
 	public void puedeRealizarSegundaTransformacion() throws TransformacionNoPosible {
 		super.puedeRealizarSegundaTransformacion();
 		
-		for (Personaje personaje: this.getEquipo().getMiembros()){
+		for (Personaje personaje: this.getEquipo().getMiembros().values()){
 			if (personaje == this){
 				continue;
 			}

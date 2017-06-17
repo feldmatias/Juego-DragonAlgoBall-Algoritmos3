@@ -6,7 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import modelo.excepciones.AtaqueNoPosible;
-import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.juego.DragonBall;
@@ -27,15 +26,16 @@ public class TestTurno {
 	private Posicion destino;
 	
 	@Before
-	public void setUp() throws EquipoNoDisponible{
+	public void setUp() throws PersonajeNoSeleccionable{
 		juego = new DragonBall();
 		juego.establecerEquipoJugador1(Constantes.GUERREROS);
 		juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
 		this.jugador1 = juego.getJugador1();
 		this.jugador2 = juego.getJugador2();
 		this.turno = new Turno (jugador1, jugador2, juego.getTablero());
-		this.personajeJugadorActual = jugador1.getPersonajeSeleccionado(); //Elijo cualquier personaje
-		this.personajeJugador2 = jugador2.getEquipo().getMiembros().get(0);
+		this.personajeJugadorActual = jugador1.getEquipo().getMiembros().get("Goku");
+		turno.seleccionarPersonaje(personajeJugadorActual);
+		this.personajeJugador2 = jugador2.getEquipo().getMiembros().get("Freezer");
 		juego.getTablero().reposicionarPersonaje(personajeJugadorActual ,new Posicion (0,0));
 		juego.getTablero().reposicionarPersonaje(personajeJugador2 ,new Posicion (0,1)); // Los posiciono cerca
 		this.destino = new Posicion (1,1); //Posicion cercana a ambos para poder moverse
@@ -53,7 +53,7 @@ public class TestTurno {
 		
 	@Test
 	public void testGenerarKiAlComienzoDelTurno(){
-		for (Personaje personaje : jugador1.getEquipo().getMiembros()){
+		for (Personaje personaje : jugador1.getEquipo().getMiembros().values()){
 			int kiEsperado = personaje.getKi() + Personaje.kiGeneradoAlComienzoTurno;
 			new Turno (jugador1, jugador2, juego.getTablero());
 			Assert.assertEquals(kiEsperado, personaje.getKi());
@@ -62,7 +62,7 @@ public class TestTurno {
 	
 	@Test
 	public void testNoGenerarKiAlComienzoDelTurnoDelOtroJugador(){
-		for (Personaje personaje : jugador2.getEquipo().getMiembros()){
+		for (Personaje personaje : jugador2.getEquipo().getMiembros().values()){
 			int kiEsperado = personaje.getKi() ;
 			new Turno (jugador1, jugador2, juego.getTablero());
 			Assert.assertEquals(kiEsperado, personaje.getKi());
@@ -195,7 +195,7 @@ public class TestTurno {
 	@Test
 	public void testPuedoSeleccionarOtroPersonajeDelJugadorYMoverlo() throws MovimientoNoPosible{
 		Posicion origen = juego.getTablero().getPosicionPersonaje(personajeJugadorActual);
-		Personaje companiero = jugador1.getEquipo().getMiembros().get(1); //Elijo un personaje cualquiera
+		Personaje companiero = jugador1.getEquipo().getMiembros().get("Gohan"); 
 		juego.getTablero().reposicionarPersonaje(companiero ,new Posicion (1,0)); //Lo posicion cerca de los otros
 		try {
 			turno.seleccionarPersonaje(companiero);

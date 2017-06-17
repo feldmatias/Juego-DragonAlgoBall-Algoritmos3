@@ -1,6 +1,7 @@
 package pruebas;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Assert;
@@ -80,7 +81,7 @@ public class TestDragonBall {
 	public void equipoGuerrerosTieneLosTresPersonajesAlIniciar(){
 
 		dragonBall.establecerEquipoJugador1( Constantes.GUERREROS );
-		List<Personaje> miembros = dragonBall.getJugador1().getEquipo().getMiembros();
+		Collection<Personaje> miembros = dragonBall.getJugador1().getEquipo().getMiembros().values();
 		List<String> nombresEsperados = new ArrayList<String>();
 		nombresEsperados.add("Goku");
 		nombresEsperados.add("Gohan");
@@ -96,7 +97,7 @@ public class TestDragonBall {
 	public void equipoEnemigosTieneLosTresPersonajesAlIniciar(){
 		
 		dragonBall.establecerEquipoJugador1( Constantes.ENEMIGOS );
-		List<Personaje> miembros = dragonBall.getJugador1().getEquipo().getMiembros();
+		Collection<Personaje> miembros = dragonBall.getJugador1().getEquipo().getMiembros().values();
 		List<String> nombresEsperados = new ArrayList<String>();
 		nombresEsperados.add("Cell");
 		nombresEsperados.add("Majin Boo");

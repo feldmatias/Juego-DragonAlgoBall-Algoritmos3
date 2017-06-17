@@ -45,7 +45,8 @@ public class Jugador {
 	}
 	
 	private void seleccionarCualquierPersonaje(){
-		this.seleccionarPersonaje(this.equipo.getMiembros().get(0));
+		this.seleccionarPersonaje(this.equipo.getMiembros().values().iterator().next());
+		//Selecciona un personaje cualquiera del equipo
 	}
 	
 	public void comprobarPersonajeSeleccionado(){
