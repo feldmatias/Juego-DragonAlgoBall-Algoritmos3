@@ -3,7 +3,6 @@ package vista;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 

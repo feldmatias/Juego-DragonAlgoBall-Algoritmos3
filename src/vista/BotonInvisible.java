@@ -87,12 +87,7 @@ public abstract class BotonInvisible extends StackPane{
 		 imagenFondo.setEffect(sombra);
 	}
 	
-	public void lanzarSonidoError(){
-		this.sonidos.reproducirSonidoError();
-	}
-	
-	
-	public void titilar(Color color){
+	public void parpadear(Color color){
 		boton.setOpacity(0.5);
 		for (int i = 0; i < 100; i++){
 		Timer timer = new Timer();
@@ -110,13 +105,16 @@ public abstract class BotonInvisible extends StackPane{
 		}
 	}
 
-
-	public void lanzarSonidoTransformacion() {
+	public void reproducirSonidoError(){
+		this.sonidos.reproducirSonidoError();
+	}
+	
+	public void reproducirSonidoTransformacion() {
 		this.sonidos.reproducirSonidoTransformacion();
 		
 	}
 	
-	public void lanzarSonidoMovimiento(){
+	public void reproducirSonidoMovimiento(){
 		this.sonidos.reproducirSonidoMovimiento();
 	}
 

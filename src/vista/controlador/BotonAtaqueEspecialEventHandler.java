@@ -40,6 +40,7 @@ public class BotonAtaqueEspecialEventHandler implements EventHandler<ActionEvent
 			boton.habilitar();
 			boton.setOnAction(new BotonPersonajeAtacableEspecialEventHandler(juego,personaje, labelAcciones, vista, boton));
 		}
+		labelAcciones.setText("Seleccione al enemigo a atacar");
 	}
 
 }

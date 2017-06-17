@@ -59,11 +59,11 @@ public class MenuPrincipal extends StackPane{
 			menuPantalla.setTranslateX( posSubmenu2 );
 			
 			
-			btnContinuar = new BotonMenu ("CONTINUAR PARTIDA");
+			btnContinuar = new BotonMenu ("CONTINUAR PARTIDA", sonidos);
 			btnContinuar.deshabilitar();
 				
 			
-			BotonMenu btnEmpezar = new BotonMenu ("NUEVA PARTIDA");
+			BotonMenu btnEmpezar = new BotonMenu ("NUEVA PARTIDA", sonidos);
 			btnEmpezar.setOnMouseClicked( evento1 -> {
 				DragonBall juego = new DragonBall();
 	
@@ -77,39 +77,39 @@ public class MenuPrincipal extends StackPane{
 			});
 	
 			
-			BotonMenu btnOpciones = new BotonMenu("OPCIONES");
+			BotonMenu btnOpciones = new BotonMenu("OPCIONES", sonidos);
 			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuPrincipal,menuOpciones,posSubmenu1);
 			btnOpciones.setOnMouseClicked(eventoTransicion);
 			
 			
-			BotonMenu btnAtrasPrincipal =new BotonMenu("ATRAS");
+			BotonMenu btnAtrasPrincipal =new BotonMenu("ATRAS", sonidos);
 			TransicionMenuEventHandler eventoTransicion2 = new TransicionMenuEventHandler(this,menuOpciones,menuPrincipal,-posSubmenu1);
 			btnAtrasPrincipal.setOnMouseClicked(eventoTransicion2);
 			
 			
-			BotonMenu btnSonido = new BotonMenu("SONIDO");
+			BotonMenu btnSonido = new BotonMenu("SONIDO", sonidos);
 			TransicionMenuEventHandler eventoTransicion3 = new TransicionMenuEventHandler(this, menuOpciones, menuSonido, posSubmenu2);
 			btnSonido.setOnMouseClicked(eventoTransicion3);
 			
 			
-			BotonMenu btnAtrasSonido = new BotonMenu("ATRAS");
+			BotonMenu btnAtrasSonido = new BotonMenu("ATRAS", sonidos);
 			TransicionMenuEventHandler eventoTransicion4 = new TransicionMenuEventHandler(this, menuSonido, menuOpciones, -posSubmenu2);
 			btnAtrasSonido.setOnMouseClicked(eventoTransicion4);
 			
 						
-			BotonMenu btnPantalla = new BotonMenu("PANTALLA");
+			BotonMenu btnPantalla = new BotonMenu("PANTALLA", sonidos);
 			TransicionMenuEventHandler eventoTransicion5 = new TransicionMenuEventHandler(this,menuOpciones,menuPantalla, posSubmenu1);
 			btnPantalla.setOnMouseClicked(eventoTransicion5);
 			
 			
 			
-			BotonMenu btnAtrasPantalla = new BotonMenu("ATRAS");
+			BotonMenu btnAtrasPantalla = new BotonMenu("ATRAS", sonidos);
 			TransicionMenuEventHandler eventoTransicion6 = new TransicionMenuEventHandler(this,menuPantalla,menuOpciones,-posSubmenu2);
 			btnAtrasPantalla.setOnMouseClicked(eventoTransicion6);
 			
 			
-			BotonMenu btnPantallaCompletaOn = new BotonMenu("PANTALLA COMPLETA");
-			BotonMenu btnPantallaCompletaOff = new BotonMenu("MODO VENTANA");
+			BotonMenu btnPantallaCompletaOn = new BotonMenu("PANTALLA COMPLETA", sonidos);
+			BotonMenu btnPantallaCompletaOff = new BotonMenu("MODO VENTANA", sonidos);
 			
 			btnPantallaCompletaOn.setOnMouseClicked( evento-> {
 				stage.setFullScreen(true);
@@ -128,29 +128,29 @@ public class MenuPrincipal extends StackPane{
 			});
 
 			
-			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF");
+			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF", sonidos);
 			btnMusicaOff.setOnMouseClicked(evento -> {
 				sonidos.mutearMusica();
 			});
 			
-			BotonMenu btnMusicaOn = new BotonMenu("MUSICA ON");
+			BotonMenu btnMusicaOn = new BotonMenu("MUSICA ON", sonidos);
 			btnMusicaOn.setOnMouseClicked(evento -> {
 				sonidos.desmutearMusica();
 			});
 			
-			BotonMenu btnEfectosOn = new BotonMenu("EFECTOS DE SONIDO ON");
+			BotonMenu btnEfectosOn = new BotonMenu("EFECTOS DE SONIDO ON", sonidos);
 			btnEfectosOn.setOnMouseClicked(evento -> {
 				sonidos.desmutearEfectosSonido();
 			});
 			
-			BotonMenu btnEfectosOff = new BotonMenu("EFECTOS DE SONIDO OFF");
+			BotonMenu btnEfectosOff = new BotonMenu("EFECTOS DE SONIDO OFF", sonidos);
 			btnEfectosOff.setOnMouseClicked(evento-> {
 				sonidos.mutearEfectosSonido();
 			});
 			
 			
 			
-			BotonMenu btnSalir = new BotonMenu( "SALIR" );
+			BotonMenu btnSalir = new BotonMenu( "SALIR" , sonidos);
 			btnSalir.setOnMouseClicked( evento -> {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
 				alert.setTitle("Confirmación de salida");

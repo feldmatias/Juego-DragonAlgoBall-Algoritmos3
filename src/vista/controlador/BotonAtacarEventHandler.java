@@ -40,6 +40,7 @@ public class BotonAtacarEventHandler implements EventHandler<ActionEvent> {
 			boton.habilitar();
 			boton.setOnAction(new BotonPersonajeAtacableEventHandler(juego,personaje, labelAcciones, vista, boton));
 		}
+		labelAcciones.setText("Seleccione al enemigo a atacar");
 	}
 
 }

@@ -4,33 +4,33 @@ import java.io.File;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 public class LibreriaSonidos {
+	
+	private static double volumenEfectosPorDefecto = 0.2;
 	
 	private MediaPlayer	sonidoError;
 	private MediaPlayer musica;
 	private MediaPlayer sonidoTransformacion;
 	private MediaPlayer sonidoMovimiento;
+	private MediaPlayer sonidoBotonMenu;
 	private double volumenMusica;
 	private double volumenEfectosSonido;
 
-	
+
 	public LibreriaSonidos(){
+		this.musica =  new MediaPlayer(new Media(new File("src/vista/sonidos/Dragon Ball opening.mp3").toURI().toString()));
 		
-		
-//		this.archivoSonidoError = new Media(new File("src/vista/sonidos/sonido error.wav").toURI().toString());
-//		this.archivoMusica = new Media(new File("src/vista/sonidos/Dragon Ball opening.mp3").toURI().toString());
+		this.sonidoBotonMenu = new MediaPlayer(new Media(new File("src/vista/sonidos/sonido deslizarse por boton.wav").toURI().toString()));
 		
 		this.sonidoError = new MediaPlayer(new Media(new File("src/vista/sonidos/sonido error.wav").toURI().toString()));
-		this.musica =  new MediaPlayer(new Media(new File("src/vista/sonidos/Dragon Ball opening.mp3").toURI().toString()));
 		
 		this.sonidoTransformacion = new MediaPlayer(new Media(new File("src/vista/sonidos/transformacion.wav").toURI().toString()));
 		this.sonidoMovimiento = new MediaPlayer(new Media(new File("src/vista/sonidos/teleport.wav").toURI().toString()));
 		
 		
 		this.volumenMusica = 0.1;
-		this.volumenEfectosSonido = 0.2;
+		this.volumenEfectosSonido = volumenEfectosPorDefecto;
 		
 
 
@@ -50,13 +50,7 @@ public class LibreriaSonidos {
 	}
 	
 	public void desmutearEfectosSonido(){
-		this.volumenEfectosSonido = 0.2;
-	}
-
-	public void reproducirSonidoError(){
-		sonidoError.setVolume(this.volumenEfectosSonido);
-		sonidoError.play();
-		sonidoError.stop();
+		this.volumenEfectosSonido = volumenEfectosPorDefecto;
 	}
 	
 	public void	reproducirMusica(){
@@ -65,16 +59,28 @@ public class LibreriaSonidos {
 		musica.play();
 	}
 	
+	public void reproducirSonidoError(){
+		this.reproducirSonidoEfecto(sonidoError);
+	}
+	
 	public void reproducirSonidoTransformacion(){
-		this.sonidoTransformacion.setVolume(this.volumenEfectosSonido);
-		this.sonidoTransformacion.stop();
-		this.sonidoTransformacion.play();
+		this.reproducirSonidoEfecto(sonidoTransformacion);
 	}
 	
 	public void reproducirSonidoMovimiento(){
-		this.sonidoMovimiento.setVolume(this.volumenEfectosSonido);
-		this.sonidoMovimiento.stop();
-		this.sonidoMovimiento.play();
+		this.reproducirSonidoEfecto(sonidoMovimiento);
 	}
+	
+	public void reproducirSonidoBotonMenu() {
+		this.reproducirSonidoEfecto(sonidoBotonMenu);
+	}
+	
+	private void reproducirSonidoEfecto(MediaPlayer sonido){
+		sonido.setVolume(volumenEfectosSonido);
+		sonido.stop();
+		sonido.play();
+	}
+
+
 
 }

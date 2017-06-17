@@ -53,7 +53,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		
 		this.crearHbox();
 		
-		
+		this.setAlignment(Pos.CENTER);
 	    
 	}
 
