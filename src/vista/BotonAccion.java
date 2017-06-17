@@ -20,13 +20,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Screen;
 
 public class BotonAccion extends StackPane{
 
 	private VBox boton;
 	private LibreriaSonidos sonidos;
-	public static int anchoBotonAccion = 200;
-	public static int altoBotonAccion = 120;
+	public static int anchoBotonAccion = (int) (Screen.getPrimary().getVisualBounds().getWidth()/8); //cambio  200
+	public static int altoBotonAccion = (int) (Screen.getPrimary().getVisualBounds().getHeight()/8.5); //cambio  120
 	
 	public BotonAccion(String nombre, EventHandler<MouseEvent> eventHandler, LibreriaSonidos sonidos){
 		this.sonidos = sonidos;

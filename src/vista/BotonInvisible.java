@@ -16,7 +16,7 @@ import javafx.stage.Screen;
 
 public abstract class BotonInvisible extends StackPane{
 	
-	public static int medida = (int) (Screen.getPrimary().getVisualBounds().getHeight()/12.5);
+	public static int medida = (int) (Screen.getPrimary().getVisualBounds().getHeight()/13);
 
 	public static int anchoBoton = medida;
 	public static int altoBoton = medida;

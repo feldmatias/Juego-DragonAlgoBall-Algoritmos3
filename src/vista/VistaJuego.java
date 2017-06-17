@@ -21,6 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
@@ -48,6 +49,10 @@ public class VistaJuego extends VBox{
 	public LibreriaSonidos sonidos;
 	private Stage stage;
 	private String rutaFuente;
+	private int tamFuenteNombreEquipo = (int) (Screen.getPrimary().getVisualBounds().getHeight()/30);
+	private int tamFuenteNombrePersonaje = (int) (Screen.getPrimary().getVisualBounds().getHeight()/35);
+	private int tamFuenteTurno = (int) (Screen.getPrimary().getVisualBounds().getHeight()/17.5);
+	private int tamEsfera = (int) (Screen.getPrimary().getVisualBounds().getHeight()/7);
 
 	
 	public VistaJuego(DragonBall juego, Stage stage,LibreriaSonidos sonidos){
@@ -118,7 +123,7 @@ public class VistaJuego extends VBox{
 	private VBox crearEspacioJugador(Jugador jugador){
 		Label nombre = new Label();
 		nombre.setText(jugador.getEquipo().getNombre());
-		nombre.setFont(Font.loadFont(rutaFuente, 35));
+		nombre.setFont(Font.loadFont(rutaFuente, this.tamFuenteNombreEquipo)); //cambio 35
 		VBox contenedor = new VBox (nombre);
 		int cantidadEsferas = jugador.getEquipo().getCantidadEsferas();
 		InputStream entradaImagen;
@@ -127,6 +132,8 @@ public class VistaJuego extends VBox{
 			Image imagen = new Image(entradaImagen);
 			entradaImagen.close();
 			ImageView vistaImagen = new ImageView(imagen);
+			vistaImagen.setFitHeight(tamEsfera); 
+			vistaImagen.setFitWidth(tamEsfera);  
 			contenedor.getChildren().add(vistaImagen);
 		} catch (IOException e) {
 		}
@@ -147,7 +154,7 @@ public class VistaJuego extends VBox{
 		
 		Label nombre = new Label();
 		nombre.setText(personaje.getNombre());
-		nombre.setFont(Font.loadFont(rutaFuente, 30));
+		nombre.setFont(Font.loadFont(rutaFuente, this.tamFuenteNombrePersonaje)); //cambio 30
 		nombre.setUnderline(true);
 		
 		
@@ -209,7 +216,7 @@ public class VistaJuego extends VBox{
 	private VBox actualizarTurnos() {
 		Label labelTurnos = new Label();
 		labelTurnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
-		labelTurnos.setFont(Font.loadFont(rutaFuente, 60));
+		labelTurnos.setFont(Font.loadFont(rutaFuente,this.tamFuenteTurno)); //cambio 60
 		labelTurnos.setUnderline(true);
 		labelAcciones.setText("Selecciona un personaje");
 		VBox contenedorLabels = new VBox(labelTurnos, labelAcciones);
