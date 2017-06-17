@@ -24,10 +24,12 @@ import javafx.scene.text.FontWeight;
 public class BotonAccion extends StackPane{
 
 	private VBox boton;
+	private LibreriaSonidos sonidos;
 	public static int anchoBotonAccion = 200;
 	public static int altoBotonAccion = 120;
 	
-	public BotonAccion(String nombre, EventHandler<MouseEvent> eventHandler){
+	public BotonAccion(String nombre, EventHandler<MouseEvent> eventHandler, LibreriaSonidos sonidos){
+		this.sonidos = sonidos;
 		this.crearBoton(nombre);
 		this.crearBotonTransparente();
 		this.setOnMouseClicked(eventHandler);
@@ -51,6 +53,7 @@ public class BotonAccion extends StackPane{
 			botonTransparente.setFill(Color.WHITE);
 			botonTransparente.setOpacity(0.3);
 			botonTransparente.setEffect(sombra);
+			sonidos.reproducirSonidoBotonMenu();
 		});
 		
 		this.setOnMouseExited(evento2 -> {

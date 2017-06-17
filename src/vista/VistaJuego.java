@@ -29,6 +29,7 @@ import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 import vista.controlador.BotonAtacarEventHandler;
 import vista.controlador.BotonAtaqueEspecialEventHandler;
+import vista.controlador.BotonCancelarAccionEventHandler;
 import vista.controlador.BotonCasilleroOcupadoEventHandler;
 import vista.controlador.BotonCasilleroVacioEventHandler;
 import vista.controlador.BotonMoverEventHandler;
@@ -165,22 +166,24 @@ public class VistaJuego extends VBox{
 
 	private void crearBotonesAcciones() {
 		BotonTerminarTurnoEventHandler eventHandler = new BotonTerminarTurnoEventHandler(juego, this);
-		BotonAccion terminarTurno = new BotonAccion ("Terminar Turno", eventHandler);
+		BotonAccion terminarTurno = new BotonAccion ("Terminar Turno", eventHandler, sonidos);
 		
 		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones, botonesPersonajes);
-		BotonAccion transformar = new BotonAccion ("Transformar", eventHandler2);
+		BotonAccion transformar = new BotonAccion ("Transformar", eventHandler2, sonidos);
 		
 		BotonMoverEventHandler eventHandler3 = new BotonMoverEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes);
-		BotonAccion mover = new BotonAccion ("Mover", eventHandler3);
+		BotonAccion mover = new BotonAccion ("Mover", eventHandler3, sonidos);
 		
 		BotonAtacarEventHandler eventHandler4 = new BotonAtacarEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes, juego, this);
-		BotonAccion atacar = new BotonAccion ("Atacar", eventHandler4);
+		BotonAccion atacar = new BotonAccion ("Atacar", eventHandler4, sonidos);
 		
 		BotonAtaqueEspecialEventHandler eventHandler5 = new BotonAtaqueEspecialEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes, juego, this);
-		BotonAccion ataqueEspecial = new BotonAccion ("Ataque Especial", eventHandler5);
+		BotonAccion ataqueEspecial = new BotonAccion ("Ataque Especial", eventHandler5, sonidos);
 		
+		BotonCancelarAccionEventHandler eventHandler6 = new BotonCancelarAccionEventHandler(this);
+		BotonAccion cancelarAccion = new BotonAccion ("Cancelar Accion", eventHandler6, sonidos);
 		
-		contenedorBotonesAcciones = new HBox(mover,atacar,ataqueEspecial, transformar, terminarTurno);
+		contenedorBotonesAcciones = new HBox(mover,atacar,ataqueEspecial, transformar, cancelarAccion, terminarTurno);
 		contenedorBotonesAcciones.setPadding(new Insets(20));
 		contenedorBotonesAcciones.setSpacing(50);
 		

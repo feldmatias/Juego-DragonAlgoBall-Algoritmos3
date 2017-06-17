@@ -109,13 +109,18 @@ public class VistaSeleccionarEquipo extends VBox{
 		
 		DropShadow sombra1= new DropShadow( 20, color);
 		DropShadow sombra2= new DropShadow();
-		vistaImagen.setOnMouseMoved(evento ->{
+		vistaImagen.setOnMouseEntered(evento ->{
 			vistaImagen.setEffect(sombra1);
+			sonidos.reproducirSonidoBotonMenu();
 		});
+		
 		vistaImagen.setOnMouseExited(evento ->{
 			vistaImagen.setEffect(sombra2);
 		});
 		
+		vistaImagen.setOnMouseClicked(evento ->{
+			sonidos.reproducirSonidoMovimiento();
+		});
 		
 		vbox.getChildren().add(vistaImagen);
 		this.crearNombre(equipo, vbox);
