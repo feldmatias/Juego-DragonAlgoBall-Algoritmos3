@@ -46,7 +46,7 @@ public class Equipo {
 	}
 
 	public void personajeMuerto(Personaje personaje) {
-		this.personajes.remove(personaje);
+		this.personajes.values().remove(personaje);
 	}
 	
 	public boolean estaMuerto(){
