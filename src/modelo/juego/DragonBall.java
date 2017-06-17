@@ -155,6 +155,10 @@ public class DragonBall {
 		this.turno.seleccionarPersonaje(personaje);
 	}
 	
+	public Personaje jugadorActualgetPersonajeSeleccionado(){
+		return this.turno.jugadorActual().getPersonajeSeleccionado();
+	}
+	
 	public void jugadorActualTerminarTurno(){
 		this.turno.terminarTurno();
 	}

@@ -279,5 +279,10 @@ public class VistaJuego extends VBox{
 		}
 		
 	}
+
+	public BotonPersonaje getBotonPersonajeSeleccionado() {
+		BotonPersonaje boton= (BotonPersonaje) botonesPersonajes.get(this.juego.jugadorActualgetPersonajeSeleccionado());
+		return boton;
+	}
 	
 }
