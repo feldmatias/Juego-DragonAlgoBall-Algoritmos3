@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -13,6 +14,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import vista.controlador.TransicionMenuEventHandler;
@@ -47,6 +52,12 @@ public class MenuPrincipal extends StackPane{
 			} catch (IOException e) {
 			}
 			
+			Text title = new Text("Dragon AlgoBall");
+	        
+	        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 220));
+	        title.setFill(Color.BLUE);
+	        title.setTextAlignment(TextAlignment.CENTER);
+	        this.setAlignment(Pos.TOP_CENTER);
 			
 			menuPrincipal = new Submenu();
 			menuOpciones = new Submenu();
@@ -62,7 +73,7 @@ public class MenuPrincipal extends StackPane{
 			menuSonido.setTranslateX( posSubmenu2 );
 			menuPantalla.setTranslateX( posSubmenu2 );
 
-			this.getChildren().addAll(menuPrincipal);
+			this.getChildren().addAll(title, menuPrincipal);
 			
 			
 		}

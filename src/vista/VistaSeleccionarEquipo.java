@@ -40,7 +40,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		this.menu = menu;
 		
 		Image imagen = new Image("file:src/vista/imagenes/FondoElegir.jpg");
-		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
 		this.setBackground(new Background(imagenDeFondo));
 		
 		title = new Text("Jugador I: Elegir equipo");
