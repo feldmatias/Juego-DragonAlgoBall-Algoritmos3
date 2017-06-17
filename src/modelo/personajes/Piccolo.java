@@ -45,8 +45,11 @@ public class Piccolo extends Personaje {
 	
 	@Override
 	public void puedeRealizarSegundaTransformacion() throws TransformacionNoPosible {
-
+		
 		Personaje gohan = this.getEquipo().getMiembros().get("Gohan");
+		if (gohan == null){
+			return; //Gohan esta muerto
+		}
 		if (gohan.getPorcentajeVida() >= porcentajeVidaGohanParaSegundaTransformacion){
 			throw new TransformacionNoPosible(Constantes.ErrorTransformacionPiccolo);
 		}
