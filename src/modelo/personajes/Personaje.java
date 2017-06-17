@@ -97,6 +97,26 @@ public abstract class Personaje implements Posicionable{
 		this.ki -= kiPerdido;
 	}
 	
+	public void empezarTurno(){
+		for(Efecto efecto: listadoEfectos){
+			efecto.empezarTurno();
+		}
+		this.modoActual.empezarTurno(this);
+	}
+	
+	public void sumarEfecto(Efecto efecto){
+		efecto.aplicarEfectoInstantaneo(this);
+		this.listadoEfectos.add(efecto);
+	}
+	
+	public void regenerarVida(double vidaRegenerada){
+		this.vidaActual += vidaRegenerada;
+	}
+	
+	public void inmovilizar(){
+		this.modoActual = new ModoInmovilizado(this.modoActual);
+	}
+	
 	public void realizarAtaqueEspecial(Personaje enemigo) throws AtaqueNoPosible{
 		this.ataqueEspecial.ataqueEspecial(this, enemigo);
 	}
@@ -127,6 +147,13 @@ public abstract class Personaje implements Posicionable{
 		this.comprobarSiEstaMuerto();
 	}
 	
+	private void comprobarSiEstaMuerto(){
+		if (this.vidaActual <= 0){
+			this.equipo.personajeMuerto(this);
+			this.tablero.personajeMuerto(this);
+		}
+	}
+	
 	public void mover(Posicion nuevaPosicion) throws MovimientoNoPosible{
 		this.puedeMoverse(nuevaPosicion);
 		this.tablero.reposicionarPersonaje(this , nuevaPosicion);
@@ -144,42 +171,17 @@ public abstract class Personaje implements Posicionable{
 		this.modoActual.puedeTransformarse(this);
 		this.modoActual = this.modoActual.transformar(this);
 	}
+
 	
-	private void comprobarSiEstaMuerto(){
-		if (this.vidaActual <= 0){
-			this.equipo.personajeMuerto(this);
-			this.tablero.personajeMuerto(this);
-		}
-	}
-	
-	public boolean comprobarKiNecesario(int kiNecesario){
+	public boolean alcanzaKi(int kiNecesario){
 		return this.ki >= kiNecesario;
 	}
-	
-	public void empezarTurno(){
-		for(Efecto efecto: listadoEfectos){
-			efecto.empezarTurno();
-		}
-		this.modoActual.empezarTurno(this);
-	}
-	
-	public void sumarEfecto(Efecto efecto){
-		efecto.aplicarEfectoInstantaneo(this);
-		this.listadoEfectos.add(efecto);
-	}
-	
-	public void regenerarVida(double vidaRegenerada){
-		this.vidaActual += vidaRegenerada;
-	}
-	
-	public void inmovilizar(){
-		this.modoActual = new ModoInmovilizado(this.modoActual);
-	}
+
 
 	public abstract Modo realizarPrimeraTransformacion();
 
 	public void puedeRealizarPrimeraTransformacion() throws TransformacionNoPosible{
-		if (!this.comprobarKiNecesario(kiNecesarioPrimeraTransformacion)){
+		if (!this.alcanzaKi(kiNecesarioPrimeraTransformacion)){
 			throw new TransformacionNoPosible(Constantes.ErrorTransformacionKiInsuficiente);
 		}
 	}
@@ -187,14 +189,9 @@ public abstract class Personaje implements Posicionable{
 	public abstract Modo realizarSegundaTransformacion();
 
 	public void puedeRealizarSegundaTransformacion() throws TransformacionNoPosible{
-		if (!this.comprobarKiNecesario(kiNecesarioSegundaTransformacion)){
+		if (!this.alcanzaKi(kiNecesarioSegundaTransformacion)){
 			throw new TransformacionNoPosible(Constantes.ErrorTransformacionKiInsuficiente);
 		}
-	}
-
-	public void agregarEsferaAColeccion() {
-		this.equipo.agregarEsferaAColeccion();
-		
 	}
 	
 	public void restarKiPrimeraTransformacion(){
@@ -205,5 +202,10 @@ public abstract class Personaje implements Posicionable{
 		this.restarKi(kiNecesarioSegundaTransformacion);
 	}
 
+	public void agregarEsferaAColeccion() {
+		this.equipo.agregarEsferaAColeccion();
+		
+	}
+	
 
 }

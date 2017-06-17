@@ -11,7 +11,7 @@ public class AtaqueInmovilizador extends AtaqueEspecial {
 	
 	@Override
 	public double getPoderAtaqueEspecial(Personaje atacante) {
-		return 0;
+		return 0; //No hace danio
 	}
 	
 	@Override
