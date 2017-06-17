@@ -16,6 +16,7 @@ public class LibreriaSonidos {
 	private MediaPlayer sonidoAtaque;
 	private MediaPlayer sonidoAtaqueEspecial;
 	private MediaPlayer sonidoBotonMenu;
+	private MediaPlayer sonidoSeleccionEquipo;
 	private double volumenMusica;
 	private double volumenEfectosSonido;
 	
@@ -33,6 +34,7 @@ public class LibreriaSonidos {
 		this.sonidoMovimiento = new MediaPlayer(new Media(new File(carpetaSonidos + "teleport.wav").toURI().toString()));
 		this.sonidoAtaque = new MediaPlayer(new Media(new File(carpetaSonidos + "ataque.wav").toURI().toString()));
 		this.sonidoAtaqueEspecial = new MediaPlayer(new Media(new File(carpetaSonidos + "ataque especial.wav").toURI().toString()));
+		this.sonidoSeleccionEquipo = new MediaPlayer(new Media(new File(carpetaSonidos + "seleccion.wav").toURI().toString()));
 		
 		
 		this.volumenMusica = 0.1;
@@ -87,6 +89,10 @@ public class LibreriaSonidos {
 	
 	public void reproducirSonidoBotonMenu() {
 		this.reproducirSonidoEfecto(sonidoBotonMenu);
+	}
+	
+	public void reproducirSonidoSeleccion(){
+		this.reproducirSonidoEfecto(sonidoSeleccionEquipo);
 	}
 	
 	private void reproducirSonidoEfecto(MediaPlayer sonido){

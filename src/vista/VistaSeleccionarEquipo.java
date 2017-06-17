@@ -119,7 +119,7 @@ public class VistaSeleccionarEquipo extends VBox{
 		});
 		
 		vistaImagen.setOnMouseClicked(evento ->{
-			sonidos.reproducirSonidoMovimiento();
+			sonidos.reproducirSonidoSeleccion();
 		});
 		
 		vbox.getChildren().add(vistaImagen);
