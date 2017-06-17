@@ -1,6 +1,7 @@
 package modelo.juego;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -124,8 +125,9 @@ public class Tablero {
 	}
 
 
-	public void posicionarPersonajes(List<Personaje> personajes, Posicion posCentral) {
+	public void posicionarPersonajes(Equipo equipo, Posicion posCentral) {
 		
+		Collection<Personaje> personajes = equipo.getMiembros().values();
 		List<Posicion> listadoPosiciones = new ArrayList<Posicion>();
 		listadoPosiciones.add(posCentral);
 		int cantPorLado = (personajes.size()) /2;
@@ -137,9 +139,9 @@ public class Tablero {
 			listadoPosiciones.add(posIzquierda);
 		}
 		
-		for(int j=0; j < personajes.size() ; j++ ){
-			Personaje personaje = personajes.get(j);
-			Posicion posicion = listadoPosiciones.get(j);
+		for(Personaje personaje: personajes){
+			Posicion posicion = listadoPosiciones.get(0);
+			listadoPosiciones.remove(0);
 			this.posicionarPersonaje(personaje, posicion);
 		}
 		

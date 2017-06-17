@@ -28,8 +28,8 @@ public class TestPiccolo {
 		DragonBall juego = new DragonBall();
 		juego.establecerEquipoJugador1(Constantes.GUERREROS);
 		Equipo equipo = juego.getJugador1().getEquipo();
-		this.gohan = equipo.getMiembros().get(1);
-		this.piccolo = equipo.getMiembros().get(2);
+		this.gohan = equipo.getMiembros().get("Gohan");
+		this.piccolo = equipo.getMiembros().get("Piccolo");
 		
 		for (int i = 0; i < Constantes.cantidadParaGenerarKiSuficiente; i ++){
 			piccolo.empezarTurno();
@@ -78,7 +78,7 @@ public class TestPiccolo {
 	@Test
 	public void testPiccoloNoPuedeTransformarseGohanVidaCompletaYGokuVidaVacia(){
 		
-		Personaje goku = piccolo.getEquipo().getMiembros().get(0);
+		Personaje goku = piccolo.getEquipo().getMiembros().get("Goku");
 		goku.recibirAtaque(danioParaPocaVidaGoku);
 		try {
 			piccolo.transformar();

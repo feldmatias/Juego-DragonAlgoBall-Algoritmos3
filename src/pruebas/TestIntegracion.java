@@ -1,6 +1,7 @@
 package pruebas;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Assert;
@@ -32,7 +33,7 @@ public class TestIntegracion {
 		Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Enemigos", Constantes.ENEMIGOS, otroNombre);
 			
 		//Se comprueban personajes equipo guerreros
-		List<Personaje> miembrosGuerreros = dragonBall.getJugador1().getEquipo().getMiembros();
+		Collection<Personaje> miembrosGuerreros = dragonBall.getJugador1().getEquipo().getMiembros().values();
 		List<String> nombresEsperados = new ArrayList<String>();
 		nombresEsperados.add("Goku");
 		nombresEsperados.add("Gohan");
@@ -45,7 +46,7 @@ public class TestIntegracion {
 			
 			
 		//Se comprueban personajes equipo enemigos
-		List<Personaje> miembrosEnemigos = dragonBall.getJugador2().getEquipo().getMiembros();
+		Collection<Personaje> miembrosEnemigos = dragonBall.getJugador2().getEquipo().getMiembros().values();
 		nombresEsperados.clear();
 		nombresEsperados.add("Cell");
 		nombresEsperados.add("Freezer");
@@ -95,11 +96,11 @@ public class TestIntegracion {
 				juego.jugadorActualTerminarTurno();
 			}
 		
-			Personaje goku = juego.getJugador1().getEquipo().getMiembros().get(0);
-			Personaje gohan = juego.getJugador1().getEquipo().getMiembros().get(1);
-			Personaje cell = juego.getJugador2().getEquipo().getMiembros().get(0);
-			Personaje freezer = juego.getJugador2().getEquipo().getMiembros().get(1);
-			Personaje majinBoo = juego.getJugador2().getEquipo().getMiembros().get(2);
+			Personaje goku = juego.getJugador1().getEquipo().getMiembros().get("Goku");
+			Personaje gohan = juego.getJugador1().getEquipo().getMiembros().get("Gohan");
+			Personaje cell = juego.getJugador2().getEquipo().getMiembros().get("Cell");
+			Personaje freezer = juego.getJugador2().getEquipo().getMiembros().get("Freezer");
+			Personaje majinBoo = juego.getJugador2().getEquipo().getMiembros().get("Majin Boo");
 		
 			//Turno guerreros
 			juego.jugadorActualSeleccionarPersonaje(goku);

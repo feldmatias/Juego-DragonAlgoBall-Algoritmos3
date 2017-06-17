@@ -25,8 +25,8 @@ public class TestCell {
 		juego = new DragonBall();
 		juego.establecerEquipoJugador1(Constantes.GUERREROS);
 		juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
-		this.goku = juego.getJugador1().getEquipo().getMiembros().get(0);
-		this.cell = juego.getJugador2().getEquipo().getMiembros().get(0);
+		this.goku = juego.getJugador1().getEquipo().getMiembros().get("Goku");
+		this.cell = juego.getJugador2().getEquipo().getMiembros().get("Cell");
 		juego.getTablero().reposicionarPersonaje(goku, new Posicion(5,5));
 		juego.getTablero().reposicionarPersonaje(cell, new Posicion(5,6));
 		

@@ -97,9 +97,8 @@ public class DragonBall {
 		}
 		Equipo equipoElegido = this.equipos.get(nombreEquipo);
 		jugador.setEquipo(equipoElegido);
-		List<Personaje> personajesEquipo = equipoElegido.getMiembros();
 		this.equipos.remove(nombreEquipo);
-		this.tablero.posicionarPersonajes(personajesEquipo, posInicial);
+		this.tablero.posicionarPersonajes(equipoElegido, posInicial);
 	}
 	
 	public void establecerEquipoJugador1(String nombreEquipo){
