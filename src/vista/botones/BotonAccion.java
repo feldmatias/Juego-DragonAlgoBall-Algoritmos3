@@ -1,4 +1,4 @@
-package vista;
+package vista.botones;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +21,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Screen;
+import vista.LibreriaSonidos;
 
 public class BotonAccion extends StackPane{
 

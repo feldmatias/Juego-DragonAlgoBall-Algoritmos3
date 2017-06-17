@@ -1,4 +1,4 @@
-package vista.controlador;
+package vista.controlador.eventosAccionesJuego;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;

@@ -1,4 +1,4 @@
-package vista;
+package vista.botones;
 
 
 import java.util.Timer;
@@ -13,6 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
+import vista.LibreriaSonidos;
 
 public abstract class BotonInvisible extends StackPane{
 	

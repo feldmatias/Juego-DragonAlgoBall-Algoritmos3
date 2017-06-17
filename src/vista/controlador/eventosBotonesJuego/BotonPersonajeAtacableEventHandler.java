@@ -1,4 +1,4 @@
-package vista.controlador;
+package vista.controlador.eventosBotonesJuego;
 
 
 import java.awt.MouseInfo;
@@ -20,9 +20,9 @@ import javafx.util.Duration;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
-import vista.BotonInvisible;
-import vista.BotonPersonaje;
 import vista.VistaJuego;
+import vista.botones.BotonInvisible;
+import vista.botones.BotonPersonaje;
 
 public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEvent> {
 

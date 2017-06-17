@@ -1,4 +1,4 @@
-package vista.controlador;
+package vista.controlador.eventosBotonesJuego;
 
 
 import javafx.animation.PauseTransition;
@@ -10,8 +10,8 @@ import javafx.util.Duration;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
-import vista.BotonInvisible;
 import vista.VistaJuego;
+import vista.botones.BotonInvisible;
 
 public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<MouseEvent> {
 

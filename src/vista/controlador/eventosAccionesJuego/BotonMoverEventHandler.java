@@ -1,4 +1,4 @@
-package vista.controlador;
+package vista.controlador.eventosAccionesJuego;
 
 import java.util.List;
 import java.util.Map;
@@ -7,7 +7,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import modelo.personajes.Personaje;
-import vista.BotonInvisible;
+import vista.botones.BotonInvisible;
 
 public class BotonMoverEventHandler implements EventHandler<MouseEvent> {
 

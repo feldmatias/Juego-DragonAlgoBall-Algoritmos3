@@ -1,4 +1,4 @@
-package vista;
+package vista.botones;
 
 import java.io.IOException;
 import java.io.InputStream;

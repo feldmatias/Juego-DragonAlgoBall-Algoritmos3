@@ -1,4 +1,4 @@
-package vista.controlador;
+package vista.controlador.eventosBotonesJuego;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -6,8 +6,8 @@ import javafx.scene.input.MouseEvent;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
-import vista.BotonInvisible;
 import vista.VistaJuego;
+import vista.botones.BotonInvisible;
 
 public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>{
 

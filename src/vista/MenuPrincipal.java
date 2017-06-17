@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
+import vista.botones.BotonMenu;
 import vista.controlador.TransicionMenuEventHandler;
 
 public class MenuPrincipal extends StackPane{

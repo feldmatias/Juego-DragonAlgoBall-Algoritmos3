@@ -1,4 +1,4 @@
-package vista.controlador;
+package vista.controlador.eventosBotonesJuego;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
@@ -6,8 +6,8 @@ import javafx.scene.input.MouseEvent;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
-import vista.BotonInvisible;
 import vista.VistaJuego;
+import vista.botones.BotonInvisible;
 
 public class BotonCasilleroOcupadoEventHandler implements EventHandler<MouseEvent> {
 

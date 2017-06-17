@@ -1,4 +1,4 @@
-package vista.controlador;
+package vista.controlador.eventosAccionesJuego;
 
 import java.util.Map;
 
@@ -11,8 +11,8 @@ import javafx.util.Duration;
 import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
-import vista.BotonInvisible;
 import vista.VistaJuego;
+import vista.botones.BotonInvisible;
 
 public class BotonTransformarEventHandler implements EventHandler<MouseEvent> {
 

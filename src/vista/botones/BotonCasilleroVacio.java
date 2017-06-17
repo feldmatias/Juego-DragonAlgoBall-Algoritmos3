@@ -1,7 +1,8 @@
-package vista;
+package vista.botones;
 
 import javafx.scene.paint.Color;
 import modelo.juego.Casillero;
+import vista.LibreriaSonidos;
 
 public class BotonCasilleroVacio extends BotonInvisible {
 	

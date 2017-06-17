@@ -1,4 +1,4 @@
-package vista;
+package vista.botones;
 
 
 import javafx.geometry.Pos;
@@ -10,6 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import vista.LibreriaSonidos;
 
 public class BotonMenu extends StackPane {
 	private Text texto;

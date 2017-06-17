@@ -1,8 +1,9 @@
-package vista;
+package vista.botones;
 
 import javafx.scene.paint.Color;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
+import vista.LibreriaSonidos;
 
 public class BotonPersonaje extends BotonInvisible {
 

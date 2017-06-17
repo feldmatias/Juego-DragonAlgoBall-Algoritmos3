@@ -1,4 +1,4 @@
-package vista;
+package vista.botones;
 
 public interface Posicionable {
 
