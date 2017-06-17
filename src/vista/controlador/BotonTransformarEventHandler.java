@@ -1,13 +1,11 @@
 package vista.controlador;
 
-
-
 import java.util.Map;
 
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import modelo.excepciones.TransformacionNoPosible;
@@ -16,7 +14,7 @@ import modelo.personajes.Personaje;
 import vista.BotonInvisible;
 import vista.VistaJuego;
 
-public class BotonTransformarEventHandler implements EventHandler<ActionEvent> {
+public class BotonTransformarEventHandler implements EventHandler<MouseEvent> {
 
 	private DragonBall juego;
 	private VistaJuego vista;
@@ -31,7 +29,7 @@ public class BotonTransformarEventHandler implements EventHandler<ActionEvent> {
 	}
 
 	@Override
-	public void handle(ActionEvent event) {
+	public void handle(MouseEvent event) {
 		BotonInvisible boton = botonesPersonajes.get(juego.getJugadorActual().getPersonajeSeleccionado());
 		try {
 			juego.jugadorActualTransformar();

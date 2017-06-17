@@ -3,13 +3,13 @@ package vista.controlador;
 import java.util.List;
 import java.util.Map;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import modelo.personajes.Personaje;
 import vista.BotonInvisible;
 
-public class BotonMoverEventHandler implements EventHandler<ActionEvent> {
+public class BotonMoverEventHandler implements EventHandler<MouseEvent> {
 
 	private Label labelAcciones;
 	private Map<Personaje, BotonInvisible> personajes;
@@ -24,7 +24,7 @@ public class BotonMoverEventHandler implements EventHandler<ActionEvent> {
 
 
 	@Override
-	public void handle(ActionEvent event) {
+	public void handle(MouseEvent event) {
 		for (BotonInvisible boton: personajes.values()){
 			boton.deshabilitar();
 		}

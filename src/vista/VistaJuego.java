@@ -12,7 +12,6 @@ import java.util.Map;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -165,35 +164,25 @@ public class VistaJuego extends VBox{
 
 
 	private void crearBotonesAcciones() {
-		Button terminarTurno = new Button();
 		BotonTerminarTurnoEventHandler eventHandler = new BotonTerminarTurnoEventHandler(juego, this);
-		terminarTurno.setOnAction(eventHandler);
-		terminarTurno.setText("Terminar Turno");
+		BotonAccion terminarTurno = new BotonAccion ("Terminar Turno", eventHandler);
 		
-		Button transformar = new Button();
 		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones, botonesPersonajes);
-		transformar.setOnAction(eventHandler2);
-		transformar.setText("Transformar");
+		BotonAccion transformar = new BotonAccion ("Transformar", eventHandler2);
 		
-		Button mover = new Button();
 		BotonMoverEventHandler eventHandler3 = new BotonMoverEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes);
-		mover.setOnAction(eventHandler3);
-		mover.setText("Mover");
+		BotonAccion mover = new BotonAccion ("Mover", eventHandler3);
 		
-		Button atacar = new Button();
 		BotonAtacarEventHandler eventHandler4 = new BotonAtacarEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes, juego, this);
-		atacar.setOnAction(eventHandler4);
-		atacar.setText("Atacar");
+		BotonAccion atacar = new BotonAccion ("Atacar", eventHandler4);
 		
-		Button ataqueEspecial = new Button();
 		BotonAtaqueEspecialEventHandler eventHandler5 = new BotonAtaqueEspecialEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes, juego, this);
-		ataqueEspecial.setOnAction(eventHandler5);
-		ataqueEspecial.setText("Ataque Especial");
+		BotonAccion ataqueEspecial = new BotonAccion ("Ataque Especial", eventHandler5);
 		
 		
-		contenedorBotonesAcciones = new HBox(terminarTurno, transformar, mover,atacar,ataqueEspecial);
+		contenedorBotonesAcciones = new HBox(mover,atacar,ataqueEspecial, transformar, terminarTurno);
 		contenedorBotonesAcciones.setPadding(new Insets(20));
-		contenedorBotonesAcciones.setSpacing(10);
+		contenedorBotonesAcciones.setSpacing(50);
 		
 		contenedorBotonesAcciones.setAlignment(Pos.CENTER);
 		

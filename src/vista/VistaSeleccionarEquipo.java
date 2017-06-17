@@ -106,7 +106,6 @@ public class VistaSeleccionarEquipo extends VBox{
 		}
 		vistaImagen.setFitHeight(ALTURA_EQUIPOS);
 		vistaImagen.setPreserveRatio(true);
-		//vistaImagen.setTranslateY(ALTURA_EQUIPOS);
 		
 		DropShadow sombra1= new DropShadow( 20, color);
 		DropShadow sombra2= new DropShadow();
