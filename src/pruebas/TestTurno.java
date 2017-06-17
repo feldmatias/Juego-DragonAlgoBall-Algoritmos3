@@ -12,7 +12,10 @@ import modelo.juego.DragonBall;
 import modelo.juego.Jugador;
 import modelo.juego.Posicion;
 import modelo.juego.Turno;
+import modelo.personajes.Freezer;
+import modelo.personajes.Gohan;
 import modelo.personajes.Personaje;
+import modelo.personajes.Piccolo;
 import modelo.utilidades.Constantes;
 
 public class TestTurno {
@@ -216,4 +219,30 @@ public class TestTurno {
 			Assert.assertTrue(true);
 		}
 	}
+	
+	@Test
+	public void testDespuesDeMoverCambiaDeTurnoSiNoPuedeAtacar(){
+		juego.getTablero().reposicionarPersonaje(personajeJugador2 ,new Posicion (7,7)); // Posiciono al enemigo lejos
+		try {
+			turno.moverPersonaje(destino);
+		} catch (MovimientoNoPosible e) {
+		}
+		Assert.assertEquals(jugador2, turno.jugadorActual());
+	}
+
+	@Test
+	public void testDespuesDeAtacarCambiaDeTurnoSiNoPuedeMover(){
+		Posicion posDestino2 = new Posicion(1,0);
+		jugador1.getEquipo().getMiembros().get("Gohan").recibirAtaque(Gohan.vidaInicial * 2);
+		jugador1.getEquipo().getMiembros().get("Piccolo").recibirAtaque(Piccolo.vidaInicial * 2); //Mato a los companieros
+		juego.getTablero().posicionarPersonaje(new Freezer(juego.getTablero()), destino);
+		juego.getTablero().posicionarPersonaje(new Freezer(juego.getTablero()), posDestino2); //Bloqueo al personaje
+		try {
+			turno.atacarEnemigo(personajeJugador2);
+		} catch (AtaqueNoPosible e) {
+		}
+		Assert.assertEquals(jugador2, turno.jugadorActual());
+	}
+	
+	
 }

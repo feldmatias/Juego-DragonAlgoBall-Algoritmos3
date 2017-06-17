@@ -7,10 +7,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import modelo.excepciones.AtaqueNoPosible;
-import modelo.excepciones.MovimientoNoPosible;
-import modelo.excepciones.PersonajeNoSeleccionable;
-import modelo.excepciones.TransformacionNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
 import modelo.personajes.Personaje;
@@ -80,110 +76,6 @@ public class TestIntegracion {
 			Assert.assertTrue(flag);
 		}
 	}
-	
-	@Test
-	public void testIntegracionJugarJuego() {
-		
-		//La prueba falla si lanza una excepcion
-		try{
-			DragonBall juego = new DragonBall();
-		
-			juego.establecerEquipoJugador1(Constantes.GUERREROS);
-			juego.establecerEquipoJugador2(Constantes.ENEMIGOS);
-			juego.iniciar();
-		
-			if (juego.getJugadorActual() == juego.getJugador2()){
-				juego.jugadorActualTerminarTurno();
-			}
-		
-			Personaje goku = juego.getJugador1().getEquipo().getMiembros().get("Goku");
-			Personaje gohan = juego.getJugador1().getEquipo().getMiembros().get("Gohan");
-			Personaje cell = juego.getJugador2().getEquipo().getMiembros().get("Cell");
-			Personaje freezer = juego.getJugador2().getEquipo().getMiembros().get("Freezer");
-			Personaje majinBoo = juego.getJugador2().getEquipo().getMiembros().get("Majin Boo");
-		
-			//Turno guerreros
-			juego.jugadorActualSeleccionarPersonaje(goku);
-			juego.jugadorActualMoverAPosicion(new Posicion (2,3));
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno enemigos
-			juego.jugadorActualSeleccionarPersonaje(freezer);
-			juego.jugadorActualMoverAPosicion(new Posicion (4,6));
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno guerreros
-			juego.jugadorActualMoverAPosicion(new Posicion(3,1));
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno enemigos
-			juego.jugadorActualMoverAPosicion(new Posicion (5,3));
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno guerreros
-			juego.jugadorActualAtacarAEnemigo(freezer);
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno enemigos
-			juego.jugadorActualAtacarAEnemigo(goku);
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno guerreros
-			juego.jugadorActualMoverAPosicion(new Posicion (5,1));
-			juego.jugadorActualAtacarAEnemigo(freezer);
-		
-			//Turno enemigos
-			Assert.assertEquals(juego.getJugador2(), juego.getJugadorActual());
-			juego.jugadorActualAtacarAEnemigo(goku);
-			juego.jugadorActualMoverAPosicion(new Posicion (5,2));
-		
-			//Turno guerreros
-			juego.jugadorActualTransformar();
-			juego.jugadorActualAtacarAEnemigo(freezer);
-			juego.jugadorActualMoverAPosicion(new Posicion (2,4));
-		
-			//Turno enemigos
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno guerreros
-			juego.jugadorActualAtacarAEnemigo(freezer);
-			juego.jugadorActualSeleccionarPersonaje(gohan);
-			juego.jugadorActualMoverAPosicion(new Posicion(2,5));
-		
-			//Turno Enemigos
-			juego.jugadorActualSeleccionarPersonaje(cell);
-			juego.jugadorActualMoverAPosicion(new Posicion(6,4));
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno Guerreros
-			juego.jugadorActualTransformar();
-			juego.jugadorActualMoverAPosicion(new Posicion (4,5));
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno Enemigos
-			juego.jugadorActualRealizarAtaqueEspecial(gohan);
-			juego.jugadorActualSeleccionarPersonaje(majinBoo);
-			juego.jugadorActualMoverAPosicion(new Posicion(6,3));
-		
-			//Turno guerreros
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno Enemigos
-			juego.jugadorActualRealizarAtaqueEspecial(gohan);
-			juego.jugadorActualTerminarTurno();
-		
-			//Turno Guerreros
-			try{
-				juego.jugadorActualAtacarAEnemigo(majinBoo);
-				Assert.fail("No deberia atacar, esta inmovilizado");
-			} catch (AtaqueNoPosible e){
-			}
-			juego.jugadorActualSeleccionarPersonaje(goku);
-			juego.jugadorActualRealizarAtaqueEspecial(majinBoo);
-			
-		} catch (MovimientoNoPosible | PersonajeNoSeleccionable | AtaqueNoPosible | TransformacionNoPosible error){
-			Assert.fail("No deberia lanzarse ninguna excepcion");
-		}
-	}
+
 	
 }
