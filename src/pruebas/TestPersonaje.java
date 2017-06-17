@@ -52,8 +52,23 @@ public class TestPersonaje {
 	}
 	
 	@Test
+	public void testEmpezarTurnoVariasVecesGenerarKiVariasVeces(){
+		int cantidadVeces = 4;
+		for (int i = 0; i< cantidadVeces; i++){
+			personaje.empezarTurno();
+		}
+		int kiEsperado = Personaje.kiGeneradoAlComienzoTurno * cantidadVeces;
+		Assert.assertEquals(kiEsperado, personaje.getKi());
+	}
+	
+	@Test
 	public void testPorcentajeVidaInicialEs100(){
 		Assert.assertEquals(100, personaje.getPorcentajeVida(), Constantes.diferenciaMaximaFloats);
+	}
+	
+	@Test
+	public void testVidaActualEsVidaInicial(){
+		Assert.assertEquals(Goku.vidaInicial, personaje.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test

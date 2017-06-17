@@ -246,7 +246,7 @@ public class TestTablero {
 		Posicion PosInicial = new Posicion(0,0);
 		Posicion PosBloqueada1 = new Posicion(1,1);//bloquea camino recto
 		Posicion Posbloqueada2 = new Posicion (1,0);//bloquea camino diagonal
-		Posicion PosicionDestino = new Posicion(3,3); // se llega con 3 casilleros combinando direcciones
+		Posicion PosicionDestino = new Posicion(2,2); // se llega con 3 casilleros combinando direcciones y con 2 si no estuviera bloqueada
 		
 		this.tablero.posicionarPersonaje(personaje, PosInicial);
 		this.tablero.posicionarPersonaje(personaje2, PosBloqueada1);
