@@ -23,6 +23,13 @@ public class MenuPrincipal extends StackPane{
 		private BotonMenu btnContinuar;
 		private Stage stage;
 		private LibreriaSonidos sonidos;
+		private Submenu menuPrincipal;
+		private Submenu menuOpciones;
+		private Submenu menuSonido;
+		private Submenu menuPantalla;
+		
+		private final double posSubmenu1 = 400;
+		private final double posSubmenu2 = 800;
 		
 		public MenuPrincipal(Stage stage,LibreriaSonidos sonidos) {
 			this.stage = stage;
@@ -41,24 +48,26 @@ public class MenuPrincipal extends StackPane{
 			}
 			
 			
-			Submenu menuPrincipal = new Submenu();
-			Submenu menuOpciones = new Submenu();
-			Submenu menuSonido = new Submenu();
-			Submenu menuPantalla = new Submenu();
+			menuPrincipal = new Submenu();
+			menuOpciones = new Submenu();
+			menuSonido = new Submenu();
+			menuPantalla = new Submenu();
 			
-
-			HBox opcionesMusica = new HBox(10);
-			HBox opcionesEfectosSonido = new HBox(10);
-
-			
-			final double posSubmenu1 = 400;
-			final double posSubmenu2 = 800;
+			this.crearMenuPrincipal();
+			this.crearMenuOpciones();
+			this.crearMenuSonido();
+			this.crearMenuPantalla();
 			
 			menuOpciones.setTranslateX(posSubmenu1);
 			menuSonido.setTranslateX( posSubmenu2 );
 			menuPantalla.setTranslateX( posSubmenu2 );
+
+			this.getChildren().addAll(menuPrincipal);
 			
 			
+		}
+
+		private void crearMenuPrincipal() {
 			btnContinuar = new BotonMenu ("CONTINUAR PARTIDA", sonidos);
 			btnContinuar.deshabilitar();
 				
@@ -81,31 +90,91 @@ public class MenuPrincipal extends StackPane{
 			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuPrincipal,menuOpciones,posSubmenu1);
 			btnOpciones.setOnMouseClicked(eventoTransicion);
 			
+			BotonMenu btnSalir = new BotonMenu( "SALIR" , sonidos);
+			btnSalir.setOnMouseClicked( evento -> {
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setTitle("Confirmación de salida");
+				alert.setHeaderText("Se ha seleccionado la opción de SALIR de la aplicación");
+				alert.setContentText("¿Está seguro que desea salir?");
+				alert.showAndWait();
+				if (alert.getResult() == ButtonType.OK){
+					System.exit(0);
+				}				
+				
+			});
 			
+			menuPrincipal.getChildren().addAll(btnContinuar, btnEmpezar , btnOpciones, btnSalir);
+			
+		}
+		
+		private void crearMenuOpciones() {
 			BotonMenu btnAtrasPrincipal =new BotonMenu("ATRAS", sonidos);
-			TransicionMenuEventHandler eventoTransicion2 = new TransicionMenuEventHandler(this,menuOpciones,menuPrincipal,-posSubmenu1);
-			btnAtrasPrincipal.setOnMouseClicked(eventoTransicion2);
+			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuOpciones,menuPrincipal,-posSubmenu1);
+			btnAtrasPrincipal.setOnMouseClicked(eventoTransicion);
 			
 			
 			BotonMenu btnSonido = new BotonMenu("SONIDO", sonidos);
-			TransicionMenuEventHandler eventoTransicion3 = new TransicionMenuEventHandler(this, menuOpciones, menuSonido, posSubmenu2);
-			btnSonido.setOnMouseClicked(eventoTransicion3);
+			TransicionMenuEventHandler eventoTransicion2 = new TransicionMenuEventHandler(this, menuOpciones, menuSonido, posSubmenu2);
+			btnSonido.setOnMouseClicked(eventoTransicion2);
 			
+			BotonMenu btnPantalla = new BotonMenu("PANTALLA", sonidos);
+			TransicionMenuEventHandler eventoTransicion3 = new TransicionMenuEventHandler(this,menuOpciones,menuPantalla, posSubmenu1);
+			btnPantalla.setOnMouseClicked(eventoTransicion3);
+			
+			menuOpciones.getChildren().addAll(btnAtrasPrincipal, btnSonido, btnPantalla);
+			
+		}
+		
+		private void crearMenuSonido() {
+			HBox opcionesMusica = new HBox(10);
+			HBox opcionesEfectosSonido = new HBox(10);
 			
 			BotonMenu btnAtrasSonido = new BotonMenu("ATRAS", sonidos);
-			TransicionMenuEventHandler eventoTransicion4 = new TransicionMenuEventHandler(this, menuSonido, menuOpciones, -posSubmenu2);
-			btnAtrasSonido.setOnMouseClicked(eventoTransicion4);
+			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this, menuSonido, menuOpciones, -posSubmenu2);
+			btnAtrasSonido.setOnMouseClicked(eventoTransicion);
 			
-						
-			BotonMenu btnPantalla = new BotonMenu("PANTALLA", sonidos);
-			TransicionMenuEventHandler eventoTransicion5 = new TransicionMenuEventHandler(this,menuOpciones,menuPantalla, posSubmenu1);
-			btnPantalla.setOnMouseClicked(eventoTransicion5);
+			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF", sonidos);
+			BotonMenu btnMusicaOn = new BotonMenu("MUSICA ON", sonidos);
+			btnMusicaOn.deshabilitar();
 			
+			btnMusicaOff.setOnMouseClicked(evento -> {
+				sonidos.mutearMusica();
+				btnMusicaOff.deshabilitar();
+				btnMusicaOn.habilitar();
+			});
 			
+			btnMusicaOn.setOnMouseClicked(evento -> {
+				sonidos.desmutearMusica();
+				btnMusicaOn.deshabilitar();
+				btnMusicaOff.habilitar();
+			});
 			
+			BotonMenu btnEfectosOn = new BotonMenu("EFECTOS DE SONIDO ON", sonidos);
+			BotonMenu btnEfectosOff = new BotonMenu("EFECTOS DE SONIDO OFF", sonidos);
+			btnEfectosOn.deshabilitar();
+			
+			btnEfectosOn.setOnMouseClicked(evento -> {
+				sonidos.desmutearEfectosSonido();
+				btnEfectosOn.deshabilitar();
+				btnEfectosOff.habilitar();
+			});
+			
+			btnEfectosOff.setOnMouseClicked(evento-> {
+				sonidos.mutearEfectosSonido();
+				btnEfectosOff.deshabilitar();
+				btnEfectosOn.habilitar();
+			});
+			
+			opcionesMusica.getChildren().addAll(btnMusicaOn,btnMusicaOff);
+			opcionesEfectosSonido.getChildren().addAll(btnEfectosOn,btnEfectosOff);
+			menuSonido.getChildren().addAll(btnAtrasSonido,opcionesMusica,opcionesEfectosSonido);
+			
+		}
+		
+		private void crearMenuPantalla() {
 			BotonMenu btnAtrasPantalla = new BotonMenu("ATRAS", sonidos);
-			TransicionMenuEventHandler eventoTransicion6 = new TransicionMenuEventHandler(this,menuPantalla,menuOpciones,-posSubmenu2);
-			btnAtrasPantalla.setOnMouseClicked(eventoTransicion6);
+			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuPantalla,menuOpciones,-posSubmenu2);
+			btnAtrasPantalla.setOnMouseClicked(eventoTransicion);
 			
 			
 			BotonMenu btnPantallaCompletaOn = new BotonMenu("PANTALLA COMPLETA", sonidos);
@@ -126,57 +195,10 @@ public class MenuPrincipal extends StackPane{
 				btnPantallaCompletaOff.deshabilitar();
 				btnPantallaCompletaOn.habilitar();
 			});
-
 			
-			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF", sonidos);
-			btnMusicaOff.setOnMouseClicked(evento -> {
-				sonidos.mutearMusica();
-			});
-			
-			BotonMenu btnMusicaOn = new BotonMenu("MUSICA ON", sonidos);
-			btnMusicaOn.setOnMouseClicked(evento -> {
-				sonidos.desmutearMusica();
-			});
-			
-			BotonMenu btnEfectosOn = new BotonMenu("EFECTOS DE SONIDO ON", sonidos);
-			btnEfectosOn.setOnMouseClicked(evento -> {
-				sonidos.desmutearEfectosSonido();
-			});
-			
-			BotonMenu btnEfectosOff = new BotonMenu("EFECTOS DE SONIDO OFF", sonidos);
-			btnEfectosOff.setOnMouseClicked(evento-> {
-				sonidos.mutearEfectosSonido();
-			});
-			
-			
-			
-			BotonMenu btnSalir = new BotonMenu( "SALIR" , sonidos);
-			btnSalir.setOnMouseClicked( evento -> {
-				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Confirmación de salida");
-				alert.setHeaderText("Se ha seleccionado la opción de SALIR de la aplicación");
-				alert.setContentText("¿Está seguro que desea salir?");
-				alert.showAndWait();
-				if (alert.getResult() == ButtonType.OK){
-					System.exit(0);
-				}				
-				
-			});
-			
-			
-			menuPrincipal.getChildren().addAll(btnContinuar, btnEmpezar , btnOpciones, btnSalir);
-			menuOpciones.getChildren().addAll(btnAtrasPrincipal, btnSonido, btnPantalla);
-			opcionesMusica.getChildren().addAll(btnMusicaOn,btnMusicaOff);
-			opcionesEfectosSonido.getChildren().addAll(btnEfectosOn,btnEfectosOff);
-			menuSonido.getChildren().addAll(btnAtrasSonido,opcionesMusica,opcionesEfectosSonido);
 			menuPantalla.getChildren().addAll(btnAtrasPantalla,btnPantallaCompletaOn,btnPantallaCompletaOff);
-			
-			
-			this.getChildren().addAll(menuPrincipal);
-			
-			
 		}
-		
+
 		private Boolean comprobarPantallaCompleta() {
 			return stage.isFullScreen();
 		}
