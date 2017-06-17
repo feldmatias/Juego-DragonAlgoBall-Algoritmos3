@@ -9,7 +9,7 @@ import modelo.juego.Posicion;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 
-public class TestCasillero {
+public class CasilleroTest {
 	
 	private Casillero casillero1;
 	private Personaje personaje;

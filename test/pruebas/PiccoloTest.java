@@ -14,7 +14,7 @@ import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
 import modelo.utilidades.Constantes;
 
-public class TestPiccolo {
+public class PiccoloTest {
 	
 	public static final double danioParaPocaVidaGohan = Gohan.vidaInicial * 0.98;
 	public static final double danioParaPocaVidaGoku = Goku.vidaInicial * 0.98;

@@ -15,7 +15,7 @@ import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 
 
-public class TestDragonBall {
+public class DragonBallTest {
 	
 	public static final String equipoInexistente1 = "Equipo Verde";
 	public static final String equipoInexistente2 = "Equipo Rojo";

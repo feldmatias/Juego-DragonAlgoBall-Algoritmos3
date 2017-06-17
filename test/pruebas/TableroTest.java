@@ -15,7 +15,7 @@ import modelo.personajes.Gohan;
 import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 
-public class TestTablero {
+public class TableroTest {
 	private int sizeTablero;
 	private Tablero tablero;
 

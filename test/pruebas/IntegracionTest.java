@@ -12,7 +12,7 @@ import modelo.juego.Posicion;
 import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 
-public class TestIntegracion {
+public class IntegracionTest {
 	
 	@Test
 	public void integracionNuevoJuegoConDosJugadoresYPersonajesDistribuidos() {

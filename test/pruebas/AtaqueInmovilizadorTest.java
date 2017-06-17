@@ -14,7 +14,7 @@ import modelo.personajes.Personaje;
 import modelo.personajes.modos.ModoInmovilizado;
 import modelo.utilidades.Constantes;
 
-public class TestAtaqueInmovilizador {
+public class AtaqueInmovilizadorTest {
 
 	private Personaje majinBoo;
 	private Personaje goku;

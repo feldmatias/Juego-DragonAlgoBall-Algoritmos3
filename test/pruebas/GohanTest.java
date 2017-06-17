@@ -14,7 +14,7 @@ import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
 import modelo.utilidades.Constantes;
 
-public class TestGohan {
+public class GohanTest {
 	
 
 

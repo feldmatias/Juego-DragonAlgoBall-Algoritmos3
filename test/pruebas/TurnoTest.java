@@ -18,7 +18,7 @@ import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
 import modelo.utilidades.Constantes;
 
-public class TestTurno {
+public class TurnoTest {
 	
 	private DragonBall juego;
 	private Jugador jugador1;

@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import modelo.juego.Posicion;
 
-public class TestPosicion {
+public class PosicionTest {
 
 	private Posicion posicion;
 	private int sizeTableroPrueba = 10;

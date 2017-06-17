@@ -14,7 +14,7 @@ import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 
-public class TestCell {
+public class CellTest {
 
 	private Personaje cell;
 	private Personaje goku;

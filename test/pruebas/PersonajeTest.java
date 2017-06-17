@@ -18,7 +18,7 @@ import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 
-public class TestPersonaje {
+public class PersonajeTest {
 	
 	private Personaje personaje;
 	private Tablero tablero;

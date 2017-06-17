@@ -19,7 +19,7 @@ import modelo.personajes.Goku;
 import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
 
-public class TestConsumibles {
+public class ConsumiblesTest {
 
 	public static final int consumible_pos_x = 1;
 	public static final int consumible_pos_y = 1;

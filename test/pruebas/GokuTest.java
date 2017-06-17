@@ -10,7 +10,7 @@ import modelo.utilidades.Constantes;
 
 
 
-public class TestGoku {
+public class GokuTest {
 
 	public static final double danioParaPocaVida = Goku.vidaInicial * 0.98;
 	
