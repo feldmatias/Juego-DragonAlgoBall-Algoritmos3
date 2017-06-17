@@ -1,8 +1,5 @@
 package vista;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -35,7 +32,7 @@ public class VistaFinDelJuego extends VBox {
 		
 
 		Image imagen = new Image("file:src/vista/imagenes/Shenlong 2.jpg");
-		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 		this.setBackground(new Background(imagenDeFondo));
 		
 	}

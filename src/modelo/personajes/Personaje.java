@@ -159,7 +159,7 @@ public abstract class Personaje implements Posicionable{
 		this.tablero.reposicionarPersonaje(this , nuevaPosicion);
 	}
 	
-	private void puedeMoverse(Posicion nuevaPosicion) throws MovimientoNoPosible{
+	public void puedeMoverse(Posicion nuevaPosicion) throws MovimientoNoPosible{
 		
 		if (!this.tablero.personajePuedeMoverse(this, nuevaPosicion)){
 			throw new MovimientoNoPosible(Constantes.ErrorMovimientoLejano);

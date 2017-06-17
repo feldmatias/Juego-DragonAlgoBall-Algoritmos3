@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.consumibles.Efecto;
+import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.personajes.Personaje;
 
@@ -164,8 +165,23 @@ public class Tablero {
 			int x = (int) (Math.random() * (this.size - 1));
 			int y = (int) (Math.random() * (this.size - 1));
 			Posicion pos = new Posicion (x,y); //Posicion al azar
-			this.getCasillero(pos).agregarConsumible(consumibles.get(0));
+			try {
+				this.getCasillero(pos).agregarConsumible( consumibles.get(0).getClass().newInstance());
+			} catch (InstantiationException | IllegalAccessException e) {
+			}
 		}
+	}
+	
+	public boolean tieneMovimientoPosible(Personaje personaje) {
+		Casillero actual = this.getCasillero(this.getPosicionPersonaje(personaje));
+		for (Casillero casillero: this.adyacentesA(actual)){
+			try {
+				personaje.puedeMoverse(casillero.getPosicion());
+				return true;
+			} catch (MovimientoNoPosible e) {
+			}
+		}
+		return false;
 	}
 	
 }
