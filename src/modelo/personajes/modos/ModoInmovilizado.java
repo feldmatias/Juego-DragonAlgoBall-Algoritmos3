@@ -7,11 +7,12 @@ import modelo.utilidades.Constantes;
 public class ModoInmovilizado extends Modo {
 
 	public static final int duracionTurnos = 3;
+	public static final String nombreInmovilizado = "Chocolate";
 	private int turnosRestantes;
 	private Modo modoAnterior;
 	
 	public ModoInmovilizado(Modo modoAnterior){
-		super(0,0,0,"Chocolate");
+		super(0,0,0,nombreInmovilizado);
 		this.turnosRestantes = duracionTurnos + 1;
 		this.modoAnterior = modoAnterior;
 	}
