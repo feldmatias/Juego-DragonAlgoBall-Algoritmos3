@@ -50,6 +50,7 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 			
 			
 			juego.jugadorActualAtacarAEnemigo(personaje);
+<<<<<<< HEAD
 		
 			
 			
@@ -74,7 +75,8 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 //			transicionTraslado.play();
 			
 			
-			boton.titilar(Color.RED);
+		
+			boton.parpadear(Color.RED);
 			PauseTransition pausa = new PauseTransition(Duration.seconds(1));
 			pausa.setOnFinished(finPausa -> {
 				vista.actualizarVista();
@@ -82,7 +84,7 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 			pausa.play();
 		} catch (AtaqueNoPosible error) {
 			acciones.setText("No puede atacar: " + error.getMensaje());
-			boton.lanzarSonidoError();
+			boton.reproducirSonidoError();
 		}
 	}
 

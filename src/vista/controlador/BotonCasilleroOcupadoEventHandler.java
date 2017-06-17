@@ -34,7 +34,7 @@ public class BotonCasilleroOcupadoEventHandler implements EventHandler<MouseEven
 			vista.actualizarVista();
 		} catch (PersonajeNoSeleccionable e) {
 			labelAcciones.setText("No puede seleccionar a ese personaje");
-			boton.lanzarSonidoError();
+			boton.reproducirSonidoError();
 		}
 	}
 

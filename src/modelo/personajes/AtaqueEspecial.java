@@ -21,7 +21,7 @@ public abstract class AtaqueEspecial {
 
 	protected void ataquePosible(Personaje atacante, Personaje enemigo) throws AtaqueNoPosible {
 		atacante.puedeAtacarA(enemigo);
-		if (!atacante.comprobarKiNecesario(this.kiNecesario)){
+		if (!atacante.alcanzaKi(this.kiNecesario)){
 			throw new AtaqueNoPosible(Constantes.ErrorAtaqueEspecialKiInsuficiente);
 		}
 	}

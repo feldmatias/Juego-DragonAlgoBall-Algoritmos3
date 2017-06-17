@@ -1,11 +1,11 @@
 package vista.controlador;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import modelo.juego.DragonBall;
 import vista.VistaJuego;
 
-public class BotonTerminarTurnoEventHandler implements EventHandler<ActionEvent> {
+public class BotonTerminarTurnoEventHandler implements EventHandler<MouseEvent> {
 
 	private DragonBall juego;
 	private VistaJuego vista;
@@ -17,7 +17,7 @@ public class BotonTerminarTurnoEventHandler implements EventHandler<ActionEvent>
 
 
 	@Override
-	public void handle(ActionEvent event) {
+	public void handle(MouseEvent event) {
 		juego.jugadorActualTerminarTurno();
 		vista.actualizarVista();
 	}

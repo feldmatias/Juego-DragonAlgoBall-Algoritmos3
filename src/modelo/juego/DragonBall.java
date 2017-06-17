@@ -39,9 +39,19 @@ public class DragonBall {
 		this.equipos = new HashMap<String, Equipo>();
 		this.crearEquipoGuerreros();
 		this.crearEquipoEnemigos();
-		this.jugador1 = new Jugador();
-		this.jugador2 = new Jugador();
 		
+	}
+	
+	public void iniciar(){
+		this.iniciarTurno();
+	}
+	
+	private void iniciarTurno(){
+		List<Jugador> lista = new ArrayList<Jugador>();
+		lista.add(this.jugador1);
+		lista.add(this.jugador2);
+		Collections.shuffle(lista);
+		this.turno = new Turno (lista.get(0), lista.get(1), this.tablero);
 	}
 	
 	private void crearTablero(int sizeTablero){
@@ -65,26 +75,23 @@ public class DragonBall {
 		return equipo;
 	}
 	
-	private Equipo crearEquipoGuerreros() /*throws PosicionFueraDeRango*/ {
+	private Equipo crearEquipoGuerreros()  {
 		Personaje goku = new Goku(this.tablero);
 		Personaje gohan = new Gohan(this.tablero);
 		Personaje piccolo = new Piccolo(this.tablero);		
 		return this.crearEquipo(Constantes.GUERREROS, goku, gohan, piccolo);
 	}
 	
-	private Equipo crearEquipoEnemigos() /*throws PosicionFueraDeRango*/ {
+	private Equipo crearEquipoEnemigos()  {
 		Personaje cell = new Cell(this.tablero);
 		Personaje freezer = new Freezer(this.tablero);
 		Personaje majinBoo = new MajinBoo(this.tablero);		
 		return this.crearEquipo(Constantes.ENEMIGOS, cell, freezer, majinBoo);
 	}
 
-	
-	public void iniciar(){
-		this.iniciarTurno();
-	}
 
-	private void establecerEquipo(Jugador jugador,String nombreEquipo,Posicion posInicial) throws EquipoNoDisponible{
+
+	private void establecerEquipo(Jugador jugador,String nombreEquipo,Posicion posInicial){
 		if(! this.equipoEstaDisponible(nombreEquipo) ){
 			throw new EquipoNoDisponible();
 		}
@@ -95,14 +102,14 @@ public class DragonBall {
 		this.tablero.posicionarPersonajes(personajesEquipo, posInicial);
 	}
 	
-	public void establecerEquipoJugador1(String nombreEquipo) throws EquipoNoDisponible{
-		Jugador jugador = this.jugador1;
-		this.establecerEquipo(jugador, nombreEquipo, Constantes.POS_INICIAL1);
+	public void establecerEquipoJugador1(String nombreEquipo){
+		this.jugador1 = new Jugador();
+		this.establecerEquipo(jugador1, nombreEquipo, Constantes.POS_INICIAL1);
 	}
 	
-	public void establecerEquipoJugador2(String nombreEquipo) throws EquipoNoDisponible{
-		Jugador jugador = this.jugador2;
-		this.establecerEquipo(jugador, nombreEquipo,Constantes.POS_INICIAL2);
+	public void establecerEquipoJugador2(String nombreEquipo){
+		this.jugador2 = new Jugador();
+		this.establecerEquipo(jugador2, nombreEquipo,Constantes.POS_INICIAL2);
 	}
 	
 	
@@ -111,6 +118,10 @@ public class DragonBall {
 		
 	}
 
+	public Tablero getTablero(){
+		return this.tablero;
+	}
+	
 	public Jugador getJugador1(){
 		return this.jugador1;
 	}
@@ -118,19 +129,7 @@ public class DragonBall {
 	public Jugador getJugador2(){
 		return this.jugador2;
 	}
-	
-	public Tablero getTablero(){
-		return this.tablero;
-	}
-	
-	private void iniciarTurno(){
-		List<Jugador> lista = new ArrayList<Jugador>();
-		lista.add(this.jugador1);
-		lista.add(this.jugador2);
-		Collections.shuffle(lista);
-		this.turno = new Turno (lista.get(0), lista.get(1), this.tablero);
-	}
-	
+
 	public Jugador getJugadorActual(){
 		return this.turno.jugadorActual();
 	}
@@ -165,19 +164,19 @@ public class DragonBall {
 	
 	public boolean estaTerminado(){
 		if (jugador1.equipoMuerto()){
-			ganador = jugador2.getEquipo().getNombre() + ": Derroto al otro equipo";
+			ganador = jugador2.getEquipo().getNombre() +  Constantes.GanadorPorDerrotarEnemigo;
 			return true;
 		}
 		if (jugador2.equipoMuerto()){
-			ganador = jugador1.getEquipo().getNombre() + ": Derroto al otro equipo";
+			ganador = jugador1.getEquipo().getNombre() + Constantes.GanadorPorDerrotarEnemigo;
 			return true;
 		}
 		if (jugador1.coleccionDeEsferasCompleta()){
-			ganador = jugador1.getEquipo().getNombre() + ": Encontro siete esferas del dragon";
+			ganador = jugador1.getEquipo().getNombre() +  Constantes.GanadorPorEncontrarSieteEsferas;
 			return true;
 		}
 		if (jugador2.coleccionDeEsferasCompleta()){
-			ganador = jugador2.getEquipo().getNombre() + ": Encontro siete esferas del dragon";
+			ganador = jugador2.getEquipo().getNombre() + Constantes.GanadorPorEncontrarSieteEsferas;
 			return true;
 		}
 		return false;

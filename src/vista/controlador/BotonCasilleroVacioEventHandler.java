@@ -32,9 +32,9 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 		try {
 			juego.jugadorActualMoverAPosicion(pos);
 			vista.actualizarVista();
-			this.boton.lanzarSonidoMovimiento();
+			this.boton.reproducirSonidoMovimiento();
 		} catch (MovimientoNoPosible error){
-			this.boton.lanzarSonidoError();
+			this.boton.reproducirSonidoError();
 			acciones.setText("No puede moverse: " + error.getMensaje());
 		}
 	}

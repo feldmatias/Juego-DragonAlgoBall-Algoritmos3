@@ -48,18 +48,18 @@ public class TestConsumibles {
 	public void testConsumibleDesapareceAlAgarrarse(){
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		
-		Assert.assertEquals(Goku.vidaInicial, personaje1.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(Goku.vidaInicial, personaje1.getVidaActual(), Constantes.diferenciaMaximaFloats);
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		
 		//Personaje1 Agarro el consumible
 		int vidaEsperada = Goku.vidaInicial + SemillaDelErmitanio.regeneracionDeVida;
-		Assert.assertEquals(vidaEsperada , personaje1.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada , personaje1.getVidaActual(), Constantes.diferenciaMaximaFloats);
 		
 		tablero.reposicionarPersonaje(personaje1, new Posicion (0,0));
 		
 		tablero.reposicionarPersonaje(personaje2, posConsumible);
 		//Personaje2 no agarro el consumible
-		Assert.assertEquals(Freezer.vidaInicial, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(Freezer.vidaInicial, personaje2.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -67,7 +67,7 @@ public class TestConsumibles {
 		int vidaEsperada = Goku.vidaInicial + SemillaDelErmitanio.regeneracionDeVida;
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
-		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -75,7 +75,7 @@ public class TestConsumibles {
 		tablero.getCasillero(posConsumible).agregarConsumible(new EsferaDeDragon());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		double poderPeleaEsperado = Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio;
-		Assert.assertEquals(poderPeleaEsperado, personaje1.getPoderPelea(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(poderPeleaEsperado, personaje1.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -113,9 +113,9 @@ public class TestConsumibles {
 		tablero.getCasillero(posConsumible).agregarConsumible(new SemillaDelErmitanio());
 		tablero.reposicionarPersonaje(personaje1, posConsumible);
 		int vidaEsperada = Goku.vidaInicial + SemillaDelErmitanio.regeneracionDeVida;
-		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.diferenciaMaximaFloats);
 		personaje1.empezarTurno();
-		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje1.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	
@@ -127,7 +127,7 @@ public class TestConsumibles {
 			personaje1.atacarAPersonaje(personaje2);
 		} catch (AtaqueNoPosible e) {}
 		double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio;
-		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -138,12 +138,12 @@ public class TestConsumibles {
 			personaje1.atacarAPersonaje(personaje2); 
 		} catch (AtaqueNoPosible e) {}
 		double vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio;
-		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.diferenciaMaximaFloats);
 		try {
 			personaje1.atacarAPersonaje(personaje2);
 		}catch (AtaqueNoPosible e){}
 		vidaEsperada = Freezer.vidaInicial - Goku.poderPeleaNormal * EsferaDeDragon.aumentoDanio * 2;
-		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -159,7 +159,7 @@ public class TestConsumibles {
 			personaje1.atacarAPersonaje(personaje2);
 		}catch(AtaqueNoPosible e){}
 		double vidaEsperada = vidaTrasDosAtaques - Goku.poderPeleaNormal;
-		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(vidaEsperada, personaje2.getVidaActual(), Constantes.diferenciaMaximaFloats);
 	}
 	
 

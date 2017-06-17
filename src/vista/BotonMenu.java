@@ -1,14 +1,11 @@
 package vista;
 
-import java.io.File;
 
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
 import javafx.scene.layout.StackPane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -16,18 +13,18 @@ import javafx.scene.text.Text;
 
 public class BotonMenu extends StackPane {
 	private Text texto;
-	private MediaPlayer sonido;
 	private Rectangle fondo;
 	private Color colorActualBoton;
 	private Color colorAuxiliarBoton;
+	private LibreriaSonidos sonidos;
 	
-	public BotonMenu(String nombre){
+	public BotonMenu(String nombre, LibreriaSonidos sonidos){
+		this.sonidos = sonidos;
+		
 		texto = new Text(nombre);
 		texto.setFont(Font.font(20));
 		texto.setFill(Color.WHITE);
-		
-		Media archivoSonido= new Media(new File("src/vista/sonidos/sonido deslizarse por boton.wav").toURI().toString());
-		sonido = new MediaPlayer(archivoSonido);
+
 		
 		this.colorActualBoton =Color.ORANGE;
 		this.colorAuxiliarBoton = Color.WHITE;
@@ -47,7 +44,7 @@ public class BotonMenu extends StackPane {
 			this.texto.setTranslateX(10);
 			this.fondo.setFill(colorAuxiliarBoton);
 			this.texto.setFill(Color.ORANGE);
-			sonido.play();
+			this.reproducirSonido();
 		});
 		
 		this.setOnMouseExited(event ->{
@@ -55,7 +52,6 @@ public class BotonMenu extends StackPane {
 			this.texto.setTranslateX(0);
 			this.fondo.setFill(colorActualBoton);
 			this.texto.setFill(Color.WHITE);
-			sonido.stop();
 		});
 		
 		
@@ -66,7 +62,7 @@ public class BotonMenu extends StackPane {
 		this.setOnMouseReleased(evento -> setEffect(null));
 		
 	}
-	
+
 	public void deshabilitar(){
 		colorActualBoton = Color.GRAY;
 		this.fondo.setFill(colorActualBoton);
@@ -76,6 +72,11 @@ public class BotonMenu extends StackPane {
 		colorActualBoton = Color.ORANGE;
 		this.fondo.setFill(colorActualBoton);
 		this.setDisable(false);
+	}
+	
+	private void reproducirSonido() {
+		sonidos.reproducirSonidoBotonMenu();
+		
 	}
 	
 }

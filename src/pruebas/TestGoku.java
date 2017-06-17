@@ -24,14 +24,14 @@ public class TestGoku {
 		
 	@Test
 	public void testGokuVidaCompletaTienePoderPeleaNormal(){
-		Assert.assertEquals(Goku.poderPeleaNormal, goku.getPoderPelea(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(Goku.poderPeleaNormal, goku.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
 	public void testGokuPocaVidaTienePoderPeleaMayor(){
 		goku.recibirAtaque(danioParaPocaVida);
 		double poderPeleaEsperado = Goku.poderPeleaNormal * Goku.multiplicadorPocaVida;
-		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ public class TestGoku {
 		try {
 			goku.transformar();
 		} catch (TransformacionNoPosible e) {}
-		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class TestGoku {
 			goku.transformar();
 			goku.transformar();
 		} catch (TransformacionNoPosible e) {}
-		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.porcentajeEsperado);
+		Assert.assertEquals(poderPeleaEsperado, goku.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 	}
 
 }

@@ -19,7 +19,7 @@ public class Tablero {
 	public Tablero(int size){
 		this.size = size;
 		this.tablero = new Casillero[size][size];
-		this.cargarCasilleros();
+		this.crearCasilleros();
 		this.casillerosOcupados = new HashMap<Personaje,Casillero>();
 	}
 	
@@ -27,7 +27,7 @@ public class Tablero {
 		this.consumibles = listadoConsumibles;
 	}
 
-	private void cargarCasilleros(){
+	private void crearCasilleros(){
 		Casillero casillero;
 		for(int x=0 ; x < this.size ; x++){
 			for(int y=0 ; y < this.size ; y++){
@@ -37,7 +37,7 @@ public class Tablero {
 		}
 	}
 	
-	public Casillero getCasillero(Posicion pos) throws PosicionFueraDeRango{
+	public Casillero getCasillero(Posicion pos){
 		if ( !this.posicionEnRango(pos)){
 			throw new PosicionFueraDeRango();
 		}
@@ -59,8 +59,28 @@ public class Tablero {
 		
 	}
 	
+	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion){
+		Casillero destino;
+		Casillero origen = this.casillerosOcupados.get(personaje);
+		try{
+			destino = this.getCasillero(nuevaPosicion);
+			return destino.estaVacio() && this.existeCamino(origen, origen, destino, personaje.getVelocidad());			
+		}catch(PosicionFueraDeRango e){
+			return false;
+		}		
+	}
+	
+	public int distanciaEntre(Personaje personaje, Personaje enemigo) {
+		Posicion pos1 = this.getPosicionPersonaje(personaje);
+		Posicion pos2 = this.getPosicionPersonaje(enemigo);
+		return pos1.distanciaA(pos2);
+	}
+	
+	public Posicion getPosicionPersonaje(Personaje personaje){
+		return this.casillerosOcupados.get(personaje).getPosicion();
+	}
 
-	private boolean existeCamino(Casillero actual,Casillero origen, Casillero destino, int velocidad) throws PosicionFueraDeRango {
+	private boolean existeCamino(Casillero actual,Casillero origen, Casillero destino, int velocidad){
 		
 		if (actual == destino){
 			return true;
@@ -82,13 +102,13 @@ public class Tablero {
 		return posicion.esValida(this.size);
 	}
 	
-	private List<Casillero> adyacentesA(Casillero origen) throws PosicionFueraDeRango{
+	private List<Casillero> adyacentesA(Casillero origen){
 		List<Casillero> listaCasilleros = new ArrayList<Casillero>();
 		Posicion posOrigen = origen.getPosicion();
 		Posicion posActual;
 		
 		for(int x = -1; x < 2 ; x++ ){
-			for(int y = -1 ; y< 2 ; y++){
+			for(int y = -1 ; y < 2 ; y++){
 				posActual = posOrigen.sumarPosicion(new Posicion (x, y));
 				
 				if ( !this.posicionEnRango(posActual) ) continue;
@@ -103,27 +123,6 @@ public class Tablero {
 		return listaCasilleros;
 	}
 
-
-	public int distanciaEntre(Personaje personaje, Personaje enemigo) {
-		Posicion pos1 = this.getPosicionPersonaje(personaje);
-		Posicion pos2 = this.getPosicionPersonaje(enemigo);
-		return pos1.distanciaA(pos2);
-	}
-
-	public boolean personajePuedeMoverse(Personaje personaje, Posicion nuevaPosicion){
-		Casillero destino;
-		Casillero origen = this.casillerosOcupados.get(personaje);
-		try{
-			destino = this.getCasillero(nuevaPosicion);
-			return destino.estaVacio() && this.existeCamino(origen, origen, destino, personaje.getVelocidad());			
-		}catch(PosicionFueraDeRango e){
-			return false;
-		}
-	}
-
-	public Posicion getPosicionPersonaje(Personaje personaje){
-		return this.casillerosOcupados.get(personaje).getPosicion();
-	}
 
 	public void posicionarPersonajes(List<Personaje> personajes, Posicion posCentral) {
 		
@@ -154,11 +153,12 @@ public class Tablero {
 	}
 
 	public void generarConsumibles() {
-		//Genera un solo consumible en una posicion al azar con una probabilidad de 30%
+		//Genera un solo consumible en una posicion al azar con una probabilidad 
+		int probabilidad = 30;
 		Collections.shuffle(consumibles);
 		
-		double probabilidad = Math.random() * 10;
-		if (probabilidad <= 3){	
+		double random = Math.random() * 100;
+		if (random <= probabilidad){	
 			int x = (int) (Math.random() * (this.size - 1));
 			int y = (int) (Math.random() * (this.size - 1));
 			Posicion pos = new Posicion (x,y); //Posicion al azar

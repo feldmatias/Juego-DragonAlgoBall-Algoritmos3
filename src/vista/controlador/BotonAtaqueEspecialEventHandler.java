@@ -3,15 +3,15 @@ package vista.controlador;
 import java.util.List;
 import java.util.Map;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
 import vista.BotonInvisible;
 import vista.VistaJuego;
 
-public class BotonAtaqueEspecialEventHandler implements EventHandler<ActionEvent> {
+public class BotonAtaqueEspecialEventHandler implements EventHandler<MouseEvent> {
 
 	private Label labelAcciones;
 	private List<BotonInvisible> casilleros;
@@ -31,7 +31,7 @@ public class BotonAtaqueEspecialEventHandler implements EventHandler<ActionEvent
 
 	
 	@Override
-	public void handle(ActionEvent event) {
+	public void handle(MouseEvent event) {
 		for (BotonInvisible boton: casilleros){
 			boton.deshabilitar();
 		}
@@ -40,6 +40,7 @@ public class BotonAtaqueEspecialEventHandler implements EventHandler<ActionEvent
 			boton.habilitar();
 			boton.setOnAction(new BotonPersonajeAtacableEspecialEventHandler(juego,personaje, labelAcciones, vista, boton));
 		}
+		labelAcciones.setText("Seleccione al enemigo a atacar");
 	}
 
 }

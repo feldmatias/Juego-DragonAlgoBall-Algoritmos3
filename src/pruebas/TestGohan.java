@@ -46,7 +46,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -57,7 +57,7 @@ public class TestGohan {
 		piccolo.recibirAtaque(Piccolo.vidaInicial * 0.98);
 		try {
 			gohan.transformar();
-			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse Transformado");
 		}
@@ -70,7 +70,7 @@ public class TestGohan {
 		piccolo.recibirAtaque(Piccolo.vidaInicial * 2);
 		try {
 			gohan.transformar();
-			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaSegundaTransformacion, gohan.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		} catch (TransformacionNoPosible e) {
 			Assert.fail("Deberia haberse Transformado");
 		}
@@ -84,7 +84,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		}
 	}
 	
@@ -96,7 +96,7 @@ public class TestGohan {
 			gohan.transformar();
 			Assert.fail("No deberia haberse transformado");
 		} catch (TransformacionNoPosible e) {
-			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.porcentajeEsperado);
+			Assert.assertEquals(Gohan.poderPeleaPrimerTransformacion, gohan.getPoderPelea(), Constantes.diferenciaMaximaFloats);
 		}
 	}
 	

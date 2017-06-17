@@ -36,7 +36,7 @@ public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<
 	public void handle(MouseEvent event) {
 		try {
 			juego.jugadorActualRealizarAtaqueEspecial(personaje);
-			boton.titilar(Color.RED);
+			boton.parpadear(Color.RED);
 			PauseTransition pausa = new PauseTransition(Duration.seconds(1));
 			pausa.setOnFinished(finPausa -> {
 				vista.actualizarVista();
@@ -44,7 +44,7 @@ public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<
 			pausa.play();
 		} catch ( AtaqueNoPosible error) {
 			acciones.setText("No puede realizar ataque especial: " + error.getMensaje());
-			boton.lanzarSonidoError();
+			boton.reproducirSonidoError();
 		}
 	}
 
