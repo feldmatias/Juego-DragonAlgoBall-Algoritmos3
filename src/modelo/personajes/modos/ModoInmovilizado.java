@@ -11,7 +11,7 @@ public class ModoInmovilizado extends Modo {
 	private Modo modoAnterior;
 	
 	public ModoInmovilizado(Modo modoAnterior){
-		super(0,0,0,modoAnterior.getNombre());
+		super(0,0,0,"Chocolate");
 		this.turnosRestantes = duracionTurnos + 1;
 		this.modoAnterior = modoAnterior;
 	}

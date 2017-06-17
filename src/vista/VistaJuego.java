@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -59,6 +61,17 @@ public class VistaJuego extends VBox{
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
 
+		
+		Image imagen;
+		try {
+			imagen = new Image(Files.newInputStream(Paths.get("src/vista/imagenes/mosaico naranja.jpg")));
+			BackgroundImage fondoImagen = new BackgroundImage(imagen, null, null, null, null);
+			Background fondo = new Background(fondoImagen);
+			this.setBackground(fondo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.crearBotonesAcciones();
 		this.actualizarVista();

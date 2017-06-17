@@ -1,8 +1,17 @@
 package vista;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -19,18 +28,35 @@ public class VistaFinDelJuego extends VBox {
 		this.botonMenu(stage);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(100);
+		
+		Image imagen;
+		try {
+			imagen = new Image(Files.newInputStream(Paths.get("src/vista/imagenes/shenlong 2.jpg")));
+			BackgroundImage fondoImagen = new BackgroundImage(imagen, null, null, null, null);
+			Background fondo = new Background(fondoImagen);
+			this.setBackground(fondo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void mensajeFinJuego() {
-		Text finJuego = new Text("Termino el Juego");
+		Text finJuego = new Text("Fin de la partida");
+		finJuego.setFill(Color.WHITE);
+		finJuego.setStroke(Color.BLACK);
 		finJuego.setFont(Font.font("Castellar", 60));
 		this.getChildren().add(finJuego);
 	}
 	
 	private void mensajeGanador(DragonBall juego) {
 		Text mensaje = new Text("El ganador es:");
+		mensaje.setFill(Color.WHITE);
+		mensaje.setStroke(Color.BLACK);
 		mensaje.setFont(Font.font("Bahaus 93", 50));
 		Text ganador = new Text(juego.getGanador());
+		ganador.setFill(Color.WHITE);
+		ganador.setStroke(Color.BLACK);
 		ganador.setFont(Font.font("Comic Sans MS", 40));
 		this.getChildren().addAll(mensaje, ganador);
 	}
