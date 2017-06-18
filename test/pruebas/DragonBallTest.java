@@ -118,8 +118,8 @@ public class DragonBallTest {
 		String nombreEquipo1 = dragonBall.getJugador1().getEquipo().getNombre();
 		String nombreEquipo2 = dragonBall.getJugador2().getEquipo().getNombre();
 			
-		Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Guerreros Z", Constantes.GUERREROS, nombreEquipo1);
-		Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Enemigos de la Tierra", Constantes.ENEMIGOS, nombreEquipo2);
+		Assert.assertEquals("La prueba paso: el jugador 1 es del equipo Guerreros Z", Constantes.GUERREROS, nombreEquipo1);
+		Assert.assertEquals("La prueba paso: el jugador 2 es del equipo Enemigos de la Tierra", Constantes.ENEMIGOS, nombreEquipo2);
 			
 	}
 	
@@ -132,8 +132,8 @@ public class DragonBallTest {
 		String nombreEquipo1 = dragonBall.getJugador1().getEquipo().getNombre();
 		String nombreEquipo2 = dragonBall.getJugador2().getEquipo().getNombre();
 			
-		Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Enemigos de la Tierra", Constantes.ENEMIGOS, nombreEquipo1);
-		Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Guerreros Z", Constantes.GUERREROS, nombreEquipo2);
+		Assert.assertEquals("La prueba paso: el jugador 1 es del equipo Enemigos de la Tierra", Constantes.ENEMIGOS, nombreEquipo1);
+		Assert.assertEquals("La prueba paso: el jugador 2 es del equipo Guerreros Z", Constantes.GUERREROS, nombreEquipo2);
 		
 	}
 	
