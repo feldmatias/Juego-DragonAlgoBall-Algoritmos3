@@ -34,9 +34,11 @@ public class MenuPrincipal extends StackPane{
 		private Submenu menuOpciones;
 		private Submenu menuSonido;
 		private Submenu menuPantalla;
+		private Submenu menuAcerca;
 		
 		private final double posSubmenu1 = 400;
 		private final double posSubmenu2 = 800;
+		private final double posSubmenu3 = 1000;
 		
 		public MenuPrincipal(Stage stage,LibreriaSonidos sonidos) {
 			this.stage = stage;
@@ -64,11 +66,13 @@ public class MenuPrincipal extends StackPane{
 			menuOpciones = new Submenu();
 			menuSonido = new Submenu();
 			menuPantalla = new Submenu();
+			menuAcerca = new Submenu();
 			
 			this.crearMenuPrincipal();
 			this.crearMenuOpciones();
 			this.crearMenuSonido();
 			this.crearMenuPantalla();
+			this.crearMenuAcerca();
 			
 			menuOpciones.setTranslateX(posSubmenu1);
 			menuSonido.setTranslateX( posSubmenu2 );
@@ -78,6 +82,8 @@ public class MenuPrincipal extends StackPane{
 			
 			
 		}
+
+		
 
 		private void crearMenuPrincipal() {
 			btnContinuar = new BotonMenu ("CONTINUAR PARTIDA", sonidos);
@@ -121,7 +127,7 @@ public class MenuPrincipal extends StackPane{
 		
 		private void crearMenuOpciones() {
 			BotonMenu btnAtrasPrincipal =new BotonMenu("ATRAS", sonidos);
-			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuOpciones,menuPrincipal,-posSubmenu1);
+			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuOpciones, menuPrincipal,-posSubmenu1);
 			btnAtrasPrincipal.setOnMouseClicked(eventoTransicion);
 			
 			
@@ -130,10 +136,14 @@ public class MenuPrincipal extends StackPane{
 			btnSonido.setOnMouseClicked(eventoTransicion2);
 			
 			BotonMenu btnPantalla = new BotonMenu("PANTALLA", sonidos);
-			TransicionMenuEventHandler eventoTransicion3 = new TransicionMenuEventHandler(this,menuOpciones,menuPantalla, posSubmenu1);
+			TransicionMenuEventHandler eventoTransicion3 = new TransicionMenuEventHandler(this,menuOpciones, menuPantalla, posSubmenu1);
 			btnPantalla.setOnMouseClicked(eventoTransicion3);
 			
-			menuOpciones.getChildren().addAll(btnAtrasPrincipal, btnSonido, btnPantalla);
+			BotonMenu btnAcercaDe = new BotonMenu("ACERCA DE", sonidos);
+			TransicionMenuEventHandler eventoTransicion4 = new TransicionMenuEventHandler(this,menuOpciones, menuAcerca, posSubmenu3);
+			btnAcercaDe.setOnMouseClicked(eventoTransicion4);
+			
+			menuOpciones.getChildren().addAll(btnAtrasPrincipal, btnSonido, btnPantalla, btnAcercaDe);
 			
 		}
 		
@@ -210,6 +220,24 @@ public class MenuPrincipal extends StackPane{
 			
 			menuPantalla.getChildren().addAll(btnAtrasPantalla,btnPantallaCompletaOn,btnPantallaCompletaOff);
 		}
+		
+		private void crearMenuAcerca() {
+			HBox hbox = new HBox(10);
+			
+			BotonMenu btnAtrasAcerca = new BotonMenu("ATRAS", sonidos);
+			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuAcerca,menuOpciones,-posSubmenu2);
+			btnAtrasAcerca.setOnMouseClicked(eventoTransicion);
+			
+			Text titulo = new Text("Dragon Algo Ball");
+			titulo.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 80));
+			titulo.setFill(Color.RED);
+			titulo.setStroke(Color.WHITE);
+			titulo.setStrokeWidth(3);
+			hbox.getChildren().addAll(btnAtrasAcerca, titulo);
+			menuAcerca.getChildren().add(hbox);
+			
+		}
+		
 
 		private Boolean comprobarPantallaCompleta() {
 			return stage.isFullScreen();
