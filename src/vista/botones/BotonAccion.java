@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import vista.ConstantesPantalla;
 import vista.LibreriaSonidos;
 
@@ -74,8 +75,10 @@ public class BotonAccion extends StackPane{
 	}
 
 	private void agregarTexto(String nombre) {
-		Label texto = new Label(nombre);
+		Text texto = new Text(nombre);
 		texto.setFont(Font.font("Arial", FontWeight.BOLD, ConstantesPantalla.tamFuenteBotonAccion));
+		texto.setFill(Color.BLACK);
+		texto.setStroke(Color.WHITE);
 		boton.getChildren().add(texto);
 	}
 	
