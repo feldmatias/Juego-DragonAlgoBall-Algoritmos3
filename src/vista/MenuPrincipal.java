@@ -225,26 +225,14 @@ public class MenuPrincipal extends StackPane{
 			BotonMenu btnAtrasAcerca = new BotonMenu("ATRAS", sonidos);
 			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuAcerca,menuOpciones,posSubmenu3);
 			btnAtrasAcerca.setOnMouseClicked(eventoTransicion);
-			btnAtrasAcerca.setAlignment(Pos.TOP_LEFT);
-			
-			
-			Text titulo = new Text("Algoritmos y programacion III");
-			titulo.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 80));
-			titulo.setFill(Color.DARKCYAN);
-			titulo.setStroke(Color.WHITE);
-			titulo.setStrokeWidth(3);
-			
-			Text alumnos = new Text("FELD Matias \nLOBOSCO Barbara \nMATLES Karina \nPELOZO Emanuel\n");
-			alumnos.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 60));
-			alumnos.setFill(Color.DARKRED);
-			alumnos.setStroke(Color.WHITE);
-			alumnos.setStrokeWidth(3);
-			
-			Text profesor = new Text("Profesor CARLOS FONTELA");
-			profesor.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 70));
-			profesor.setFill(Color.CORAL);
-			profesor.setStroke(Color.DARKRED);
-			profesor.setStrokeWidth(3);
+			btnAtrasAcerca.setAlignment(Pos.CENTER);
+						
+			Text titulo = this.crearTextosAcercaDeConFormato("Algoritmos y programacion III", Color.DARKCYAN, Color.WHITE, 80);
+
+			String nombreAlumnos = "FELD Matias \nLOBOSCO Barbara \nMATLES Karina \nPELOZO Emanuel\n" ;
+			Text alumnos = this.crearTextosAcercaDeConFormato(nombreAlumnos, Color.DARKRED, Color.WHITE, 60);
+
+			Text profesor = this.crearTextosAcercaDeConFormato("Profesor: CARLOS FONTELA",Color.CORAL, Color.DARKRED, 70);
 			
 			Text fecha = new Text("Primer Cuatrimestre 2017");
 			fecha.setFont(Font.font("Calibri", FontWeight.BOLD, 35));
@@ -252,10 +240,21 @@ public class MenuPrincipal extends StackPane{
 			fecha.setStroke(Color.BLACK);
 			fecha.setStrokeWidth(1);
 			
-			btnAtrasAcerca.setAlignment(Pos.CENTER);
 			infoBox.getChildren().addAll(titulo, alumnos, profesor, fecha, btnAtrasAcerca);
 			infoBox.setAlignment(Pos.CENTER);
 			menuAcerca.getChildren().add(infoBox);
+			
+		}
+		
+		private Text crearTextosAcercaDeConFormato(String textoDeseado,Color colorLetra,Color colorBorde ,int tamFuente){
+			
+
+			Text texto = new Text(textoDeseado);
+			texto.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", tamFuente));
+			texto.setFill(colorLetra);
+			texto.setStroke(colorBorde);
+			texto.setStrokeWidth(3);
+			return texto;
 			
 		}
 		
