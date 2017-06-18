@@ -69,7 +69,7 @@ public class VistaJuego extends VBox{
 		this.sonidos = sonidos;
 		this.juego = juego;
 		this.informacionAcciones = new Text();
-		informacionAcciones.setFont(Font.font("Calibri", 18));
+		informacionAcciones.setFont(Font.font("Calibri",FontWeight.BOLD, 18));
 		rutaFuente = "file:src/vista/imagenes/Saiyan-Sans.ttf";
 		
 		botonesCasilleros = new ArrayList<BotonInvisible>();
