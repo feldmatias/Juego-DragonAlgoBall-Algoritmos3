@@ -145,7 +145,7 @@ public class MenuPrincipal extends StackPane{
 			TransicionMenuEventHandler eventoTransicion4 = new TransicionMenuEventHandler(this,menuOpciones, menuAcerca, posSubmenu3);
 			btnAcercaDe.setOnMouseClicked(eventoTransicion4);
 			
-			menuOpciones.getChildren().addAll(btnAtrasPrincipal, btnSonido, btnPantalla, btnAcercaDe);
+			menuOpciones.getChildren().addAll(btnSonido, btnPantalla, btnAcercaDe, btnAtrasPrincipal);
 			
 		}
 		
@@ -191,7 +191,7 @@ public class MenuPrincipal extends StackPane{
 			
 			opcionesMusica.getChildren().addAll(btnMusicaOn,btnMusicaOff);
 			opcionesEfectosSonido.getChildren().addAll(btnEfectosOn,btnEfectosOff);
-			menuSonido.getChildren().addAll(btnAtrasSonido,opcionesMusica,opcionesEfectosSonido);
+			menuSonido.getChildren().addAll(opcionesMusica,opcionesEfectosSonido, btnAtrasSonido);
 			
 		}
 		
@@ -220,7 +220,7 @@ public class MenuPrincipal extends StackPane{
 				btnPantallaCompletaOn.habilitar();
 			});
 			
-			menuPantalla.getChildren().addAll(btnAtrasPantalla,btnPantallaCompletaOn,btnPantallaCompletaOff);
+			menuPantalla.getChildren().addAll(btnPantallaCompletaOn,btnPantallaCompletaOff, btnAtrasPantalla);
 		}
 		
 		private void crearMenuAcerca() {
