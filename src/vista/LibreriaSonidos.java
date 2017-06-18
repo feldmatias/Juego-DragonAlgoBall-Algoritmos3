@@ -17,10 +17,13 @@ public class LibreriaSonidos {
 	private MediaPlayer sonidoAtaqueEspecial;
 	private MediaPlayer sonidoBotonMenu;
 	private MediaPlayer sonidoSeleccionEquipo;
+	private MediaPlayer sonidoAgarrarConsumible;
 	private double volumenMusica;
 	private double volumenEfectosSonido;
 	
 	private final String carpetaSonidos = "src/vista/sonidos/";
+
+	
 
 
 	public LibreriaSonidos(){
@@ -35,6 +38,7 @@ public class LibreriaSonidos {
 		this.sonidoAtaque = new MediaPlayer(new Media(new File(carpetaSonidos + "ataque.wav").toURI().toString()));
 		this.sonidoAtaqueEspecial = new MediaPlayer(new Media(new File(carpetaSonidos + "ataque especial.wav").toURI().toString()));
 		this.sonidoSeleccionEquipo = new MediaPlayer(new Media(new File(carpetaSonidos + "seleccion.wav").toURI().toString()));
+		this.sonidoAgarrarConsumible = new MediaPlayer(new Media(new File(carpetaSonidos + "sonido consumible.m4a").toURI().toString()));
 		
 		
 		this.volumenMusica = 0.1;
@@ -95,12 +99,14 @@ public class LibreriaSonidos {
 		this.reproducirSonidoEfecto(sonidoSeleccionEquipo);
 	}
 	
+	public void reproducirSonidoAgarrarConsumible() {
+		this.reproducirSonidoEfecto(sonidoAgarrarConsumible);
+	}
+	
 	private void reproducirSonidoEfecto(MediaPlayer sonido){
 		sonido.setVolume(volumenEfectosSonido);
 		sonido.stop();
 		sonido.play();
 	}
-
-
 
 }
