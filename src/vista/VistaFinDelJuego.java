@@ -44,6 +44,7 @@ public class VistaFinDelJuego extends VBox {
 		finJuego.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 80));
 		finJuego.setFill(Color.RED);
 		finJuego.setStroke(Color.WHITE);
+		finJuego.setStrokeWidth(3);
 		this.getChildren().add(finJuego);
 	}
 	
@@ -58,6 +59,7 @@ public class VistaFinDelJuego extends VBox {
 		ganador.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 50));
 		ganador.setFill(Color.DARKCYAN);
 		ganador.setStroke(Color.WHITE);
+		
 		this.getChildren().addAll(mensaje, ganador);
 	}
 	

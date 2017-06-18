@@ -16,7 +16,6 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -58,7 +57,6 @@ public class MenuPrincipal extends StackPane{
 	        title.setFill(Color.RED);
 	        title.setStroke(Color.YELLOW);
 	        title.setStrokeWidth(3);
-	        title.setStrokeLineJoin(StrokeLineJoin.ROUND);
 	        title.setTextAlignment(TextAlignment.CENTER);
 	        this.setAlignment(Pos.TOP_CENTER);
 			

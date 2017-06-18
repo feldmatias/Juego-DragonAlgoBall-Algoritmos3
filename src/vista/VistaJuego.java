@@ -72,7 +72,8 @@ public class VistaJuego extends VBox{
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
 		
-		Image imagen = new Image("file:src/vista/imagenes/nebulosa 3.jpg");
+		//Image imagen = new Image("file:src/vista/imagenes/nebulosa 3.jpg");
+		Image imagen = new Image("file:src/vista/imagenes/fondos/Fondo 10.jpg");
 		BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo,false,false,true,true);
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 		this.setBackground(new Background(imagenDeFondo));
