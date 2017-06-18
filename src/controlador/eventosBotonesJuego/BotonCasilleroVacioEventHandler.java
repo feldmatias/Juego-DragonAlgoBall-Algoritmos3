@@ -3,7 +3,6 @@ package controlador.eventosBotonesJuego;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
-import modelo.consumibles.Efecto;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
@@ -31,9 +30,9 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 	@Override
 	public void handle(MouseEvent event) {
 		try {
-			Efecto consumible = casillero.getConsumible();
+			boolean tieneConsumible = this.casilleroTieneConsumible();
 			juego.jugadorActualMoverAPosicion(casillero.getPosicion());
-			if (consumible != null){
+			if (tieneConsumible){
 				boton.reproducirSonidoAgarrarConsumible();
 			}
 			vista.actualizarVista();
@@ -42,6 +41,12 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 			this.boton.reproducirSonidoError();
 			acciones.setText("No puede moverse: " + error.getMensaje());
 		}
+	}
+
+
+
+	private boolean casilleroTieneConsumible() {
+		return casillero.getConsumible() != null;
 	}
 
 }
