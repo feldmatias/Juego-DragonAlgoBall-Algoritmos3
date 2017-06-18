@@ -74,7 +74,7 @@ public class VistaJuego extends VBox{
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
 		
-		Image imagen = new Image("file:src/vista/imagenes/fondos/Fondo 4.jpg");
+		Image imagen = new Image("file:src/vista/imagenes/fondos/Fondo 5.png");
 		BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo,false,false,true,true);
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 		this.setBackground(new Background(imagenDeFondo));
@@ -162,12 +162,16 @@ public class VistaJuego extends VBox{
 		
 		Label vida = new Label();
 		vida.setText("Vida: " + String.valueOf((int)personaje.getVidaActual()));
+		vida.setTextFill(Color.WHITE);
 		Label ki = new Label();
 		ki.setText("Ki: " + String.valueOf(personaje.getKi()));
+		ki.setTextFill(Color.WHITE);
 		Label velocidad = new Label();
+		velocidad.setTextFill(Color.WHITE);
 		velocidad.setText("Velocidad: " + String.valueOf(personaje.getVelocidad()));
 		Label distanciaAtaque = new Label();
 		distanciaAtaque.setText("Distancia Ataque: " + String.valueOf(personaje.getDistanciaAtaque()));
+		distanciaAtaque.setTextFill(Color.WHITE);
 		
 		String letraParametros = "Calibri";
 		double tamanioParametros = 15;
