@@ -32,7 +32,7 @@ public class VistaFinDelJuego extends VBox {
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(100);
 		
-		Image imagen = new Image("file:src/vista/imagenes/Shenlong 3.jpg");
+		Image imagen = new Image("file:src/vista/imagenes/fondo final.jpg");
 		BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo,false,false,true,true);
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 		this.setBackground(new Background(imagenDeFondo));

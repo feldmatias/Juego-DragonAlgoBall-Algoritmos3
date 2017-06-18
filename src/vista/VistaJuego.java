@@ -75,7 +75,7 @@ public class VistaJuego extends VBox{
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
 		
-		Image imagen = new Image("file:src/vista/imagenes/fondos/Fondo 13.jpg");
+		Image imagen = new Image("file:src/vista/imagenes/fondo tablero.jpg");
 		BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo,false,false,true,true);
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 		this.setBackground(new Background(imagenDeFondo));
@@ -268,7 +268,7 @@ public class VistaJuego extends VBox{
 	private ImageView crearFondoTablero() {
 		InputStream entradaImagen;
 		try {
-			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo.jpg"));
+			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/tablero.jpg"));
 			Image imagen = new Image(entradaImagen);
 			entradaImagen.close();
 			ImageView vistaImagen = new ImageView(imagen);
