@@ -47,16 +47,12 @@ public class MenuPrincipal extends StackPane{
 			this.sonidos = sonidos;
 			stage.setFullScreen(true);
 
-			
-			
 			Image imagen = new Image("file:src/vista/imagenes/fondos/fondo esferas.jpg");
 			BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo, false,false,true,true);
 			BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 			this.setBackground(new Background(imagenDeFondo));
 
-			
 			Text title = new Text("Dragon AlgoBall");
-	        
 	        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", ConstantesPantalla.tamFuenteTituloMenuPrincipal));
 	        title.setFill(Color.RED);
 	        title.setStroke(Color.YELLOW);

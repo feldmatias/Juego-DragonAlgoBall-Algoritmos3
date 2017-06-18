@@ -76,8 +76,8 @@ public class BotonAccion extends StackPane{
 	private void agregarTexto(String nombre) {
 		Text texto = new Text(nombre);
 		texto.setFont(Font.font("Arial", FontWeight.BOLD, ConstantesPantalla.tamFuenteBotonAccion));
-		texto.setFill(Color.BLACK);
-		texto.setStroke(Color.WHITE);
+		texto.setFill(Color.WHITE);
+		texto.setStroke(Color.BLACK);
 		boton.getChildren().add(texto);
 	}
 	
