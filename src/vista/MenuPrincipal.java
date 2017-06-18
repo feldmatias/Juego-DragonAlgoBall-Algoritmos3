@@ -12,12 +12,18 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import vista.controlador.TransicionMenuEventHandler;
@@ -35,6 +41,8 @@ public class MenuPrincipal extends StackPane{
 		
 		private final double posSubmenu1 = 400;
 		private final double posSubmenu2 = 800;
+		private double anchoImgFondo = Screen.getPrimary().getVisualBounds().getWidth();
+		private double altoImgFondo = Screen.getPrimary().getVisualBounds().getHeight();
 		
 		public MenuPrincipal(Stage stage,LibreriaSonidos sonidos) {
 			this.stage = stage;
@@ -42,15 +50,22 @@ public class MenuPrincipal extends StackPane{
 			stage.setFullScreen(true);
 
 			
-			InputStream entradaImagen;
-			try {
-				entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo menu esferas.jpg"));
-				Image imagen = new Image(entradaImagen);
-				entradaImagen.close();
-				ImageView vistaImagen = new ImageView(imagen);
-				this.getChildren().add(vistaImagen);
-			} catch (IOException e) {
-			}
+			
+			Image imagen = new Image("file:src/vista/imagenes/fondo menu esferas.jpg");
+			BackgroundSize size = new BackgroundSize(altoImgFondo,anchoImgFondo,false,false,true,true);
+			BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
+			
+			this.setBackground(new Background(imagenDeFondo));
+			
+//			InputStream entradaImagen;
+//			try {
+//				entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo menu esferas.jpg"));
+//				Image imagen = new Image(entradaImagen);
+//				entradaImagen.close();
+//				ImageView vistaImagen = new ImageView(imagen);
+//				this.getChildren().add(vistaImagen);
+//			} catch (IOException e) {
+//			}
 			
 			Text title = new Text("Dragon AlgoBall");
 	        

@@ -14,11 +14,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 
 public class VistaFinDelJuego extends VBox {
 	LibreriaSonidos sonidos;
+	private double anchoImgFondo = Screen.getPrimary().getVisualBounds().getWidth();
+	private double altoImgFondo = Screen.getPrimary().getVisualBounds().getHeight();
 	
 	
 	public VistaFinDelJuego(DragonBall juego, Stage stage,LibreriaSonidos sonidos){
@@ -30,9 +33,9 @@ public class VistaFinDelJuego extends VBox {
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(100);
 		
-
-		Image imagen = new Image("file:src/vista/imagenes/Shenlong 2.jpg");
-		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+		Image imagen = new Image("file:src/vista/imagenes/Shenlong 3.jpg");
+		BackgroundSize size = new BackgroundSize(altoImgFondo,anchoImgFondo,false,false,true,true);
+		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 		this.setBackground(new Background(imagenDeFondo));
 		
 	}
@@ -49,12 +52,12 @@ public class VistaFinDelJuego extends VBox {
 		Text mensaje = new Text("El ganador es:");
 
 		mensaje.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 40));
-		mensaje.setFill(Color.DARKCYAN);
+		mensaje.setFill(Color.YELLOW);
 		mensaje.setStroke(Color.WHITE);
 		Text ganador = new Text(juego.getGanador());
 
 		ganador.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 50));
-		ganador.setFill(Color.YELLOW);
+		ganador.setFill(Color.DARKCYAN);
 		ganador.setStroke(Color.WHITE);
 		this.getChildren().addAll(mensaje, ganador);
 	}

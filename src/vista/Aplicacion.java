@@ -28,8 +28,8 @@ public class Aplicacion extends Application {
 		stage.setScene(scene);
 		stage.setFullScreen(true);
 		stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-		stage.setMinWidth(800);
-		stage.setMinHeight(600);
+		stage.setMinWidth(1200);
+		stage.setMinHeight(750);
 		stage.setTitle("DRAGON ALGO BALL");
 		stage.show();
 		
