@@ -17,10 +17,10 @@ import vista.LibreriaSonidos;
 
 public abstract class BotonInvisible extends StackPane{
 	
-	public static int medida = (int) (Screen.getPrimary().getVisualBounds().getHeight()/13);
+	public static double medida = Screen.getPrimary().getVisualBounds().getHeight() / 13;
 
-	public static int anchoBoton = medida;
-	public static int altoBoton = medida;
+	public static double anchoBoton = medida;
+	public static double altoBoton = medida;
 	private Rectangle boton;
 	private Node imagenFondo;
 	private LibreriaSonidos sonidos;

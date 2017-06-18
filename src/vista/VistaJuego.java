@@ -54,11 +54,10 @@ public class VistaJuego extends VBox{
 	public LibreriaSonidos sonidos;
 	private Stage stage;
 	private String rutaFuente;
-	private int tamFuenteNombreEquipo = (int) (Screen.getPrimary().getVisualBounds().getHeight()/30);
-	private int tamFuenteNombrePersonaje = (int) (Screen.getPrimary().getVisualBounds().getHeight()/35);
-	private int tamFuenteTurno = (int) (Screen.getPrimary().getVisualBounds().getHeight()/17.5);
-	private int tamEsfera = (int) (Screen.getPrimary().getVisualBounds().getHeight()/7);
-	private int tamFuenteDatos = (int)  (Screen.getPrimary().getVisualBounds().getHeight()/70);
+	private double tamFuenteNombreEquipo = Screen.getPrimary().getVisualBounds().getHeight() / 30;
+	private double tamFuenteNombrePersonaje = Screen.getPrimary().getVisualBounds().getHeight() / 35 ;
+	private double tamFuenteTurno = Screen.getPrimary().getVisualBounds().getHeight() / 17.5;
+	private double tamEsfera = Screen.getPrimary().getVisualBounds().getHeight() / 7;
 
 	
 	public VistaJuego(DragonBall juego, Stage stage,LibreriaSonidos sonidos){
