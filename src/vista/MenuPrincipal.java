@@ -44,6 +44,7 @@ public class MenuPrincipal extends StackPane{
 		private final double posSubmenu2 = 800;
 		private double anchoImgFondo = Screen.getPrimary().getVisualBounds().getWidth();
 		private double altoImgFondo = Screen.getPrimary().getVisualBounds().getHeight();
+		private double tamFuenteTitulo = Screen.getPrimary().getVisualBounds().getHeight() / 4.7;
 		
 		public MenuPrincipal(Stage stage,LibreriaSonidos sonidos) {
 			this.stage = stage;
@@ -55,23 +56,14 @@ public class MenuPrincipal extends StackPane{
 			Image imagen = new Image("file:src/vista/imagenes/fondo menu esferas.jpg");
 			BackgroundSize size = new BackgroundSize(altoImgFondo,anchoImgFondo,false,false,true,true);
 			BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
-			
 			this.setBackground(new Background(imagenDeFondo));
-			
-//			InputStream entradaImagen;
-//			try {
-//				entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/fondo menu esferas.jpg"));
-//				Image imagen = new Image(entradaImagen);
-//				entradaImagen.close();
-//				ImageView vistaImagen = new ImageView(imagen);
-//				this.getChildren().add(vistaImagen);
-//			} catch (IOException e) {
-//			}
+
 			
 			Text title = new Text("Dragon AlgoBall");
 	        
-	        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 220));
-	        title.setFill(Color.BLUE);
+	        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", tamFuenteTitulo));
+	        title.setFill(Color.RED);
+	        title.setStroke(Color.YELLOW);
 	        title.setTextAlignment(TextAlignment.CENTER);
 	        this.setAlignment(Pos.TOP_CENTER);
 			

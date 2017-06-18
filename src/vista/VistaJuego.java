@@ -17,6 +17,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -58,6 +61,9 @@ public class VistaJuego extends VBox{
 	private double tamFuenteNombrePersonaje = Screen.getPrimary().getVisualBounds().getHeight() / 35 ;
 	private double tamFuenteTurno = Screen.getPrimary().getVisualBounds().getHeight() / 17.5;
 	private double tamEsfera = Screen.getPrimary().getVisualBounds().getHeight() / 7;
+	private double anchoImgFondo = Screen.getPrimary().getVisualBounds().getWidth();
+	private double altoImgFondo = Screen.getPrimary().getVisualBounds().getHeight();
+	
 
 	
 	public VistaJuego(DragonBall juego, Stage stage,LibreriaSonidos sonidos){
@@ -73,17 +79,24 @@ public class VistaJuego extends VBox{
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
 
 		
-		Image imagen;
-		try {
-			imagen = new Image(Files.newInputStream(Paths.get("src/vista/imagenes/mosaico naranja.jpg")));
-			BackgroundImage fondoImagen = new BackgroundImage(imagen, null, null, null, null);
-			Background fondo = new Background(fondoImagen);
-			this.setBackground(fondo);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
+		Image imagen = new Image("file:src/vista/imagenes/nebulosa 3.jpg");
+		BackgroundSize size = new BackgroundSize(altoImgFondo,anchoImgFondo,false,false,true,true);
+		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
+		this.setBackground(new Background(imagenDeFondo));
+		
+		
+//		Image imagen;
+//		try {
+//			imagen = new Image(Files.newInputStream(Paths.get("src/vista/imagenes/mosaico naranja.jpg")));
+//			BackgroundImage fondoImagen = new BackgroundImage(imagen, null, null, null, null);
+//			Background fondo = new Background(fondoImagen);
+//			this.setBackground(fondo);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 		this.crearBotonesAcciones();
 		this.actualizarVista();
 	}
