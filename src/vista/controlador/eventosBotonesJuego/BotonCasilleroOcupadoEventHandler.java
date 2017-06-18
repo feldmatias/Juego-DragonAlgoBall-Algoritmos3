@@ -31,6 +31,7 @@ public class BotonCasilleroOcupadoEventHandler implements EventHandler<MouseEven
 	public void handle(MouseEvent event) {
 		try {
 			juego.jugadorActualSeleccionarPersonaje(personaje);
+			boton.reproducirSonidoSeleccion();
 			vista.actualizarVista();
 		} catch (PersonajeNoSeleccionable e) {
 			labelAcciones.setText("No puede seleccionar a ese personaje");

@@ -110,9 +110,12 @@ public abstract class BotonInvisible extends StackPane{
 		this.sonidos.reproducirSonidoError();
 	}
 	
+	public void reproducirSonidoSeleccion() {
+		this.sonidos.reproducirSonidoSeleccion();
+	}
+	
 	public void reproducirSonidoTransformacion() {
 		this.sonidos.reproducirSonidoTransformacion();
-		
 	}
 	
 	public void reproducirSonidoMovimiento(){
