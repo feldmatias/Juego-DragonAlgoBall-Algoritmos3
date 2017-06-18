@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.consumibles.Efecto;
+import modelo.consumibles.EsferaDeDragon;
+import modelo.consumibles.NubeVoladora;
+import modelo.consumibles.SemillaDelErmitanio;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.excepciones.PosicionFueraDeRango;
 import modelo.personajes.Personaje;
@@ -16,7 +19,6 @@ public class Tablero {
 	private Casillero [][] tablero;
 	private int size;
 	private Map<Personaje,Casillero> casillerosOcupados;
-	private List<Efecto> consumibles;
 	
 	public Tablero(int size){
 		this.size = size;
@@ -24,10 +26,7 @@ public class Tablero {
 		this.crearCasilleros();
 		this.casillerosOcupados = new HashMap<Personaje,Casillero>();
 	}
-	
-	public void setListadoConsumibles(List<Efecto> listadoConsumibles){
-		this.consumibles = listadoConsumibles;
-	}
+
 
 	private void crearCasilleros(){
 		Casillero casillero;
@@ -158,7 +157,7 @@ public class Tablero {
 	public void generarConsumibles() {
 		//Genera un solo consumible en una posicion al azar con una probabilidad 
 		int probabilidad = 30;
-		Collections.shuffle(consumibles);
+		List<Efecto> consumibles = this.getListaConsumibles();
 		
 		double random = Math.random() * 100;
 		if (random <= probabilidad){	
@@ -172,6 +171,15 @@ public class Tablero {
 		}
 	}
 	
+	private List<Efecto> getListaConsumibles() {
+		List <Efecto> consumibles = new ArrayList<Efecto>();
+		consumibles.add(new EsferaDeDragon());
+		consumibles.add(new SemillaDelErmitanio());
+		consumibles.add(new NubeVoladora());
+		Collections.shuffle(consumibles);
+		return consumibles;
+	}
+
 	public boolean tieneMovimientoPosible(Personaje personaje) {
 		Casillero actual = this.getCasillero(this.getPosicionPersonaje(personaje));
 		for (Casillero casillero: this.adyacentesA(actual)){

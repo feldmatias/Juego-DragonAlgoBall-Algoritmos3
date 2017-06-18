@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import modelo.consumibles.Efecto;
-import modelo.consumibles.EsferaDeDragon;
-import modelo.consumibles.NubeVoladora;
-import modelo.consumibles.SemillaDelErmitanio;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.excepciones.EquipoNoDisponible;
 import modelo.excepciones.MovimientoNoPosible;
@@ -35,7 +31,7 @@ public class DragonBall {
 
 	public DragonBall () {
 		
-		this.crearTablero(Constantes.SIZE_TABLERO);
+		this.tablero = new Tablero(Constantes.SIZE_TABLERO);
 		this.equipos = new HashMap<String, Equipo>();
 		this.crearEquipoGuerreros();
 		this.crearEquipoEnemigos();
@@ -53,17 +49,6 @@ public class DragonBall {
 		Collections.shuffle(lista);
 		this.turno = new Turno (lista.get(0), lista.get(1), this.tablero);
 	}
-	
-	private void crearTablero(int sizeTablero){
-		List <Efecto> consumiblesPosibles = new ArrayList<Efecto>();
-		consumiblesPosibles.add(new EsferaDeDragon());
-		consumiblesPosibles.add(new NubeVoladora());
-		consumiblesPosibles.add(new SemillaDelErmitanio());
-		this.tablero = new Tablero(sizeTablero);
-		this.tablero.setListadoConsumibles(consumiblesPosibles);
-	}
-
-
 	
 	private Equipo crearEquipo(String nombreEquipo, Personaje pers1, Personaje pers2, Personaje pers3){
 		List<Personaje> listaPersonajes = new ArrayList<Personaje>();
