@@ -30,14 +30,19 @@ import modelo.juego.Posicion;
 import modelo.juego.Tablero;
 import modelo.personajes.Personaje;
 import modelo.utilidades.Constantes;
-import vista.controlador.BotonAtacarEventHandler;
-import vista.controlador.BotonAtaqueEspecialEventHandler;
-import vista.controlador.BotonCancelarAccionEventHandler;
-import vista.controlador.BotonCasilleroOcupadoEventHandler;
-import vista.controlador.BotonCasilleroVacioEventHandler;
-import vista.controlador.BotonMoverEventHandler;
-import vista.controlador.BotonTerminarTurnoEventHandler;
-import vista.controlador.BotonTransformarEventHandler;
+import vista.botones.BotonAccion;
+import vista.botones.BotonCasilleroVacio;
+import vista.botones.BotonInvisible;
+import vista.botones.BotonPersonaje;
+import vista.botones.ImagenFondo;
+import vista.controlador.eventosAccionesJuego.BotonAtacarEventHandler;
+import vista.controlador.eventosAccionesJuego.BotonAtaqueEspecialEventHandler;
+import vista.controlador.eventosAccionesJuego.BotonCancelarAccionEventHandler;
+import vista.controlador.eventosAccionesJuego.BotonMoverEventHandler;
+import vista.controlador.eventosAccionesJuego.BotonTerminarTurnoEventHandler;
+import vista.controlador.eventosAccionesJuego.BotonTransformarEventHandler;
+import vista.controlador.eventosBotonesJuego.BotonCasilleroOcupadoEventHandler;
+import vista.controlador.eventosBotonesJuego.BotonCasilleroVacioEventHandler;
 
 public class VistaJuego extends VBox{
 

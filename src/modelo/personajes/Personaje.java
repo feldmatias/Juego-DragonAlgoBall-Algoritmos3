@@ -13,7 +13,7 @@ import modelo.juego.Tablero;
 import modelo.personajes.modos.Modo;
 import modelo.personajes.modos.ModoInmovilizado;
 import modelo.utilidades.Constantes;
-import vista.Posicionable;
+import vista.botones.Posicionable;
 
 public abstract class Personaje implements Posicionable{
 	

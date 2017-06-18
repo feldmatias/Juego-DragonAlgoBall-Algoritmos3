@@ -1,7 +1,7 @@
 package modelo.consumibles;
 
 import modelo.personajes.Personaje;
-import vista.Posicionable;
+import vista.botones.Posicionable;
 
 public abstract class Efecto implements Posicionable{
 	

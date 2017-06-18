@@ -4,7 +4,7 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.util.Duration;
-import vista.BotonInvisible;
+import vista.botones.BotonInvisible;
 
 public class MovimientoAtaqueEventHandler implements EventHandler<ActionEvent>{
 	

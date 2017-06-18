@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
+import vista.botones.BotonMenu;
 
 public class VistaFinDelJuego extends VBox {
 	LibreriaSonidos sonidos;

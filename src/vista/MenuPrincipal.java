@@ -26,6 +26,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
+import vista.botones.BotonMenu;
 import vista.controlador.TransicionMenuEventHandler;
 
 public class MenuPrincipal extends StackPane{
@@ -119,9 +120,9 @@ public class MenuPrincipal extends StackPane{
 			BotonMenu btnSalir = new BotonMenu( "SALIR" , sonidos);
 			btnSalir.setOnMouseClicked( evento -> {
 				Alert alert = new Alert(AlertType.CONFIRMATION);
-				alert.setTitle("Confirmación de salida");
-				alert.setHeaderText("Se ha seleccionado la opción de SALIR de la aplicación");
-				alert.setContentText("¿Está seguro que desea salir?");
+				alert.setTitle("Confirmacion de salida");
+				alert.setHeaderText("Se ha seleccionado la opcion de SALIR de la aplicacion");
+				alert.setContentText("Esta seguro que desea salir?");
 				alert.showAndWait();
 				if (alert.getResult() == ButtonType.OK){
 					System.exit(0);
