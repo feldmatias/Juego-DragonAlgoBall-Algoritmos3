@@ -29,6 +29,8 @@ public class BotonAccion extends StackPane{
 	private LibreriaSonidos sonidos;
 	public static int anchoBotonAccion = (int) (Screen.getPrimary().getVisualBounds().getWidth()/8); //cambio  200
 	public static int altoBotonAccion = (int) (Screen.getPrimary().getVisualBounds().getHeight()/8.5); //cambio  120
+	public static double tamFuente = Screen.getPrimary().getVisualBounds().getHeight() / 42 ;
+
 	
 	public BotonAccion(String nombre, EventHandler<MouseEvent> eventHandler, LibreriaSonidos sonidos){
 		this.sonidos = sonidos;
@@ -77,7 +79,7 @@ public class BotonAccion extends StackPane{
 
 	private void agregarTexto(String nombre) {
 		Label texto = new Label(nombre);
-		texto.setFont(Font.font("Arial", FontWeight.BOLD, 25));
+		texto.setFont(Font.font("Arial", FontWeight.BOLD, tamFuente));
 		boton.getChildren().add(texto);
 	}
 	
