@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import modelo.personajes.Personaje;
