@@ -224,12 +224,13 @@ public class MenuPrincipal extends StackPane{
 		}
 		
 		private void crearMenuAcerca() {
-			HBox hbox = new HBox(10);
+			HBox hbox = new HBox(50);
 			VBox infoBox = new VBox(0);
 			
 			BotonMenu btnAtrasAcerca = new BotonMenu("ATRAS", sonidos);
 			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuAcerca,menuOpciones,posSubmenu3);
 			btnAtrasAcerca.setOnMouseClicked(eventoTransicion);
+			btnAtrasAcerca.setAlignment(Pos.TOP_LEFT);
 			
 			
 			Text titulo = new Text("Algoritmos y programacion III");
