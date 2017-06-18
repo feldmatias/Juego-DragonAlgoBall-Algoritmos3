@@ -51,12 +51,12 @@ public class VistaFinDelJuego extends VBox {
 	private void mensajeGanador(DragonBall juego) {
 		Text mensaje = new Text("El ganador es:");
 
-		mensaje.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 40));
+		mensaje.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 60));
 		mensaje.setFill(Color.YELLOW);
 		mensaje.setStroke(Color.BLACK);
 		Text ganador = new Text(juego.getGanador());
 
-		ganador.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 50));
+		ganador.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 60));
 		ganador.setFill(Color.DARKCYAN);
 		ganador.setStroke(Color.WHITE);
 		
