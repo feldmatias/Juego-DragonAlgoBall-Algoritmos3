@@ -33,6 +33,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.juego.Casillero;
@@ -174,12 +175,13 @@ public class VistaJuego extends VBox{
 		distanciaAtaque.setTextFill(Color.WHITE);
 		
 		String letraParametros = "Calibri";
-		double tamanioParametros = 15;
+		double tamanioParametros = 16;
+		FontWeight font = FontWeight.EXTRA_BOLD;
 		
-		vida.setFont(Font.font(letraParametros, tamanioParametros));
-		ki.setFont(Font.font(letraParametros, tamanioParametros));
-		velocidad.setFont(Font.font(letraParametros, tamanioParametros));
-		distanciaAtaque.setFont(Font.font(letraParametros, tamanioParametros));
+		vida.setFont(Font.font(letraParametros, font, tamanioParametros));
+		ki.setFont(Font.font(letraParametros,font, tamanioParametros));
+		velocidad.setFont(Font.font(letraParametros,font, tamanioParametros));
+		distanciaAtaque.setFont(Font.font(letraParametros,font, tamanioParametros));
 		
 		parametrosPersonaje.getChildren().addAll(nombre,vida,ki,velocidad,distanciaAtaque);
 		boxDatos.getChildren().add(parametrosPersonaje);
