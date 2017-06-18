@@ -122,10 +122,10 @@ public class VistaJuego extends VBox{
 	}
 
 	private VBox crearEspacioJugador(Jugador jugador){
-		Text nombre = new Text();
-		nombre.setText(jugador.getEquipo().getNombre());
-		nombre.setStroke(Color.WHITE);
-		nombre.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteNombreEquipo)); 
+		
+		Text nombre = this.crearTextosTitulosConFormato(jugador.getEquipo().getNombre(),"", ConstantesPantalla.tamFuenteNombreEquipo);
+		nombre.setUnderline(false);
+		
 		VBox contenedor = new VBox (nombre);
 		int cantidadEsferas = jugador.getEquipo().getCantidadEsferas();
 		InputStream entradaImagen;
@@ -154,34 +154,16 @@ public class VistaJuego extends VBox{
 		VBox parametrosPersonaje = new VBox();
 		parametrosPersonaje.setPadding(new Insets(10));
 		
-		Text nombre = new Text();
-		nombre.setText(personaje.getNombre());
-		nombre.setStroke(Color.WHITE);
-		nombre.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteNombrePersonaje));
-		nombre.setUnderline(true);
+		Text nombre = this.crearTextosTitulosConFormato(personaje.getNombre(),"", ConstantesPantalla.tamFuenteNombrePersonaje);
+
+		Label vida = this.crearLabelDatosConFormato("Vida", String.valueOf((int)personaje.getVidaActual()));
 		
+		Label ki = this.crearLabelDatosConFormato("Ki", String.valueOf(personaje.getKi()));
 		
-		Label vida = new Label();
-		vida.setText("Vida: " + String.valueOf((int)personaje.getVidaActual()));
-		vida.setTextFill(Color.WHITE);
-		Label ki = new Label();
-		ki.setText("Ki: " + String.valueOf(personaje.getKi()));
-		ki.setTextFill(Color.WHITE);
-		Label velocidad = new Label();
-		velocidad.setTextFill(Color.WHITE);
-		velocidad.setText("Velocidad: " + String.valueOf(personaje.getVelocidad()));
-		Label distanciaAtaque = new Label();
-		distanciaAtaque.setText("Distancia Ataque: " + String.valueOf(personaje.getDistanciaAtaque()));
-		distanciaAtaque.setTextFill(Color.WHITE);
+		Label velocidad = this.crearLabelDatosConFormato("Velocidad",String.valueOf(personaje.getVelocidad()) );
 		
-		String letraParametros = "Calibri";
-		double tamanioParametros = 16;
-		FontWeight font = FontWeight.EXTRA_BOLD;
-		
-		vida.setFont(Font.font(letraParametros, font, tamanioParametros));
-		ki.setFont(Font.font(letraParametros,font, tamanioParametros));
-		velocidad.setFont(Font.font(letraParametros,font, tamanioParametros));
-		distanciaAtaque.setFont(Font.font(letraParametros,font, tamanioParametros));
+		Label distanciaAtaque = this.crearLabelDatosConFormato("Distancia Ataque",  String.valueOf(personaje.getDistanciaAtaque()));
+
 		
 		parametrosPersonaje.getChildren().addAll(nombre,vida,ki,velocidad,distanciaAtaque);
 		boxDatos.getChildren().add(parametrosPersonaje);
@@ -222,11 +204,9 @@ public class VistaJuego extends VBox{
 
 
 	private VBox actualizarTurnos() {
-		Text turnos = new Text();
-		turnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
-		turnos.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteTurno)); 
-		turnos.setUnderline(true);
-		turnos.setStroke(Color.WHITE);
+		String dato =juego.getJugadorActual().getEquipo().getNombre();
+		Text turnos = this.crearTextosTitulosConFormato("Turno de: ",dato, ConstantesPantalla.tamFuenteTurno);
+		
 		informacionAcciones.setText("Selecciona un personaje");
 		VBox contenedorDatos = new VBox(turnos, informacionAcciones);
 		contenedorDatos.setAlignment(Pos.CENTER);
@@ -299,6 +279,30 @@ public class VistaJuego extends VBox{
 			return null;
 		}
 		
+	}
+	
+	private Label crearLabelDatosConFormato(String nombreDato,String texto){
+		String letraParametros = "Calibri";
+		double tamanioParametros = 15;
+		FontWeight font = FontWeight.EXTRA_BOLD;
+		
+		Label label = new Label();
+		label.setText(nombreDato + ": " + texto);
+		label.setTextFill(Color.WHITE);
+		label.setFont(Font.font(letraParametros, font, tamanioParametros));
+		
+		return label;
+		
+	}
+	
+	private Text crearTextosTitulosConFormato(String nombreTitulo,String texto, double tamfuenteturno){
+		Text titulo = new Text();
+		titulo.setText(nombreTitulo + texto);
+		titulo.setFont(Font.loadFont(rutaFuente, tamfuenteturno)); 
+		titulo.setStroke(Color.WHITE);
+		titulo.setUnderline(true);	
+		
+		return titulo;
 	}
 
 	

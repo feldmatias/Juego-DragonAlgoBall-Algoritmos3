@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
@@ -77,8 +76,8 @@ public class BotonAccion extends StackPane{
 	private void agregarTexto(String nombre) {
 		Text texto = new Text(nombre);
 		texto.setFont(Font.font("Arial", FontWeight.BOLD, ConstantesPantalla.tamFuenteBotonAccion));
-		texto.setFill(Color.BLACK);
-		texto.setStroke(Color.WHITE);
+		texto.setFill(Color.WHITE);
+		texto.setStroke(Color.BLACK);
 		boton.getChildren().add(texto);
 	}
 	
