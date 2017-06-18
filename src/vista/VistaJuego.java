@@ -31,7 +31,9 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
@@ -51,7 +53,7 @@ public class VistaJuego extends VBox{
 	private DragonBall juego;
 	private List <BotonInvisible> botonesCasilleros;
 	private Map <Personaje,BotonInvisible> botonesPersonajes;
-	private Label labelAcciones;
+	private Text informacionAcciones;
 	private HBox contenedorBotonesAcciones;
 	public LibreriaSonidos sonidos;
 	private Stage stage;
@@ -65,15 +67,16 @@ public class VistaJuego extends VBox{
 		this.stage = stage;
 		this.sonidos = sonidos;
 		this.juego = juego;
-		this.labelAcciones = new Label();
-		labelAcciones.setFont(Font.font("Calibri", 18));
+		this.informacionAcciones = new Text();
+		informacionAcciones.setFont(Font.font("Calibri", 18));
+//		informacionAcciones.setStroke(Color.WHITE);
 		rutaFuente = "file:src/vista/imagenes/Saiyan-Sans.ttf";
 		
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
 		
 		//Image imagen = new Image("file:src/vista/imagenes/nebulosa 3.jpg");
-		Image imagen = new Image("file:src/vista/imagenes/fondos/Fondo 10.jpg");
+		Image imagen = new Image("file:src/vista/imagenes/fondos/Fondo 4.jpg");
 		BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo,false,false,true,true);
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 		this.setBackground(new Background(imagenDeFondo));
@@ -120,8 +123,9 @@ public class VistaJuego extends VBox{
 	}
 
 	private VBox crearEspacioJugador(Jugador jugador){
-		Label nombre = new Label();
+		Text nombre = new Text();
 		nombre.setText(jugador.getEquipo().getNombre());
+		nombre.setStroke(Color.WHITE);
 		nombre.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteNombreEquipo)); 
 		VBox contenedor = new VBox (nombre);
 		int cantidadEsferas = jugador.getEquipo().getCantidadEsferas();
@@ -151,8 +155,9 @@ public class VistaJuego extends VBox{
 		VBox parametrosPersonaje = new VBox();
 		parametrosPersonaje.setPadding(new Insets(10));
 		
-		Label nombre = new Label();
+		Text nombre = new Text();
 		nombre.setText(personaje.getNombre());
+		nombre.setStroke(Color.WHITE);
 		nombre.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteNombrePersonaje));
 		nombre.setUnderline(true);
 		
@@ -187,16 +192,16 @@ public class VistaJuego extends VBox{
 		BotonTerminarTurnoEventHandler eventHandler = new BotonTerminarTurnoEventHandler(juego, this);
 		BotonAccion terminarTurno = new BotonAccion ("Terminar Turno", eventHandler, sonidos);
 		
-		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, labelAcciones, botonesPersonajes);
+		BotonTransformarEventHandler eventHandler2 = new BotonTransformarEventHandler(juego, this, informacionAcciones, botonesPersonajes);
 		BotonAccion transformar = new BotonAccion ("Transformar", eventHandler2, sonidos);
 		
-		BotonMoverEventHandler eventHandler3 = new BotonMoverEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes);
+		BotonMoverEventHandler eventHandler3 = new BotonMoverEventHandler( informacionAcciones, botonesCasilleros, botonesPersonajes);
 		BotonAccion mover = new BotonAccion ("Mover", eventHandler3, sonidos);
 		
-		BotonAtacarEventHandler eventHandler4 = new BotonAtacarEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes, juego, this);
+		BotonAtacarEventHandler eventHandler4 = new BotonAtacarEventHandler( informacionAcciones, botonesCasilleros, botonesPersonajes, juego, this);
 		BotonAccion atacar = new BotonAccion ("Atacar", eventHandler4, sonidos);
 		
-		BotonAtaqueEspecialEventHandler eventHandler5 = new BotonAtaqueEspecialEventHandler( labelAcciones, botonesCasilleros, botonesPersonajes, juego, this);
+		BotonAtaqueEspecialEventHandler eventHandler5 = new BotonAtaqueEspecialEventHandler( informacionAcciones, botonesCasilleros, botonesPersonajes, juego, this);
 		BotonAccion ataqueEspecial = new BotonAccion ("Ataque Especial", eventHandler5, sonidos);
 		
 		BotonCancelarAccionEventHandler eventHandler6 = new BotonCancelarAccionEventHandler(this);
@@ -213,15 +218,16 @@ public class VistaJuego extends VBox{
 
 
 	private VBox actualizarTurnos() {
-		Label labelTurnos = new Label();
-		labelTurnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
-		labelTurnos.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteTurno)); 
-		labelTurnos.setUnderline(true);
-		labelAcciones.setText("Selecciona un personaje");
-		VBox contenedorLabels = new VBox(labelTurnos, labelAcciones);
-		contenedorLabels.setAlignment(Pos.CENTER);
-		contenedorLabels.setSpacing(12);
-		return contenedorLabels;
+		Text turnos = new Text();
+		turnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
+		turnos.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteTurno)); 
+		turnos.setUnderline(true);
+		turnos.setStroke(Color.WHITE);
+		informacionAcciones.setText("Selecciona un personaje");
+		VBox contenedorDatos = new VBox(turnos, informacionAcciones);
+		contenedorDatos.setAlignment(Pos.CENTER);
+		contenedorDatos.setSpacing(12);
+		return contenedorDatos;
 	}
 
 
@@ -256,7 +262,7 @@ public class VistaJuego extends VBox{
 
 	private void nuevoBotonPersonaje(HBox fila, Personaje personaje) {
 		BotonInvisible boton = new BotonPersonaje(personaje, juego,this.sonidos);
-		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, labelAcciones, this, boton);
+		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, informacionAcciones, this, boton);
 
 		boton.setOnAction(eventHandler);
 		boton.habilitar();
@@ -268,7 +274,7 @@ public class VistaJuego extends VBox{
 	private void nuevoBotonCasilleroVacio(HBox fila, Posicion pos, Casillero casillero) {
 		BotonInvisible boton = new BotonCasilleroVacio(casillero,this.sonidos);
 
-		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,labelAcciones, this, boton);
+		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,informacionAcciones, this, boton);
 		boton.setOnAction(eventHandler);
 		boton.deshabilitar();
 		fila.getChildren().add(boton);

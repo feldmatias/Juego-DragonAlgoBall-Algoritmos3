@@ -3,6 +3,7 @@ package controlador.eventosBotonesJuego;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import modelo.excepciones.PersonajeNoSeleccionable;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
@@ -13,14 +14,14 @@ public class BotonCasilleroOcupadoEventHandler implements EventHandler<MouseEven
 
 	private DragonBall juego;
 	private Personaje personaje;
-	private Label labelAcciones;
+	private Text acciones;
 	private VistaJuego vista;
 	private BotonInvisible boton;
 	
-	public BotonCasilleroOcupadoEventHandler(DragonBall juego,  Personaje personaje, Label acciones, VistaJuego vista, BotonInvisible boton) {
+	public BotonCasilleroOcupadoEventHandler(DragonBall juego,  Personaje personaje, Text informacionAcciones, VistaJuego vista, BotonInvisible boton) {
 		this.juego = juego;
 		this.personaje = personaje;
-		this.labelAcciones = acciones;
+		this.acciones = informacionAcciones;
 		this.vista = vista;
 		this.boton = boton;
 	}
@@ -34,7 +35,7 @@ public class BotonCasilleroOcupadoEventHandler implements EventHandler<MouseEven
 			boton.reproducirSonidoSeleccion();
 			vista.actualizarVista();
 		} catch (PersonajeNoSeleccionable e) {
-			labelAcciones.setText("No puede seleccionar a ese personaje");
+			acciones.setText("No puede seleccionar a ese personaje");
 			boton.reproducirSonidoError();
 		}
 	}

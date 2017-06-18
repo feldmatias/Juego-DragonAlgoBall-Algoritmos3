@@ -7,6 +7,7 @@ import controlador.eventosBotonesJuego.BotonPersonajeAtacableEventHandler;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
 import vista.VistaJuego;
@@ -14,16 +15,16 @@ import vista.botones.BotonInvisible;
 
 public class BotonAtacarEventHandler implements EventHandler<MouseEvent> {
 
-	private Label labelAcciones;
+	private Text acciones;
 	private Map<Personaje, BotonInvisible> personajes;
 	private List<BotonInvisible> casilleros;
 	private DragonBall juego;
 	private VistaJuego vista;
 
-	public BotonAtacarEventHandler(Label labelAcciones, List<BotonInvisible> botonesCasilleros,
+	public BotonAtacarEventHandler(Text informacionAcciones, List<BotonInvisible> botonesCasilleros,
 			Map<Personaje, BotonInvisible> botonesPersonajes, DragonBall juego, VistaJuego vista) {
 		
-		this.labelAcciones = labelAcciones;
+		this.acciones = informacionAcciones;
 		this.casilleros = botonesCasilleros;
 		this.personajes = botonesPersonajes;
 		this.juego = juego;
@@ -41,9 +42,9 @@ public class BotonAtacarEventHandler implements EventHandler<MouseEvent> {
 		for (Personaje personaje: personajes.keySet()){
 			BotonInvisible boton = personajes.get(personaje);
 			boton.habilitar();
-			boton.setOnAction(new BotonPersonajeAtacableEventHandler(juego,personaje, labelAcciones, vista, boton));
+			boton.setOnAction(new BotonPersonajeAtacableEventHandler(juego,personaje, acciones, vista, boton));
 		}
-		labelAcciones.setText("Seleccione al enemigo a atacar");
+		acciones.setText("Seleccione al enemigo a atacar");
 	}
 
 }

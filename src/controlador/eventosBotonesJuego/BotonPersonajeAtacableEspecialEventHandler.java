@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.juego.DragonBall;
@@ -16,16 +17,16 @@ import vista.botones.BotonInvisible;
 public class BotonPersonajeAtacableEspecialEventHandler implements EventHandler<MouseEvent> {
 
 	private DragonBall juego;
-	private Label acciones;
+	private Text acciones;
 	private Personaje personaje;
 	private VistaJuego vista;
 	private BotonInvisible boton;
 
-	public BotonPersonajeAtacableEspecialEventHandler(DragonBall juego, Personaje personaje, Label labelAcciones,
+	public BotonPersonajeAtacableEspecialEventHandler(DragonBall juego, Personaje personaje, Text acciones,
 			VistaJuego vista, BotonInvisible boton) {
 		this.juego = juego;
 		this.personaje = personaje;
-		this.acciones = labelAcciones;
+		this.acciones = acciones;
 		this.vista = vista;
 		this.boton = boton;
 	}

@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.text.Text;
 import javafx.stage.Screen;
 import javafx.util.Duration;
 import modelo.excepciones.AtaqueNoPosible;
@@ -28,15 +29,15 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 
 	private DragonBall juego;
 	private Personaje personaje;
-	private Label acciones;
+	private Text acciones;
 	private VistaJuego vista;
 	private BotonInvisible boton;
 	private BotonPersonaje atacante;
 
-	public BotonPersonajeAtacableEventHandler(DragonBall juego, Personaje personaje, Label labelAcciones, VistaJuego vista, BotonInvisible boton) {
+	public BotonPersonajeAtacableEventHandler(DragonBall juego, Personaje personaje, Text acciones, VistaJuego vista, BotonInvisible boton) {
 		this.juego = juego;
 		this.personaje = personaje;
-		this.acciones = labelAcciones;
+		this.acciones = acciones;
 		this.vista = vista;
 		this.boton = boton;
 		this.atacante = vista.getBotonPersonajeSeleccionado();

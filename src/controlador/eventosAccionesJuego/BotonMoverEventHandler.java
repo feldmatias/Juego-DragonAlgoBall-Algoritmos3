@@ -6,18 +6,19 @@ import java.util.Map;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import modelo.personajes.Personaje;
 import vista.botones.BotonInvisible;
 
 public class BotonMoverEventHandler implements EventHandler<MouseEvent> {
 
-	private Label labelAcciones;
+	private Text acciones;
 	private Map<Personaje, BotonInvisible> personajes;
 	private List<BotonInvisible> casilleros;
 
-	public BotonMoverEventHandler(Label labelAcciones, List<BotonInvisible> botonesCasilleros, 
+	public BotonMoverEventHandler(Text informacionAcciones, List<BotonInvisible> botonesCasilleros, 
 			Map<Personaje, BotonInvisible> botonesPersonajes) {
-		this.labelAcciones = labelAcciones;
+		this.acciones = informacionAcciones;
 		this.personajes = botonesPersonajes;
 		this.casilleros = botonesCasilleros;
 	}
@@ -31,7 +32,7 @@ public class BotonMoverEventHandler implements EventHandler<MouseEvent> {
 		for (BotonInvisible boton: casilleros){
 			boton.habilitar();
 		}
-		labelAcciones.setText("Seleccione una nueva Posicion");
+		acciones.setText("Seleccione una nueva Posicion");
 	}
 
 }

@@ -3,6 +3,7 @@ package controlador.eventosBotonesJuego;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import modelo.excepciones.MovimientoNoPosible;
 import modelo.juego.DragonBall;
 import modelo.juego.Posicion;
@@ -13,14 +14,14 @@ public class BotonCasilleroVacioEventHandler implements EventHandler<MouseEvent>
 
 	private DragonBall juego;
 	private Posicion pos;
-	private Label acciones;
+	private Text acciones;
 	private VistaJuego vista;
 	private BotonInvisible boton;
 	
-	public BotonCasilleroVacioEventHandler(DragonBall juego, Posicion pos, Label acciones, VistaJuego vista, BotonInvisible boton) {
+	public BotonCasilleroVacioEventHandler(DragonBall juego, Posicion pos, Text informacionAcciones, VistaJuego vista, BotonInvisible boton) {
 		this.juego = juego;
 		this.pos = pos;
-		this.acciones = acciones;
+		this.acciones = informacionAcciones;
 		this.vista = vista;
 		this.boton = boton;
 	}
