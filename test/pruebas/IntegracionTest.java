@@ -25,8 +25,8 @@ public class IntegracionTest {
 		//Se comprueba seleccion de equipos correcta
 		String unNombre = dragonBall.getJugador1().getEquipo().getNombre();
 		String otroNombre = dragonBall.getJugador2().getEquipo().getNombre();
-		Assert.assertEquals("La prueba pasó: el jugador 1 es del equipo Guerreros", Constantes.GUERREROS, unNombre);
-		Assert.assertEquals("La prueba pasó: el jugador 2 es del equipo Enemigos", Constantes.ENEMIGOS, otroNombre);
+		Assert.assertEquals("La prueba paso: el jugador 1 es del equipo Guerreros", Constantes.GUERREROS, unNombre);
+		Assert.assertEquals("La prueba paso: el jugador 2 es del equipo Enemigos", Constantes.ENEMIGOS, otroNombre);
 			
 		//Se comprueban personajes equipo guerreros
 		Collection<Personaje> miembrosGuerreros = dragonBall.getJugador1().getEquipo().getMiembros().values();
