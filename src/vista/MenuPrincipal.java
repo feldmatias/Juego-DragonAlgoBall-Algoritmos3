@@ -36,6 +36,7 @@ public class MenuPrincipal extends StackPane{
 		private Submenu menuSonido;
 		private Submenu menuPantalla;
 		private Submenu menuAcerca;
+		private Submenu menuInstrucciones;
 		
 		private final double posSubmenu1 = 400;
 		private final double posSubmenu2 = 800;
@@ -68,12 +69,14 @@ public class MenuPrincipal extends StackPane{
 			menuSonido = new Submenu();
 			menuPantalla = new Submenu();
 			menuAcerca = new Submenu();
+			menuInstrucciones = new Submenu();
 			
 			this.crearMenuPrincipal();
 			this.crearMenuOpciones();
 			this.crearMenuSonido();
 			this.crearMenuPantalla();
 			this.crearMenuAcerca();
+			this.crearMenuInstrucciones();
 			
 			menuOpciones.setTranslateX(posSubmenu1);
 			menuSonido.setTranslateX( posSubmenu2 );
@@ -83,8 +86,6 @@ public class MenuPrincipal extends StackPane{
 			
 			
 		}
-
-		
 
 		private void crearMenuPrincipal() {
 			btnContinuar = new BotonMenu ("CONTINUAR PARTIDA", sonidos);
@@ -141,11 +142,15 @@ public class MenuPrincipal extends StackPane{
 			TransicionMenuEventHandler eventoTransicion3 = new TransicionMenuEventHandler(this,menuOpciones, menuPantalla, posSubmenu1);
 			btnPantalla.setOnMouseClicked(eventoTransicion3);
 			
-			BotonMenu btnAcercaDe = new BotonMenu("ACERCA DE", sonidos);
-			TransicionMenuEventHandler eventoTransicion4 = new TransicionMenuEventHandler(this,menuOpciones, menuAcerca, posSubmenu3);
-			btnAcercaDe.setOnMouseClicked(eventoTransicion4);
+			BotonMenu btnInstrucciones = new BotonMenu("INSTRUCCIONES", sonidos);
+			TransicionMenuEventHandler eventoTransicion4 = new TransicionMenuEventHandler(this,menuOpciones, menuInstrucciones, posSubmenu3);
+			btnInstrucciones.setOnMouseClicked(eventoTransicion4);
 			
-			menuOpciones.getChildren().addAll(btnSonido, btnPantalla, btnAcercaDe, btnAtrasPrincipal);
+			BotonMenu btnAcercaDe = new BotonMenu("ACERCA DE", sonidos);
+			TransicionMenuEventHandler eventoTransicion5 = new TransicionMenuEventHandler(this,menuOpciones, menuAcerca, posSubmenu3);
+			btnAcercaDe.setOnMouseClicked(eventoTransicion5);
+			
+			menuOpciones.getChildren().addAll(btnSonido, btnPantalla, btnInstrucciones, btnAcercaDe, btnAtrasPrincipal);
 			
 		}
 		
@@ -263,6 +268,44 @@ public class MenuPrincipal extends StackPane{
 			
 		}
 		
+		private void crearMenuInstrucciones() {
+			VBox instrucciones = new VBox();
+			instrucciones.setSpacing(16);
+			
+			Text texto = new Text();
+			texto.setText("Es un juego por turnos. Hay 2 jugadores, cada uno debe elegir un equipo antes de iniciar una partida\n"
+					+ "En un mismo turno, se puede realizar una ataque y un movimiento, no necesariamente del mismo personaje.\n"
+					+ "Cada personaje tiene un ataque basico y un ataque especial que puede aplicar un efecto.\n"
+					+ "Tambien pueden realizar transformaciones cuando cumplen los requerimientos necesarios.\n"
+					+ "Los personajes se desplazan por el tablero de casillero en casillero. \n"
+					+ "Cada punto de su velocidad de desplazamiento representa 1 casillero.\n"
+					+ "La distancia de ataque representa la cantidad de casilleros maxima que puede atacar.\n"
+					+ "El Ki se aumenta solo en cada personaje, al comenzar el turno.\n"
+					+ "Cuando comienza el turno del jugador, puede seleccionar cualquier personaje de su equipo. \n"
+					+ "Luego debe selecionar una accion dentro de las posibles: \n"
+					+ "Atacar, mover, transformar o ataque especial.\n"
+					+ "Al seleccionar mover, debe elegir la posicion a moverse. \n"
+					+ "Al seleccionar atacar o ataque especial, debe elegir al enemigo a atacar.\n"
+					+ "Se puede cancelar la accion seleccionada en cualquier momento, o terminar el turno.\n"
+					+ "El turno termina automaticamente cuando ya se realizo un ataque y un movimiento, \n"
+					+ "o cuando ninguna de estas acciones es posible para ningun personaje del equipo.\n"
+					+ "Para ganar se debe matar a todos los personajes enemigos, \n"
+					+ "o capturar 7 esferas del dragon entre cualquiera de los 3 personajes.");
+			
+			texto.setFill(Color.DARKTURQUOISE);
+			texto.setFont(Font.font("Calibri", FontWeight.EXTRA_BOLD, 20));
+			texto.setTextAlignment(TextAlignment.CENTER);
+			
+			BotonMenu btnAtrasInstrucciones = new BotonMenu("ATRAS", sonidos);
+			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this, menuInstrucciones, menuOpciones, -posSubmenu2);
+			btnAtrasInstrucciones.setOnMouseClicked(eventoTransicion);
+			
+			btnAtrasInstrucciones.setAlignment(Pos.CENTER);
+			instrucciones.getChildren().addAll(texto, btnAtrasInstrucciones);
+			instrucciones.setAlignment(Pos.CENTER);
+			menuInstrucciones.getChildren().add(instrucciones);
+			
+		}
 
 		private Boolean comprobarPantallaCompleta() {
 			return stage.isFullScreen();
