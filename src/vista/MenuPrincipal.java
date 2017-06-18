@@ -2,6 +2,8 @@ package vista;
 
 
 
+import java.awt.peer.FontPeer;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,8 +17,10 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
@@ -223,17 +227,39 @@ public class MenuPrincipal extends StackPane{
 		
 		private void crearMenuAcerca() {
 			HBox hbox = new HBox(10);
+			VBox infoBox = new VBox(0);
 			
 			BotonMenu btnAtrasAcerca = new BotonMenu("ATRAS", sonidos);
-			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuAcerca,menuOpciones,-posSubmenu2);
+			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuAcerca,menuOpciones,posSubmenu3);
 			btnAtrasAcerca.setOnMouseClicked(eventoTransicion);
 			
-			Text titulo = new Text("Dragon Algo Ball");
+			
+			Text titulo = new Text("Algoritmos y programacion III");
 			titulo.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 80));
-			titulo.setFill(Color.RED);
+			titulo.setFill(Color.DARKCYAN);
 			titulo.setStroke(Color.WHITE);
 			titulo.setStrokeWidth(3);
-			hbox.getChildren().addAll(btnAtrasAcerca, titulo);
+			
+			Text alumnos = new Text("FELD Matias \nLOBOSCO Barbara \nMATLES Karina \nPELOZO Emanuel\n");
+			alumnos.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 70));
+			alumnos.setFill(Color.DARKRED);
+			alumnos.setStroke(Color.WHITE);
+			alumnos.setStrokeWidth(3);
+			
+			Text profesor = new Text("Profesor CARLOS FONTELA");
+			profesor.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 70));
+			profesor.setFill(Color.CORAL);
+			profesor.setStroke(Color.DARKRED);
+			profesor.setStrokeWidth(3);
+			
+			Text fecha = new Text("Primer Cuatrimestre 2017");
+			fecha.setFont(Font.font("Calibri", FontWeight.BOLD, 35));
+			fecha.setFill(Color.SEAGREEN);
+			fecha.setStroke(Color.BLACK);
+			fecha.setStrokeWidth(1);
+			
+			infoBox.getChildren().addAll(titulo, alumnos, profesor, fecha);
+			hbox.getChildren().addAll(btnAtrasAcerca, infoBox);
 			menuAcerca.getChildren().add(hbox);
 			
 		}
