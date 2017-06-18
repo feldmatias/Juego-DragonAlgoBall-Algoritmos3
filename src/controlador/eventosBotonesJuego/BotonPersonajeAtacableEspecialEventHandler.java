@@ -1,4 +1,4 @@
-package vista.controlador.eventosBotonesJuego;
+package controlador.eventosBotonesJuego;
 
 
 import javafx.animation.PauseTransition;

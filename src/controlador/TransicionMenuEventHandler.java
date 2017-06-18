@@ -1,4 +1,4 @@
-package vista.controlador;
+package controlador;
 
 import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;

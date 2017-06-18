@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import controlador.ElegirEquipoPrimerJugadorEventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -22,7 +24,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import modelo.utilidades.Constantes;
-import vista.controlador.ElegirEquipoPrimerJugadorEventHandler;
 
 public class VistaSeleccionarEquipo extends VBox{
 	

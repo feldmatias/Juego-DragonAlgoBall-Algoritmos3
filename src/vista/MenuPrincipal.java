@@ -4,6 +4,7 @@ package vista;
 
 import java.awt.peer.FontPeer;
 
+import controlador.TransicionMenuEventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -26,7 +27,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import vista.botones.BotonMenu;
-import vista.controlador.TransicionMenuEventHandler;
 
 public class MenuPrincipal extends StackPane{
 	

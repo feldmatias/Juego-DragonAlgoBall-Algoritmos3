@@ -1,4 +1,4 @@
-package vista.controlador.eventosAccionesJuego;
+package controlador.eventosAccionesJuego;
 
 import java.util.Map;
 

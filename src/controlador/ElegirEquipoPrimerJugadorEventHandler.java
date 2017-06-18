@@ -1,4 +1,4 @@
-package vista.controlador;
+package controlador;
 
 import javafx.event.EventHandler;
 import javafx.scene.effect.DropShadow;

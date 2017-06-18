@@ -1,4 +1,4 @@
-package vista.controlador.eventosBotonesJuego;
+package controlador.eventosBotonesJuego;
 
 
 import java.awt.MouseInfo;

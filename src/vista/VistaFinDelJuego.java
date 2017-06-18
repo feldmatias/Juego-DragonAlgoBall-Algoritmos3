@@ -53,7 +53,7 @@ public class VistaFinDelJuego extends VBox {
 
 		mensaje.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 40));
 		mensaje.setFill(Color.YELLOW);
-		mensaje.setStroke(Color.WHITE);
+		mensaje.setStroke(Color.BLACK);
 		Text ganador = new Text(juego.getGanador());
 
 		ganador.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 50));

@@ -9,6 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import controlador.eventosAccionesJuego.BotonAtacarEventHandler;
+import controlador.eventosAccionesJuego.BotonAtaqueEspecialEventHandler;
+import controlador.eventosAccionesJuego.BotonCancelarAccionEventHandler;
+import controlador.eventosAccionesJuego.BotonMoverEventHandler;
+import controlador.eventosAccionesJuego.BotonTerminarTurnoEventHandler;
+import controlador.eventosAccionesJuego.BotonTransformarEventHandler;
+import controlador.eventosBotonesJuego.BotonCasilleroOcupadoEventHandler;
+import controlador.eventosBotonesJuego.BotonCasilleroVacioEventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -37,14 +45,6 @@ import vista.botones.BotonCasilleroVacio;
 import vista.botones.BotonInvisible;
 import vista.botones.BotonPersonaje;
 import vista.botones.ImagenFondo;
-import vista.controlador.eventosAccionesJuego.BotonAtacarEventHandler;
-import vista.controlador.eventosAccionesJuego.BotonAtaqueEspecialEventHandler;
-import vista.controlador.eventosAccionesJuego.BotonCancelarAccionEventHandler;
-import vista.controlador.eventosAccionesJuego.BotonMoverEventHandler;
-import vista.controlador.eventosAccionesJuego.BotonTerminarTurnoEventHandler;
-import vista.controlador.eventosAccionesJuego.BotonTransformarEventHandler;
-import vista.controlador.eventosBotonesJuego.BotonCasilleroOcupadoEventHandler;
-import vista.controlador.eventosBotonesJuego.BotonCasilleroVacioEventHandler;
 
 public class VistaJuego extends VBox{
 

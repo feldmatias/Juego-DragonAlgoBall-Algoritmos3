@@ -1,8 +1,9 @@
-package vista.controlador.eventosAccionesJuego;
+package controlador.eventosAccionesJuego;
 
 import java.util.List;
 import java.util.Map;
 
+import controlador.eventosBotonesJuego.BotonPersonajeAtacableEspecialEventHandler;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -10,7 +11,6 @@ import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
 import vista.VistaJuego;
 import vista.botones.BotonInvisible;
-import vista.controlador.eventosBotonesJuego.BotonPersonajeAtacableEspecialEventHandler;
 
 public class BotonAtaqueEspecialEventHandler implements EventHandler<MouseEvent> {
 
