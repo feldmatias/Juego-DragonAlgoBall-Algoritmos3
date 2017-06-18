@@ -1,9 +1,6 @@
 package vista;
 
 
-
-import java.awt.peer.FontPeer;
-
 import controlador.TransicionMenuEventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -118,6 +115,7 @@ public class MenuPrincipal extends StackPane{
 				alert.setTitle("Confirmacion de salida");
 				alert.setHeaderText("Se ha seleccionado la opcion de SALIR de la aplicacion");
 				alert.setContentText("Esta seguro que desea salir?");
+				alert.initOwner(stage);
 				alert.showAndWait();
 				if (alert.getResult() == ButtonType.OK){
 					System.exit(0);
@@ -226,12 +224,13 @@ public class MenuPrincipal extends StackPane{
 		}
 		
 		private void crearMenuAcerca() {
-			HBox hbox = new HBox(10);
+			HBox hbox = new HBox(50);
 			VBox infoBox = new VBox(0);
 			
 			BotonMenu btnAtrasAcerca = new BotonMenu("ATRAS", sonidos);
 			TransicionMenuEventHandler eventoTransicion = new TransicionMenuEventHandler(this,menuAcerca,menuOpciones,posSubmenu3);
 			btnAtrasAcerca.setOnMouseClicked(eventoTransicion);
+			btnAtrasAcerca.setAlignment(Pos.TOP_LEFT);
 			
 			
 			Text titulo = new Text("Algoritmos y programacion III");

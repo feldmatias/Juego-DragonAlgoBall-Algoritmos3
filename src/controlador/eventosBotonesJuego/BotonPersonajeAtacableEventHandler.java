@@ -1,29 +1,17 @@
 package controlador.eventosBotonesJuego;
 
 
-import java.awt.MouseInfo;
-
-import javafx.animation.PathTransition;
 import javafx.animation.PauseTransition;
-import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
-import javafx.geometry.Point2D;
-import javafx.geometry.Point3D;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.util.Duration;
 import modelo.excepciones.AtaqueNoPosible;
 import modelo.juego.DragonBall;
 import modelo.personajes.Personaje;
 import vista.VistaJuego;
 import vista.botones.BotonInvisible;
-import vista.botones.BotonPersonaje;
 
 public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEvent> {
 
@@ -32,7 +20,6 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 	private Text acciones;
 	private VistaJuego vista;
 	private BotonInvisible boton;
-	private BotonPersonaje atacante;
 
 	public BotonPersonajeAtacableEventHandler(DragonBall juego, Personaje personaje, Text acciones, VistaJuego vista, BotonInvisible boton) {
 		this.juego = juego;
@@ -40,7 +27,6 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 		this.acciones = acciones;
 		this.vista = vista;
 		this.boton = boton;
-		this.atacante = vista.getBotonPersonajeSeleccionado();
 	}
 
 
@@ -52,29 +38,6 @@ public class BotonPersonajeAtacableEventHandler implements EventHandler<MouseEve
 			
 			juego.jugadorActualAtacarAEnemigo(personaje);
 		
-			
-			
-//			double posDestinoX = boton.localToScene(Point3D.ZERO).getX();
-//			double posDestinoX =boton.localToScene(boton.getBoundsInLocal().getMaxX());
-		
-
-			//double PosDestinoY = boton.localToScene(boton.getBoundsInLocal().getMaxY();
-//			double posDestinoY = boton.localToScene(Point3D.ZERO).getY();
-
-
-
-//			double x = MouseInfo.getPointerInfo().getLocation().x;
-//			double y = MouseInfo.getPointerInfo().getLocation().y;			
-
-			
-//			TranslateTransition transicionTraslado = new TranslateTransition(Duration.seconds(2), atacante);
-//			transicionTraslado.setToY(y);
-//			transicionTraslado.setToX(x);
-//			transicionTraslado.setAutoReverse(true);
-		
-//			transicionTraslado.play();
-			
-			
 			boton.reproducirSonidoAtaque();
 			boton.parpadear(Color.RED);
 			PauseTransition pausa = new PauseTransition(Duration.seconds(1));

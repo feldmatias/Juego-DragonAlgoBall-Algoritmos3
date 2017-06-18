@@ -69,13 +69,11 @@ public class VistaJuego extends VBox{
 		this.juego = juego;
 		this.informacionAcciones = new Text();
 		informacionAcciones.setFont(Font.font("Calibri", 18));
-//		informacionAcciones.setStroke(Color.WHITE);
 		rutaFuente = "file:src/vista/imagenes/Saiyan-Sans.ttf";
 		
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
 		
-		//Image imagen = new Image("file:src/vista/imagenes/nebulosa 3.jpg");
 		Image imagen = new Image("file:src/vista/imagenes/fondos/Fondo 4.jpg");
 		BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo,false,false,true,true);
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
@@ -297,9 +295,5 @@ public class VistaJuego extends VBox{
 		
 	}
 
-	public BotonPersonaje getBotonPersonajeSeleccionado() {
-		BotonPersonaje boton= (BotonPersonaje) botonesPersonajes.get(this.juego.jugadorActualgetPersonajeSeleccionado());
-		return boton;
-	}
 	
 }
