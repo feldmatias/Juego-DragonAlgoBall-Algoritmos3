@@ -230,7 +230,7 @@ public class VistaJuego extends VBox{
 				Posicion pos = new Posicion(j,i);
 				Casillero casillero = tablero.getCasillero(pos);
 					if (casillero.estaVacio()){
-						this.nuevoBotonCasilleroVacio(fila, pos, casillero);
+						this.nuevoBotonCasilleroVacio(fila, casillero);
 					}else{
 						Personaje ocupante = casillero.getPersonaje();
 						this.nuevoBotonPersonaje(fila, ocupante);
@@ -255,10 +255,10 @@ public class VistaJuego extends VBox{
 	}
 
 
-	private void nuevoBotonCasilleroVacio(HBox fila, Posicion pos, Casillero casillero) {
+	private void nuevoBotonCasilleroVacio(HBox fila, Casillero casillero) {
 		BotonInvisible boton = new BotonCasilleroVacio(casillero,this.sonidos);
 
-		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,pos,informacionAcciones, this, boton);
+		BotonCasilleroVacioEventHandler eventHandler = new BotonCasilleroVacioEventHandler(juego,casillero,informacionAcciones, this, boton);
 		boton.setOnAction(eventHandler);
 		boton.deshabilitar();
 		fila.getChildren().add(boton);
