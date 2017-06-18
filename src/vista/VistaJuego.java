@@ -24,7 +24,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
@@ -57,12 +56,7 @@ public class VistaJuego extends VBox{
 	public LibreriaSonidos sonidos;
 	private Stage stage;
 	private String rutaFuente;
-	private double tamFuenteNombreEquipo = Screen.getPrimary().getVisualBounds().getHeight() / 30;
-	private double tamFuenteNombrePersonaje = Screen.getPrimary().getVisualBounds().getHeight() / 35 ;
-	private double tamFuenteTurno = Screen.getPrimary().getVisualBounds().getHeight() / 17.5;
-	private double tamEsfera = Screen.getPrimary().getVisualBounds().getHeight() / 7;
-	private double anchoImgFondo = Screen.getPrimary().getVisualBounds().getWidth();
-	private double altoImgFondo = Screen.getPrimary().getVisualBounds().getHeight();
+	
 	
 
 	
@@ -77,26 +71,12 @@ public class VistaJuego extends VBox{
 		
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
-
-		
 		
 		Image imagen = new Image("file:src/vista/imagenes/nebulosa 3.jpg");
-		BackgroundSize size = new BackgroundSize(altoImgFondo,anchoImgFondo,false,false,true,true);
+		BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo,false,false,true,true);
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 		this.setBackground(new Background(imagenDeFondo));
 		
-		
-//		Image imagen;
-//		try {
-//			imagen = new Image(Files.newInputStream(Paths.get("src/vista/imagenes/mosaico naranja.jpg")));
-//			BackgroundImage fondoImagen = new BackgroundImage(imagen, null, null, null, null);
-//			Background fondo = new Background(fondoImagen);
-//			this.setBackground(fondo);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
 		this.crearBotonesAcciones();
 		this.actualizarVista();
 	}
@@ -141,7 +121,7 @@ public class VistaJuego extends VBox{
 	private VBox crearEspacioJugador(Jugador jugador){
 		Label nombre = new Label();
 		nombre.setText(jugador.getEquipo().getNombre());
-		nombre.setFont(Font.loadFont(rutaFuente, this.tamFuenteNombreEquipo)); //cambio 35
+		nombre.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteNombreEquipo)); 
 		VBox contenedor = new VBox (nombre);
 		int cantidadEsferas = jugador.getEquipo().getCantidadEsferas();
 		InputStream entradaImagen;
@@ -150,8 +130,8 @@ public class VistaJuego extends VBox{
 			Image imagen = new Image(entradaImagen);
 			entradaImagen.close();
 			ImageView vistaImagen = new ImageView(imagen);
-			vistaImagen.setFitHeight(tamEsfera); 
-			vistaImagen.setFitWidth(tamEsfera);  
+			vistaImagen.setFitHeight(ConstantesPantalla.tamEsfera); 
+			vistaImagen.setFitWidth(ConstantesPantalla.tamEsfera);  
 			contenedor.getChildren().add(vistaImagen);
 		} catch (IOException e) {
 		}
@@ -166,13 +146,13 @@ public class VistaJuego extends VBox{
 	private VBox crearBoxPersonaje(Personaje personaje) {
 		
 		VBox boxPersonaje = new VBox();
-		HBox boxDatos = new HBox(new ImagenFondo(personaje, BotonPersonaje.width, BotonPersonaje.height));
+		HBox boxDatos = new HBox(new ImagenFondo(personaje, ConstantesPantalla.anchoPersonaje, ConstantesPantalla.altoPersonaje));
 		VBox parametrosPersonaje = new VBox();
 		parametrosPersonaje.setPadding(new Insets(10));
 		
 		Label nombre = new Label();
 		nombre.setText(personaje.getNombre());
-		nombre.setFont(Font.loadFont(rutaFuente, this.tamFuenteNombrePersonaje)); //cambio 30
+		nombre.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteNombrePersonaje));
 		nombre.setUnderline(true);
 		
 		
@@ -234,7 +214,7 @@ public class VistaJuego extends VBox{
 	private VBox actualizarTurnos() {
 		Label labelTurnos = new Label();
 		labelTurnos.setText("Turno de: " + juego.getJugadorActual().getEquipo().getNombre());
-		labelTurnos.setFont(Font.loadFont(rutaFuente,this.tamFuenteTurno)); //cambio 60
+		labelTurnos.setFont(Font.loadFont(rutaFuente, ConstantesPantalla.tamFuenteTurno)); 
 		labelTurnos.setUnderline(true);
 		labelAcciones.setText("Selecciona un personaje");
 		VBox contenedorLabels = new VBox(labelTurnos, labelAcciones);
@@ -301,8 +281,8 @@ public class VistaJuego extends VBox{
 			Image imagen = new Image(entradaImagen);
 			entradaImagen.close();
 			ImageView vistaImagen = new ImageView(imagen);
-			vistaImagen.setFitWidth(Constantes.SIZE_TABLERO * BotonInvisible.anchoBoton);
-			vistaImagen.setFitHeight(Constantes.SIZE_TABLERO * BotonInvisible.altoBoton);
+			vistaImagen.setFitWidth(ConstantesPantalla.anchoImagenTablero);
+			vistaImagen.setFitHeight(ConstantesPantalla.altoImagenTablero);
 			return vistaImagen;
 		} catch (IOException e) {
 			return null;

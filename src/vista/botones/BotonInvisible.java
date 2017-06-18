@@ -12,15 +12,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Screen;
+import vista.ConstantesPantalla;
 import vista.LibreriaSonidos;
 
 public abstract class BotonInvisible extends StackPane{
-	
-	public static double medida = Screen.getPrimary().getVisualBounds().getHeight() / 13;
 
-	public static double anchoBoton = medida;
-	public static double altoBoton = medida;
 	private Rectangle boton;
 	private Node imagenFondo;
 	private LibreriaSonidos sonidos;
@@ -35,7 +31,7 @@ public abstract class BotonInvisible extends StackPane{
 
 
 	private void crearBoton() {
-		boton = new Rectangle(anchoBoton,altoBoton);
+		boton = new Rectangle(ConstantesPantalla.anchoBotonCasillero,ConstantesPantalla.altoBotonCasillero);
 		boton.setFill(Color.TRANSPARENT);
 		boton.setStroke(Color.BLACK);
 		this.getChildren().add(boton);
@@ -82,8 +78,8 @@ public abstract class BotonInvisible extends StackPane{
 	
 	protected void seleccionar(){
 		 DropShadow sombra= new DropShadow( 1, Color.AQUA );
-		 sombra.setWidth(anchoBoton / 2);
-		 sombra.setHeight(altoBoton);
+		 sombra.setWidth(ConstantesPantalla.anchoBotonCasillero / 2);
+		 sombra.setHeight(ConstantesPantalla.altoBotonCasillero);
 		 sombra.setSpread(0.5);
 		 imagenFondo.setEffect(sombra);
 	}

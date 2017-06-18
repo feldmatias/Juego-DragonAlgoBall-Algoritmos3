@@ -19,7 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import modelo.utilidades.Constantes;
@@ -31,7 +30,6 @@ public class VistaSeleccionarEquipo extends VBox{
 	private Stage stage;
 	private MenuPrincipal menu;
 	private Text title;
-	public static final double ALTURA_EQUIPOS = Screen.getPrimary().getVisualBounds().getHeight() / 2;
 	private LibreriaSonidos sonidos;
 	
 	public VistaSeleccionarEquipo(DragonBall juego, Stage stage, MenuPrincipal menu,LibreriaSonidos sonidos){
@@ -105,7 +103,7 @@ public class VistaSeleccionarEquipo extends VBox{
 			archivoImagen.close();
 		} catch (IOException e1) {
 		}
-		vistaImagen.setFitHeight(ALTURA_EQUIPOS);
+		vistaImagen.setFitHeight(ConstantesPantalla.alturaImagenesEquipos);
 		vistaImagen.setPreserveRatio(true);
 		
 		DropShadow sombra1= new DropShadow( 20, color);

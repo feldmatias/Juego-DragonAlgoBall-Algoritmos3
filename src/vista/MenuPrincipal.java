@@ -1,9 +1,6 @@
 package vista;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,7 +8,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -23,7 +19,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import vista.botones.BotonMenu;
@@ -42,9 +37,6 @@ public class MenuPrincipal extends StackPane{
 		
 		private final double posSubmenu1 = 400;
 		private final double posSubmenu2 = 800;
-		private double anchoImgFondo = Screen.getPrimary().getVisualBounds().getWidth();
-		private double altoImgFondo = Screen.getPrimary().getVisualBounds().getHeight();
-		private double tamFuenteTitulo = Screen.getPrimary().getVisualBounds().getHeight() / 4.7;
 		
 		public MenuPrincipal(Stage stage,LibreriaSonidos sonidos) {
 			this.stage = stage;
@@ -54,14 +46,14 @@ public class MenuPrincipal extends StackPane{
 			
 			
 			Image imagen = new Image("file:src/vista/imagenes/fondo menu esferas.jpg");
-			BackgroundSize size = new BackgroundSize(altoImgFondo,anchoImgFondo,false,false,true,true);
+			BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo, false,false,true,true);
 			BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 			this.setBackground(new Background(imagenDeFondo));
 
 			
 			Text title = new Text("Dragon AlgoBall");
 	        
-	        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", tamFuenteTitulo));
+	        title.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", ConstantesPantalla.tamFuenteTituloMenuPrincipal));
 	        title.setFill(Color.RED);
 	        title.setStroke(Color.YELLOW);
 	        title.setTextAlignment(TextAlignment.CENTER);

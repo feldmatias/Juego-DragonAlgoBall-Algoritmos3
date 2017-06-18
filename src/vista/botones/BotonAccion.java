@@ -20,18 +20,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Screen;
+import vista.ConstantesPantalla;
 import vista.LibreriaSonidos;
 
 public class BotonAccion extends StackPane{
 
 	private VBox boton;
 	private LibreriaSonidos sonidos;
-	public static double anchoBotonAccion = Screen.getPrimary().getVisualBounds().getWidth() / 8 ; //cambio  200
-	public static double altoBotonAccion = Screen.getPrimary().getVisualBounds().getHeight() / 8.5; //cambio  120
-	public static double tamFuente = Screen.getPrimary().getVisualBounds().getHeight() / 42 ;
 
-	
 	public BotonAccion(String nombre, EventHandler<MouseEvent> eventHandler, LibreriaSonidos sonidos){
 		this.sonidos = sonidos;
 		this.crearBoton(nombre);
@@ -47,7 +43,7 @@ public class BotonAccion extends StackPane{
 	}
 
 	private void crearBotonTransparente() {
-		Rectangle botonTransparente = new Rectangle(anchoBotonAccion, altoBotonAccion);
+		Rectangle botonTransparente = new Rectangle(ConstantesPantalla.anchoBotonAccion, ConstantesPantalla.altoBotonAccion);
 		botonTransparente.setFill(Color.TRANSPARENT);
 		this.getChildren().add(botonTransparente);
 		
@@ -79,7 +75,7 @@ public class BotonAccion extends StackPane{
 
 	private void agregarTexto(String nombre) {
 		Label texto = new Label(nombre);
-		texto.setFont(Font.font("Arial", FontWeight.BOLD, tamFuente));
+		texto.setFont(Font.font("Arial", FontWeight.BOLD, ConstantesPantalla.tamFuenteBotonAccion));
 		boton.getChildren().add(texto);
 	}
 	

@@ -14,15 +14,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
 import vista.botones.BotonMenu;
 
 public class VistaFinDelJuego extends VBox {
-	LibreriaSonidos sonidos;
-	private double anchoImgFondo = Screen.getPrimary().getVisualBounds().getWidth();
-	private double altoImgFondo = Screen.getPrimary().getVisualBounds().getHeight();
+	
+	private LibreriaSonidos sonidos;
 	
 	
 	public VistaFinDelJuego(DragonBall juego, Stage stage,LibreriaSonidos sonidos){
@@ -35,7 +33,7 @@ public class VistaFinDelJuego extends VBox {
 		this.setSpacing(100);
 		
 		Image imagen = new Image("file:src/vista/imagenes/Shenlong 3.jpg");
-		BackgroundSize size = new BackgroundSize(altoImgFondo,anchoImgFondo,false,false,true,true);
+		BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo,false,false,true,true);
 		BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,size);
 		this.setBackground(new Background(imagenDeFondo));
 		
