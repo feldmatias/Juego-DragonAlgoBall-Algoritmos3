@@ -12,7 +12,6 @@ import modelo.juego.DragonBall;
 import modelo.juego.Jugador;
 import modelo.juego.Posicion;
 import modelo.juego.Turno;
-import modelo.personajes.Freezer;
 import modelo.personajes.Gohan;
 import modelo.personajes.Personaje;
 import modelo.personajes.Piccolo;
@@ -199,7 +198,7 @@ public class TurnoTest {
 	public void testPuedoSeleccionarOtroPersonajeDelJugadorYMoverlo() throws MovimientoNoPosible{
 		Posicion origen = juego.getTablero().getPosicionPersonaje(personajeJugadorActual);
 		Personaje companiero = jugador1.getEquipo().getMiembros().get("Gohan"); 
-		juego.getTablero().reposicionarPersonaje(companiero ,new Posicion (1,0)); //Lo posicion cerca de los otros
+		juego.getTablero().reposicionarPersonaje(companiero ,new Posicion (1,0)); //Lo posiciono cerca de los otros
 		try {
 			turno.seleccionarPersonaje(companiero);
 			turno.moverPersonaje(destino);
@@ -235,8 +234,10 @@ public class TurnoTest {
 		Posicion posDestino2 = new Posicion(1,0);
 		jugador1.getEquipo().getMiembros().get("Gohan").recibirAtaque(Gohan.vidaInicial * 2);
 		jugador1.getEquipo().getMiembros().get("Piccolo").recibirAtaque(Piccolo.vidaInicial * 2); //Mato a los companieros
-		juego.getTablero().posicionarPersonaje(new Freezer(juego.getTablero()), destino);
-		juego.getTablero().posicionarPersonaje(new Freezer(juego.getTablero()), posDestino2); //Bloqueo al personaje
+		Personaje enemigo2 = jugador2.getEquipo().getMiembros().get("Cell");
+		Personaje enemigo3 = jugador2.getEquipo().getMiembros().get("Majin Boo");
+		juego.getTablero().posicionarPersonaje(enemigo2, destino);
+		juego.getTablero().posicionarPersonaje(enemigo3, posDestino2); //Bloqueo al personaje
 		try {
 			turno.atacarEnemigo(personajeJugador2);
 		} catch (AtaqueNoPosible e) {
