@@ -15,7 +15,7 @@ import controlador.eventosAccionesJuego.BotonCancelarAccionEventHandler;
 import controlador.eventosAccionesJuego.BotonMoverEventHandler;
 import controlador.eventosAccionesJuego.BotonTerminarTurnoEventHandler;
 import controlador.eventosAccionesJuego.BotonTransformarEventHandler;
-import controlador.eventosBotonesJuego.BotonCasilleroOcupadoEventHandler;
+import controlador.eventosBotonesJuego.BotonCasilleroConPersonajeEventHandler;
 import controlador.eventosBotonesJuego.BotonCasilleroVacioEventHandler;
 import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
@@ -61,6 +61,7 @@ public class VistaJuego extends VBox{
 	public LibreriaSonidos sonidos;
 	private Stage stage;
 	private String rutaFuenteTexto;
+	private ImageView fondoTablero;
 	
 	
 
@@ -83,6 +84,7 @@ public class VistaJuego extends VBox{
 		this.setBackground(new Background(imagenDeFondo));
 		
 		this.crearBotonesAcciones();
+		this.crearFondoTablero();
 		this.actualizarVista();
 	}
 	
@@ -111,6 +113,21 @@ public class VistaJuego extends VBox{
 			ConstantesPantalla.actualizarStage(stage, fin);
 		});
 		pausa.play();
+		
+	}
+	
+	private void crearFondoTablero() {
+		InputStream entradaImagen;
+		try {
+			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/tablero.jpg"));
+			Image imagen = new Image(entradaImagen);
+			entradaImagen.close();
+			ImageView vistaImagen = new ImageView(imagen);
+			vistaImagen.setFitWidth(ConstantesPantalla.anchoImagenTablero);
+			vistaImagen.setFitHeight(ConstantesPantalla.altoImagenTablero);
+			this.fondoTablero =  vistaImagen;
+		} catch (IOException e) {
+		}
 		
 	}
 	
@@ -218,7 +235,7 @@ public class VistaJuego extends VBox{
 
 	private StackPane actualizarCasilleros() {
 		StackPane contenedor = new StackPane();
-		contenedor.getChildren().add(this.crearFondoTablero());
+		contenedor.getChildren().add(this.fondoTablero);
 		botonesCasilleros.clear();
 		botonesPersonajes.clear();
 		
@@ -247,7 +264,7 @@ public class VistaJuego extends VBox{
 
 	private void nuevoBotonPersonaje(HBox fila, Personaje personaje) {
 		BotonInvisible boton = new BotonPersonaje(personaje, juego,this.sonidos);
-		BotonCasilleroOcupadoEventHandler eventHandler = new BotonCasilleroOcupadoEventHandler(juego, personaje, informacionAcciones, this, boton);
+		BotonCasilleroConPersonajeEventHandler eventHandler = new BotonCasilleroConPersonajeEventHandler(juego, personaje, informacionAcciones, this, boton);
 
 		boton.setOnAction(eventHandler);
 		boton.habilitar();
@@ -266,21 +283,6 @@ public class VistaJuego extends VBox{
 		this.botonesCasilleros.add(boton);
 	}
 	
-	private ImageView crearFondoTablero() {
-		InputStream entradaImagen;
-		try {
-			entradaImagen = Files.newInputStream(Paths.get("src/vista/imagenes/tablero.jpg"));
-			Image imagen = new Image(entradaImagen);
-			entradaImagen.close();
-			ImageView vistaImagen = new ImageView(imagen);
-			vistaImagen.setFitWidth(ConstantesPantalla.anchoImagenTablero);
-			vistaImagen.setFitHeight(ConstantesPantalla.altoImagenTablero);
-			return vistaImagen;
-		} catch (IOException e) {
-			return null;
-		}
-		
-	}
 	
 	private Label crearLabelDatosConFormato(String nombreDato,String texto){
 		String letraParametros = "Calibri";

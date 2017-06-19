@@ -9,7 +9,7 @@ import modelo.personajes.Personaje;
 import vista.VistaJuego;
 import vista.botones.BotonInvisible;
 
-public class BotonCasilleroOcupadoEventHandler implements EventHandler<MouseEvent> {
+public class BotonCasilleroConPersonajeEventHandler implements EventHandler<MouseEvent> {
 
 	private DragonBall juego;
 	private Personaje personaje;
@@ -17,7 +17,7 @@ public class BotonCasilleroOcupadoEventHandler implements EventHandler<MouseEven
 	private VistaJuego vista;
 	private BotonInvisible boton;
 	
-	public BotonCasilleroOcupadoEventHandler(DragonBall juego,  Personaje personaje, Text informacionAcciones, VistaJuego vista, BotonInvisible boton) {
+	public BotonCasilleroConPersonajeEventHandler(DragonBall juego,  Personaje personaje, Text informacionAcciones, VistaJuego vista, BotonInvisible boton) {
 		this.juego = juego;
 		this.personaje = personaje;
 		this.acciones = informacionAcciones;
