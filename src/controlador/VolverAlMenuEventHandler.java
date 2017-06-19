@@ -22,7 +22,7 @@ public class VolverAlMenuEventHandler implements EventHandler<KeyEvent> {
 	@Override
 	public void handle(KeyEvent event) {
 		if (event.getCode() == KeyCode.ESCAPE) {
-			menu.habilitarContinuar(vistaJuego);
+			menu.habilitarBotonContinuar(vistaJuego);
 			Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 			stage.setScene(menu.getScene());
 			stage.setFullScreen(pantallaCompleta);

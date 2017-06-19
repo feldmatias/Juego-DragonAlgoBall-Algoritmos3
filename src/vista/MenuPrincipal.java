@@ -318,9 +318,9 @@ public class MenuPrincipal extends StackPane{
 			
 		}
 
-		public void habilitarContinuar(Scene vista){
+		public void habilitarBotonContinuar(Scene vista){
 			this.vistaJuego = vista;
-			btnContinuar.setDisable(false);
+			btnContinuar.habilitar();
 			btnContinuar.setOnMouseClicked( evento1 -> {
 				
 				ConstantesPantalla.actualizarStage(stage, vistaJuego);
