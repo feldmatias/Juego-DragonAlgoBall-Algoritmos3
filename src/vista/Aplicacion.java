@@ -19,18 +19,19 @@ public class Aplicacion extends Application {
 		this.sonidos = new LibreriaSonidos();
 		
 
-		this.sonidos.reproducirMusica();		
+		this.sonidos.reproducirMusica();	
+		
+		stage.setFullScreen(true);
+		stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
+		stage.setMinWidth(1200);
+		stage.setMinHeight(750);
+		stage.setTitle("DRAGON ALGO BALL");
 		
 		this.menuJuego = new MenuPrincipal(stage,sonidos);
 		
 		Scene scene = new Scene(menuJuego);
 		
 		stage.setScene(scene);
-		stage.setFullScreen(true);
-		stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
-		stage.setMinWidth(1200);
-		stage.setMinHeight(750);
-		stage.setTitle("DRAGON ALGO BALL");
 		stage.show();
 		
 		

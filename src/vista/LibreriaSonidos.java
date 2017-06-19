@@ -109,4 +109,12 @@ public class LibreriaSonidos {
 		sonido.play();
 	}
 
+	public boolean estaReproduciendoMusicaFondo(){
+		return ! this.musica.isMute();
+	}
+	
+	public boolean estaReproduciendoSonidos(){
+		return this.volumenEfectosSonido != 0;
+	}
+	
 }

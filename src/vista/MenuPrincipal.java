@@ -27,7 +27,7 @@ import vista.botones.BotonMenu;
 
 public class MenuPrincipal extends StackPane{
 	
-		private Scene vistaJuego = null;
+		private Scene vistaJuego;
 		private BotonMenu btnContinuar;
 		private Stage stage;
 		private LibreriaSonidos sonidos;
@@ -45,7 +45,6 @@ public class MenuPrincipal extends StackPane{
 		public MenuPrincipal(Stage stage,LibreriaSonidos sonidos) {
 			this.stage = stage;
 			this.sonidos = sonidos;
-			stage.setFullScreen(true);
 
 			Image imagen = new Image("file:src/vista/imagenes/fondo menu.jpg");
 			BackgroundSize size = new BackgroundSize(ConstantesPantalla.altoImagenFondo,ConstantesPantalla.anchoImagenFondo, false,false,true,true);
@@ -160,7 +159,12 @@ public class MenuPrincipal extends StackPane{
 			
 			BotonMenu btnMusicaOff = new BotonMenu("MUSICA OFF", sonidos);
 			BotonMenu btnMusicaOn = new BotonMenu("MUSICA ON", sonidos);
-			btnMusicaOn.deshabilitar();
+
+			if (sonidos.estaReproduciendoMusicaFondo()){
+				btnMusicaOn.deshabilitar();
+			}else{
+				btnMusicaOff.deshabilitar();
+			}
 			
 			btnMusicaOff.setOnMouseClicked(evento -> {
 				sonidos.mutearMusica();
@@ -174,9 +178,15 @@ public class MenuPrincipal extends StackPane{
 				btnMusicaOff.habilitar();
 			});
 			
+			
 			BotonMenu btnEfectosOn = new BotonMenu("EFECTOS DE SONIDO ON", sonidos);
 			BotonMenu btnEfectosOff = new BotonMenu("EFECTOS DE SONIDO OFF", sonidos);
-			btnEfectosOn.deshabilitar();
+
+			if (sonidos.estaReproduciendoSonidos()){
+				btnEfectosOn.deshabilitar();
+			}else{
+				btnEfectosOff.deshabilitar();
+			}
 			
 			btnEfectosOn.setOnMouseClicked(evento -> {
 				sonidos.desmutearEfectosSonido();
@@ -205,6 +215,12 @@ public class MenuPrincipal extends StackPane{
 			BotonMenu btnPantallaCompletaOn = new BotonMenu("PANTALLA COMPLETA", sonidos);
 			BotonMenu btnPantallaCompletaOff = new BotonMenu("MODO VENTANA", sonidos);
 			
+			if (this.comprobarPantallaCompleta()){
+				btnPantallaCompletaOn.deshabilitar();
+			}else{
+				btnPantallaCompletaOff.deshabilitar();
+			}
+			
 			btnPantallaCompletaOn.setOnMouseClicked( evento-> {
 				stage.setFullScreen(true);
 				stage.setFullScreenExitHint("");
@@ -212,7 +228,6 @@ public class MenuPrincipal extends StackPane{
 				btnPantallaCompletaOn.deshabilitar();
 			});
 			
-			btnPantallaCompletaOn.deshabilitar();
 
 			
 			btnPantallaCompletaOff.setOnMouseClicked( evento-> {
