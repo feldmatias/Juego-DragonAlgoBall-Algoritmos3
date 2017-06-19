@@ -295,10 +295,10 @@ public class VistaJuego extends VBox{
 		
 	}
 	
-	private Text crearTextosTitulosConFormato(String nombreTitulo,String texto, double tamfuenteturno){
+	private Text crearTextosTitulosConFormato(String nombreTitulo,String texto, double tamanioFuente){
 		Text titulo = new Text();
 		titulo.setText(nombreTitulo + texto);
-		titulo.setFont(Font.loadFont(rutaFuente, tamfuenteturno)); 
+		titulo.setFont(Font.loadFont(rutaFuente, tamanioFuente)); 
 		titulo.setStroke(Color.WHITE);
 		titulo.setUnderline(true);	
 		
