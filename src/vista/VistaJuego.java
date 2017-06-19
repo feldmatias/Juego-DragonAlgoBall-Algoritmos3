@@ -58,7 +58,7 @@ public class VistaJuego extends VBox{
 	private HBox contenedorBotonesAcciones;
 	public LibreriaSonidos sonidos;
 	private Stage stage;
-	private String rutaFuente;
+	private String rutaFuenteTexto;
 	
 	
 
@@ -70,7 +70,7 @@ public class VistaJuego extends VBox{
 		this.juego = juego;
 		this.informacionAcciones = new Text();
 		informacionAcciones.setFont(Font.font("Calibri",FontWeight.BOLD, 18));
-		rutaFuente = "file:src/vista/imagenes/Saiyan-Sans.ttf";
+		rutaFuenteTexto = "file:src/vista/imagenes/Saiyan-Sans.ttf";
 		
 		botonesCasilleros = new ArrayList<BotonInvisible>();
 		botonesPersonajes = new HashMap<Personaje,BotonInvisible>();
@@ -103,14 +103,8 @@ public class VistaJuego extends VBox{
 	}
 		
 	private void terminarJuego() {
-		Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 		Scene fin = new Scene (new VistaFinDelJuego(juego,stage,this.sonidos));
-		stage.setScene(fin);
-		stage.setFullScreen(pantallaCompleta);
-	}
-	
-	private Boolean comprobarPantallaCompleta() {
-		return stage.isFullScreen();
+		ConstantesPantalla.actualizarStage(stage, fin);
 	}
 	
 	private VBox espacioJugador1() {
@@ -298,7 +292,7 @@ public class VistaJuego extends VBox{
 	private Text crearTextosTitulosConFormato(String nombreTitulo,String texto, double tamanioFuente){
 		Text titulo = new Text();
 		titulo.setText(nombreTitulo + texto);
-		titulo.setFont(Font.loadFont(rutaFuente, tamanioFuente)); 
+		titulo.setFont(Font.loadFont(rutaFuenteTexto, tamanioFuente)); 
 		titulo.setStroke(Color.WHITE);
 		titulo.setUnderline(true);	
 		

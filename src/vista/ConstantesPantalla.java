@@ -1,6 +1,8 @@
 package vista;
 
+import javafx.scene.Scene;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
 import modelo.utilidades.Constantes;
 
 public class ConstantesPantalla {
@@ -43,4 +45,11 @@ public class ConstantesPantalla {
 	//Imagen fondo del tablero
 	public static final double anchoImagenTablero = Constantes.SIZE_TABLERO * anchoBotonCasillero;
 	public static final double altoImagenTablero = Constantes.SIZE_TABLERO * altoBotonCasillero;
+	
+	
+	public static void actualizarStage(Stage stage, Scene nuevaEscena){
+		boolean pantallaCompleta = stage.isFullScreen();
+		stage.setScene(nuevaEscena);
+		stage.setFullScreen(pantallaCompleta);
+	}
 }

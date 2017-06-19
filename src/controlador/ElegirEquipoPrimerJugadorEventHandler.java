@@ -40,11 +40,11 @@ public class ElegirEquipoPrimerJugadorEventHandler implements EventHandler<Mouse
 	public void handle(MouseEvent event) {
 		juego.establecerEquipoJugador1(nombreEquipoActual);
 		title.setText("Jugador II: Elegir equipo");
-		this.deshabilitar();
+		this.deshabilitarOpcionEquipo();
 		otroEquipo.setOnMouseClicked(new ElegirEquipoSegundoJugadorEventHandler(juego, nombreOtroEquipo, stage, sonidos, menu));
 	}
 
-	private void deshabilitar() {
+	private void deshabilitarOpcionEquipo() {
 		DropShadow sombra = new DropShadow( 20, Color.GRAY);
 		equipoActual.setEffect(sombra);
 		equipoActual.setOpacity(0.7);

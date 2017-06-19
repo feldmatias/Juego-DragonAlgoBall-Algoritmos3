@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import modelo.juego.DragonBall;
+import vista.ConstantesPantalla;
 import vista.LibreriaSonidos;
 import vista.MenuPrincipal;
 import vista.VistaJuego;
@@ -30,17 +31,10 @@ public class ElegirEquipoSegundoJugadorEventHandler implements EventHandler<Mous
 	public void handle(MouseEvent event) {
 		juego.establecerEquipoJugador2(nombreEquipo);
 		juego.iniciar();
-		Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 		Scene scene = new Scene(new VistaJuego(juego, stage,this.sonidos));
 		scene.setOnKeyPressed(new VolverAlMenuEventHandler(menu, stage, scene));
-		stage.setScene(scene);
-		stage.setFullScreen(pantallaCompleta);
-		stage.show();
+		ConstantesPantalla.actualizarStage(stage, scene);
 		
-	}
-
-	private Boolean comprobarPantallaCompleta() {
-		return stage.isFullScreen();
 	}
 
 }

@@ -27,7 +27,7 @@ import vista.botones.BotonMenu;
 
 public class MenuPrincipal extends StackPane{
 	
-		private Scene vistaJuego;
+		private Scene vistaJuego = null;
 		private BotonMenu btnContinuar;
 		private Stage stage;
 		private LibreriaSonidos sonidos;
@@ -92,11 +92,8 @@ public class MenuPrincipal extends StackPane{
 				DragonBall juego = new DragonBall();
 	
 				btnContinuar.habilitar();
-				Boolean pantallaCompleta = this.comprobarPantallaCompleta();
 				Scene scene = new Scene(new VistaSeleccionarEquipo(juego, stage, this,this.sonidos));
-				stage.setScene(scene);
-				stage.setFullScreen(pantallaCompleta);
-				stage.show();
+				ConstantesPantalla.actualizarStage(stage, scene);
 				
 			});
 	
@@ -215,7 +212,7 @@ public class MenuPrincipal extends StackPane{
 			BotonMenu btnPantallaCompletaOn = new BotonMenu("PANTALLA COMPLETA", sonidos);
 			BotonMenu btnPantallaCompletaOff = new BotonMenu("MODO VENTANA", sonidos);
 			
-			if (this.comprobarPantallaCompleta()){
+			if (stage.isFullScreen()){
 				btnPantallaCompletaOn.deshabilitar();
 			}else{
 				btnPantallaCompletaOff.deshabilitar();
@@ -321,19 +318,12 @@ public class MenuPrincipal extends StackPane{
 			
 		}
 
-		private Boolean comprobarPantallaCompleta() {
-			return stage.isFullScreen();
-		}
-
 		public void habilitarContinuar(Scene vista){
 			this.vistaJuego = vista;
 			btnContinuar.setDisable(false);
 			btnContinuar.setOnMouseClicked( evento1 -> {
 				
-				Boolean pantallaCompleta = this.comprobarPantallaCompleta();
-				stage.setScene(vistaJuego);
-				stage.setFullScreen(pantallaCompleta);
-				stage.show();
+				ConstantesPantalla.actualizarStage(stage, vistaJuego);
 				
 			});
 			
