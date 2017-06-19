@@ -272,15 +272,15 @@ public class MenuPrincipal extends StackPane{
 			Text texto = new Text();
 			texto.setText("Es un juego por turnos. Hay 2 jugadores, cada uno debe elegir un equipo antes de iniciar una partida\n"
 					+ "En un mismo turno, se puede realizar una ataque y un movimiento, no necesariamente del mismo personaje.\n"
-					+ "Cada personaje tiene un ataque basico y un ataque especial que puede aplicar un efecto.\n"
+					+ "Cada personaje tiene un ataque basico y un ataque especial, que puede aplicar un efecto.\n"
 					+ "Tambien pueden realizar transformaciones cuando cumplen los requerimientos necesarios.\n"
 					+ "Los personajes se desplazan por el tablero de casillero en casillero. \n"
 					+ "Cada punto de su velocidad de desplazamiento representa 1 casillero.\n"
 					+ "La distancia de ataque representa la cantidad de casilleros maxima que puede atacar.\n"
-					+ "El Ki se aumenta solo en cada personaje, al comenzar el turno.\n"
+					+ "El Ki se aumenta automaticamente en cada personaje, al comenzar el turno.\n"
 					+ "Cuando comienza el turno del jugador, puede seleccionar cualquier personaje de su equipo. \n"
 					+ "Luego debe selecionar una accion dentro de las posibles: \n"
-					+ "Atacar, mover, transformar o ataque especial.\n"
+					+ "Mover, atacar, transformar o ataque especial.\n"
 					+ "Al seleccionar mover, debe elegir la posicion a moverse. \n"
 					+ "Al seleccionar atacar o ataque especial, debe elegir al enemigo a atacar.\n"
 					+ "Se puede cancelar la accion seleccionada en cualquier momento, o terminar el turno.\n"
@@ -291,7 +291,7 @@ public class MenuPrincipal extends StackPane{
 			
 			texto.setFill(Color.LIGHTBLUE);
 			texto.setFont(Font.font("Calibri", FontWeight.EXTRA_BOLD, 20));
-			texto.setTextAlignment(TextAlignment.CENTER);
+			texto.setTextAlignment(TextAlignment.JUSTIFY);
 			texto.setStroke(Color.BLACK);
 			texto.setStrokeWidth(0.8);
 			
