@@ -34,7 +34,7 @@ public class LibreriaSonidos {
 		this.sonidoError = new MediaPlayer(new Media(new File(carpetaSonidos + "sonido error.wav").toURI().toString()));
 		
 		this.sonidoTransformacion = new MediaPlayer(new Media(new File(carpetaSonidos + "transformacion.wav").toURI().toString()));
-		this.sonidoMovimiento = new MediaPlayer(new Media(new File(carpetaSonidos + "teleport.wav").toURI().toString()));
+		this.sonidoMovimiento = new MediaPlayer(new Media(new File(carpetaSonidos + "sonido mover.wav").toURI().toString()));
 		this.sonidoAtaque = new MediaPlayer(new Media(new File(carpetaSonidos + "ataque.wav").toURI().toString()));
 		this.sonidoAtaqueEspecial = new MediaPlayer(new Media(new File(carpetaSonidos + "ataque especial.wav").toURI().toString()));
 		this.sonidoSeleccionEquipo = new MediaPlayer(new Media(new File(carpetaSonidos + "seleccion.wav").toURI().toString()));

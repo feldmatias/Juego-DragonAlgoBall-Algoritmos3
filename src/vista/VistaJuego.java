@@ -17,6 +17,7 @@ import controlador.eventosAccionesJuego.BotonTerminarTurnoEventHandler;
 import controlador.eventosAccionesJuego.BotonTransformarEventHandler;
 import controlador.eventosBotonesJuego.BotonCasilleroOcupadoEventHandler;
 import controlador.eventosBotonesJuego.BotonCasilleroVacioEventHandler;
+import javafx.animation.PauseTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -36,6 +37,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import modelo.juego.Casillero;
 import modelo.juego.DragonBall;
 import modelo.juego.Jugador;
@@ -104,7 +106,12 @@ public class VistaJuego extends VBox{
 		
 	private void terminarJuego() {
 		Scene fin = new Scene (new VistaFinDelJuego(juego,stage,this.sonidos));
-		ConstantesPantalla.actualizarStage(stage, fin);
+		PauseTransition pausa = new PauseTransition(Duration.seconds(1));
+		pausa.setOnFinished(finPausa -> {
+			ConstantesPantalla.actualizarStage(stage, fin);
+		});
+		pausa.play();
+		
 	}
 	
 	private VBox espacioJugador1() {
