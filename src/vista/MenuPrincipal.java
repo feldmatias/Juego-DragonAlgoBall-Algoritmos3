@@ -224,7 +224,6 @@ public class MenuPrincipal extends StackPane{
 		}
 		
 		private void crearMenuAcerca() {
-			HBox hbox = new HBox(50);
 			VBox infoBox = new VBox(0);
 			
 			BotonMenu btnAtrasAcerca = new BotonMenu("ATRAS", sonidos);
@@ -240,7 +239,7 @@ public class MenuPrincipal extends StackPane{
 			titulo.setStrokeWidth(3);
 			
 			Text alumnos = new Text("FELD Matias \nLOBOSCO Barbara \nMATLES Karina \nPELOZO Emanuel\n");
-			alumnos.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 70));
+			alumnos.setFont(Font.loadFont("file:src/vista/imagenes/Saiyan-Sans.ttf", 60));
 			alumnos.setFill(Color.DARKRED);
 			alumnos.setStroke(Color.WHITE);
 			alumnos.setStrokeWidth(3);
@@ -257,9 +256,10 @@ public class MenuPrincipal extends StackPane{
 			fecha.setStroke(Color.BLACK);
 			fecha.setStrokeWidth(1);
 			
-			infoBox.getChildren().addAll(titulo, alumnos, profesor, fecha);
-			hbox.getChildren().addAll(btnAtrasAcerca, infoBox);
-			menuAcerca.getChildren().add(hbox);
+			btnAtrasAcerca.setAlignment(Pos.CENTER);
+			infoBox.getChildren().addAll(titulo, alumnos, profesor, fecha, btnAtrasAcerca);
+			infoBox.setAlignment(Pos.CENTER);
+			menuAcerca.getChildren().add(infoBox);
 			
 		}
 		
