@@ -31,12 +31,12 @@ public class MenuPrincipal extends StackPane{
 		private BotonMenu btnContinuar;
 		private Stage stage;
 		private LibreriaSonidos sonidos;
-		private Submenu menuPrincipal;
-		private Submenu menuOpciones;
-		private Submenu menuSonido;
-		private Submenu menuPantalla;
-		private Submenu menuAcerca;
-		private Submenu menuInstrucciones;
+		private VBox menuPrincipal;
+		private VBox menuOpciones;
+		private VBox menuSonido;
+		private VBox menuPantalla;
+		private VBox menuAcerca;
+		private VBox menuInstrucciones;
 		
 		private final double posSubmenu1 = 400;
 		private final double posSubmenu2 = 800;
@@ -59,12 +59,12 @@ public class MenuPrincipal extends StackPane{
 	        title.setTextAlignment(TextAlignment.CENTER);
 	        this.setAlignment(Pos.TOP_CENTER);
 			
-			menuPrincipal = new Submenu();
-			menuOpciones = new Submenu();
-			menuSonido = new Submenu();
-			menuPantalla = new Submenu();
-			menuAcerca = new Submenu();
-			menuInstrucciones = new Submenu();
+			menuPrincipal = this.crearSubmenu();
+			menuOpciones = this.crearSubmenu();
+			menuSonido = this.crearSubmenu();
+			menuPantalla = this.crearSubmenu();
+			menuAcerca = this.crearSubmenu();
+			menuInstrucciones = this.crearSubmenu();
 			
 			this.crearMenuPrincipal();
 			this.crearMenuOpciones();
@@ -327,6 +327,13 @@ public class MenuPrincipal extends StackPane{
 				
 			});
 			
+		}
+		
+		private VBox crearSubmenu(){
+			VBox submenu = new VBox(10);
+			submenu.setTranslateX(100);
+			submenu.setTranslateY(200);
+			return submenu;
 		}
 
 		
